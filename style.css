@@ -1,0 +1,53 @@
+:root {
+  /* Grayscale colors */
+  --grayscale-50: #fefefe;
+  --grayscale-100: #f7f7fc;
+  --grayscale-200: #eff0f6;
+  --grayscale-300: #d9dbe9;
+  --grayscale-400: #bec1d5;
+  --grayscale-500: #a0a3bd;
+  --grayscale-600: #6e7191;
+  --grayscale-700: #4e4b66;
+  --grayscale-800: #2a2a44;
+  --grayscale-900: #14142b;
+  /* Accent colors */
+  --accent-blue: #007aff;
+  --accent-red: #ff3b30;
+  /* Text colors */
+  --text-strong: var(--grayscale-900);
+  --text-bold: var(--grayscale-700);
+  --text-default: var(--grayscale-600);
+  --text-weak: var(--grayscale-500);
+  --text-white-default: var(--grayscale-50);
+  --text-white-weak: var(--grayscale-100);
+  --text-brand: var(--accent-blue);
+  --text-danger: var(--accent-red);
+  /* Surface colors */
+  --surface-default: var(--grayscale-50);
+  --surface-alt: var(--grayscale-100);
+  --surface-brand: var(--accent-blue);
+  --surface-danger: var(--accent-red);
+  /* Border colors */
+  --border-default: var(--grayscale-200);
+  --border-bord: var(--grayscale-400);
+}
+
+body {
+  margin: 0;
+  background-color: var(--surface-alt);
+  display: flex;
+  justify-content: center;
+}
+
+header {
+  width: 1280px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+h1 {
+  font-family: "Pretendard", sans-serif;
+  font-size: 24px;
+  color: var(--text-strong);
+}
