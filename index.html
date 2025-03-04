@@ -6,6 +6,44 @@
     <title>TASKIFY</title>
 </head>
 <body>
+    <header class="app-header">
+        <h1 class="app-header__title">TASKIFY</h1>
+        <button class="app-header__history-btn"></button>
+    </header>
     
+    <main class="kanban">
+        <section class="kanban__column">
+            <header class="column-header">
+                <h2 class="column-header__title">해야할 일</h2>
+                <button class="column-header__add-btn"></button>
+                <button class="column-header__close-btn"></button>
+            </header>
+            <div class="column-content">
+                <article class="card"></article>
+            </div>
+        </section>
+
+        <section class="kanban__column">
+            <header class="column-header">
+                <h2 class="column-header__title">하고 있는 일</h2>
+                <button class="column-header__add-btn"></button>
+                <button class="column-header__close-btn"></button>
+            </header>
+            <div class="column-content">
+                <article class="card"></article>
+            </div>
+        </section>
+
+        <section class="kanban__column">
+            <header class="column-header">
+                <h2 class="column-header__title">완료한 일</h2>
+                <button class="column-header__add-btn"></button>
+                <button class="column-header__close-btn"></button>
+            </header>
+            <div class="column-content">
+                <article class="card"></article>
+            </div>
+        </section>
+    </main>
 </body>
 </html>
