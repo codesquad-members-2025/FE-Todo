@@ -14,34 +14,95 @@
         <span class="header__logo-name">TASKIFY</span>
       </div>
       <div class="header__history">
-        <img class="header__history__icon" src="history.svg" alt="history" />
+        <img
+          class="header__history-icon"
+          src="./icons/history.png"
+          alt="history"
+        />
       </div>
     </header>
-    <!-- Column -->
+
+    <!-- Column Container -->
     <section class="column-container">
-      <div class="column-container__column column">
-        <div class="column__title">해야 할 일</div>
+      <!-- 해야 할 일 Column -->
+      <div class="column">
+        <div class="column__header">
+          <div class="column__header-left">
+            <span class="column__header-title">해야 할 일</span>
+            <span class="column__header-card-count">0</span>
+          </div>
+          <div class="column__header-right">
+            <img
+              class="column__header-right-icon"
+              src="./icons/plus.png"
+              alt="add task"
+            />
+            <img
+              class="column__header-right-icon"
+              src="./icons/delete.png"
+              alt="delete column"
+            />
+          </div>
+        </div>
         <!-- Task Card -->
-        <!-- <div class="column__task-card task-card">
+        <div class="task-card">
           <div class="task-card__title">Task 1</div>
           <div class="task-card__description">Description 1</div>
-        </div> -->
+        </div>
       </div>
-      <div class="column-container__column column">
-        <div class="column__title">하고 있는 일</div>
+
+      <!-- 하고 있는 일 Column -->
+      <div class="column">
+        <div class="column__header">
+          <div class="column__header-left">
+            <span class="column__header-title">하고 있는 일</span>
+            <span class="column__header-card-count">0</span>
+          </div>
+          <div class="column__header-right">
+            <img
+              class="column__header-right-icon"
+              src="./icons/plus.png"
+              alt="add task"
+            />
+            <img
+              class="column__header-right-icon"
+              src="./icons/delete.png"
+              alt="delete column"
+            />
+          </div>
+        </div>
         <!-- Task Card -->
-        <!-- <div class="column__task-card task-card">
+        <div class="task-card">
           <div class="task-card__title">Task 1</div>
           <div class="task-card__description">Description 1</div>
-        </div> -->
+        </div>
       </div>
-      <div class="column-container__column column">
-        <div class="column__title">완료한 일</div>
+
+      <!-- 완료한 일 Column -->
+      <div class="column">
+        <div class="column__header">
+          <div class="column__header-left">
+            <span class="column__header-title">완료한 일</span>
+            <span class="column__header-card-count">0</span>
+          </div>
+          <div class="column__header-right">
+            <img
+              class="column__header-right-icon"
+              src="./icons/plus.png"
+              alt="add task"
+            />
+            <img
+              class="column__header-right-icon"
+              src="./icons/delete.png"
+              alt="delete column"
+            />
+          </div>
+        </div>
         <!-- Task Card -->
-        <!-- <div class="column__task-card task-card">
+        <div class="task-card">
           <div class="task-card__title">Task 1</div>
           <div class="task-card__description">Description 1</div>
-        </div> -->
+        </div>
       </div>
     </section>
   </body>

@@ -1,3 +1,5 @@
+@import "./font/pretendard.css";
+
 :root {
   /* Grayscale colors */
   --grayscale-50: #fefefe;
@@ -30,4 +32,8 @@
   /* Border colors */
   --border-default: var(--grayscale-200);
   --border-bord: var(--grayscale-400);
+}
+
+* {
+  box-sizing: border-box;
 }
