@@ -28,4 +28,43 @@
 - 히스토리 버튼을 누르면 오른쪽에 숨어있던 레이어가 애니메이션 효과와 함께 왼쪽으로 나타난다
   - 애니메이션 효과 검색
 
-3. 카드 추가
+## 관련 학습
+
+1. HTML
+
+- 화면 배치를 위한 태그들
+
+  - 기본적인 레이아웃 태그 : div, span, ...
+  - 시맨틱 레이아웃 태그 : header, section, article, nav, aside, footer
+
+- 그외 여러가지 태그들 : 이미지, 제목, 문단, 표, 목록 등등
+
+- 태그 내에 attribute들의 각각의 역할 : class, id, data-\*, style
+
+  - class
+
+    - 여러 개의 요소에 동일한 스타일이나 기능을 적용할 때 사용
+    - 한 요소에 여러 개의 클래스를 추가할 수 있다(공백으로 구분)
+
+  - id
+
+    - 문서 내에서 유일한 식별자를 지정(같은 id를 가진 요소는 하나만 존재해야 함,id는 고유해야 함)
+    - JavaScript에서 특정 요소를 선택할 때 주로 사용 => getElementById()로 선택 가능
+
+  - data-\*
+
+    - HTML 요소에 추가적인 데이터를 저장할 때 사용
+    - data-이름="값"의 형태로 data- 를 붙여 사용
+    - JavaScript에서 쉽게 접근 가능 => dataset을 통해
+
+  - style
+
+    - HTML 요소에 직접 CSS를 적용할 때 사용(style속성을 태그 내에 직접 정의)
+    - 우선 순위가 가장 높지만, 유지 보수가 어려워 잘 사용하지 않는다
+
+- block 속성 요소 VS inline 속성 요소
+
+  - block 요소 : 항상 새 줄에서 시작하고, 전체 가로 폭을 차지한다. (주로 컨테이너 역할)
+    - 예) div, header, section, article, nav, aside, footer, main, figure 등
+  - inline 요소 : 현재 줄 안에서 배치되고, 자신의 내용만큼 너비를 차지한다. (텍스트 일부를 꾸밀 때 사용)
+    - 예) span, a, b, strong, img 등
