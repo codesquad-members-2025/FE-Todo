@@ -36,8 +36,14 @@
 
   - 기본적인 레이아웃 태그 : div, span, ...
   - 시맨틱 레이아웃 태그 : header, section, article, nav, aside, footer
+    - header : 페이지나 섹션의 머리말 역할 (로고, 내비게이션 등을 포함)
+    - section : 독립적인 콘텐츠 영역 (기사, 챕터, 주제별 내용 등을 그룹화할 때 사용)
+    - article : 'section' 과 비슷하지만, 자체적으로 완결된 콘텐츠
+    - nav : 메뉴를 만들 때 사용
+    - aside : 주요 내용과 관련 있지만 부가적인 정보
+    - footer : 페이지나 섹션의 바닥글 역할 (저작권 정보, 연락처 등을 포함)
 
-- 그외 여러가지 태그들 : 이미지, 제목, 문단, 표, 목록 등등
+- 그외 여러가지 태그들 : 이미지, 제목, 문단, 표, 목록, 강조, 링크 등등 관련 태그 찾아보기
 
 - 태그 내에 attribute들의 각각의 역할 : class, id, data-\*, style
 
@@ -68,3 +74,5 @@
     - 예) div, header, section, article, nav, aside, footer, main, figure 등
   - inline 요소 : 현재 줄 안에서 배치되고, 자신의 내용만큼 너비를 차지한다. (텍스트 일부를 꾸밀 때 사용)
     - 예) span, a, b, strong, img 등
+
+- Figma 아이콘 추가 방법 : 저장하고 싶은 아이콘을 선택한 후 우측 하단에 있는 확장자 선택 후 export클릭
