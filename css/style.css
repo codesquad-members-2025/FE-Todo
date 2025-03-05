@@ -22,6 +22,12 @@ body {
   color: var(--text-strong);
 }
 
+.header__history {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .header__history-icon {
   width: 24px;
   height: 24px;
@@ -126,4 +132,35 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.history-modal-container {
+  display: grid;
+  grid-template-rows: 48px 1fr 40px;
+  gap: 8px;
+  position: fixed;
+  top: 64px;
+  right: 56px;
+  width: 366px;
+  height: 680px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.1);
+}
+
+.history-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14.5px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.history-modal__header-close {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: var(--text-default);
 }
