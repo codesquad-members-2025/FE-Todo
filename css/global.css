@@ -37,3 +37,8 @@
 * {
   box-sizing: border-box;
 }
+
+img {
+  margin: 5px;
+  /* width: 14px; */
+}
