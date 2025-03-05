@@ -36,19 +36,25 @@
 body {
   margin: 0;
   background-color: var(--surface-alt);
-  display: flex;
-  justify-content: center;
+  position: relative;
 }
 
 header {
-  width: 1280px;
+  width: 1440px;
   height: 64px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 h1 {
+  width: 98px;
+  height: 29px;
+  position: absolute;
+  left: 80px;
   font-family: "Pretendard", sans-serif;
   font-size: 24px;
   color: var(--text-strong);
+}
+
+.history {
+  position: absolute;
+  top: 20px;
+  left: 1336px;
 }
