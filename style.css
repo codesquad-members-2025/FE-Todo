@@ -1,0 +1,208 @@
+:root {
+    /* Grayscale colors */
+    --grayscale-50: #fefefe;
+    --grayscale-100: #f7f7fc;
+    --grayscale-200: #eff0f6;
+    --grayscale-300: #d9dbe9;
+    --grayscale-400: #bec1d5;
+    --grayscale-500: #a0a3bd;
+    --grayscale-600: #6e7191;
+    --grayscale-700: #4e4b66;
+    --grayscale-800: #2a2a44;
+    --grayscale-900: #14142b;
+    /* Accent colors */
+    --accent-blue: #007aff;
+    --accent-red: #ff3b30;
+    /* Text colors */
+    --text-strong: var(--grayscale-900);
+    --text-bold: var(--grayscale-700);
+    --text-default: var(--grayscale-600);
+    --text-weak: var(--grayscale-500);
+    --text-white-default: var(--grayscale-50);
+    --text-white-weak: var(--grayscale-100);
+    --text-brand: var(--accent-blue);
+    --text-danger: var(--accent-red);
+    /* Surface colors */
+    --surface-default: var(--grayscale-50);
+    --surface-alt: var(--grayscale-100);
+    --surface-brand: var(--accent-blue);
+    --surface-danger: var(--accent-red);
+    /* Border colors */
+    --border-default: var(--grayscale-200);
+    --border-bord: var(--grayscale-400);
+  }
+  
+* {
+    box-sizing: border-box; /* 패딩과 보더를 포함한 너비 계산 */
+}
+
+html {
+    height: 100%; /* 배경색을 채우기 위해 필요 */
+}
+
+body {
+    min-height: 100vh;
+    background-color: rgba(247, 247, 252, 1);  /* 피그마의 배경색 */
+    margin: 0;
+    padding: 0 80px;
+}
+
+/* app-header */
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    height: 64px;
+}
+
+.app-header__title {
+    font-size: 24px;
+}
+
+.app-header__history-btn {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+/* kanban */
+.kanban {
+    display: flex;
+    padding-top: 32px;
+    gap: 24px;
+}
+
+.kanban__column {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 320px;
+}
+
+.column-header {
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.column-header__text-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.column-header__title {
+    margin: 0;
+    font-size: 16px;
+    color: rgba(78, 75, 102, 1);
+    font-family: 'Pretendard Variable';
+    font-weight: bold; /* 또는 700 인데 h1 기본 속성이랑 같음 */
+} 
+
+.column-header__badge {
+    width: 24px;
+    height: 24px;
+    border: 1px solid rgba(239, 240, 246, 1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.column-header__badge-textLabel {
+    font-size: 12px;
+    color: rgba(160, 163, 189, 1);
+    font-family: 'Pretendard Variable';
+}
+
+.column-header__buttons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.column-header__add-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.column-header__close-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 320px;
+    background-color: rgba(254, 254, 254, 1);
+    border-radius: 16px;
+    border: 1px solid rgba(239, 240, 246, 1);
+    padding: 16px;
+    gap: 16px;
+}
+
+.card__text-area {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card__title {
+    width: 248px;
+    height: 17px;
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Pretendard Variable';
+    font-weight: 700;
+    color: rgba(20, 20, 43, 1);
+}
+
+.card__body-text {
+    width: 248px;
+    height: 17px;
+    margin: 0;
+    font-size: 14px;
+    font-family: 'Pretendard Variable';
+    font-weight: 500;
+    color: rgba(110, 113, 145, 1);
+}
+
+.card__caption {
+    width: 248px;
+    height: 18px;
+    margin: 0;
+    font-size: 12px;
+    font-family: 'Pretendard Variable';
+    font-weight: 500;
+    color: rgba(160, 163, 189, 1);
+}
+
+.card__icon-buttons {
+    display: flex;
+    flex-direction: column;
+}

@@ -4,45 +4,122 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TASKIFY</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="icon.css">
 </head>
 <body>
     <header class="app-header">
         <h1 class="app-header__title">TASKIFY</h1>
-        <button class="app-header__history-btn"></button>
+        <button class="app-header__history-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 7.8V12H16.2" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12 19C15.8661 19 19 15.8661 19 12C19 8.1339 15.8661 5 12 5C8.1339 5 5 8.1339 5 12C5 15.8661 8.1339 19 12 19Z" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>                
+        </button>
     </header>
     
     <main class="kanban">
         <section class="kanban__column">
             <header class="column-header">
-                <h2 class="column-header__title">해야할 일</h2>
-                <button class="column-header__add-btn"></button>
-                <button class="column-header__close-btn"></button>
+                <div class="column-header__text-area">
+                    <h2 class="column-header__title">해야할 일</h2>
+                    <span class="column-header__badge">
+                        <div class="column-header__badge-textLabel">2</div>
+                    </span>
+                </div>
+                <div class="column-header__buttons">
+                    <button class="column-header__add-btn">
+                        <svg class="icon icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z" fill="#6E7191"/>
+                        </svg>
+                    </button>
+                    <button class="column-header__close-btn">
+                        <svg class="icon icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
+                        </svg>
+                    </button>
+                </div>
             </header>
-            <div class="column-content">
-                <article class="card"></article>
-            </div>
+            <article class="card">
+                <div class="card__text-area">
+                    <div class="card__body">
+                        <h3 class="card__title">GitHub 공부하기</h3>
+                        <p class="card__body-text">add, commit, push</p>
+                    </div>
+                    <p class="card__caption">author by web</p>
+                </div>
+                <div class="card__icon-buttons">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.727 6.72708L14.9642 5.48991C15.1194 5.33459 15.3038 5.21139 15.5066 5.12733C15.7095 5.04327 15.927 5 16.1466 5C16.3662 5 16.5836 5.04327 16.7865 5.12733C16.9894 5.21139 17.1737 5.33459 17.329 5.48991L18.511 6.67191C18.8244 6.98542 19.0005 7.41059 19.0005 7.8539C19.0005 8.29722 18.8244 8.72238 18.511 9.0359L17.2738 10.2731M13.727 6.72708L5.68877 14.7645C5.41122 15.042 5.24018 15.4084 5.2056 15.7994L5.00331 18.0898C4.99244 18.2115 5.00842 18.3342 5.0501 18.4491C5.09178 18.564 5.15816 18.6684 5.24456 18.7549C5.33096 18.8414 5.43528 18.9078 5.55016 18.9496C5.66503 18.9914 5.78768 19.0075 5.90945 18.9968L8.19988 18.7945C8.59145 18.7603 8.95845 18.5892 9.23642 18.3113L17.2738 10.2731M13.727 6.72708L17.2738 10.2731" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </article>
         </section>
 
         <section class="kanban__column">
             <header class="column-header">
-                <h2 class="column-header__title">하고 있는 일</h2>
-                <button class="column-header__add-btn"></button>
-                <button class="column-header__close-btn"></button>
+                <div class="column-header__text-area">
+                    <h2 class="column-header__title">하고 있는 일</h2>
+                    <span class="column-header__badge">
+                        <div class="column-header__badge-textLabel">1</div>
+                    </span>
+                </div>
+                <div class="column-header__buttons">
+                    <button class="column-header__add-btn">
+                        <svg class="icon icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z" fill="#6E7191"/>
+                        </svg>
+                    </button>
+                    <button class="column-header__close-btn">
+                        <svg class="icon icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
+                        </svg>
+                    </button>
+                </div>
             </header>
-            <div class="column-content">
-                <article class="card"></article>
-            </div>
+            <article class="card">
+                <div class="card__text-area">
+                    <div class="card__body">
+                        <h3 class="card__title">HTML/CSS 공부하기</h3>
+                        <p class="card__body-text">input 태그 실습</p>
+                    </div>
+                    <p class="card__caption">author by web</p>
+                </div>
+                <div class="card__icon-buttons">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
+                    </svg>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13.727 6.72708L14.9642 5.48991C15.1194 5.33459 15.3038 5.21139 15.5066 5.12733C15.7095 5.04327 15.927 5 16.1466 5C16.3662 5 16.5836 5.04327 16.7865 5.12733C16.9894 5.21139 17.1737 5.33459 17.329 5.48991L18.511 6.67191C18.8244 6.98542 19.0005 7.41059 19.0005 7.8539C19.0005 8.29722 18.8244 8.72238 18.511 9.0359L17.2738 10.2731M13.727 6.72708L5.68877 14.7645C5.41122 15.042 5.24018 15.4084 5.2056 15.7994L5.00331 18.0898C4.99244 18.2115 5.00842 18.3342 5.0501 18.4491C5.09178 18.564 5.15816 18.6684 5.24456 18.7549C5.33096 18.8414 5.43528 18.9078 5.55016 18.9496C5.66503 18.9914 5.78768 19.0075 5.90945 18.9968L8.19988 18.7945C8.59145 18.7603 8.95845 18.5892 9.23642 18.3113L17.2738 10.2731M13.727 6.72708L17.2738 10.2731" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+            </article>
         </section>
 
         <section class="kanban__column">
             <header class="column-header">
-                <h2 class="column-header__title">완료한 일</h2>
-                <button class="column-header__add-btn"></button>
-                <button class="column-header__close-btn"></button>
+                <div class="column-header__text-area">
+                    <h2 class="column-header__title">완료한 일</h2>
+                    <span class="column-header__badge">
+                        <div class="column-header__badge-textLabel">0</div>
+                    </span>
+                </div>
+                <div class="column-header__buttons">
+                    <button class="column-header__add-btn">
+                        <svg class="icon icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z" fill="#6E7191"/>
+                        </svg>
+                    </button>
+                    <button class="column-header__close-btn">
+                        <svg class="icon icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
+                        </svg>
+                    </button>
+                </div>
             </header>
-            <div class="column-content">
-                <article class="card"></article>
-            </div>
         </section>
     </main>
 </body>
