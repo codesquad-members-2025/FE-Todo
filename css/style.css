@@ -263,3 +263,22 @@ h6 {
 .author-section {
   margin-top: 8px;
 }
+
+.number-box {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-small);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.number {
+  color: var(--text-weak);
+  font-size: 12px;
+  line-height: auto;
+  font-style: normal;
+  font-weight: 500;
+}
