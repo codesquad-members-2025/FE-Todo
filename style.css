@@ -36,25 +36,33 @@
 body {
   margin: 0;
   background-color: var(--surface-alt);
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
+  margin: 0 auto;
   width: 1440px;
   height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 h1 {
-  width: 98px;
-  height: 29px;
-  position: absolute;
-  left: 80px;
   font-family: "Pretendard", sans-serif;
   font-size: 24px;
   color: var(--text-strong);
 }
 
 .history {
-  position: absolute;
-  top: 20px;
-  left: 1336px;
+  width: 24px;
+  height: 24px;
+}
+
+.columnList {
+  width: 1280px;
+  margin-left: 80px;
+  margin-top: 32px;
+  font-size: 16px;
 }
