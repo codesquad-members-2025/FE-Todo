@@ -1,15 +1,15 @@
-.icon {
-    width: 14px;
-    height: 14px;
-    fill: rgba(160, 163, 189, 1);
-}
-
-.icon-plus {
-    width: 14px;
-    height: 14px;
-}
-
-.icon-closed {
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 24px;
     height: 24px;
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.icon {
+    fill: rgba(160, 163, 189, 1);
 }

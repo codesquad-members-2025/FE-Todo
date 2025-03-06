@@ -1,0 +1,197 @@
+/* 사이드 패널 컨테이너 */
+.action-history {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px;
+    right: 56px;
+    background-color: rgba(254, 254, 254, 1);
+    border-radius: 16px;
+    padding: 8px;
+    gap: 8px;
+    box-shadow: 0px 16px 16px 0px rgba(110, 128, 145, 0.24),
+        0px 0px 4px 0px rgba(110, 128, 145, 0.08);
+}
+
+/* 상단 고정 헤더 영역 */
+.action-history__title-area { 
+    width: 344px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 8px 8px 16px;
+    gap: 4px;
+}
+
+/* 헤더의 제목 텍스트 */
+.action-history__heading {
+    margin: 0;
+    height: 19px;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+/* 닫기 버튼과 텍스트를 감싸는 영역 */
+.action-history__close-btn-area {
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+/* 닫기 버튼 아이콘 */
+.action-history__closed-btn {
+    width: 16px;
+    height: 16px;
+}
+
+/* 닫기 버튼의 텍스트 */
+.action-history__close-btn-text {
+    font-size: 14px;
+    padding: 0px 4px;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: rgba(110, 113, 145, 1);
+}
+
+/* 활동 기록 목록을 감싸는 컨테이너 */
+.action-history__list {
+    max-height: 560px;
+    overflow-y: auto;
+}
+
+/* Chrome, Safari 스크롤 바 너비 설정*/
+.action-history__list::-webkit-scrollbar {
+    width: 2px;  /* Width: 2px */
+}
+
+/* Chrome, Safari 스크롤 바 색상 및 모양 설정 */
+.action-history__list::-webkit-scrollbar-thumb {
+    background: rgba(247, 247, 252, 1);  /* surface-alt 색상 */
+    border-radius: 6px;  /* Radius: 6px */
+}
+
+.action-history__list::-webkit-scrollbar-track {
+    background: transparent;  /* 스크롤바 트랙 배경 투명 */
+}
+
+
+/* 활동 기록이 없을 때 표시되는 영역 */
+.action-history__empty {
+    display: flex;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 344px;
+    padding: 16px;
+}
+
+/* 활동 기록 없음 메시지 */
+.action-history__empty-text {
+    margin: 0;
+    color: rgba(160, 163, 189, 1);
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+}
+
+/* 개별 활동 기록 아이템 */
+.action-history__item {
+    width: 344px;
+    padding: 16px;
+    gap: 16px;
+    display: flex;
+}
+
+/* 마지막 아이템을 제외한 모든 아이템 아래에 보더 추가 */
+.action-history__item:not(:last-child) {
+    border-bottom: 1px solid rgba(239, 240, 246, 1);  /* var(--border-default) */
+}
+
+/* 활동 기록의 프로필 이미지 영역 */
+.action-history__item-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* 활동 기록의 텍스트 컨텐츠 영역 */
+.action-history__item-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* 유저네임 */
+.action-history__item-username {
+    margin: 0;
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(110, 113, 145, 1);
+    text-decoration: none;
+}
+
+/* 활동 내용 텍스트 */
+.action-history__item-text {
+    margin: 0;
+    font-family: 'Pretendard Variable';
+    font-size: 14px;
+    line-height: 100%;
+    font-weight: 500;
+    color: rgba(110, 113, 145, 1);
+}
+
+/* 활동 내용 중 강조 텍스트 */
+.action-history__item-text strong {
+    font-weight: 700;
+    color: rgba(20, 20, 43, 1);
+}
+
+/* 활동 시간 표시 */
+.action-history__item-timestamp {
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: rgba(160, 163, 189, 1);
+}
+
+/* 하단 고정 푸터 영역 */
+.action-history__footer {
+    width: 350px;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+/* 전체 삭제 버튼 */
+.action-history__footer-btn {
+    width: auto;
+    height: 32px;
+    padding: 0px 8px;
+}
+
+/* 전체 삭제 버튼 텍스트 */
+.action-history__footer-btn-text {
+    margin: 0;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    text-align: center;
+    color: rgba(255, 59, 48, 1);
+}
