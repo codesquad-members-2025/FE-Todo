@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO-DO</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <!-- 클래스 네임 컨벤션: BEM 방식 -->
+    <!-- Header -->
+    <header class="header">
+      <div class="header__logo">
+        <h1 class="header__logo-name">TASKIFY</h1>
+      </div>
+      <div class="header__history">
+        <img
+          class="header__history-icon"
+          src="./icons/history.png"
+          width="14px"
+          alt="히스토리(활동기록)를 확인하는 아이콘 버튼"
+        />
+      </div>
+    </header>
+
+    <!-- Column Container -->
+    <section class="column-container">
+      <!-- 해야 할 일 Column -->
+      <div class="column">
+        <div class="column__header">
+          <div class="column__header-left">
+            <h1 class="column__header-title">해야 할 일</h1>
+            <h2 class="column__header-card-count">0</h2>
+          </div>
+          <div class="column__header-right">
+            <img
+              class="column__header-right-icon"
+              src="./icons/plus.png"
+              width="14px"
+              alt="할 일(카드)을 추가하는 플러스 아이콘 버튼"
+            />
+            <img
+              class="column__header-right-icon"
+              src="./icons/delete.png"
+              width="14px"
+              alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
+            />
+          </div>
+        </div>
+        <!-- Task Card -->
+        <div class="task-card">
+          <div class="task-card__left">
+            <h1 class="task-card__title">Task 1</h1>
+            <h2 class="task-card__description">Description 1</h2>
+            <h3 class="task-card__author">author by YooN</h3>
+          </div>
+          <div class="task-card__right">
+            <img
+              class="task-card__right-delete-icon"
+              src="./icons/delete.png"
+              width="14px"
+              alt="카드를 삭제하는 가위표 아이콘 버튼"
+            />
+            <img
+              class="task-card__right-modify-icon"
+              src="./icons/pen.png"
+              width="14px"
+              alt="카드를 수정하는 펜 아이콘 버튼"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 하고 있는 일 Column -->
+      <div class="column">
+        <div class="column__header">
+          <div class="column__header-left">
+            <h1 class="column__header-title">하고 있는 일</h1>
+            <h2 class="column__header-card-count">0</h2>
+          </div>
+          <div class="column__header-right">
+            <img
+              class="column__header-right-icon"
+              src="./icons/plus.png"
+              width="14px"
+              alt="할 일(카드)을 추가하는 플러스 아이콘 버튼"
+            />
+            <img
+              class="column__header-right-icon"
+              src="./icons/delete.png"
+              width="14px"
+              alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
+            />
+          </div>
+        </div>
+        <!-- Task Card -->
+        <div class="task-card">
+          <div class="task-card__left">
+            <h1 class="task-card__title">Task 1</h1>
+            <h2 class="task-card__description">Description 1</h2>
+            <h3 class="task-card__author">author by YooN</h3>
+          </div>
+          <div class="task-card__right">
+            <img
+              class="task-card__right-delete-icon"
+              src="./icons/delete.png"
+              width="14px"
+              alt="카드를 삭제하는 가위표 아이콘 버튼"
+            />
+            <img
+              class="task-card__right-modify-icon"
+              src="./icons/pen.png"
+              width="14px"
+              alt="카드를 수정하는 펜 아이콘 버튼"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- 완료한 일 Column -->
+      <div class="column">
+        <div class="column__header">
+          <div class="column__header-left">
+            <h1 class="column__header-title">완료한 일</h1>
+            <h2 class="column__header-card-count">0</h2>
+          </div>
+          <div class="column__header-right">
+            <img
+              class="column__header-right-icon"
+              src="./icons/plus.png"
+              width="14px"
+              alt="할 일(카드)을 추가하는 플러스 아이콘 버튼"
+            />
+            <img
+              class="column__header-right-icon"
+              src="./icons/delete.png"
+              width="14px"
+              alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
+            />
+          </div>
+        </div>
+        <!-- Task Card -->
+        <div class="task-card">
+          <div class="task-card__left">
+            <h1 class="task-card__title">Task 1</h1>
+            <h2 class="task-card__description">Description 1</h2>
+            <h3 class="task-card__author">author by YooN</h3>
+          </div>
+          <div class="task-card__right">
+            <img
+              class="task-card__right-delete-icon"
+              src="./icons/delete.png"
+              width="14px"
+              alt="카드를 삭제하는 가위표 아이콘 버튼"
+            />
+            <img
+              class="task-card__right-modify-icon"
+              src="./icons/pen.png"
+              width="14px"
+              alt="카드를 수정하는 펜 아이콘 버튼"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="history-modal-container">
+      <div class="history-modal__header">
+        <div class="history-modal__header-title">
+          <h1>사용자 활동 기록</h1>
+        </div>
+        <div class="history-modal__header-close">
+          <img
+            src="./icons/delete.png"
+            width="16px"
+            alt="닫기 버튼"
+            class="히스토리를 닫는 가위 아이콘 버튼"
+          />
+          <h2>닫기</h2>
+        </div>
+      </div>
+      <div>Hello</div>
+      <div>Hello</div>
+    </section>
+  </body>
+</html>

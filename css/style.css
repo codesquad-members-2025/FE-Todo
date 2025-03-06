@@ -1,0 +1,166 @@
+@import "reset.css";
+@import "global.css";
+
+body {
+  font-family: "Pretendard";
+  background-color: #f5f5f5;
+  margin: 0;
+  color: var(--text-strong);
+}
+
+/* Header */
+.header {
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  padding: 18px 80px;
+}
+
+.header__logo {
+  font-size: 24px;
+  font-weight: 500;
+  color: var(--text-strong);
+}
+
+.header__history {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__history-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Column Container */
+.column-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 18px 80px;
+}
+
+/* Column */
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 320px;
+  margin: 0 24px 50px 0;
+}
+
+.column__header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 14px;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 16px 20px;
+  color: var(--text-strong);
+}
+
+.column__header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.column__header-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+.column__header-card-count {
+  border: 1px solid var(--border-default);
+  border-radius: 20%;
+  padding: 4px 8px;
+  font-size: 12px;
+  color: var(--text-weak);
+}
+
+.column__header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.column__header-right-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+
+/* Task Card */
+.task-card {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+  height: 104px;
+  margin: 0px 0px 10px 0;
+  padding: 16px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-card__left {
+  display: grid;
+  grid-template-rows: 20px 1fr 12px;
+}
+
+.task-card__title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.task-card__description {
+  font-size: 14px;
+  color: var(--text-default);
+  margin-top: 5px;
+}
+
+.task-card__author {
+  color: var(--text-weak);
+  font-size: 12px;
+}
+
+.task-card__right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.history-modal-container {
+  display: grid;
+  grid-template-rows: 48px 1fr 40px;
+  gap: 8px;
+  position: fixed;
+  top: 64px;
+  right: 56px;
+  width: 366px;
+  height: 680px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 16px 16px rgba(0, 0, 0, 0.1);
+}
+
+.history-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14.5px 16px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-strong);
+}
+
+.history-modal__header-close {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: var(--text-default);
+}
