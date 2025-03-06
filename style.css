@@ -52,9 +52,9 @@
   --display-bold16: var(--font-bold-M);
   --display-bold14: var(--font-bold-R);
   --display-bold12: var(--font-bold-S);
-  --display-medium16: var(--font-bold-M);
-  --display-medium14: var(--font-bold-R);
-  --display-medium12: var(--font-bold-S);
+  --display-medium16: var(--font-medium-M);
+  --display-medium14: var(--font-medium-R);
+  --display-medium12: var(--font-medium-S);
   --selected-bold16: var(--font-bold-M);
   --selected-bold14: var(--font-bold-R);
   --available-medium16: var(--font-medium-M);
@@ -81,7 +81,6 @@ body {
 }
 
 header {
-  width: 1440px;
   height: 64px;
   display: flex;
   justify-content: space-between;
@@ -95,15 +94,78 @@ h1 {
   color: var(--text-strong);
 }
 
-.history {
-  width: 24px;
-  height: 24px;
-}
-
+/* main */
 .columnList {
   width: 1280px;
   padding-left: 80px;
   display: flex;
-  justify-content: flex-start;
+  flex-direction: row;
   gap: 24px;
+}
+
+.column {
+  width: 320px;
+}
+
+.column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 var(--number-200);
+}
+
+.column-header__textArea {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--number-100);
+}
+
+.column-header__title {
+  font: var(--display-bold16);
+  color: var(--text-bold);
+}
+
+.count_card {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--number-100);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-weak);
+  font: var(--display-medium12);
+}
+
+.column-header__button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--number-100);
+}
+
+.column-header__plus-button {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: unset;
+}
+
+.column-header__closed-button {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: unset;
+}
+
+.plus_button,
+.closed_button {
+  fill: var(--text-weak);
 }
