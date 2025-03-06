@@ -112,7 +112,7 @@ body {
   font-weight: var(--font-weight-bold);
 }
 
-.display-medium16, .display-medium14, .available-medium16, .available-medium14 {
+.display-medium16, .display-medium14, .display-medium12, .available-medium16, .available-medium14 {
   font-weight: var(--font-weight-medium);
 }
 
