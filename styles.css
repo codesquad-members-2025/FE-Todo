@@ -1,0 +1,42 @@
+.container {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard", sans-serif;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+.page-header {
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.page-header__logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0px;
+}
+.column {
+  display: flex;
+  justify-content: flex-start;
+}
+.col1 {
+  display: flex;
+  align-items: center;
+  margin-right: 24px;
+}
+
+.col1 div:nth-child(1) {
+  margin-left: 16px;
+  margin-right: 8px;
+}
+.col1 div:nth-child(2) {
+  margin-right: 141px;
+}
+.col1 button:nth-child(4) {
+  margin-right: 16px;
+  margin-left: 8px;
+}
