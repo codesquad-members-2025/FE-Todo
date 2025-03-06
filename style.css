@@ -138,14 +138,14 @@ h1 {
   font: var(--display-medium12);
 }
 
-.column-header__button {
+.column-header__icons {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: var(--number-100);
 }
 
-.column-header__plus-button {
+.column-header__plus-icon {
   width: 24px;
   height: 24px;
   display: flex;
@@ -155,7 +155,7 @@ h1 {
   background-color: unset;
 }
 
-.column-header__closed-button {
+.column-header__closed-icon {
   width: 24px;
   height: 24px;
   display: flex;
@@ -168,4 +168,63 @@ h1 {
 .plus_button,
 .closed_button {
   fill: var(--text-weak);
+}
+
+.column-cardList {
+  width: 320px;
+}
+
+.add-card {
+  margin-top: 10px;
+  background-color: var(--surface-default);
+  border-radius: var(--number-100);
+  padding: var(--number-200);
+  box-shadow: 0px 1px 4px #6e80913d;
+  display: flex;
+  flex-direction: column;
+  gap: var(--number-200);
+}
+
+.add-card__input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-card__input__title {
+  font: var(--display-bold14);
+  color: var(--text-strong);
+}
+
+.add-card__input__content {
+  font: var(--display-medium14);
+  color: var(--text-default);
+}
+
+.add-card__buttons {
+  display: flex;
+  gap: var(--number-100);
+}
+
+.add-card__cancle-btn {
+  width: 140px;
+  height: 32px;
+  border-radius: var(--number-100);
+  border: none;
+  padding: 0 var(--number-100);
+  background-color: var(--surface-alt);
+  font: var(--display-bold14);
+  color: var(--text-default);
+}
+
+.add-card__submit-btn {
+  width: 140px;
+  height: 32px;
+  border-radius: var(--number-100);
+  border: none;
+  padding: 0 var(--number-100);
+  background-color: var(--surface-brand);
+  opacity: 30%;
+  font: var(--display-bold14);
+  color: var(--text-white-default);
 }
