@@ -17,16 +17,19 @@
       <header class="header flex-item-center">
         <div class="header-left">
           <h1 class="text-strong display-bold24">TASKIFY</h1>
-          <button class="sort-btn" aria-label="Sort tasks">
+          <button
+            id="sort-btn"
+            class="sort-btn"
+            aria-label="Sort tasks"
+            data-type="created"
+          >
             <img
               src="/assets/icons/arrowBoth.svg"
               alt="Sort tasks"
               width="16"
               height="16"
             />
-            <span id="sort-btn-name" class="text-bold display-medium12"
-              >생성순</span
-            >
+            <span class="sort-btn-name text-bold display-medium12">생성순</span>
           </button>
         </div>
         <button aria-label="View history">

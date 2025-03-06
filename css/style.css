@@ -226,6 +226,6 @@ body {
   border-radius: var(--radius-small);
 }
 
-#sort-btn-name {
+.sort-btn-name {
   padding: 1.5px 4px;
 }
