@@ -1,0 +1,30 @@
+/* 기본 스타일 초기화 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 리스트 점 제거 */
+ul,
+ol {
+  list-style: none;
+}
+
+/* 링크의 기본 스타일 제거 */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 버튼 기본 스타일 제거 */
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* 기본 폰트 설정 */
+body {
+  font-family: Arial, sans-serif;
+}

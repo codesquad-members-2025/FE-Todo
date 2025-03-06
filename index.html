@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TASKIFY</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/@pretendard/core/css/pretendard.css"
+      rel="stylesheet"
+    />
+    <!-- 📌 순서 중요! reset.css를 먼저 불러오고, style.css를 불러와야 함! -->
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1>TASKIFY</h1>
+        <button aria-label="View history">
+          <img src="./assets/icons/history.svg" alt="history" />
+        </button>
+      </header>
+
+      <main class="main">
+        <section class="column">
+          <div class="column-area">
+            <div class="column-area-left">
+              <h2>해야할 일</h2>
+              <div class="number-box">
+                <span class="number">2</span>
+              </div>
+            </div>
+            <div class="column-area-right">
+              <button aria-label="Add task">
+                <img src="./assets/icons/plus.svg" alt="Add task" />
+              </button>
+              <button aria-label="Close column">
+                <img src="./assets/icons/closed.svg" alt="Close" />
+              </button>
+            </div>
+          </div>
+          <div class="card-list">
+            <article class="todo-card">
+              <div class="content-section">
+                <h3>제목</h3>
+                <p>내용</p>
+                <h6>author by web</h6>
+              </div>
+              <div class="button-section">
+                <button aria-label="Close task">
+                  <img src="./assets/icons/closed.svg" alt="Close" />
+                </button>
+                <button aria-label="Edit task">
+                  <img src="./assets/icons/edit.svg" alt="Edit" />
+                </button>
+              </div>
+            </article>
+            <article class="todo-card">
+              <div class="content-section">
+                <h3>제목</h3>
+                <p>내용</p>
+                <h6>author by web</h6>
+              </div>
+              <div class="button-section">
+                <button aria-label="Close task">
+                  <img src="./assets/icons/closed.svg" alt="Close" />
+                </button>
+                <button aria-label="Edit task">
+                  <img src="./assets/icons/edit.svg" alt="Edit" />
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="column">
+          <div class="column-area">
+            <div class="column-area-left">
+              <h2>하고 있는 일</h2>
+              <div class="number-box">
+                <span class="number">2</span>
+              </div>
+            </div>
+            <div class="column-area-right">
+              <button aria-label="Add task">
+                <img src="./assets/icons/plus.svg" alt="Add task" />
+              </button>
+              <button aria-label="Close column">
+                <img src="./assets/icons/closed.svg" alt="Close" />
+              </button>
+            </div>
+          </div>
+          <div class="card-list">
+            <article class="todo-card">
+              <div class="content-section">
+                <h3>제목</h3>
+                <p>내용</p>
+                <h6>author by web</h6>
+              </div>
+              <div class="button-section">
+                <button aria-label="Close task">
+                  <img src="./assets/icons/closed.svg" alt="Close" />
+                </button>
+                <button aria-label="Edit task">
+                  <img src="./assets/icons/edit.svg" alt="Edit" />
+                </button>
+              </div>
+            </article>
+            <article class="todo-card">
+              <div class="content-section">
+                <h3>제목</h3>
+                <p>내용</p>
+                <h6>author by web</h6>
+              </div>
+              <div class="button-section">
+                <button aria-label="Close task">
+                  <img src="./assets/icons/closed.svg" alt="Close" />
+                </button>
+                <button aria-label="Edit task">
+                  <img src="./assets/icons/edit.svg" alt="Edit" />
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+        <section class="column">
+          <div class="column-area">
+            <div class="column-area-left">
+              <h2>완료한 일</h2>
+              <div class="number-box">
+                <span class="number">2</span>
+              </div>
+            </div>
+            <div class="column-area-right">
+              <button aria-label="Add task">
+                <img src="./assets/icons/plus.svg" alt="Add task" />
+              </button>
+              <button aria-label="Close column">
+                <img src="./assets/icons/closed.svg" alt="Close" />
+              </button>
+            </div>
+          </div>
+          <div class="card-list">
+            <article class="todo-card">
+              <div class="content-section">
+                <h3>제목</h3>
+                <p>내용</p>
+                <h6>author by web</h6>
+              </div>
+              <div class="button-section">
+                <button aria-label="Close task">
+                  <img src="./assets/icons/closed.svg" alt="Close" />
+                </button>
+                <button aria-label="Edit task">
+                  <img src="./assets/icons/edit.svg" alt="Edit" />
+                </button>
+              </div>
+            </article>
+            <article class="todo-card">
+              <div class="content-section">
+                <h3>제목</h3>
+                <p>내용</p>
+                <h6>author by web</h6>
+              </div>
+              <div class="button-section">
+                <button aria-label="Close task">
+                  <img src="./assets/icons/closed.svg" alt="Close" />
+                </button>
+                <button aria-label="Edit task">
+                  <img src="./assets/icons/edit.svg" alt="Edit" />
+                </button>
+              </div>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>

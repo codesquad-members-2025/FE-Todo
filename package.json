@@ -1,0 +1,12 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "A simple Todo application built with Vanilla JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "open index.html"
+  },
+  "author": "wan0514",
+  "license": "ISC",
+  "type": "module"
+}
