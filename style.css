@@ -1,0 +1,96 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/Pretendard/dist/web/static/pretendard.css");
+:root {
+  /* Grayscale colors */
+  --grayscale-50: #fefefe;
+  --grayscale-100: #f7f7fc;
+  --grayscale-200: #eff0f6;
+  --grayscale-300: #d9dbe9;
+  --grayscale-400: #bec1d5;
+  --grayscale-500: #a0a3bd;
+  --grayscale-600: #6e7191;
+  --grayscale-700: #4e4b66;
+  --grayscale-800: #2a2a44;
+  --grayscale-900: #14142b;
+
+  /* Accent colors */
+  --accent-blue: #007aff;
+  --accent-red: #ff3b30;
+
+  /* Text colors */
+  --text-strong: var(--grayscale-900);
+  --text-bold: var(--grayscale-700);
+  --text-default: var(--grayscale-600);
+  --text-weak: var(--grayscale-500);
+  --text-white-default: var(--grayscale-50);
+  --text-white-weak: var(--grayscale-100);
+  --text-brand: var(--accent-blue);
+  --text-danger: var(--accent-red);
+
+  /* Surface colors */
+  --surface-default: var(--grayscale-50);
+  --surface-alt: var(--grayscale-100);
+  --surface-brand: var(--accent-blue);
+  --surface-danger: var(--accent-red);
+
+  /* Border colors */
+  --border-default: var(--grayscale-200);
+  --border-bord: var(--grayscale-400);
+
+  /* Bold type (700) */
+  --font-bold-L: 700 24px/1.4 "Pretendard", sans-serif;
+  --font-bold-M: 700 16px/1.4 "Pretendard", sans-serif;
+  --font-bold-R: 700 14px/1.4 "Pretendard", sans-serif;
+  --font-bold-S: 700 12px/1.4 "Pretendard", sans-serif;
+
+  /* Medium type (500) */
+  --font-medium-M: 500 16px/22px "Pretendard", sans-serif;
+  --font-medium-R: 500 14px/1.4 "Pretendard", sans-serif;
+  --font-medium-S: 500 12px/1.4 "Pretendard", sans-serif;
+
+  /* Typogrephy system */
+  --display-bold24: var(--font-bold-L);
+  --display-bold16: var(--font-bold-M);
+  --display-bold14: var(--font-bold-R);
+  --display-bold12: var(--font-bold-S);
+  --display-medium16: var(--font-bold-M);
+  --display-medium14: var(--font-bold-R);
+  --display-medium12: var(--font-bold-S);
+  --selected-bold16: var(--font-bold-M);
+  --selected-bold14: var(--font-bold-R);
+  --available-medium16: var(--font-medium-M);
+  --available-medium14: var(--font-medium-R);
+}
+
+body {
+  margin: 0;
+  background-color: var(--surface-alt);
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  width: 1440px;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 80px;
+}
+
+h1 {
+  font-family: "Pretendard", sans-serif;
+  font-size: 24px;
+  color: var(--text-strong);
+}
+
+.history {
+  width: 24px;
+  height: 24px;
+}
+
+.columnList {
+  width: 1280px;
+  margin-left: 80px;
+  margin-top: 32px;
+  font-size: 16px;
+}
