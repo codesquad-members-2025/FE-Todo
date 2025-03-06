@@ -47,6 +47,20 @@
 
   --drop-shadow-floating: 0 0 4px rgba(110, 128, 145, 0.08),
     0 16px 16px rgba(110, 128, 145, 0.24);
+
+  /* Font Size  */
+  --font-size-large: 24px;
+  --font-size-medium: 16px;
+  --font-size-regular: 14px;
+  --font-size-small: 12px;
+
+  /* Font Weights */
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+
+  /* Line Height */
+  --line-height-auto: auto; 
+  --line-height-22: 22px; 
 }
 
 body {
@@ -81,82 +95,32 @@ body {
 }
 
 /* Typo style */
-.display-bold24 {
-  font-size: 24px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 700;
-}
 
-.display-bold16 {
-  font-size: 16px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 700;
-}
-
-.display-bold14 {
-  font-size: 14px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 700;
-}
-
-.display-bold12 {
-  font-size: 12px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 700;
+/* Line Height */
+.display-bold24, .display-bold16, .display-bold14, .display-bold12,
+.display-medium16, .display-medium14, .display-medium12 {
+  line-height: var(--line-height-auto);
 }
 
 .display-medium16 {
-  font-size: 16px;
-  line-height: 22px;
-  font-style: normal;
-  font-weight: 500;
+  line-height: var(--line-height-22);
 }
 
-.display-medium14 {
-  font-size: 14px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 500;
+/* 글씨 굵기 설정 */
+.display-bold24, .display-bold16, .display-bold14, .display-bold12,
+.selected-bold16, .selected-bold14, .available-medium16, .available-medium14 {
+  font-weight: var(--font-weight-bold);
 }
 
-.display-medium12 {
-  font-size: 12px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 500;
+.display-medium16, .display-medium14, .available-medium16, .available-medium14 {
+  font-weight: var(--font-weight-medium);
 }
 
-.selected-bold16 {
-  font-size: 16px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 700;
-}
-
-.selected-bold14 {
-  font-size: 14px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 700;
-}
-
-.available-medium16 {
-  font-size: 16px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 500;
-}
-
-.available-medium14 {
-  font-size: 14px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 500;
-}
+/* 글씨 크기 설정 */
+.display-bold24 { font-size: var(--font-size-large); }
+.display-bold16, .display-medium16, .selected-bold16, .available-medium16 { font-size: var(--font-size-medium); }
+.display-bold14, .display-medium14, .selected-bold14, .available-medium14 { font-size: var(--font-size-regular); }
+.display-bold12, .display-medium12 { font-size: var(--font-size-small); }
 
 /* Common Structure styles */
 .flex-col {
