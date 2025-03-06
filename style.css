@@ -297,11 +297,11 @@ h1 {
   top: 64px; */
   background-color: var(--surface-default);
   box-shadow: 0px 16px 16px #6e80913d, 0px 0px 4px #6e809114;
-  height: 121px;
   border-radius: var(--number-200);
   padding: var(--number-100);
   display: flex;
   flex-direction: column;
+  gap: 4px;
 }
 
 .history__header {
@@ -334,4 +334,12 @@ h1 {
   height: 16px;
   display: flex;
   align-items: center;
+}
+
+.history__recordList {
+  width: 344px;
+  padding: var(--number-200);
+  display: flex;
+  flex-direction: column;
+  gap: var(--number-50);
 }
