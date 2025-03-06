@@ -59,6 +59,18 @@
   --selected-bold14: var(--font-bold-R);
   --available-medium16: var(--font-medium-M);
   --available-medium14: var(--font-medium-R);
+
+  /* Number system */
+  --number-50: 4px;
+  --number-100: 8px;
+  --number-200: 16px;
+  --number-300: 24px;
+  --number-400: 32px;
+  --number-500: 40px;
+  --number-600: 48px;
+  --number-700: 56px;
+  --number-800: 64px;
+  --number-900: 72px;
 }
 
 body {
