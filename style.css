@@ -69,12 +69,12 @@ body {
 }
 
 header {
-  margin: 0 auto;
   width: 1440px;
   height: 64px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 80px;
 }
 
 h1 {
