@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="icon.css">
     <link rel="stylesheet" href="action-history.css">
+    <link rel="stylesheet" href="modal.css">
 </head>
 
 <body>
@@ -356,6 +357,20 @@
             </button>
         </div>
     </aside>
+
+    <dialog class="modal">
+        <div class="modal__content-area">
+            <p class="modal__content">모든 사용자 활동 기록을 삭제할까요?</p>
+            
+            <!-- 모달 푸터 -->
+            <footer class="modal__footer">
+                <button class="modal__cancel-btn btn">취소</button>
+                <button class="modal__confirm-btn btn">삭제</button>
+            </footer>
+        </div>
+    </dialog>
+
+    <script type="module" src="./modal.js"></script>
 </body>
 
 </html>
