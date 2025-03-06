@@ -1,0 +1,15 @@
+.icon {
+    width: 14px;
+    height: 14px;
+    fill: rgba(160, 163, 189, 1);
+}
+
+.icon-plus {
+    width: 14px;
+    height: 14px;
+}
+
+.icon-closed {
+    width: 24px;
+    height: 24px;
+}
