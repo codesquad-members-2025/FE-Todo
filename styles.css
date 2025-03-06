@@ -1,9 +1,17 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7fc;
+}
+
 button {
   all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
   cursor: pointer;
 }
 
-.container {
+.top-layout-container {
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -28,6 +36,7 @@ button {
   display: flex;
   justify-content: flex-start;
   gap: 24px;
+  padding-top: 32px;
   flex-wrap: wrap;
 }
 .columnlist__col {
