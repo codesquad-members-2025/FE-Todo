@@ -91,4 +91,7 @@ h1 {
 .columnList {
   width: 1280px;
   padding-left: 80px;
+  display: flex;
+  justify-content: flex-start;
+  gap: 24px;
 }
