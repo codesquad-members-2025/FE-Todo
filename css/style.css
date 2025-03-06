@@ -12,7 +12,7 @@
   --grayscale-900: #14142b;
 
   /* Accent colors */
-  --accent-blue: #007aff;
+  --accent-blue: #007aff;ㄴ
   --accent-red: #ff3b30;
 
   /* Text colors */
@@ -60,42 +60,27 @@ body {
   background-color: var(--surface-default);
 }
 
-/* Text styles */
-h1 {
+/* Typo Color */
+.text-strong {
   color: var(--text-strong);
-  font-size: 24px;
 }
-
-h2 {
+.text-bold {
   color: var(--text-bold);
-  font-size: 16px;
 }
-
-h3 {
-  color: var(--text-strong);
-  font-size: 14px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 700;
-}
-
-p {
+.text-default {
   color: var(--text-default);
-  font-size: 14px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 500;
 }
-
-h6 {
+.text-weak {
   color: var(--text-weak);
-  font-size: 12px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 500;
+}
+.text-brand {
+  color: var(--text-brand);
+}
+.text-danger {
+  color: var(--text-danger);
 }
 
-/* Display Bold 타입 */
+/* Typo style */
 .display-bold24 {
   font-size: 24px;
   line-height: auto;
@@ -124,7 +109,6 @@ h6 {
   font-weight: 700;
 }
 
-/* Display Medium 타입 */
 .display-medium16 {
   font-size: 16px;
   line-height: 22px;
@@ -146,7 +130,6 @@ h6 {
   font-weight: 500;
 }
 
-/* Selected Bold 타입 */
 .selected-bold16 {
   font-size: 16px;
   line-height: auto;
@@ -161,7 +144,6 @@ h6 {
   font-weight: 700;
 }
 
-/* Available Medium 타입 */
 .available-medium16 {
   font-size: 16px;
   line-height: auto;
@@ -176,11 +158,19 @@ h6 {
   font-weight: 500;
 }
 
-/* Other styles */
-
-.container {
+/* Common Structure styles */
+.flex-col {
   display: flex;
   flex-direction: column;
+}
+
+.flex-item-center {
+  display: flex;
+  align-items: center;
+}
+
+/* Structure styles */
+.container {
   gap: 32px;
   width: 1440px;
   height: 100vh;
@@ -189,9 +179,7 @@ h6 {
 }
 
 .header {
-  display: flex;
   justify-content: space-between;
-  align-items: center;
   height: 64px;
 }
 
@@ -202,8 +190,6 @@ h6 {
 }
 
 .column {
-  display: flex;
-  flex-direction: column;
   width: 320px;
   gap: 10px;
 }
@@ -217,8 +203,6 @@ h6 {
 }
 
 .column-area-left {
-  display: flex;
-  align-items: center;
   gap: 8px;
   width: 100%;
 }
@@ -229,8 +213,6 @@ h6 {
 }
 
 .card-list {
-  display: flex;
-  flex-direction: column;
   gap: 10px;
 }
 
@@ -245,18 +227,6 @@ h6 {
 
 .content-section {
   width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.button-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.content-section {
-  display: flex;
-  flex-direction: column;
   gap: 8px;
 }
 
@@ -270,15 +240,5 @@ h6 {
   border: 1px solid var(--border-default);
   border-radius: var(--radius-small);
 
-  display: flex;
   justify-content: center;
-  align-items: center;
-}
-
-.number {
-  color: var(--text-weak);
-  font-size: 12px;
-  line-height: auto;
-  font-style: normal;
-  font-weight: 500;
 }
