@@ -15,7 +15,23 @@
   <body>
     <div class="container flex-col">
       <header class="header flex-item-center">
-        <h1 class="text-strong display-bold24">TASKIFY</h1>
+        <div class="header-left">
+          <h1 class="text-strong display-bold24">TASKIFY</h1>
+          <button
+            id="sort-btn"
+            class="sort-btn"
+            aria-label="Sort tasks"
+            data-type="created"
+          >
+            <img
+              src="/assets/icons/arrowBoth.svg"
+              alt="Sort tasks"
+              width="16"
+              height="16"
+            />
+            <span class="sort-btn-name text-bold display-medium12">생성순</span>
+          </button>
+        </div>
         <button aria-label="View history">
           <img src="./assets/icons/history.svg" alt="View task history" />
         </button>

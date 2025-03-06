@@ -147,6 +147,12 @@ body {
   height: 64px;
 }
 
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .main {
   display: flex;
   gap: 24px;
@@ -205,4 +211,21 @@ body {
   border-radius: var(--radius-small);
 
   justify-content: center;
+}
+
+
+.sort-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 75px; 
+  height: 24px;
+
+  border: 1px solid var(--border-bord);
+  border-radius: var(--radius-small);
+}
+
+.sort-btn-name {
+  padding: 1.5px 4px;
 }
