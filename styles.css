@@ -1,3 +1,8 @@
+button {
+  all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
+  cursor: pointer;
+}
+
 .container {
   margin: 0px;
   display: flex;
@@ -19,24 +24,28 @@
   font-weight: bold;
   margin: 0px;
 }
-.column {
+.page-main__columnlist {
   display: flex;
   justify-content: flex-start;
+  gap: 24px;
+  flex-wrap: wrap;
 }
-.col1 {
+.columnlist__col {
+  display: flex;
+  flex-direction: column;
+}
+.columnlist__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 16px;
+  gap: 141px;
+}
+.columnlist__header div {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4e4b66;
   display: flex;
   align-items: center;
-  margin-right: 24px;
-}
-
-.col1 div:nth-child(1) {
-  margin-left: 16px;
-  margin-right: 8px;
-}
-.col1 div:nth-child(2) {
-  margin-right: 141px;
-}
-.col1 button:nth-child(4) {
-  margin-right: 16px;
-  margin-left: 8px;
+  gap: 8px;
 }

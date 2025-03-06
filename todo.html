@@ -13,7 +13,7 @@
   <body class="container">
     <header class="page-header">
       <h1 class="page-header__logo">TASKIFY</h1>
-      <div class="page-header__history">
+      <button class="page-header__history">
         <svg
           width="24"
           height="24"
@@ -36,41 +36,158 @@
             stroke-linejoin="round"
           />
         </svg>
-      </div>
+      </button>
     </header>
-    <main class="column">
-      <div class="col1">
-        <div>해야할 일</div>
-        <div>0</div>
-        <button>
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 14 14"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z"
-              fill="#6E7191"
-            />
-          </svg>
-        </button>
-        <button>x</button>
-      </div>
-      <div class="col1">
-        <div>하고 있는 일</div>
-        <div>0</div>
-        <button>+</button>
-        <button>x</button>
-      </div>
+    <main class="page-main__columnlist">
+      <section class="columnlist__col">
+        <header class="columnlist__header">
+          <div>
+            해야할 일
+            <svg
+              width="16"
+              height="18"
+              viewBox="0 0 16 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 13.1172C6.03711 13.1172 4.88281 11.5352 4.88281 8.75781C4.88281 5.99805 6.04883 4.39844 8 4.39844C9.94531 4.39844 11.1113 5.99805 11.1172 8.75781C11.1113 11.5352 9.96289 13.1172 8 13.1172ZM6.17188 8.75781C6.16602 10.873 6.85156 12.0039 8 12.0039C9.14258 12.0039 9.82812 10.873 9.82812 8.75781C9.82812 6.64844 9.13672 5.49414 8 5.48828C6.85742 5.49414 6.17188 6.64844 6.17188 8.75781Z"
+                fill="#A0A3BD"
+              />
+            </svg>
+          </div>
+          <div>
+            <button>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z"
+                  fill="#6E7191"
+                />
+              </svg>
+            </button>
+            <button>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z"
+                  fill="#6E7191"
+                />
+              </svg>
+            </button>
+          </div>
+        </header>
+      </section>
 
-      <div class="col1">
-        <div>완료한 일</div>
-        <div>0</div>
-        <button>+</button>
-        <button>x</button>
-      </div>
+      <section class="columnlist__col">
+        <header class="columnlist__header">
+          <div>
+            하고 있는 일
+            <svg
+              width="16"
+              height="18"
+              viewBox="0 0 16 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 13.1172C6.03711 13.1172 4.88281 11.5352 4.88281 8.75781C4.88281 5.99805 6.04883 4.39844 8 4.39844C9.94531 4.39844 11.1113 5.99805 11.1172 8.75781C11.1113 11.5352 9.96289 13.1172 8 13.1172ZM6.17188 8.75781C6.16602 10.873 6.85156 12.0039 8 12.0039C9.14258 12.0039 9.82812 10.873 9.82812 8.75781C9.82812 6.64844 9.13672 5.49414 8 5.48828C6.85742 5.49414 6.17188 6.64844 6.17188 8.75781Z"
+                fill="#A0A3BD"
+              />
+            </svg>
+          </div>
+          <div>
+            <button>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z"
+                  fill="#6E7191"
+                />
+              </svg>
+            </button>
+            <button>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z"
+                  fill="#6E7191"
+                />
+              </svg>
+            </button>
+          </div>
+        </header>
+      </section>
+
+      <section class="columnlist__col">
+        <header class="columnlist__header">
+          <div>
+            완료한 일
+            <svg
+              width="16"
+              height="18"
+              viewBox="0 0 16 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8 13.1172C6.03711 13.1172 4.88281 11.5352 4.88281 8.75781C4.88281 5.99805 6.04883 4.39844 8 4.39844C9.94531 4.39844 11.1113 5.99805 11.1172 8.75781C11.1113 11.5352 9.96289 13.1172 8 13.1172ZM6.17188 8.75781C6.16602 10.873 6.85156 12.0039 8 12.0039C9.14258 12.0039 9.82812 10.873 9.82812 8.75781C9.82812 6.64844 9.13672 5.49414 8 5.48828C6.85742 5.49414 6.17188 6.64844 6.17188 8.75781Z"
+                fill="#A0A3BD"
+              />
+            </svg>
+          </div>
+          <div>
+            <button>
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z"
+                  fill="#6E7191"
+                />
+              </svg>
+            </button>
+            <button>
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z"
+                  fill="#6E7191"
+                />
+              </svg>
+            </button>
+          </div>
+        </header>
+      </section>
     </main>
   </body>
 </html>
