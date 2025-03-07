@@ -65,12 +65,12 @@ button {
 }
 
 .popover-sidebar {
-  border: 2px solid black;
-  height: 121px;
+  border: 1px solid black;
   position: absolute;
   inset: 64px auto auto 1018px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   gap: 8px;
   padding: 8px;
 }
@@ -78,7 +78,6 @@ button {
 .popover-header {
   display: flex;
   justify-content: space-between;
-
   gap: 4px;
   align-items: center;
   padding-left: 16px;
@@ -96,5 +95,14 @@ button {
   /* left: 16px;
   right: 77px; */
 }
-.popover-header__close {
+.popover__section {
+  padding: 16px;
+}
+
+.popover-article {
+  width: 312px;
+  text-align: center;
+}
+
+.popover-footer {
 }
