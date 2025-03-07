@@ -1,18 +1,20 @@
-const addCardBtn = document.querySelectorAll('.column-header__add-btn');
-
-// 카드 폼 없으면 생성, 있으면 삭제
-addCardBtn.forEach(btn => {
-    btn.addEventListener('click', (event) => {
-        const currentColumn = event.currentTarget.closest('.kanban__column');
-        const cardForm = currentColumn.querySelector('.card-form');
-
-        if (cardForm) removeCardForm(currentColumn);
-        else createCardForm(currentColumn);
-    });
-});
-
+export function initCardForm() {
+    const addCardBtn = document.querySelectorAll('.column-header__add-btn');
+    
+    // 카드 폼 없으면 생성, 있으면 삭제
+    addCardBtn.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            const currentColumn = event.currentTarget.closest('.kanban__column');
+            const cardForm = currentColumn.querySelector('.card-form');
+            
+            if (cardForm) removeCardForm(currentColumn);
+            else createCardForm(currentColumn);
+        });
+    });    
+}
+    
 // 카드 폼 생성
-export function createCardForm(currentColumn) {
+function createCardForm(currentColumn) {
     const cardFormTemplate = document.querySelector('#card-form-template');
     const cardForm = cardFormTemplate.content.cloneNode(true);
 
@@ -39,7 +41,7 @@ export function createCardForm(currentColumn) {
 }
 
 // 카드 폼 삭제
-export function removeCardForm(currentColumn) {
+function removeCardForm(currentColumn) {
     const cardForm = currentColumn.querySelector('.card-form');
 
     if (cardForm) {
@@ -53,7 +55,7 @@ export function removeCardForm(currentColumn) {
 
 
 
-export function createCard(currentColumn) {
+function createCard(currentColumn) {
     const cardTemplate = document.querySelector('#card-template');
     const card = cardTemplate.content.cloneNode(true);
 

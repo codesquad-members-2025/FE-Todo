@@ -1,0 +1,38 @@
+.column {
+    gap: 10px;
+    width: 320px;
+}
+
+.column-header {
+    padding: 0 16px;
+}
+
+.column-header__text-area {
+    gap: 8px;
+}
+
+.column-header__title {
+    margin: 0;
+    color: var(--text-bold);
+} 
+
+.badge {
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
+}
+
+.badge__text {
+    color: var(--text-weak);
+}
+
+.column-header__buttons{
+    gap: 8px;
+}
+
+.column-header__add-btn,
+.column-header__close-btn {
+    width: 24px;
+    height: 24px;
+}

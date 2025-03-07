@@ -27,7 +27,6 @@
 .action-history__heading {
     margin: 0;
     height: 19px;
-    font-family: Pretendard Variable;
     font-weight: 700;
     font-size: 16px;
     line-height: 100%;
@@ -51,7 +50,6 @@
 .action-history__close-btn-text {
     font-size: 14px;
     padding: 0px 4px;
-    font-family: Pretendard Variable;
     font-weight: 700;
     font-size: 14px;
     line-height: 100%;
@@ -96,7 +94,6 @@
 .action-history__empty-text {
     margin: 0;
     color: rgba(160, 163, 189, 1);
-    font-family: Pretendard Variable;
     font-weight: 500;
     font-size: 14px;
     line-height: 100%;
@@ -133,7 +130,6 @@
 /* 유저네임 */
 .action-history__item-username {
     margin: 0;
-    font-family: Pretendard Variable;
     font-weight: 500;
     font-size: 14px;
     line-height: 100%;
@@ -145,9 +141,7 @@
 /* 활동 내용 텍스트 */
 .action-history__item-text {
     margin: 0;
-    font-family: 'Pretendard Variable';
     font-size: 14px;
-    line-height: 100%;
     font-weight: 500;
     color: rgba(110, 113, 145, 1);
 }
@@ -160,7 +154,6 @@
 
 /* 활동 시간 표시 */
 .action-history__item-timestamp {
-    font-family: Pretendard Variable;
     font-weight: 500;
     font-size: 12px;
     line-height: 100%;
@@ -187,7 +180,7 @@
 /* 전체 삭제 버튼 텍스트 */
 .action-history__footer-btn-text {
     margin: 0;
-    font-family: Pretendard Variable;
+    /* font-family: Pretendard Variable; */
     font-weight: 700;
     font-size: 14px;
     line-height: 100%;

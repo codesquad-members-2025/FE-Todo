@@ -1,0 +1,54 @@
+@font-face {
+    font-family: 'Pretendard Variable';
+    src: url('../../assets/fonts/PretendardVariable.woff2') format('woff2-variations');
+    font-weight: 45 920;  /* 45: Thin ~ 920: Black 까지 지원 */
+    font-display: swap;
+}
+
+.text-thin { font-weight: 100; }
+.text-regular { font-weight: 400; }
+.text-bold { font-weight: 700; }
+.text-black { font-weight: 900; }
+
+/* Display Bold */
+.display-bold24 {
+    font-size: 24px;
+    font-weight: 700;  /* bold */
+}
+
+.display-bold16 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.display-bold14 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Display Medium */
+.display-medium16 {
+    font-size: 16px;
+    font-weight: 500;  /* medium */
+}
+
+.display-medium14 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.display-medium12 {
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* CSS 변수로 정의할 수도 있습니다 */
+:root {
+    --font-bold: 700;
+    --font-medium: 500;
+    
+    --text-24: 24px;
+    --text-16: 16px;
+    --text-14: 14px;
+    --text-12: 12px;
+}
