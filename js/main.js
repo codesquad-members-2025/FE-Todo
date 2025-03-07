@@ -1,4 +1,4 @@
-import mockData from '../data/columnData.js';
+import columnsData from '../data/columnData.js';
 import { createColumn, createTaskCard } from './components.js';
 
 //dom에 요소 추가하는 함수
@@ -74,8 +74,8 @@ function updateButtonState(sortButton, sortButtonName, newType, buttonText) {
 // sort 데이터 가져오기
 function getSortedData(type) {
   return type === 'created'
-    ? sortTasksByCreationOrder(mockData.columns)
-    : sortTasksByLatest(mockData.columns);
+    ? sortTasksByCreationOrder(columnsData)
+    : sortTasksByLatest(columnsData);
 }
 
 //생성순 정렬
@@ -98,7 +98,7 @@ function sortTasksByLatest(columnData) {
   }));
 }
 
-renderColumnsAndCards(mockData.columns);
+renderColumnsAndCards(columnsData);
 
 const sortButton = document.getElementById('sort-btn');
 sortButton.addEventListener('click', sortCards);
