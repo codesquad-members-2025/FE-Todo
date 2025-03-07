@@ -209,9 +209,37 @@
         </button>
       </header>
       <section class="popover__section">
-        <article class="popover-article">사용자 활동 기록이 없습니다.</article>
+        <article class="popover-article empty-message">
+          사용자 활동 기록이 없습니다.
+        </article>
+        <ul class="activity-list__ul">
+          <template> </template>
+          <!-- 탬플릿에 넣을 예정 -->
+          <li class="activity-list__list">
+            <img src="icons/Image.png" alt="귀여운 개구리" />
+            <div class="activity-list__log">
+              <div>이름</div>
+              <div>활동 log</div>
+              <div>시간</div>
+            </div>
+          </li>
+        </ul>
       </section>
-      <!-- <footer class="popover-footer"></footer> -->
+      <footer class="popover-footer">
+        <button>기록 전체 삭제</button>
+      </footer>
     </aside>
+    <div id="delete-history__modal" class="modal-overlay">
+      <p>모든 사용자 활동 기록을 삭제할까요?</p>
+      <div class="delete-history__buttons">
+        <button class="delete-history__button" id="cancel-button">
+          <div class="textLabel">취소</div>
+        </button>
+
+        <button class="delete-history__button" id="confirm-delete-button">
+          <div class="textLabel">삭제</div>
+        </button>
+      </div>
+    </div>
   </body>
 </html>

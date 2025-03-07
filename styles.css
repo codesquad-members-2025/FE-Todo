@@ -73,6 +73,7 @@ button {
   justify-content: space-between;
   gap: 8px;
   padding: 8px;
+  font-size: 14px;
 }
 
 .popover-header {
@@ -96,7 +97,10 @@ button {
   right: 77px; */
 }
 .popover__section {
+  border: 1px solid black;
   padding: 16px;
+  max-height: 500px; /* 🔹 모달의 최대 높이 설정 */
+  overflow-y: auto; /* 🔹 로그가 많아지면 스크롤 가능하게 설정 */
 }
 
 .popover-article {
@@ -104,5 +108,79 @@ button {
   text-align: center;
 }
 
+.activity-list__ul {
+  border: 1px solid black;
+  /* display: none; */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 350px;
+}
+
+.empty-message {
+  display: none;
+}
+.activity-list__list {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.activity-list img {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  object-fit: cover; /* 비율 유지하면서 크기 조정 */
+}
+
 .popover-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 8px 4px 0;
+  align-items: center;
+}
+.popover-footer button {
+  padding: 7.5px 8px;
+}
+
+.activity-list__log {
+  flex-basis: 256px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+#delete-history__modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 24px 24px 24px;
+  border: 1px solid black;
+  gap: 32px;
+  width: 400px;
+  position: fixed;
+  left: 520px;
+  top: 441px;
+}
+
+#delete-history__modal .delete-history__buttons {
+  display: flex;
+  flex-direction: row;
+}
+#delete-history__modal p {
+  margin: 0px;
+}
+.textLabel {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.delete-history__button {
+  padding: 7.5px 69.5px;
+}
+
+#confirm-delete-button {
+  color: #fefefe;
+  background-color: #ff3b30;
 }
