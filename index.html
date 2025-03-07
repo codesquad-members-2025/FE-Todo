@@ -9,30 +9,29 @@
   <body>
     <!-- 클래스 네임 컨벤션: BEM 방식 -->
     <!-- Header -->
-    <header class="header">
+    <header class="header flex flex-justify-space-between">
       <div class="header__logo">
         <h1 class="header__logo-name">TASKIFY</h1>
       </div>
-      <div class="header__history">
+      <div class="header__history flex-center">
         <img
           class="header__history-icon"
           src="./icons/history.png"
-          width="14px"
-          alt="히스토리(활동기록)를 확인하는 아이콘 버튼"
+          alt="히스토리 아이콘"
         />
       </div>
     </header>
 
     <!-- Column Container -->
-    <section class="column-container">
+    <section class="column-container flex flex-align-start flex-wrap">
       <!-- 해야 할 일 Column -->
-      <div class="column">
-        <div class="column__header">
-          <div class="column__header-left">
+      <div class="column flex flex-column flex-justify-center">
+        <div class="column__header flex flex-justify-space-between">
+          <div class="column__header-left flex flex-align-center">
             <h1 class="column__header-title">해야 할 일</h1>
             <h2 class="column__header-card-count">0</h2>
           </div>
-          <div class="column__header-right">
+          <div class="column__header-right flex flex-align-center">
             <img
               class="column__header-right-icon"
               src="./icons/plus.png"
@@ -48,13 +47,13 @@
           </div>
         </div>
         <!-- Task Card -->
-        <div class="task-card">
+        <div class="task-card flex flex-justify-space-between">
           <div class="task-card__left">
             <h1 class="task-card__title">Task 1</h1>
             <h2 class="task-card__description">Description 1</h2>
             <h3 class="task-card__author">author by YooN</h3>
           </div>
-          <div class="task-card__right">
+          <div class="task-card__right flex flex-column flex-justify-start">
             <img
               class="task-card__right-delete-icon"
               src="./icons/delete.png"
@@ -72,13 +71,13 @@
       </div>
 
       <!-- 하고 있는 일 Column -->
-      <div class="column">
-        <div class="column__header">
-          <div class="column__header-left">
+      <div class="column flex flex-column flex-justify-center">
+        <div class="column__header flex flex-justify-space-between">
+          <div class="column__header-left flex flex-align-center">
             <h1 class="column__header-title">하고 있는 일</h1>
             <h2 class="column__header-card-count">0</h2>
           </div>
-          <div class="column__header-right">
+          <div class="column__header-right flex flex-align-center">
             <img
               class="column__header-right-icon"
               src="./icons/plus.png"
@@ -94,13 +93,13 @@
           </div>
         </div>
         <!-- Task Card -->
-        <div class="task-card">
+        <div class="task-card flex flex-justify-space-between">
           <div class="task-card__left">
             <h1 class="task-card__title">Task 1</h1>
             <h2 class="task-card__description">Description 1</h2>
             <h3 class="task-card__author">author by YooN</h3>
           </div>
-          <div class="task-card__right">
+          <div class="task-card__right flex flex-column flex-justify-start">
             <img
               class="task-card__right-delete-icon"
               src="./icons/delete.png"
@@ -118,13 +117,13 @@
       </div>
 
       <!-- 완료한 일 Column -->
-      <div class="column">
-        <div class="column__header">
-          <div class="column__header-left">
+      <div class="column flex flex-column flex-justify-center">
+        <div class="column__header flex flex-justify-space-between">
+          <div class="column__header-left flex flex-align-center">
             <h1 class="column__header-title">완료한 일</h1>
             <h2 class="column__header-card-count">0</h2>
           </div>
-          <div class="column__header-right">
+          <div class="column__header-right flex flex-align-center">
             <img
               class="column__header-right-icon"
               src="./icons/plus.png"
@@ -140,13 +139,13 @@
           </div>
         </div>
         <!-- Task Card -->
-        <div class="task-card">
+        <div class="task-card flex flex-justify-space-between">
           <div class="task-card__left">
             <h1 class="task-card__title">Task 1</h1>
             <h2 class="task-card__description">Description 1</h2>
             <h3 class="task-card__author">author by YooN</h3>
           </div>
-          <div class="task-card__right">
+          <div class="task-card__right flex flex-column flex-justify-start">
             <img
               class="task-card__right-delete-icon"
               src="./icons/delete.png"
@@ -164,23 +163,38 @@
       </div>
     </section>
 
+    <!-- History Modal -->
     <section class="history-modal-container">
-      <div class="history-modal__header">
+      <div
+        class="history-modal__header flex flex-justify-space-between flex-align-center"
+      >
         <div class="history-modal__header-title">
           <h1>사용자 활동 기록</h1>
         </div>
-        <div class="history-modal__header-close">
-          <img
-            src="./icons/delete.png"
-            width="16px"
-            alt="닫기 버튼"
-            class="히스토리를 닫는 가위 아이콘 버튼"
-          />
+        <div
+          class="history-modal__header-close flex flex-justify-end flex-align-center"
+        >
+          <img src="./icons/delete.png" width="16" alt="닫기 버튼" />
           <h2>닫기</h2>
         </div>
       </div>
-      <div>Hello</div>
-      <div>Hello</div>
+      <div class="history-modal__content">
+        <div class="history-modal__content-item">
+          <h1>Task 1</h1>
+          <h2>해야 할 일</h2>
+          <h3>2021. 10. 10</h3>
+        </div>
+        <div class="history-modal__content-item">
+          <h1>Task 2</h1>
+          <h2>하고 있는 일</h2>
+          <h3>2021. 10. 10</h3>
+        </div>
+        <div class="history-modal__content-item">
+          <h1>Task 3</h1>
+          <h2>완료한 일</h2>
+          <h3>2021. 10. 10</h3>
+        </div>
+      </div>
     </section>
   </body>
 </html>

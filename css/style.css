@@ -1,5 +1,6 @@
 @import "reset.css";
 @import "global.css";
+@import "utility.css";
 
 body {
   font-family: "Pretendard";
@@ -11,8 +12,6 @@ body {
 /* Header */
 .header {
   height: 60px;
-  display: flex;
-  justify-content: space-between;
   padding: 18px 80px;
 }
 
@@ -22,12 +21,6 @@ body {
   color: var(--text-strong);
 }
 
-.header__history {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .header__history-icon {
   width: 24px;
   height: 24px;
@@ -35,24 +28,16 @@ body {
 
 /* Column Container */
 .column-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
   padding: 18px 80px;
 }
 
 /* Column */
 .column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 320px;
   margin: 0 24px 50px 0;
 }
 
 .column__header {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   height: 14px;
   font-size: 20px;
@@ -62,8 +47,6 @@ body {
 }
 
 .column__header-left {
-  display: flex;
-  align-items: center;
   gap: 8px;
 }
 
@@ -82,8 +65,6 @@ body {
 }
 
 .column__header-right {
-  display: flex;
-  align-items: center;
   gap: 10px;
 }
 
@@ -96,8 +77,6 @@ body {
 
 /* Task Card */
 .task-card {
-  display: flex;
-  justify-content: space-between;
   width: 320px;
   height: 104px;
   margin: 0px 0px 10px 0;
@@ -128,12 +107,6 @@ body {
   font-size: 12px;
 }
 
-.task-card__right {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
 .history-modal-container {
   display: grid;
   grid-template-rows: 48px 1fr 40px;
@@ -149,9 +122,6 @@ body {
 }
 
 .history-modal__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 15px 16px;
   margin: 8px;
   font-size: 16px;
@@ -160,8 +130,5 @@ body {
 }
 
 .history-modal__header-close {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
   color: var(--text-default);
 }
