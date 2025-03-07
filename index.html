@@ -181,6 +181,7 @@
       </div>
       <!-- History Modal Content -->
       <div class="history-modal__content flex flex-column">
+        <!-- History Modal Content Item -->
         <div class="history-modal__content-item flex">
           <div class="history-modal__content-item-left flex-center">
             <img
@@ -202,22 +203,24 @@
             <p id="action-time">3분 전</p>
           </div>
         </div>
-        <!-- <div class="history-modal__content-item">
-          <div class="history-modal__content-item-left">
-            <h1>Task 1</h1>
-            <h2>해야 할 일</h2>
-            <h3>2021. 10. 10</h3>
-          </div>
-          <div class="history-modal__content-item-right">
-            <h1>Task 1</h1>
-            <h2>해야 할 일</h2>
-            <h3>2021. 10. 10</h3>
-          </div>
-        </div> -->
       </div>
       <!-- History Modal Footer -->
       <div class="history-modal__footer flex flex-justify-end">
-        <div class="history-modal__footer-button flex flex-center">기록 전체 삭제</div>
+        <div class="history-modal__footer-button flex flex-center">
+          기록 전체 삭제
+        </div>
+      </div>
     </section>
+
+    <!-- 삭제 확인 모달 -->
+    <div id="delete-confirm-modal" class="modal hidden">
+      <div class="modal-content">
+        <p>모든 사용자 활동 기록을 삭제할까요?</p>
+        <div class="modal-buttons">
+          <button id="cancel-delete" class="modal-button cancel">취소</button>
+          <button id="confirm-delete" class="modal-button confirm">삭제</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
