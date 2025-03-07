@@ -10,8 +10,13 @@ button {
   all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
   cursor: pointer;
 }
+button {
+  display: flex;
+  align-items: center;
+}
 
 .top-layout-container {
+  position: relative;
   margin: 0px;
   display: flex;
   flex-direction: column;
@@ -57,4 +62,39 @@ button {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+.popover-sidebar {
+  border: 2px solid black;
+  height: 121px;
+  position: absolute;
+  inset: 64px auto auto 1018px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.popover-header {
+  display: flex;
+  justify-content: space-between;
+
+  gap: 4px;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 8px;
+  position: relative;
+  height: 48px;
+}
+
+.popover-header__title {
+  font-size: 16px;
+  right: 77px;
+  margin-top: 0;
+  margin-bottom: 0;
+
+  /* left: 16px;
+  right: 77px; */
+}
+.popover-header__close {
 }
