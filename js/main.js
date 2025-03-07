@@ -1,4 +1,4 @@
-import columnsData from '../data/columnData.js';
+import columnData from '../data/columnData.js';
 import { createColumn, createTaskCard } from './components.js';
 
 //dom에 요소 추가하는 함수
@@ -60,7 +60,7 @@ function sortCards({ currentTarget }) {
   updateButtonState(sortButton, sortButtonName, newType, buttonText);
 
   // 데이터 정렬
-  const sortedData = getSortedData(columnsData, newType);
+  const sortedData = getSortedData(columnData, newType);
 
   // 카드 업데이트
   clearCards();
@@ -90,7 +90,7 @@ function sortTasks(columnData, order = 'created') {
   }));
 }
 
-renderColumnsAndCards(columnsData);
+renderColumnsAndCards(columnData);
 
 const sortButton = document.getElementById('sort-btn');
 sortButton.addEventListener('click', sortCards);

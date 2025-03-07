@@ -1,4 +1,4 @@
-const columnsData = [
+const columnData = [
   {
     id: 'todo',
     title: '해야할 일',
@@ -64,4 +64,4 @@ const columnsData = [
   },
 ];
 
-export default columnsData;
+export default columnData;
