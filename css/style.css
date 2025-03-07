@@ -12,7 +12,7 @@
   --grayscale-900: #14142b;
 
   /* Accent colors */
-  --accent-blue: #007aff;ㄴ
+  --accent-blue: #007aff;
   --accent-red: #ff3b30;
 
   /* Text colors */
@@ -59,8 +59,8 @@
   --font-weight-medium: 500;
 
   /* Line Height */
-  --line-height-auto: auto; 
-  --line-height-22: 22px; 
+  --line-height-auto: auto;
+  --line-height-22: 22px;
 }
 
 body {
@@ -97,8 +97,13 @@ body {
 /* Typo style */
 
 /* Line Height */
-.display-bold24, .display-bold16, .display-bold14, .display-bold12,
-.display-medium16, .display-medium14, .display-medium12 {
+.display-bold24,
+.display-bold16,
+.display-bold14,
+.display-bold12,
+.display-medium16,
+.display-medium14,
+.display-medium12 {
   line-height: var(--line-height-auto);
 }
 
@@ -107,20 +112,45 @@ body {
 }
 
 /* 글씨 굵기 설정 */
-.display-bold24, .display-bold16, .display-bold14, .display-bold12,
-.selected-bold16, .selected-bold14, .available-medium16, .available-medium14 {
+.display-bold24,
+.display-bold16,
+.display-bold14,
+.display-bold12,
+.selected-bold16,
+.selected-bold14,
+.available-medium16,
+.available-medium14 {
   font-weight: var(--font-weight-bold);
 }
 
-.display-medium16, .display-medium14, .display-medium12, .available-medium16, .available-medium14 {
+.display-medium16,
+.display-medium14,
+.display-medium12,
+.available-medium16,
+.available-medium14 {
   font-weight: var(--font-weight-medium);
 }
 
 /* 글씨 크기 설정 */
-.display-bold24 { font-size: var(--font-size-large); }
-.display-bold16, .display-medium16, .selected-bold16, .available-medium16 { font-size: var(--font-size-medium); }
-.display-bold14, .display-medium14, .selected-bold14, .available-medium14 { font-size: var(--font-size-regular); }
-.display-bold12, .display-medium12 { font-size: var(--font-size-small); }
+.display-bold24 {
+  font-size: var(--font-size-large);
+}
+.display-bold16,
+.display-medium16,
+.selected-bold16,
+.available-medium16 {
+  font-size: var(--font-size-medium);
+}
+.display-bold14,
+.display-medium14,
+.selected-bold14,
+.available-medium14 {
+  font-size: var(--font-size-regular);
+}
+.display-bold12,
+.display-medium12 {
+  font-size: var(--font-size-small);
+}
 
 /* Common Structure styles */
 .flex-col {
@@ -213,13 +243,12 @@ body {
   justify-content: center;
 }
 
-
 .sort-btn {
   display: flex;
   justify-content: center;
   align-items: center;
 
-  width: 75px; 
+  width: 75px;
   height: 24px;
 
   border: 1px solid var(--border-bord);
