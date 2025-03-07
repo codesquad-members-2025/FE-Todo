@@ -9,8 +9,6 @@ body {
 button {
   all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
   cursor: pointer;
-}
-button {
   display: flex;
   align-items: center;
 }
@@ -47,6 +45,7 @@ button {
 .columnlist__col {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 .columnlist__header {
   display: flex;
@@ -183,4 +182,18 @@ button {
 #confirm-delete-button {
   color: #fefefe;
   background-color: #ff3b30;
+}
+
+#task-modal-add-template {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#task-modal-add-template footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }
