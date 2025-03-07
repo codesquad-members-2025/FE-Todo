@@ -132,3 +132,34 @@ body {
 .history-modal__header-close {
   color: var(--text-default);
 }
+
+.history-modal__content {
+}
+
+.history-modal__content-item {
+  width: 344px;
+  height: 113px;
+  padding: 16px;
+}
+
+.history-modal__content-item-left {
+  width: 40px;
+  margin-right: 16px;
+}
+
+.history-modal__content-item-right {
+  width: 256px;
+  height: 81px;
+}
+
+#action-user-name {
+  color: var(--text-default);
+}
+
+#action-description {
+  color: var(--text-default);
+}
+
+#action-time {
+  color: var(--text-weak);
+}

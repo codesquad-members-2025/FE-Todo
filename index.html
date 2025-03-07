@@ -165,6 +165,7 @@
 
     <!-- History Modal -->
     <section class="history-modal-container">
+      <!-- History Modal Header -->
       <div
         class="history-modal__header flex flex-justify-space-between flex-align-center"
       >
@@ -178,22 +179,41 @@
           <h2>닫기</h2>
         </div>
       </div>
-      <div class="history-modal__content">
-        <div class="history-modal__content-item">
-          <h1>Task 1</h1>
-          <h2>해야 할 일</h2>
-          <h3>2021. 10. 10</h3>
+      <!-- History Modal Content -->
+      <div class="history-modal__content flex flex-column">
+        <div class="history-modal__content-item flex">
+          <div class="history-modal__content-item-left flex-center">
+            <img
+              class="history-modal__content-item-left-icon"
+              src="./icons/action_icon.png"
+              width="40px"
+              alt="사용자 액션 아이콘"
+            />
+          </div>
+          <div
+            class="history-modal__content-item-right flex flex-column flex-justify-space-between"
+          >
+            <h1 id="action-user-name">@SangYoonLee</h1>
+            <p id="action-description">
+              <strong>블로그에 포스팅할 것</strong>을(를)
+              <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>으로
+              이동하였습니다.
+            </p>
+            <p id="action-time">3분 전</p>
+          </div>
         </div>
-        <div class="history-modal__content-item">
-          <h1>Task 2</h1>
-          <h2>하고 있는 일</h2>
-          <h3>2021. 10. 10</h3>
-        </div>
-        <div class="history-modal__content-item">
-          <h1>Task 3</h1>
-          <h2>완료한 일</h2>
-          <h3>2021. 10. 10</h3>
-        </div>
+        <!-- <div class="history-modal__content-item">
+          <div class="history-modal__content-item-left">
+            <h1>Task 1</h1>
+            <h2>해야 할 일</h2>
+            <h3>2021. 10. 10</h3>
+          </div>
+          <div class="history-modal__content-item-right">
+            <h1>Task 1</h1>
+            <h2>해야 할 일</h2>
+            <h3>2021. 10. 10</h3>
+          </div>
+        </div> -->
       </div>
     </section>
   </body>

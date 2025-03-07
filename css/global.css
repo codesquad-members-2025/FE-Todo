@@ -43,17 +43,6 @@ img {
   /* width: 14px; */
 }
 
-/* 유틸리티 클래스 */
-.flex {
-  display: flex;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
+strong {
+  font-weight: bold;
 }
