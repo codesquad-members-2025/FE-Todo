@@ -51,35 +51,25 @@ function clearCards() {
 function sortCards({ currentTarget }) {
   const sortButton = currentTarget;
   const sortButtonName = sortButton.querySelector('.sort-btn-name');
-  const currentType = sortButton.dataset.type;
+  const currentSortType = sortButton.dataset.type;
 
-  const newType = currentType === 'created' ? 'latest' : 'created';
-  const buttonText = newType === 'created' ? '생성순' : '최신순';
+  const newSortType = currentSortType === 'created' ? 'latest' : 'created';
+  const buttonText = newSortType === 'created' ? '생성순' : '최신순';
 
   // 상태 변경 및 버튼 텍스트 업데이트
-  updateButtonState(sortButton, sortButtonName, newType, buttonText);
+  sortButton.dataset.type = newSortType;
+  sortButtonName.textContent = buttonText;
 
   // 데이터 정렬
-  const sortedData = getSortedData(columnData, newType);
+  const sortedData = sortTasksByDate(columnData, newSortType);
 
   // 카드 업데이트
   clearCards();
   renderCardsForColumn(sortedData);
 }
 
-// 버튼 상태 업데이트 함수
-function updateButtonState(sortButton, sortButtonName, newType, buttonText) {
-  sortButton.dataset.type = newType;
-  sortButtonName.textContent = buttonText;
-}
-
-// sort 데이터 가져오기
-function getSortedData(columnData, sortBy) {
-  return sortTasks(columnData, sortBy);
-}
-
 // 정렬 함수 (order: 'created' | 'latest')
-function sortTasks(columnData, order = 'created') {
+function sortTasksByDate(columnData, order = 'created') {
   return columnData.map((column) => ({
     ...column,
     tasks: [...column.tasks].sort((a, b) => {
