@@ -10,7 +10,7 @@
   <body>
     <header>
       <h1>TESKIFY</h1>
-      <button id="history"><div class="img_history"></div></button>
+      <button id="historyOpenButton"><div class="img_history"></div></button>
     </header>
     <main class="columnList">
       <section class="column column__toDo">
@@ -222,7 +222,7 @@
         </div>
       </section>
     </main>
-    <aside class="historyList">
+    <aside id="historyList">
       <div class="history__header">
         <h4 class="history__header__title">사용자 활동 기록</h4>
         <button class="history__header__closed">
@@ -247,5 +247,6 @@
         <div class="record-add">사용자 활동 기록이 없습니다.</div>
       </div>
     </aside>
+    <script src="./js/action.js"></script>
   </body>
 </html>
