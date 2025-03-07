@@ -109,7 +109,7 @@ body {
 
 .history-modal-container {
   display: grid;
-  grid-template-rows: 48px 1fr 40px;
+  grid-template-rows: 48px 1fr 40px 8px;
   gap: 8px;
   position: fixed;
   top: 64px;
@@ -134,6 +134,9 @@ body {
 }
 
 .history-modal__content {
+  width: 350px;
+  height: 500px;
+  margin: 0px 8px;
 }
 
 .history-modal__content-item {
@@ -162,4 +165,17 @@ body {
 
 #action-time {
   color: var(--text-weak);
+}
+
+.history-modal__footer {
+  width: 350px;
+  height: 40px;
+  padding: 4px 8px 4px 0;
+  margin: 8px;
+}
+
+.history-modal__footer-button {
+  width: 104px;
+  color: var(--text-danger);
+  font-weight: bold;
 }
