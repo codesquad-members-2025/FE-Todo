@@ -12,12 +12,12 @@
 @import './layout/kanban.css';
 
 /* Components */
-@import './components/action-history.css';
-@import './components/card-form.css';
+@import './components/actionHistory.css';
+@import './components/cardForm.css';
 @import './components/card.css';
 @import './components/column.css';
-@import './components/icon-styles.css';
-@import './components/modal-styles.css';
+@import './components/icon.css';
+@import './components/modal.css';
 
 /* 전역 스타일 */
 * {
