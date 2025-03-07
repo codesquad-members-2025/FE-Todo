@@ -1,5 +1,6 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/Pretendard/dist/web/static/pretendard.css");
-@import url("./reset.css");
+@import url("../css/global.css");
+@import url("../css/reset.css");
 
 body {
   margin: 0;
@@ -220,9 +221,10 @@ h1 {
 }
 
 .historyList {
-  opacity: 0;
+  /* opacity: 0; */
   position: absolute;
-  left: 1018px;
+  left: 15px;
+  top: 15px;
   background-color: var(--surface-default);
   box-shadow: 0px 16px 16px #6e80913d, 0px 0px 4px #6e809114;
   border-radius: var(--number-200);
@@ -273,7 +275,7 @@ h1 {
   display: flex;
   flex-direction: column;
   gap: var(--number-50);
-  padding: var(--number-200);
+  padding: 0 var(--number-100) var(--number-100) var(--number-100);
 }
 
 .record-add {
@@ -281,4 +283,5 @@ h1 {
   font: var(--display-medium14);
   color: var(--text-weak);
   padding: var(--number-200);
+  line-height: 100%;
 }

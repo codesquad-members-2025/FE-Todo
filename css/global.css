@@ -42,7 +42,7 @@
   --font-bold-S: 700 12px/1.4 "Pretendard", sans-serif;
 
   /* Medium type (500) */
-  --font-medium-M: 500 16px/22px "Pretendard", sans-serif;
+  --font-medium-M: 500 16px/1.4 "Pretendard", sans-serif;
   --font-medium-R: 500 14px/1.4 "Pretendard", sans-serif;
   --font-medium-S: 500 12px/1.4 "Pretendard", sans-serif;
 
@@ -70,11 +70,4 @@
   --number-700: 56px;
   --number-800: 64px;
   --number-900: 72px;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  all: unset;
 }
