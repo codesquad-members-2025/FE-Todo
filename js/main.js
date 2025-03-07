@@ -90,7 +90,29 @@ function sortTasks(columnData, order = 'created') {
   }));
 }
 
-renderColumnsAndCards(columnData);
-
+//Sort Button
 const sortButton = document.getElementById('sort-btn');
 sortButton.addEventListener('click', sortCards);
+
+//history 열기
+function openHistory() {
+  console.log('오픈!');
+  const history = document.querySelector('#history');
+  history.style.display = 'flex';
+}
+
+const historyButton = document.getElementById('history-open-btn');
+historyButton.addEventListener('click', openHistory);
+
+//history 닫기
+function closeHistory() {
+  console.log('close!');
+  const history = document.querySelector('#history');
+  history.style.display = 'none';
+}
+
+const historyCloseButton = document.getElementById('history-close-btn');
+historyCloseButton.addEventListener('click', closeHistory);
+
+//render
+renderColumnsAndCards(columnData);

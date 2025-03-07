@@ -32,10 +32,24 @@
             <span class="sort-btn-name text-bold display-medium12">생성순</span>
           </button>
         </div>
-        <button aria-label="View history">
+        <button id="history-open-btn" aria-label="View history">
           <img src="./assets/icons/history.svg" alt="View task history" />
         </button>
       </header>
+      <aside id="history" class="flex-col">
+        <div class="history-header">
+          <span class="text-strong display-bold16">사용자 활동 기록</span>
+          <button id="history-close-btn" class="history-close-btn">
+            <img src="/assets/icons/closed.svg" width="16" height="16" />
+            <span class="text-default display-bold14">닫기</span>
+          </button>
+        </div>
+        <section class="history-section">
+          <span class="text-weak display-medium14"
+            >사용자 활동 기록이 없습니다.</span
+          >
+        </section>
+      </aside>
       <main class="main" id="columns-container">
         <!-- 컬럼은 JavaScript에서 동적으로 추가 -->
       </main>

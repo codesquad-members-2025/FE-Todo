@@ -258,3 +258,51 @@ body {
 .sort-btn-name {
   padding: 1.5px 4px;
 }
+
+/* History */
+
+#history {
+  display: none;
+  gap: 8px;
+  position: fixed;
+  top: 64px;
+  right: 62px;
+  padding: 8px;
+
+  border-radius: var(--radius-medium);
+  background-color: var(--surface-default);
+  box-shadow: var(--drop-shadow-floating);
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.history-header > span {
+  display: flex;
+  padding-left: 8px;
+}
+
+.history-section {
+  padding: 16px;
+}
+
+.history-section > span {
+  width: 312px;
+  display: flex;
+  justify-content: center;
+  padding-left: 8px;
+}
+
+.history-close-btn {
+  display: flex;
+  align-items: center;
+  padding: 7.5px 8px;
+}
+
+.history-close-btn > span {
+  padding: 0 4px;
+}
