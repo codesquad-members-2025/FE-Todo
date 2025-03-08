@@ -2,10 +2,10 @@ import { createColumn, createTaskCard } from '../components/components.js';
 import { addElementToParent } from './dom.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
-function renderColumns(columnData) {
+function renderColumns(columnList) {
   const columnContainer = document.querySelector('#columns-container');
 
-  const columnsHtml = columnData.reduce(
+  const columnsHtml = columnList.reduce(
     (acc, { id, title, taskCount }) =>
       (acc += createColumn(id, title, taskCount)),
     ''
@@ -15,8 +15,8 @@ function renderColumns(columnData) {
 }
 
 // 칼럼에 카드 생성
-function renderCardsForColumn(columnsData) {
-  columnsData.forEach(({ id, tasks }) => {
+function renderCardsForColumn(columnList) {
+  columnList.forEach(({ id, tasks }) => {
     const columnCardList = document.querySelector(`#${id} .card-list`);
     const taskCardsHtml = tasks.reduce(
       (acc, { id, title, content, author }) =>
@@ -29,9 +29,9 @@ function renderCardsForColumn(columnsData) {
 }
 
 // 칼럼과 카드 렌더링을 호출하는 메인 함수
-function renderColumnsAndCards(columnData) {
-  renderColumns(columnData); // 칼럼 생성
-  renderCardsForColumn(columnData); // 카드 추가
+function renderColumnsAndCards(columnList) {
+  renderColumns(columnList); // 칼럼 생성
+  renderCardsForColumn(columnList); // 카드 추가
 }
 
 // 카드 데이터 제거

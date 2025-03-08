@@ -4,7 +4,7 @@ import { renderCardsForColumn } from './cardColumn.js';
 export { sortCards };
 
 //정렬 버튼 클릭 이벤트
-function sortCards(columnData, { currentTarget }) {
+function sortCards(columnList, { currentTarget }) {
   const sortButton = currentTarget;
   const sortButtonName = sortButton.querySelector('.sort-btn-name');
   const currentSortType = sortButton.dataset.type;
@@ -17,7 +17,7 @@ function sortCards(columnData, { currentTarget }) {
   sortButtonName.textContent = buttonText;
 
   // 데이터 정렬
-  const sortedData = sortTasksByDate(columnData, newSortType);
+  const sortedData = getSortedTasksByDate(columnList, newSortType);
 
   // 카드 업데이트
   clearCards();
@@ -25,8 +25,8 @@ function sortCards(columnData, { currentTarget }) {
 }
 
 // 정렬 함수 (order: 'created' | 'latest')
-function sortTasksByDate(columnData, order = 'created') {
-  return columnData.map((column) => ({
+function getSortedTasksByDate(columnList, order = 'created') {
+  return columnList.map((column) => ({
     ...column,
     tasks: [...column.tasks].sort((a, b) => {
       return order === 'created'
