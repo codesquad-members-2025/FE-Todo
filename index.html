@@ -25,8 +25,8 @@
     <!-- Column Container -->
     <section class="column-container flex flex-align-start flex-wrap">
       <!-- 해야 할 일 Column -->
-      <div class="column flex flex-column flex-justify-center">
-        <div class="column__header flex flex-justify-space-between">
+      <article class="column flex flex-column flex-justify-center">
+        <header class="column__header flex flex-justify-space-between">
           <div class="column__header-left flex flex-align-center">
             <h1 class="column__header-title">해야 할 일</h1>
             <h2 class="column__header-card-count">0</h2>
@@ -45,7 +45,7 @@
               alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
             />
           </div>
-        </div>
+        </header>
         <!-- Task Card -->
         <div class="task-card flex flex-justify-space-between">
           <div class="task-card__left">
@@ -68,11 +68,11 @@
             />
           </div>
         </div>
-      </div>
+      </article>
 
       <!-- 하고 있는 일 Column -->
-      <div class="column flex flex-column flex-justify-center">
-        <div class="column__header flex flex-justify-space-between">
+      <article class="column flex flex-column flex-justify-center">
+        <header class="column__header flex flex-justify-space-between">
           <div class="column__header-left flex flex-align-center">
             <h1 class="column__header-title">하고 있는 일</h1>
             <h2 class="column__header-card-count">0</h2>
@@ -91,7 +91,7 @@
               alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
             />
           </div>
-        </div>
+        </header>
         <!-- Task Card -->
         <div class="task-card flex flex-justify-space-between">
           <div class="task-card__left">
@@ -114,11 +114,11 @@
             />
           </div>
         </div>
-      </div>
+      </article>
 
       <!-- 완료한 일 Column -->
-      <div class="column flex flex-column flex-justify-center">
-        <div class="column__header flex flex-justify-space-between">
+      <article class="column flex flex-column flex-justify-center">
+        <header class="column__header flex flex-justify-space-between">
           <div class="column__header-left flex flex-align-center">
             <h1 class="column__header-title">완료한 일</h1>
             <h2 class="column__header-card-count">0</h2>
@@ -137,7 +137,7 @@
               alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
             />
           </div>
-        </div>
+        </header>
         <!-- Task Card -->
         <div class="task-card flex flex-justify-space-between">
           <div class="task-card__left">
@@ -160,13 +160,13 @@
             />
           </div>
         </div>
-      </div>
+      </article>
     </section>
 
     <!-- History Modal -->
-    <section class="history-modal-container">
+    <aside class="history-modal-container">
       <!-- History Modal Header -->
-      <div
+      <header
         class="history-modal__header flex flex-justify-space-between flex-align-center"
       >
         <div class="history-modal__header-title">
@@ -178,9 +178,9 @@
           <img src="./icons/delete.png" width="16" alt="닫기 버튼" />
           <h2>닫기</h2>
         </div>
-      </div>
+      </header>
       <!-- History Modal Content -->
-      <div class="history-modal__content flex flex-column">
+      <article class="history-modal__content flex flex-column">
         <!-- History Modal Content Item -->
         <div class="history-modal__content-item flex">
           <div class="history-modal__content-item-left flex-center">
@@ -203,14 +203,14 @@
             <p id="action-time">3분 전</p>
           </div>
         </div>
-      </div>
+      </article>
       <!-- History Modal Footer -->
-      <div class="history-modal__footer flex flex-justify-end">
+      <footer class="history-modal__footer flex flex-justify-end">
         <div class="history-modal__footer-button flex flex-center">
           기록 전체 삭제
         </div>
-      </div>
-    </section>
+      </footer>
+    </aside>
 
     <!-- 삭제 확인 모달 -->
     <div id="delete-confirm-modal" class="modal hidden">
