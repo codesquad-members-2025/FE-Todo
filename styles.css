@@ -6,11 +6,14 @@ body {
   background-color: #f7f7fc;
 }
 
+p {
+  padding: 0;
+  margin: 0;
+}
+
 button {
   all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
   cursor: pointer;
-}
-button {
   display: flex;
   align-items: center;
 }
@@ -47,6 +50,7 @@ button {
 .columnlist__col {
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 .columnlist__header {
   display: flex;
@@ -151,17 +155,25 @@ button {
 }
 
 #delete-history__modal {
+  width: 400px;
+  padding: 32px 24px;
+  border-radius: 8px;
+}
+.delete-history__content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 32px 24px 24px 24px;
-  border: 1px solid black;
   gap: 32px;
-  width: 400px;
-  position: fixed;
-  left: 520px;
-  top: 441px;
+}
+dialog::backdrop {
+  background-color: #14212b4d;
+}
+
+dialog {
+  padding: 32px 24px 24px 24px;
+  /* padding: 24px; */
+  border-radius: 8px;
 }
 
 #delete-history__modal .delete-history__buttons {
@@ -183,4 +195,87 @@ button {
 #confirm-delete-button {
   color: #fefefe;
   background-color: #ff3b30;
+}
+.task-card__default {
+  background-color: #fefefe;
+  padding: 16px;
+  font-size: 14px;
+}
+
+.task-modal-add-template {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.task-modal-add-template > div {
+  display: flex;
+  flex-direction: column;
+}
+.task-modal-add-template footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 8px;
+}
+.modal-strong__input::placeholder {
+  color: #14142b; /* 🔹 플레이스홀더 색상 변경 */
+  font-size: 16px; /* 🔹 글자 크기 변경 */
+  font-weight: bold; /* 🔹 글자 두껍게 */
+}
+.modal-default__input::placeholder {
+  color: #6e7191; /* 🔹 플레이스홀더 색상 변경 */
+  font-size: 14px; /* 🔹 글자 크기 변경 */
+}
+
+.modal__input {
+  border: none;
+}
+
+.task-add__button {
+  border: 1px solid black;
+  height: 32px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal__input {
+  border: none;
+  outline: none; /* 🔹 포커스 시 나타나는 외곽선도 제거 */
+}
+.register-button {
+  background-color: #007aff;
+}
+.cancel-button {
+  background-color: #f7f7fc;
+}
+
+.todo-card {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+}
+.todo-card__textarea {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.card-textarea__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-textarea__body header {
+  font-weight: 700;
+}
+
+.card-textarea__body p {
+  color: #6e7191;
+}
+
+.card-textarea__caption {
+  font-size: 12px;
 }
