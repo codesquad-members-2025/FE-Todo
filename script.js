@@ -7,10 +7,14 @@ const historyModalCloseBtn = document.querySelector(
 
 const handleHistoryBtnClick = (event) => {
   historyModal.style.display = "grid";
+  historyModal.style.animation = "slideIn 0.5s forwards";
 };
 
 const handleHistoryModalCloseBtnClick = (event) => {
-  historyModal.style.display = "none";
+  historyModal.style.animation = "slideOut 0.3s forwards";
+  setTimeout(() => {
+    historyModal.style.display = "none";
+  }, 500);
 };
 
 historyOpenBtn.addEventListener("click", handleHistoryBtnClick);
