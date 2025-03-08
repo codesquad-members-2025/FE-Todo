@@ -264,7 +264,7 @@ h1 {
 }
 
 .history__header__title {
-  padding-left: var(--number-200);
+  padding: 14px 0 14px var(--number-200);
   font: var(--display-bold16);
   color: var(--text-strong);
   line-height: 100%;
@@ -278,6 +278,7 @@ h1 {
   background-color: unset;
   display: flex;
   align-items: center;
+  padding-right: var(--number-100);
 }
 
 .history__header__closed-btn {
@@ -286,10 +287,11 @@ h1 {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: var(--number-100) 0 var(--number-100) var(--number-100);
 }
 
 .history__header__textLabel {
-  padding: 0 var(--number-50);
+  padding: 0 var(--number-200) 0 var(--number-50);
 }
 
 .history__recordList {
