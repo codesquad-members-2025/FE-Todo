@@ -8,15 +8,13 @@
 @import './base/typography.css';  /* 폰트 정의를 먼저 불러옴 */
 
 /* Layout */
-@import './layout/header.css';
 @import './layout/kanban.css';
 
 /* Components */
-@import './components/actionHistory.css';
+@import './components/historyPanel.css';
 @import './components/cardForm.css';
 @import './components/card.css';
 @import './components/column.css';
-@import './components/icon.css';
 @import './components/modal.css';
 
 /* 전역 스타일 */
@@ -25,12 +23,8 @@
     /* outline: 1px solid red; */
 }
 
-button, input, select, textarea {
+button, input, textarea {
     font-family: inherit;
-}
-
-html {
-    height: 100%; /* 배경색을 채우기 위해 필요 */
 }
 
 body {

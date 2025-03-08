@@ -1,6 +1,6 @@
 export function initModal() {
     const modal = document.querySelector('.modal');
-    const modalOpenBtn = document.querySelector('.action-history__footer-btn-text');
+    const modalOpenBtn = document.querySelector('.history-panel__footer-btn');
     const modalCloseBtn = document.querySelector('.modal__cancel-btn');
     const modalConfirmBtn = document.querySelector('.modal__confirm-btn');
 

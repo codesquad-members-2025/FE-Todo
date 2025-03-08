@@ -1,0 +1,135 @@
+/* 사이드 패널 컨테이너 */
+.history-panel {
+    position: fixed;
+    top: 64px;
+    right: 56px;
+    background-color: rgba(254, 254, 254, 1);
+    border-radius: 16px;
+    padding: 8px;
+    gap: 8px;
+    box-shadow: 0px 16px 16px 0px rgba(110, 128, 145, 0.24),
+        0px 0px 4px 0px rgba(110, 128, 145, 0.08);
+}
+
+/* 상단 고정 헤더 영역 */
+.history-panel__header {
+    padding: 8px 8px 8px 16px;
+    gap: 4px;
+}
+
+/* 헤더의 제목 텍스트 */
+.history-panel__title {
+    margin: 0;
+    align-self: center;
+}
+
+/* 닫기 버튼 */
+.history-panel__close-btn {
+    height: 32px;
+}
+
+/* 닫기 버튼의 텍스트 */
+.history-panel__close-btn-text {
+    padding: 0px 4px;
+    color: var(--text-default);
+}
+
+/* 활동 기록 목록을 감싸는 컨테이너 */
+.history-panel__list {
+    max-height: 560px;
+    overflow-y: auto;
+}
+
+/* Chrome, Safari 스크롤 바 너비 설정*/
+.history-panel__list::-webkit-scrollbar {
+    width: 2px;  /* Width: 2px */
+}
+
+/* Chrome, Safari 스크롤 바 색상 및 모양 설정 */
+.history-panel__list::-webkit-scrollbar-thumb {
+    background: rgba(247, 247, 252, 1);  /* surface-alt 색상 */
+    border-radius: 6px;  /* Radius: 6px */
+}
+
+.history-panel__list::-webkit-scrollbar-track {
+    background: transparent;  /* 스크롤바 트랙 배경 투명 */
+}
+
+
+/* 활동 기록이 없을 때 표시되는 영역 */
+.history-panel__empty {
+    width: 344px;
+    padding: 16px;
+}
+
+/* 활동 기록 없음 메시지 */
+.history-panel__empty-text {
+    margin: 0;
+    text-align: center;
+    color: var(--text-weak);
+}
+
+/* 개별 활동 기록 아이템 */
+.history-panel__item {
+    width: 344px;
+    padding: 16px;
+    gap: 16px;
+    display: flex;
+}
+
+/* 마지막 아이템을 제외한 모든 아이템 아래에 보더 추가 */
+.history-panel__item:not(:last-child) {
+    border-bottom: 1px solid rgba(239, 240, 246, 1);  /* var(--border-default) */
+}
+
+/* 활동 기록의 프로필 이미지 영역 */
+.history-panel__item-icon {
+    width: 40px;
+    height: 40px;
+}
+
+/* 활동 기록의 텍스트 컨텐츠 영역 */
+.history-panel__item-body {
+    gap: 8px;
+}
+
+/* 유저네임 */
+.history-panel__item-username {
+    margin: 0;
+    color: var(--text-default);
+    text-decoration: none;
+}
+
+/* 활동 내용 텍스트 */
+.history-panel__item-text {
+    margin: 0;
+    color: var(--text-default);
+}
+
+/* 활동 내용 중 강조 텍스트 */
+.history-panel__item-text strong {
+    font-weight: 700;
+    color: var(--text-bold);
+}
+
+/* 활동 시간 표시 */
+.history-panel__item-timestamp {
+    color: var(--text-weak);
+}
+
+/* 하단 고정 푸터 영역 */
+.history-panel__footer {
+    width: 350px;
+    padding: 4px 8px;
+}
+
+/* 전체 삭제 버튼 */
+.history-panel__footer-btn {
+    height: 32px;
+    padding: 0px 8px;
+}
+
+/* 전체 삭제 버튼 텍스트 */
+.history-panel__footer-btn-text {
+    color: var(--text-danger);
+}

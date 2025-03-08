@@ -4,7 +4,7 @@ export function initCardForm() {
     // 카드 폼 없으면 생성, 있으면 삭제
     addCardBtn.forEach(btn => {
         btn.addEventListener('click', (event) => {
-            const currentColumn = event.currentTarget.closest('.kanban__column');
+            const currentColumn = event.currentTarget.closest('.column');
             const cardForm = currentColumn.querySelector('.card-form');
             
             if (cardForm) removeCardForm(currentColumn);

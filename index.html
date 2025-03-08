@@ -168,65 +168,62 @@
         </section>
     </main>
 
-    <aside class="action-history">
+    <aside class="history-panel flex-column">
         <!-- 상단 고정 헤더 -->
-        <div class="action-history__title-area">
-            <h2 class="action-history__heading">사용자 활동 기록</h2>
-            <div class="action-history__close-btn-area">
-                <button class="action-history__close-btn btn">
-                    <img src="./assets/icons/close.svg" class="small-icon">
-                </button>
-                <span class="action-history__close-btn-text">닫기</span>
+        <div class="history-panel__header flex-between">
+            <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
+            <div class="history-panel__close-btn flex-center">
+                <img src="./assets/icons/close.svg" class="size-16">
+                <span class="history-panel__close-btn-text display-bold14">닫기</span>
             </div>
         </div>
 
         <!-- 활동 기록 목록 -->
-        <div class="action-history__list">
+        <div class="history-panel__list">
             <!-- 비어있을 때 보여줄 영역 -->
-            <div class="action-history__empty">
-                <p class="action-history__empty-text">사용자 활동 기록이 없습니다</p>
+            <div class="history-panel__empty flex-center">
+                <p class="history-panel__empty-text display-medium14">사용자 활동 기록이 없습니다</p>
             </div>
             <!-- 활동 기록 아이템 -->
-            <div class="action-history__item">
-                <div class="action-history__item-icon">
-                    <img src="./assets/images/profile.png" class="action-history__item-image">
+            <div class="history-panel__item flex-between">
+                <div class="history-panel__item-icon">
+                    <img src="./assets/images/profile.png" class="history-panel__item-image">
                 </div>
-                <div class="action-history__item-body">
+                <div class="history-panel__item-body flex-column">
                     <!-- 사용자 이름: 링크가 될 수 있으므로 a 태그 사용 -->
-                    <a href="#" class="action-history__item-username">@멋진삼</a>
+                    <a href="#" class="history-panel__item-username display-medium14">@멋진삼</a>
 
                     <!-- 활동 내용: 문장이므로 p 태그 -->
-                    <p class="action-history__item-text">
+                    <p class="history-panel__item-text display-medium14">
                         <strong>블로그에 포스팅할 것</strong>을(를) <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>로 이동하였습니다.
                     </p>
 
                     <!-- 시간 정보: time 태그 -->
-                    <time class="action-history__item-timestamp" datetime="2024-03-14T15:00">
+                    <time class="history-panel__item-timestamp display-medium12" datetime="2024-03-14T15:00">
                         3분 전
                     </time>
                 </div>
             </div>
+        </div>
 
         <!-- 하단 고정 푸터 -->
-        <div class="action-history__footer">
-            <button class="action-history__footer-btn btn">
-                <span class="action-history__footer-btn-text">기록 전체 삭제</span>
+        <div class="history-panel__footer flex-end">
+            <button class="history-panel__footer-btn btn">
+                <span class="history-panel__footer-btn-text display-bold14">기록 전체 삭제</span>
             </button>
         </div>
     </aside>
-
+    
     <dialog class="modal">
-        <div class="modal__content-area">
-            <p class="modal__content">모든 사용자 활동 기록을 삭제할까요?</p>
-
-            <!-- 모달 푸터 -->
-            <footer class="modal__footer">
-                <button class="modal__cancel-btn btn">취소</button>
+        <div class="modal__body flex-column">
+            <p class="modal__text display-medium16">모든 사용자 활동 기록을 삭제할까요?</p>
+            
+            <footer class="modal__footer flex-between">
+                <button class="modal__cancel-btn btn display-bold14">취소</button>
                 <button class="modal__confirm-btn btn">삭제</button>
             </footer>
         </div>
     </dialog>
-
 </body>
 
 </html>
