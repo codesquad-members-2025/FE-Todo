@@ -34,7 +34,7 @@ function renderColumnsAndCards(columnList) {
   renderCardsForColumn(columnList); // 카드 추가
 }
 
-// 카드 데이터 제거
+// 각 칼럼의 카드 전부 제거
 function clearCards() {
   document.querySelectorAll('.column').forEach(clearCardOfColumn);
 
@@ -46,4 +46,30 @@ function clearCards() {
   }
 }
 
-export { renderColumnsAndCards, renderCardsForColumn, clearCards };
+// 카드 제거
+function removeCard(cardId) {
+  const targetCard = document.getElementById(cardId);
+  targetCard.remove();
+}
+
+// 카드 제거 이벤트
+function deleteCardEvent(event) {
+  const button = event.target.closest('.delete-card-btn');
+  if (!button) return;
+
+  // 가장 가까운 .todo-list 안에 있는 .card-list 찾기
+  const todoList = button.closest('.card-list');
+  if (!todoList) return; // todo-list 내부에서만 동작하도록 제한
+
+  const card = button.closest('.todo-card');
+  if (card) {
+    removeCard(card.id);
+  }
+}
+
+export {
+  renderColumnsAndCards,
+  renderCardsForColumn,
+  clearCards,
+  deleteCardEvent,
+};

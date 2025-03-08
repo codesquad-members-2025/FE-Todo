@@ -1,5 +1,5 @@
 import columnData from '../data/columnData.js';
-import { renderColumnsAndCards } from './utils/cardColumn.js';
+import { renderColumnsAndCards, deleteCardEvent } from './utils/cardColumn.js';
 import { toggleHistory } from './utils/history.js';
 import { sortCards } from './utils/sort.js';
 
@@ -15,6 +15,9 @@ historyButton.addEventListener('click', toggleHistory);
 
 const historyCloseButton = document.getElementById('history-close-btn');
 historyCloseButton.addEventListener('click', toggleHistory);
+
+//Remove Button
+document.body.addEventListener('click', deleteCardEvent);
 
 //First render
 renderColumnsAndCards(columnData);

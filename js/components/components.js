@@ -35,7 +35,7 @@ function createTaskCard(id, title, content, author) {
       <h6 class="text-weak tx-m12">author by ${author}</h6>
     </div>
     <div class="button-section flex-col">
-      <button aria-label="Delete task">
+      <button class= "delete-card-btn" aria-label="Delete task">
         <img src="./assets/icons/closed.svg" alt="Delete this task" />
       </button>
       <button aria-label="Edit task">
