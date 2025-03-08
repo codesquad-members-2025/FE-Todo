@@ -2,17 +2,25 @@ import columnData from '../data/columnData.js';
 import { createColumn, createTaskCard } from './components.js';
 
 //dom에 요소 추가하는 함수
-function appendToDom(parentElement, newElement) {
-  parentElement.insertAdjacentHTML('beforeend', newElement);
+function addElementToParent(parentElement, newElement) {
+  if (typeof newElement === 'string') {
+    parentElement.insertAdjacentHTML('beforeend', newElement);
+  } else {
+    parentElement.appendChild(newElement);
+  }
 }
 
-// 칼럼 생성
+// 전체 칼럼 생성: 초기 랜더링시
 function renderColumns(columnData) {
-  columnData.forEach(({ id, title, taskCount }) => {
-    const columnHtml = createColumn(id, title, taskCount);
-    const columnContainer = document.querySelector('#columns-container');
-    appendToDom(columnContainer, columnHtml);
-  });
+  const columnContainer = document.querySelector('#columns-container');
+
+  const columnsHtml = columnData.reduce(
+    (acc, { id, title, taskCount }) =>
+      (acc += createColumn(id, title, taskCount)),
+    ''
+  );
+
+  addElementToParent(columnContainer, columnsHtml);
 }
 
 // 칼럼에 카드 생성
@@ -25,7 +33,7 @@ function renderCardsForColumn(columnData) {
       )
       .join('');
 
-    appendToDom(columnCardList, taskCardsHtml);
+    addElementToParent(columnCardList, taskCardsHtml);
   });
 }
 
