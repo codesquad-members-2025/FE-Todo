@@ -14,63 +14,27 @@
   <body class="top-layout-container">
     <header class="page-header">
       <h1 class="page-header__logo">TASKIFY</h1>
-      <button class="page-header__history">
+      <button class="header__history-btn">
         <img src="/icons/history.svg" alt="history-icon" />
       </button>
     </header>
 
     <main class="page-main__columnlist">
-      <section class="columnlist__col">
-        <!-- 해야할 일 헤더 부분 -->
+      <section class="columnlist__col" data-type="todo">
         <header class="columnlist__header">
           <div>
-            해야할 일
-            <svg
-              width="16"
-              height="18"
-              viewBox="0 0 16 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 13.1172C6.03711 13.1172 4.88281 11.5352 4.88281 8.75781C4.88281 5.99805 6.04883 4.39844 8 4.39844C9.94531 4.39844 11.1113 5.99805 11.1172 8.75781C11.1113 11.5352 9.96289 13.1172 8 13.1172ZM6.17188 8.75781C6.16602 10.873 6.85156 12.0039 8 12.0039C9.14258 12.0039 9.82812 10.873 9.82812 8.75781C9.82812 6.64844 9.13672 5.49414 8 5.48828C6.85742 5.49414 6.17188 6.64844 6.17188 8.75781Z"
-                fill="#A0A3BD"
-              />
-            </svg>
+            <p class="columnlist__tilte">해야할 일</p>
+            <p class="columnlist__count" data-type="todo">0</p>
           </div>
           <div>
-            <button>
+            <button class="add-task-btn">
               <img src="/icons/Vector.svg" alt="plus-icon" />
             </button>
-            <button>
+            <button class="delete-task-btn">
               <img src="/icons/closed.svg" alt="close-button" />
             </button>
           </div>
         </header>
-
-        <!-- 아래 태그 나중에 template로 바꿔야함/ 할일 추가 카드 모달 -->
-        <div class="task-modal-add-template modal-overlay task-card__default">
-          <div class="modal">
-            <input
-              type="text"
-              class="modal__input modal-strong__input"
-              placeholder="제목을 입력하세요"
-            />
-            <input
-              type="text"
-              class="modal__input modal-default__input"
-              placeholder="내용을 입력하세요"
-            />
-          </div>
-          <footer>
-            <button class="task-add__button cancel-button">
-              <div class="textLabel">취소</div>
-            </button>
-            <button class="task-add__button register-button">
-              <div class="textLabel">등록</div>
-            </button>
-          </footer>
-        </div>
 
         <!-- 추가된 할일 모달 카드 -->
         <div class="modal-overlay task-card__default todo-card">
@@ -143,23 +107,9 @@
         </div>
       </section>
 
-      <section class="columnlist__col">
+      <section class="columnlist__col" data-type="todo">
         <header class="columnlist__header">
-          <div>
-            완료한 일
-            <svg
-              width="16"
-              height="18"
-              viewBox="0 0 16 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 13.1172C6.03711 13.1172 4.88281 11.5352 4.88281 8.75781C4.88281 5.99805 6.04883 4.39844 8 4.39844C9.94531 4.39844 11.1113 5.99805 11.1172 8.75781C11.1113 11.5352 9.96289 13.1172 8 13.1172ZM6.17188 8.75781C6.16602 10.873 6.85156 12.0039 8 12.0039C9.14258 12.0039 9.82812 10.873 9.82812 8.75781C9.82812 6.64844 9.13672 5.49414 8 5.48828C6.85742 5.49414 6.17188 6.64844 6.17188 8.75781Z"
-                fill="#A0A3BD"
-              />
-            </svg>
-          </div>
+          <div>완료한 일</div>
           <div>
             <button>
               <img src="/icons/Vector.svg" alt="plus-icon" />
@@ -171,6 +121,30 @@
         </header>
       </section>
     </main>
+    <!--  할일 추가 카드 모달 -->
+    <div class="task-modal modal-overlay">
+      <div class="modal-content">
+        <input
+          type="text"
+          class="modal__input title-input"
+          placeholder="제목을 입력하세요"
+        />
+        <input
+          type="text"
+          class="modal__input content-input"
+          placeholder="내용을 입력하세요"
+        />
+      </div>
+      <footer class="modal-footer">
+        <button class="modal-button cancel-button">
+          <div class="textLabel">취소</div>
+        </button>
+        <button class="modal-button register-button">
+          <div class="textLabel">등록</div>
+        </button>
+      </footer>
+    </div>
+    <!-- 히스토리 사이드 바 -->
     <aside class="popover-sidebar">
       <header class="popover-header">
         <h2 class="popover-header__title">사용자 활동 기록</h2>

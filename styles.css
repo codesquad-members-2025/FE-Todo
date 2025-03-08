@@ -6,7 +6,10 @@ body {
   background-color: #f7f7fc;
 }
 
-p {
+p,
+h1,
+h2,
+h3 {
   padding: 0;
   margin: 0;
 }
@@ -32,7 +35,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  padding: 20px;
+}
+.header__history-btn {
+  padding: 5px;
 }
 
 .page-header__logo {
@@ -54,9 +60,9 @@ button {
 }
 .columnlist__header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding-left: 16px;
+  padding-right: 16px;
   gap: 141px;
 }
 .columnlist__header div {
@@ -68,6 +74,15 @@ button {
   gap: 8px;
 }
 
+.columnlist__count {
+  border: 1px solid black;
+}
+.add-task-btn {
+  padding: 5px;
+}
+.delete-task-btn {
+  padding: 5px;
+}
 .popover-sidebar {
   border: 1px solid black;
   position: absolute;
@@ -196,35 +211,33 @@ dialog {
   color: #fefefe;
   background-color: #ff3b30;
 }
-.task-card__default {
+
+.task-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   background-color: #fefefe;
   padding: 16px;
   font-size: 14px;
 }
 
-.task-modal-add-template {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.task-modal-add-template > div {
+.task-modal > div {
   display: flex;
   flex-direction: column;
 }
-.task-modal-add-template footer {
+.task-modal footer {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   gap: 8px;
 }
-.modal-strong__input::placeholder {
+.title-input::placeholder {
   color: #14142b; /* 🔹 플레이스홀더 색상 변경 */
   font-size: 16px; /* 🔹 글자 크기 변경 */
   font-weight: bold; /* 🔹 글자 두껍게 */
 }
-.modal-default__input::placeholder {
+.content-input::placeholder {
   color: #6e7191; /* 🔹 플레이스홀더 색상 변경 */
   font-size: 14px; /* 🔹 글자 크기 변경 */
 }
@@ -233,7 +246,7 @@ dialog {
   border: none;
 }
 
-.task-add__button {
+.modal-button {
   border: 1px solid black;
   height: 32px;
   flex-grow: 1;
