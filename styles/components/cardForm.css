@@ -1,0 +1,74 @@
+.card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card__title-input, 
+.card__body-input {
+    border: none;
+    outline: none;
+    padding: 0;
+    resize: none;
+}
+
+.card__title-input,
+.card__title-input::placeholder {
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #14142B; 
+}
+
+.card__body-input,
+.card__body-input::placeholder {
+    height: 1.2em;    /* 텍스트 크기와 비슷한 높이 */
+    overflow: hidden; /* 스크롤바 제거 */
+    font-family: Pretendard Variable;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    color: #6E7191;
+}
+
+.card__button-area {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.card__cancel-btn,
+.card__submit-btn {
+    width: 100%;
+    height: 32px;
+    border-radius: 8px;
+    padding: 0px 8px;
+    font-family: Pretendard Variable;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0%;
+}
+
+.card__cancel-btn {
+    background-color: #F7F7FC;
+    color: #6E7191;
+}
+
+.card__submit-btn {
+    background-color: #007AFF;
+    opacity: 0.3;
+    color: #FEFEFE;
+}
+
+/* 타이틀, 바디에 값 입력 시 버튼 활성화로 변경해야함. 현재는 호버 */
+.card__submit-btn:hover {
+    opacity: 1;
+}
+
+.card__submit-btn:active {
+    opacity: 0.7;
+}

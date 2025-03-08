@@ -1,0 +1,33 @@
+.card {
+    width: 320px;
+    background-color: rgba(254, 254, 254, 1);
+    border-radius: 16px;
+    border: 1px solid rgba(239, 240, 246, 1);
+    padding: 16px;
+    gap: 16px;
+}
+
+.card__content {
+    gap: 16px;
+}
+
+/* 마진이 0으로 공통인데 추후에 초기화 해야할 지 고민 중 */
+.card__text {
+    margin: 0;
+    gap: 8px;
+}
+
+.card__title {
+    margin: 0;
+    color: var(--text-strong);
+}
+
+.card__description {
+    margin: 0;
+    color: var(--text-default);
+}
+
+.card__caption {
+    margin: 0;
+    color: var(--text-weak);
+}

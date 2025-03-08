@@ -1,0 +1,37 @@
+/* Base */
+@import './base/reset.css';
+@import './base/typography.css';
+@import './base/variables.css';
+@import './base/utilities.css';
+
+/* Base styles */
+@import './base/typography.css';  /* 폰트 정의를 먼저 불러옴 */
+
+/* Layout */
+@import './layout/kanban.css';
+
+/* Components */
+@import './components/historyPanel.css';
+@import './components/cardForm.css';
+@import './components/card.css';
+@import './components/column.css';
+@import './components/modal.css';
+
+/* 전역 스타일 */
+* {
+    box-sizing: border-box; /* 패딩과 보더를 포함한 너비 계산 */
+    /* outline: 1px solid red; */
+}
+
+button, input, textarea {
+    font-family: inherit;
+}
+
+body {
+    font-family: 'Pretendard Variable';
+    min-height: 100vh;
+    background-color: var(--surface-alt);
+    margin: 0;
+    padding: 0 80px;
+    gap: 32px;
+}

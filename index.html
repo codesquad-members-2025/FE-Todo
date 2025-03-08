@@ -1,126 +1,229 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TASKIFY</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="icon.css">
+    <link rel="stylesheet" href="./styles/style.css">
+
+    <script type="module" src="./js/main.js" defer></script>
 </head>
-<body>
-    <header class="app-header">
-        <h1 class="app-header__title">TASKIFY</h1>
-        <button class="app-header__history-btn">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 7.8V12H16.2" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                <path d="M12 19C15.8661 19 19 15.8661 19 12C19 8.1339 15.8661 5 12 5C8.1339 5 5 8.1339 5 12C5 15.8661 8.1339 19 12 19Z" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>                
+
+<body class="flex-column">
+    <!-- 카드 폼 템플릿 -->
+    <template id="card-form-template">
+        <article class="card card-form">
+            <div class="card__text-area">
+                <div class="card__body">
+                    <input type="text" class="card__title-input" placeholder="제목을 입력하세요">
+                    <textarea class="card__body-input" placeholder="내용을 입력하세요"></textarea>
+                </div>
+            </div>
+            <div class="card__button-area">
+                <button type="button" class="card__cancel-btn btn">취소</button>
+                <button type="submit" class="card__submit-btn btn">등록</button>
+            </div>
+        </article>
+    </template>
+
+    <!-- 카드 템플릿 -->
+    <template id="card-template">
+        <article class="card flex-between">
+            <div class="card__content flex-column">
+                <div class="card__text flex-column">
+                    <h3 class="card__title display-bold14"></h3> <!-- 타이틀 -->
+                    <p class="card__description display-medium14"></p> <!-- 바디 -->
+                </div>
+                <p class="card__caption display-medium12">author by web</p> <!-- 캡션 -->
+            </div>
+            <div class="card__icon-buttons">
+                <button class="column-header__add-btn btn">
+                    <img src="./assets/icons/close.svg">
+                </button>
+                <button class="column-header__close-btn btn">
+                    <img src="./assets/icons/edit.svg">
+                </button>
+            </div>
+        </article>
+    </template>
+
+    <header class="app-header flex-between">
+        <h1 class="app-header__title display-bold24">TASKIFY</h1>
+        <button class="app-header__history-btn btn">
+            <img src="./assets/icons/history.svg">
         </button>
     </header>
-    
+
     <main class="kanban">
-        <section class="kanban__column">
-            <header class="column-header">
-                <div class="column-header__text-area">
-                    <h2 class="column-header__title">해야할 일</h2>
-                    <span class="column-header__badge">
-                        <div class="column-header__badge-textLabel">2</div>
+        <section class="column flex-column">
+            <header class="column-header flex-between">
+                <div class="column-header__text-area flex-center">
+                    <h2 class="column-header__title display-bold16">해야할 일</h2>
+                    <span class="badge flex-center">
+                        <span class="badge__text display-medium12">2</span>
                     </span>
                 </div>
-                <div class="column-header__buttons">
-                    <button class="column-header__add-btn">
-                        <svg class="icon icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z" fill="#6E7191"/>
-                        </svg>
+                <div class="column-header__buttons flex-center">
+                    <button class="column-header__add-btn btn">
+                        <img src="./assets/icons/plus.svg">
                     </button>
-                    <button class="column-header__close-btn">
-                        <svg class="icon icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
-                        </svg>
+                    <button class="column-header__close-btn btn"> 
+                        <img src="./assets/icons/close.svg">
                     </button>
                 </div>
             </header>
-            <article class="card">
-                <div class="card__text-area">
-                    <div class="card__body">
-                        <h3 class="card__title">GitHub 공부하기</h3>
-                        <p class="card__body-text">add, commit, push</p>
+
+            <article class="card flex-between">
+                <div class="card__content flex-column">
+                    <div class="card__text flex-column">
+                        <h3 class="card__title display-bold14">GitHub 공부하기</h3>
+                        <p class="card__description display-medium14">add, commit, push</p>
                     </div>
-                    <p class="card__caption">author by web</p>
+                    <p class="card__caption display-medium12">author by web</p>
                 </div>
                 <div class="card__icon-buttons">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
-                    </svg>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.727 6.72708L14.9642 5.48991C15.1194 5.33459 15.3038 5.21139 15.5066 5.12733C15.7095 5.04327 15.927 5 16.1466 5C16.3662 5 16.5836 5.04327 16.7865 5.12733C16.9894 5.21139 17.1737 5.33459 17.329 5.48991L18.511 6.67191C18.8244 6.98542 19.0005 7.41059 19.0005 7.8539C19.0005 8.29722 18.8244 8.72238 18.511 9.0359L17.2738 10.2731M13.727 6.72708L5.68877 14.7645C5.41122 15.042 5.24018 15.4084 5.2056 15.7994L5.00331 18.0898C4.99244 18.2115 5.00842 18.3342 5.0501 18.4491C5.09178 18.564 5.15816 18.6684 5.24456 18.7549C5.33096 18.8414 5.43528 18.9078 5.55016 18.9496C5.66503 18.9914 5.78768 19.0075 5.90945 18.9968L8.19988 18.7945C8.59145 18.7603 8.95845 18.5892 9.23642 18.3113L17.2738 10.2731M13.727 6.72708L17.2738 10.2731" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <button class="column-header__add-btn btn">
+                        <img src="./assets/icons/close.svg">
+                    </button>
+                    <button class="column-header__close-btn btn">
+                        <img src="./assets/icons/edit.svg">
+                    </button>
+                </div>
+            </article>
+
+            <article class="card flex-between">
+                <div class="card__content flex-column">
+                    <div class="card__text flex-column">
+                        <h3 class="card__title display-bold14">블로그에 포스팅할 것</h3>
+                        <p class="card__description display-medium14">* GitHub 공부내용 <br> * 모던 자바스크립트 1장 공부내용</p>
+                    </div>
+                    <p class="card__caption display-medium12">author by web</p>
+                </div>
+                <div class="card__icon-buttons">
+                    <button class="column-header__add-btn btn">
+                        <img src="./assets/icons/close.svg">
+                    </button>
+                    <button class="column-header__close-btn btn">
+                        <img src="./assets/icons/edit.svg">
+                    </button>
                 </div>
             </article>
         </section>
 
-        <section class="kanban__column">
-            <header class="column-header">
-                <div class="column-header__text-area">
-                    <h2 class="column-header__title">하고 있는 일</h2>
-                    <span class="column-header__badge">
-                        <div class="column-header__badge-textLabel">1</div>
+        <section class="column flex-column">
+            <header class="column-header flex-between">
+                <div class="column-header__text-area flex-center">
+                    <h2 class="column-header__title display-bold16">하고 있는 일</h2>
+                    <span class="badge flex-center">
+                        <span class="badge__text display-medium12">1</span>
                     </span>
                 </div>
-                <div class="column-header__buttons">
-                    <button class="column-header__add-btn">
-                        <svg class="icon icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z" fill="#6E7191"/>
-                        </svg>
+                <div class="column-header__buttons flex-center">
+                    <button class="column-header__add-btn btn">
+                        <img src="./assets/icons/plus.svg">
                     </button>
-                    <button class="column-header__close-btn">
-                        <svg class="icon icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
-                        </svg>
+                    <button class="column-header__close-btn btn"> 
+                        <img src="./assets/icons/close.svg">
                     </button>
                 </div>
             </header>
-            <article class="card">
-                <div class="card__text-area">
-                    <div class="card__body">
-                        <h3 class="card__title">HTML/CSS 공부하기</h3>
-                        <p class="card__body-text">input 태그 실습</p>
+
+            <article class="card flex-between">
+                <div class="card__content flex-column">
+                    <div class="card__text flex-column">
+                        <h3 class="card__title display-bold14">HTML/CSS 공부하기</h3>
+                        <p class="card__description display-medium14">input 태그 실습</p>
                     </div>
-                    <p class="card__caption">author by web</p>
+                    <p class="card__caption display-medium12">author by web</p>
                 </div>
                 <div class="card__icon-buttons">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
-                    </svg>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.727 6.72708L14.9642 5.48991C15.1194 5.33459 15.3038 5.21139 15.5066 5.12733C15.7095 5.04327 15.927 5 16.1466 5C16.3662 5 16.5836 5.04327 16.7865 5.12733C16.9894 5.21139 17.1737 5.33459 17.329 5.48991L18.511 6.67191C18.8244 6.98542 19.0005 7.41059 19.0005 7.8539C19.0005 8.29722 18.8244 8.72238 18.511 9.0359L17.2738 10.2731M13.727 6.72708L5.68877 14.7645C5.41122 15.042 5.24018 15.4084 5.2056 15.7994L5.00331 18.0898C4.99244 18.2115 5.00842 18.3342 5.0501 18.4491C5.09178 18.564 5.15816 18.6684 5.24456 18.7549C5.33096 18.8414 5.43528 18.9078 5.55016 18.9496C5.66503 18.9914 5.78768 19.0075 5.90945 18.9968L8.19988 18.7945C8.59145 18.7603 8.95845 18.5892 9.23642 18.3113L17.2738 10.2731M13.727 6.72708L17.2738 10.2731" stroke="#6E7191" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                    <button class="column-header__add-btn btn">
+                        <img src="./assets/icons/close.svg">
+                    </button>
+                    <button class="column-header__close-btn btn">
+                        <img src="./assets/icons/edit.svg">
+                    </button>
                 </div>
             </article>
         </section>
 
-        <section class="kanban__column">
-            <header class="column-header">
-                <div class="column-header__text-area">
-                    <h2 class="column-header__title">완료한 일</h2>
-                    <span class="column-header__badge">
-                        <div class="column-header__badge-textLabel">0</div>
+        <section class="column flex-column">
+            <header class="column-header flex-between">
+                <div class="column-header__text-area flex-center">
+                    <h2 class="column-header__title display-bold16">완료한 일</h2>
+                    <span class="badge flex-center">
+                        <span class="badge__text display-medium12">0</span>
                     </span>
                 </div>
-                <div class="column-header__buttons">
-                    <button class="column-header__add-btn">
-                        <svg class="icon icon-plus" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z" fill="#6E7191"/>
-                        </svg>
+                <div class="column-header__buttons flex-center">
+                    <button class="column-header__add-btn btn">
+                        <img src="./assets/icons/plus.svg">
                     </button>
-                    <button class="column-header__close-btn">
-                        <svg class="icon icon-closed" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#6E7191"/>
-                        </svg>
+                    <button class="column-header__close-btn btn"> 
+                        <img src="./assets/icons/close.svg">
                     </button>
                 </div>
             </header>
         </section>
     </main>
+
+    <aside class="history-panel flex-column">
+        <!-- 상단 고정 헤더 -->
+        <div class="history-panel__header flex-between">
+            <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
+            <div class="history-panel__close-btn flex-center">
+                <img src="./assets/icons/close.svg" class="size-16">
+                <span class="history-panel__close-btn-text display-bold14">닫기</span>
+            </div>
+        </div>
+
+        <!-- 활동 기록 목록 -->
+        <div class="history-panel__list">
+            <!-- 비어있을 때 보여줄 영역 -->
+            <div class="history-panel__empty flex-center">
+                <p class="history-panel__empty-text display-medium14">사용자 활동 기록이 없습니다</p>
+            </div>
+            <!-- 활동 기록 아이템 -->
+            <div class="history-panel__item flex-between">
+                <div class="history-panel__item-icon">
+                    <img src="./assets/images/profile.png" class="history-panel__item-image">
+                </div>
+                <div class="history-panel__item-body flex-column">
+                    <!-- 사용자 이름: 링크가 될 수 있으므로 a 태그 사용 -->
+                    <a href="#" class="history-panel__item-username display-medium14">@멋진삼</a>
+
+                    <!-- 활동 내용: 문장이므로 p 태그 -->
+                    <p class="history-panel__item-text display-medium14">
+                        <strong>블로그에 포스팅할 것</strong>을(를) <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>로 이동하였습니다.
+                    </p>
+
+                    <!-- 시간 정보: time 태그 -->
+                    <time class="history-panel__item-timestamp display-medium12" datetime="2024-03-14T15:00">
+                        3분 전
+                    </time>
+                </div>
+            </div>
+        </div>
+
+        <!-- 하단 고정 푸터 -->
+        <div class="history-panel__footer flex-end">
+            <button class="history-panel__footer-btn btn">
+                <span class="history-panel__footer-btn-text display-bold14">기록 전체 삭제</span>
+            </button>
+        </div>
+    </aside>
+    
+    <dialog class="modal">
+        <div class="modal__body flex-column">
+            <p class="modal__text display-medium16">모든 사용자 활동 기록을 삭제할까요?</p>
+            
+            <footer class="modal__footer flex-between">
+                <button class="modal__cancel-btn btn display-bold14">취소</button>
+                <button class="modal__confirm-btn btn">삭제</button>
+            </footer>
+        </div>
+    </dialog>
 </body>
+
 </html>
