@@ -36,8 +36,8 @@ css,js를 분리 및 모듈화를 시킬 수 있는 구조를 선택했습니다
 │   ├── style.css
 │── js/
 │   ├── main.js
-│   ├── components.js  // 컴포넌트 분리
-│   ├── module.js  // 기능 분리
+│   ├── components // 컴포넌트 분리
+│   ├── utils  // 기능 분리
 │── assets/
 │   ├── icons/
 │   ├── images/
