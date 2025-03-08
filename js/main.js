@@ -93,24 +93,22 @@ const sortButton = document.getElementById('sort-btn');
 sortButton.addEventListener('click', sortCards);
 
 //history 열기
-function openHistory() {
-  console.log('오픈!');
+function toggleHistory() {
   const history = document.querySelector('#history');
-  history.style.display = 'flex';
+  const isVisable = window.getComputedStyle(history).display === 'flex';
+
+  if (!isVisable) {
+    history.style.display = 'flex';
+  } else {
+    history.style.display = 'none';
+  }
 }
 
 const historyButton = document.getElementById('history-open-btn');
-historyButton.addEventListener('click', openHistory);
-
-//history 닫기
-function closeHistory() {
-  console.log('close!');
-  const history = document.querySelector('#history');
-  history.style.display = 'none';
-}
+historyButton.addEventListener('click', toggleHistory);
 
 const historyCloseButton = document.getElementById('history-close-btn');
-historyCloseButton.addEventListener('click', closeHistory);
+historyCloseButton.addEventListener('click', toggleHistory);
 
 //render
 renderColumnsAndCards(columnData);
