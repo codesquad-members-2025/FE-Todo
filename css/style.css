@@ -108,7 +108,7 @@ body {
 }
 
 .history-modal-container {
-  display: grid;
+  display: none;
   grid-template-rows: 48px 1fr 40px 8px;
   gap: 8px;
   position: fixed;
