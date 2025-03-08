@@ -1,4 +1,3 @@
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/Pretendard/dist/web/static/pretendard.css");
 :root {
   /* Grayscale colors */
   --grayscale-50: #fefefe;
@@ -43,7 +42,7 @@
   --font-bold-S: 700 12px/1.4 "Pretendard", sans-serif;
 
   /* Medium type (500) */
-  --font-medium-M: 500 16px/22px "Pretendard", sans-serif;
+  --font-medium-M: 500 16px/1.4 "Pretendard", sans-serif;
   --font-medium-R: 500 14px/1.4 "Pretendard", sans-serif;
   --font-medium-S: 500 12px/1.4 "Pretendard", sans-serif;
 
@@ -52,45 +51,23 @@
   --display-bold16: var(--font-bold-M);
   --display-bold14: var(--font-bold-R);
   --display-bold12: var(--font-bold-S);
-  --display-medium16: var(--font-bold-M);
-  --display-medium14: var(--font-bold-R);
-  --display-medium12: var(--font-bold-S);
+  --display-medium16: var(--font-medium-M);
+  --display-medium14: var(--font-medium-R);
+  --display-medium12: var(--font-medium-S);
   --selected-bold16: var(--font-bold-M);
   --selected-bold14: var(--font-bold-R);
   --available-medium16: var(--font-medium-M);
   --available-medium14: var(--font-medium-R);
-}
 
-body {
-  margin: 0;
-  background-color: var(--surface-alt);
-  display: flex;
-  flex-direction: column;
-}
-
-header {
-  width: 1440px;
-  height: 64px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 80px;
-}
-
-h1 {
-  font-family: "Pretendard", sans-serif;
-  font-size: 24px;
-  color: var(--text-strong);
-}
-
-.history {
-  width: 24px;
-  height: 24px;
-}
-
-.columnList {
-  width: 1280px;
-  margin-left: 80px;
-  margin-top: 32px;
-  font-size: 16px;
+  /* Number system */
+  --number-50: 4px;
+  --number-100: 8px;
+  --number-200: 16px;
+  --number-300: 24px;
+  --number-400: 32px;
+  --number-500: 40px;
+  --number-600: 48px;
+  --number-700: 56px;
+  --number-800: 64px;
+  --number-900: 72px;
 }

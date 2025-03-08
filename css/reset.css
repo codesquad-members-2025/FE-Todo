@@ -1,0 +1,12 @@
+h1,
+h2,
+h3,
+h4 {
+  all: unset;
+}
+
+/* 버튼 기본 스타일 제거 */
+button {
+  all: unset;
+  cursor: default;
+}
