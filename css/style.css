@@ -97,58 +97,58 @@ body {
 /* Typo style */
 
 /* Line Height */
-.display-bold24,
-.display-bold16,
-.display-bold14,
-.display-bold12,
-.display-medium16,
-.display-medium14,
-.display-medium12 {
+.tx-b24,
+.tx-b16,
+.tx-b14,
+.tx-b12,
+.tx-m16,
+.tx-m14,
+.tx-m12 {
   line-height: var(--line-height-auto);
 }
 
-.display-medium16 {
+.tx-m16 {
   line-height: var(--line-height-22);
 }
 
 /* 글씨 굵기 설정 */
-.display-bold24,
-.display-bold16,
-.display-bold14,
-.display-bold12,
-.selected-bold16,
-.selected-bold14,
-.available-medium16,
-.available-medium14 {
+.tx-b24,
+.tx-b16,
+.tx-b14,
+.tx-b12,
+.tx-sb16,
+.tx-sb14,
+.tx-am16,
+.tx-am14 {
   font-weight: var(--font-weight-bold);
 }
 
-.display-medium16,
-.display-medium14,
-.display-medium12,
-.available-medium16,
-.available-medium14 {
+.tx-m16,
+.tx-m14,
+.tx-m12,
+.tx-am16,
+.tx-am14 {
   font-weight: var(--font-weight-medium);
 }
 
 /* 글씨 크기 설정 */
-.display-bold24 {
+.tx-b24 {
   font-size: var(--font-size-large);
 }
-.display-bold16,
-.display-medium16,
-.selected-bold16,
-.available-medium16 {
+.tx-b16,
+.tx-m16,
+.tx-sb16,
+.tx-am16 {
   font-size: var(--font-size-medium);
 }
-.display-bold14,
-.display-medium14,
-.selected-bold14,
-.available-medium14 {
+.tx-b14,
+.tx-m14,
+.tx-sb14,
+.tx-am14 {
   font-size: var(--font-size-regular);
 }
-.display-bold12,
-.display-medium12 {
+.tx-b12,
+.tx-m12 {
   font-size: var(--font-size-small);
 }
 

@@ -4,9 +4,9 @@ function createColumn(id, title, taskCount) {
   <section class="column flex-col" id="${id}">
     <div class="column-area">
       <div class="column-area-left flex-item-center">
-        <h2 class="text-bold display-bold16">${title}</h2>
+        <h2 class="text-bold tx-b16">${title}</h2>
         <div class="number-box flex-item-center">
-          <span class="text-weak display-medium12">${taskCount}</span>
+          <span class="text-weak tx-m12">${taskCount}</span>
         </div>
       </div>
       <div class="column-area-right">
@@ -30,9 +30,9 @@ function createTaskCard(id, title, content, author) {
   return `
   <article class="todo-card" id="${id}">
     <div class="content-section flex-col">
-      <h3 class="text-strong display-bold14">${title}</h3>
-      <p class="text-default display-medium14">${content}</p>
-      <h6 class="text-weak display-medium12">author by ${author}</h6>
+      <h3 class="text-strong tx-b14">${title}</h3>
+      <p class="text-default tx-m14">${content}</p>
+      <h6 class="text-weak tx-m12">author by ${author}</h6>
     </div>
     <div class="button-section flex-col">
       <button aria-label="Delete task">
