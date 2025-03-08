@@ -24,14 +24,14 @@ function renderColumns(columnData) {
 }
 
 // 칼럼에 카드 생성
-function renderCardsForColumn(columnData) {
-  columnData.forEach(({ id, tasks }) => {
+function renderCardsForColumn(columnsData) {
+  columnsData.forEach(({ id, tasks }) => {
     const columnCardList = document.querySelector(`#${id} .card-list`);
-    const taskCardsHtml = tasks
-      .map(({ id, title, content, author }) =>
-        createTaskCard(id, title, content, author)
-      )
-      .join('');
+    const taskCardsHtml = tasks.reduce(
+      (acc, { id, title, content, author }) =>
+        (acc += createTaskCard(id, title, content, author)),
+      ''
+    );
 
     addElementToParent(columnCardList, taskCardsHtml);
   });
