@@ -1,8 +1,6 @@
 import { clearCards } from './cardColumn.js';
 import { renderCardsForColumn } from './cardColumn.js';
 
-export { sortCards };
-
 //정렬 버튼 클릭 이벤트
 function sortCards(columnList, { currentTarget }) {
   const sortButton = currentTarget;
@@ -35,3 +33,5 @@ function getSortedTasksByDate(columnList, order = 'created') {
     }),
   }));
 }
+
+export { sortCards };

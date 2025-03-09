@@ -1,5 +1,3 @@
-export { toggleHistory };
-
 //history 열기
 function toggleHistory() {
   const history = document.querySelector('#history');
@@ -11,3 +9,5 @@ function toggleHistory() {
     history.style.display = 'none';
   }
 }
+
+export { toggleHistory };
