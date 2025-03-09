@@ -1,5 +1,5 @@
 const openButton = document.getElementById("historyOpenButton");
-const historyListLayer = document.getElementById("historyList");
+const historyListLayer = document.getElementById("historyList-empty");
 const closedButton = document.getElementById("history__closedButton");
 
 // 히스토리 리스트 열기

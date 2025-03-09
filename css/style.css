@@ -241,7 +241,7 @@ h1 {
   background-color: unset;
 }
 
-#historyList {
+#historyList-empty {
   position: fixed;
   right: -366px;
   top: 64px;
@@ -255,7 +255,7 @@ h1 {
   gap: var(--number-100);
 }
 
-#historyList.active {
+#historyList-empty.active {
   transform: translateX(-452px); /* 화면 왼쪽으로 이동 */
 }
 
