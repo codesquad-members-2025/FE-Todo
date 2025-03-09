@@ -10,7 +10,7 @@
   <body>
     <header>
       <h1>TESKIFY</h1>
-      <button id="historyOpenButton"><img src="./icon/history.svg" /></button>
+      <button id="historyOpenButton"><img src="./images/history.svg" /></button>
     </header>
     <main class="columnList">
       <section class="column column__toDo">
@@ -225,12 +225,12 @@
         </div>
       </section>
     </main>
-    <aside id="historyList-empty">
+    <aside id="historyList-empty" class="historyList">
       <div class="history__header">
         <h4 class="history__header__title">사용자 활동 기록</h4>
         <button id="history__closedButton">
           <div class="history__header__closed-btn">
-            <img src="icon/closed.svg" class="img_closed" />
+            <img src="images/closed.svg" class="img_closed" />
           </div>
           <span class="history__header__textLabel">닫기</span>
         </button>
@@ -239,7 +239,82 @@
         <div class="record-add">사용자 활동 기록이 없습니다.</div>
       </div>
     </aside>
-
+    <aside id="historyList-noEmpty" class="historyList">
+      <div class="history__header">
+        <h4 class="history__header__title">사용자 활동 기록</h4>
+        <button id="history__closedButton">
+          <div class="history__header__closed-btn">
+            <img src="images/closed.svg" class="img_closed" />
+          </div>
+          <span class="history__header__textLabel">닫기</span>
+        </button>
+      </div>
+      <div class="history__recordList">
+        <div class="recordHistory">
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                블로그에 포스팅할 것 <span> 을(를)</span> 하고있는 일
+                <span> 에서 </span><br />
+                해야할 일 <span> 으로 </span> 이동 <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">3분 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                GitHub 공부하기 <span> 을(를)</span> 변경
+                <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">10분 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                HTML/CSS 공부하기 <span> 을(를)</span> 해야할 일
+                <span> 에서 </span><br />
+                하고 있는 일 <span> 으로 </span> 이동 <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">18분 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                HTML/CSS 공부하기 <span> 을(를)</span> 해야할 일
+                <span> 에서 </span><br />
+                등록 <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">1시간 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                블로그에 포스팅할 것 <span> 을(를)</span> 등록
+                <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">3분 전</div>
+            </div>
+          </div>
+          <div class="deleteBox">
+            <button id="delete">기록 전체 삭제</button>
+          </div>
+        </div>
+      </div>
+    </aside>
     <script src="./eventHandler/historyList.js"></script>
   </body>
 </html>
