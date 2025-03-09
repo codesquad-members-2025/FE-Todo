@@ -36,3 +36,36 @@
   background-color: #f1f1f1; /* 스크롤 트랙 배경 */
 }
 ```
+
+2. z-index
+
+   &rarr; HTML 요소들의 쌓이는 순서를 결정하는 속성
+
+   &rarr; 값이 클수록 더 앞에(위쪽) 배치되고, 값이 작을수록 뒤쪽으로 배치
+
+- z-index 사용 시 주의할 점
+
+  - position : static이면 z-index가 적용되지 않는다
+
+    &rarr; 반드시 relative, absolute, fixed, sticky 중 하나를 사용해야 함
+
+  - 부모 요소(z-index)의 영향을 받음
+
+    &rarr; 부모가 z-index: 0이면, 자식 요소의 z-index 값이 커도 부모보다 앞에 올 수 없다
+
+3. transform
+
+   &rarr; 요소의 위치, 크기, 회전 등을 조절하는 속성
+   \*\*\* position 속성과는 다르게, 실제 위치는 변하지 않고 시각적으로만 이동한다
+
+- translate(x, y) &rarr; 이동  
+  (좌우(x), 상하(y) 이동)
+
+- scale(x, y) &rarr; 크기 조절  
+  (x배, y배 확대/축소)
+
+- rotate(deg) &rarr; 회전  
+  (각도만큼 시계 방향으로 회전)
+
+- skew(x, y) &rarr; 기울이기  
+  (X축, Y축 기준으로 기울이기)

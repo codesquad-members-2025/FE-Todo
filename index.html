@@ -225,7 +225,7 @@
         </div>
       </section>
     </main>
-    <aside id="historyList-empty" class="historyList">
+    <!-- <aside id="historyList-empty" class="historyList">
       <div class="history__header">
         <h4 class="history__header__title">사용자 활동 기록</h4>
         <button id="history__closedButton">
@@ -236,9 +236,9 @@
         </button>
       </div>
       <div class="history__recordList">
-        <div class="record-add">사용자 활동 기록이 없습니다.</div>
+        <div class="record-empty">사용자 활동 기록이 없습니다.</div>
       </div>
-    </aside>
+    </aside> -->
     <aside id="historyList-noEmpty" class="historyList">
       <div class="history__header">
         <h4 class="history__header__title">사용자 활동 기록</h4>
@@ -250,7 +250,7 @@
         </button>
       </div>
       <div class="history__recordList">
-        <div class="recordHistory">
+        <div id="recordHistory">
           <div class="record">
             <img src="./images/sam.png" class="userImage" />
             <div class="historyItem">
@@ -326,6 +326,16 @@
         </div>
       </div>
     </aside>
+    <div class="overlay-dark"></div>
+    <div id="alert-box">
+      <div class="alertContent">
+        <p>모든 사용자 활동 기록을 삭제할까요?</p>
+        <div class="buttons">
+          <button id="cancleButton">취소</button>
+          <button id="deletButton">삭제</button>
+        </div>
+      </div>
+    </div>
     <script src="./eventHandler/historyList.js"></script>
   </body>
 </html>

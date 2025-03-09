@@ -269,9 +269,21 @@ h1 {
 
 #historyList-noEmpty {
   position: fixed;
+  right: -366px;
   top: 64px;
-  left: 35px;
+  transform: translateX(0); /* 처음 위치 설정: translateX(0) -> 변화 없음 */
+  transition: transform 1s ease-in-out; /* 슬라이드 애니메이션을 부드럽게 만들기 위한 트랜지션 */
 }
+
+#historyList-noEmpty.active {
+  transform: translateX(-452px); /* 화면 왼쪽으로 이동 */
+}
+
+/* #historyList-noEmpty {
+  position: fixed;
+  top: 64px;
+  right: 56px;
+} */
 
 .history__header {
   width: 350px;
@@ -325,23 +337,23 @@ h1 {
   padding: 0 var(--number-100) var(--number-100) var(--number-100);
 }
 
-.recordHistory {
+#recordHistory {
   height: 560px;
   overflow-y: auto;
   overflow-x: hidden;
 }
 
 /* 스크롤바 디자인 적용 */
-.recordHistory::-webkit-scrollbar {
+#recordHistory::-webkit-scrollbar {
   width: 2px;
 }
 
-.recordHistory::-webkit-scrollbar-thumb {
+#recordHistory::-webkit-scrollbar-thumb {
   background-color: var(--surface-alt);
   border-radius: 6px;
 }
 
-.record-add {
+.record-empty {
   text-align: center;
   font: var(--display-medium14);
   color: var(--text-weak);
@@ -402,4 +414,65 @@ h1 {
   padding: var(--number-50) var(--number-100);
   display: flex;
   align-items: center;
+}
+
+.overlay-dark {
+  /* display: none; */
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.391);
+  z-index: 900;
+}
+
+/* #alert-box {
+  display: none;
+} */
+
+.alertContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  background-color: var(--surface-default);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: var(--number-400);
+  border-radius: var(--number-100);
+  transform: translate(-50%, -50%);
+}
+
+.alertContent p {
+  text-align: center;
+  font: var(--display-medium16);
+  padding: var(--number-400) var(--number-300) 0 var(--number-300);
+}
+
+.alertContent .buttons {
+  display: flex;
+  gap: var(--number-100);
+  justify-content: center;
+  padding: 0 var(--number-300) var(--number-300) var(--number-300);
+  text-align: center;
+}
+
+.alertContent #cancleButton {
+  width: 172px;
+  height: 32px;
+  background-color: var(--surface-alt);
+  border-radius: var(--number-100);
+  font: var(--display-bold14);
+  color: var(--text-default);
+}
+
+.alertContent #deletButton {
+  width: 172px;
+  height: 32px;
+  background-color: var(--accent-red);
+  border-radius: var(--number-100);
+  font: var(--display-bold14);
+  color: var(--text-white-default);
 }
