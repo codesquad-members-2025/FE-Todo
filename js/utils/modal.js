@@ -15,15 +15,19 @@ function createConfirmModal(textContent, deleteCallback) {
   const description = dialog.querySelector('#modal-description');
   description.textContent = textContent;
 
-  // 삭제 버튼에 이벤트 추가
-  dialog.querySelector('#delete-btn').addEventListener('click', () => {
+  const deleteBtn = dialog.querySelector('#delete-btn');
+
+  // 기존 삭제 버튼 이벤트 제거
+  if (deleteBtn._deleteHandler) {
+    deleteBtn.removeEventListener('click', deleteBtn._deleteHandler);
+  }
+
+  // 새로운 삭제 이벤트 핸들러 등록
+  deleteBtn._deleteHandler = () => {
     deleteCallback();
     closeModal();
-  });
-  //취소 버튼에 이벤트 추가
-  dialog.querySelector('#cancel-btn').addEventListener('click', () => {
-    closeModal();
-  });
+  };
+  deleteBtn.addEventListener('click', deleteBtn._deleteHandler);
 }
 
 // 카드 삭제 모달 오픈
@@ -42,5 +46,10 @@ function openDeleteModal(event) {
     showModal();
   }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const cancelBtn = document.querySelector('#modal #cancel-btn');
+  if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+});
 
 export { showModal, openDeleteModal };
