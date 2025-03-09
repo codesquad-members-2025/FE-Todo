@@ -278,20 +278,44 @@ body {
   box-shadow: var(--drop-shadow-floating);
 }
 
-.history-header {
+#history header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px;
 }
 
-.history-header > span {
+#history header > span {
   display: flex;
   padding-left: 8px;
 }
 
 .history-section {
   gap: 1px;
+  padding-right: 4px;
+  max-height: 560px;
+  overflow-y: auto;
+}
+
+/* scrollbar */
+.history-section::-webkit-scrollbar {
+  width: 2px;
+  height: 240px;
+}
+
+.history-section::-webkit-scrollbar-track {
+  background: transparent; /* 트랙 배경 투명 */
+}
+
+/* handle */
+.history-section::-webkit-scrollbar-thumb {
+  background-color: var(--surface-alt);
+  border-radius: 6px;
+}
+
+/* hover event */
+.history-section::-webkit-scrollbar-thumb:hover {
+  background-color: darkgray; /* 호버 시 손잡이 색상 */
 }
 
 .history-section > span {
@@ -333,6 +357,20 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
+}
+
+/* History Fotter */
+
+#history footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 8px;
+}
+
+#history footer .load-more-btn {
+  display: flex;
+  justify-content: center;
+  padding: 7.5px 8px;
 }
 
 /* Modal */
