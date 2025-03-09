@@ -291,7 +291,7 @@ body {
 }
 
 .history-section {
-  padding: 16px;
+  gap: 1px;
 }
 
 .history-section > span {
@@ -309,6 +309,30 @@ body {
 
 .history-close-btn > span {
   padding: 0 4px;
+}
+
+/* History Item*/
+
+.activity-record {
+  width: 344px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.activity-record .profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-large);
+  border: 1px solid var(--border-default);
+}
+
+.activity-record .content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 /* Modal */
