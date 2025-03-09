@@ -1,7 +1,16 @@
-.card-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.card__input-area {
+    border-radius: 8px;
+    gap: 8px;
+}
+
+.card__title-input,
+.card__title-input::placeholder {
+    color: var(--text-strong);
+}
+
+.card__body-input,
+.card__body-input::placeholder {
+    color: var(--text-default);
 }
 
 .card__title-input, 
@@ -12,26 +21,12 @@
     resize: none;
 }
 
-.card__title-input,
-.card__title-input::placeholder {
-    font-family: Pretendard Variable;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #14142B; 
-}
-
 .card__body-input,
 .card__body-input::placeholder {
-    height: 1.2em;    /* 텍스트 크기와 비슷한 높이 */
+    /* 텍스트 크기와 비슷한 높이 
+    추후에 js로 조정해야함 */
+    height: 1.2em;
     overflow: hidden; /* 스크롤바 제거 */
-    font-family: Pretendard Variable;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
-    color: #6E7191;
 }
 
 .card__button-area {
@@ -46,22 +41,17 @@
     height: 32px;
     border-radius: 8px;
     padding: 0px 8px;
-    font-family: Pretendard Variable;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 100%;
-    letter-spacing: 0%;
 }
 
 .card__cancel-btn {
-    background-color: #F7F7FC;
-    color: #6E7191;
+    background-color: var(--surface-alt);
+    color: var(--text-default);
 }
 
 .card__submit-btn {
-    background-color: #007AFF;
+    background-color: var(--surface-brand);
     opacity: 0.3;
-    color: #FEFEFE;
+    color: var(--text-white-default);
 }
 
 /* 타이틀, 바디에 값 입력 시 버튼 활성화로 변경해야함. 현재는 호버 */

@@ -13,22 +13,21 @@
 <body class="flex-column">
     <!-- 카드 폼 템플릿 -->
     <template id="card-form-template">
-        <article class="card card-form">
-            <div class="card__text-area">
-                <div class="card__body">
-                    <input type="text" class="card__title-input" placeholder="제목을 입력하세요">
-                    <textarea class="card__body-input" placeholder="내용을 입력하세요"></textarea>
-                </div>
+        <article class="card card-form flex-column">
+            <div class="card__input-area flex-column">
+                <input type="text" class="card__title-input display-bold14" placeholder="제목을 입력하세요">
+                <textarea class="card__body-input display-medium14" placeholder="내용을 입력하세요"></textarea>
             </div>
             <div class="card__button-area">
-                <button type="button" class="card__cancel-btn btn">취소</button>
-                <button type="submit" class="card__submit-btn btn">등록</button>
+                <button type="button" class="card__cancel-btn btn display-bold14">취소</button>
+                <button type="submit" class="card__submit-btn btn display-bold14">등록</button>
             </div>
         </article>
     </template>
 
     <!-- 카드 템플릿 -->
     <template id="card-template">
+        <!-- card-form은 카드 폼 템플릿을 참조하는 클래스 -->
         <article class="card flex-between">
             <div class="card__content flex-column">
                 <div class="card__text flex-column">
