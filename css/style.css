@@ -325,6 +325,22 @@ h1 {
   padding: 0 var(--number-100) var(--number-100) var(--number-100);
 }
 
+.recordHistory {
+  height: 560px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* 스크롤바 디자인 적용 */
+.recordHistory::-webkit-scrollbar {
+  width: 2px;
+}
+
+.recordHistory::-webkit-scrollbar-thumb {
+  background-color: var(--surface-alt);
+  border-radius: 6px;
+}
+
 .record-add {
   text-align: center;
   font: var(--display-medium14);
