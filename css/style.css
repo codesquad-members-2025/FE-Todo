@@ -243,7 +243,7 @@ h1 {
 
 #historyList {
   position: fixed;
-  right: -360px;
+  right: -366px;
   top: 64px;
   transform: translateX(0); /* 처음 위치 설정: translateX(0) -> 변화 없음 */
   transition: transform 1s ease-in-out; /* 슬라이드 애니메이션을 부드럽게 만들기 위한 트랜지션 */
@@ -256,7 +256,7 @@ h1 {
 }
 
 #historyList.active {
-  transform: translateX(-422px); /* 화면 왼쪽으로 이동 */
+  transform: translateX(-452px); /* 화면 왼쪽으로 이동 */
 }
 
 .history__header {
