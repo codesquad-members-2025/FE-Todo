@@ -30,13 +30,6 @@ h1 {
   align-items: center;
 }
 
-.img_history {
-  width: 14px;
-  height: 14px;
-  background-image: url("../icon/history.svg");
-  background-size: cover;
-  color: var(--text-default);
-}
 /* main */
 .columnList {
   width: 1280px;
@@ -84,6 +77,7 @@ h1 {
 
 .column-header__icons {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: var(--number-100);
@@ -99,6 +93,15 @@ h1 {
   background-color: unset;
 }
 
+.plus {
+  width: 14px;
+  height: 14px;
+  color: var(--text-weak);
+}
+
+.plus:hover {
+  color: var(--accent-red);
+}
 .column-header__closed-icon {
   width: 24px;
   height: 24px;
