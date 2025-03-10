@@ -6,9 +6,10 @@
 
 - HTML을 검색, 수정, 추가, 삭제할 수 있는 자바스크립트 메서드 및 속성
 
-### 이벤트 추가 - addEventListener
+### 이벤트 추가 &rarr; addEventListener
 
 - addEventListener()는 HTML 요소에 이벤트를 추가하는 표준적인 방법
+- 이벤트를 추가해서 사용자의 액션에 반응하게끔 만들 수 있다.
 
 1. 기본 문법
 
@@ -17,6 +18,10 @@
   > - 이벤트 유형: 적용할 이벤트의 종류
   >   예) click, mouseover, heydown 등등
   > - 이벤트 핸들러 함수: 이벤트가 발생했을 때 실행할 함수
+
+```javascript
+  button.addEventListener("click", function )
+```
 
 2. addEventListener() / inclick 차이
 
@@ -45,7 +50,7 @@
 - 클래스를 추가하거나 제거하는 기능을 한번에 수행
 - 추가하려는 클래스가 존재하면 제거하고, 없으면 추가한다
 
-### 요소 선택자
+### DOM 요소 선택하기 (요소 선택자)
 
 - DOM(Document Object Model) 에서 특정 요소를 찾기 위해 사용하는 JavaScript 메서드
 
@@ -100,7 +105,9 @@
 
 ---
 
-**innerHTML**
+### DOM 요소 변경하기 (수정)
+
+1. innerHTML &rarr; HTML 변경
 
 - innerHTML은 HTML DOM에서 각 요소에 대한 읽기, 쓰기가 가능한 속성
 - 이 속성을 사용하면 해당 요소의 HTML 콘텐츠를 가져오거나 수정할 수 있습니다.
@@ -117,3 +124,23 @@
     ```javascript
     recordList.innerHTML = "<p>새로운 내용</p>";
     ```
+
+2. .style.property &rarr; CSS 스타일 변경
+
+   ```javascript
+   title.style.color = "red";
+   ```
+
+### DOM 요소 삭제하기
+
+1. element.remove() &rarr; 요소 자체 삭제
+
+```javascript
+title.remove();
+```
+
+2. parent.removeChild(child) &rarr; 부모 요소에서 특정 자식 요소를 삭제
+
+```javascript
+document.body.removeChild(title);
+```
