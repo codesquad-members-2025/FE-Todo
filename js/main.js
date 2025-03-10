@@ -1,6 +1,7 @@
 import columnData from '../data/columnData.js';
+import historyData from '../data/historyData.js';
 import { renderColumnsAndCards } from './utils/cardColumn.js';
-import { toggleHistory } from './utils/history.js';
+import { toggleHistory, renderHistoryItems } from './utils/history.js';
 import { sortCards } from './utils/sort.js';
 import { openDeleteModal } from './utils/modal.js';
 
@@ -22,3 +23,6 @@ document.body.addEventListener('click', openDeleteModal);
 
 //First render
 renderColumnsAndCards(columnData);
+
+//history Items render
+renderHistoryItems(historyData);

@@ -1,3 +1,6 @@
+import { createHistoryItem } from '../components/components.js';
+import { addElementToParent } from './dom.js';
+
 //history 열기
 function toggleHistory() {
   const history = document.querySelector('#history');
@@ -10,4 +13,19 @@ function toggleHistory() {
   }
 }
 
-export { toggleHistory };
+function renderHistoryItems(historyList) {
+  const historySection = document.querySelector('#history-section');
+
+  const historyItemsHtml = historyList.reduce(
+    (acc, { username, profileImage, actionText, timestamp }) => {
+      return (
+        acc + createHistoryItem(username, profileImage, actionText, timestamp)
+      );
+    },
+    ''
+  );
+
+  addElementToParent(historySection, historyItemsHtml);
+}
+
+export { toggleHistory, renderHistoryItems };
