@@ -318,11 +318,11 @@ body {
   background-color: darkgray; /* 호버 시 손잡이 색상 */
 }
 
-#history-section > span {
+#history-default {
   width: 312px;
   display: flex;
   justify-content: center;
-  padding-left: 8px;
+  padding: 16px;
 }
 
 .history-close-btn {
@@ -362,7 +362,7 @@ body {
 /* History Fotter */
 
 #history footer {
-  display: flex;
+  display: none;
   justify-content: flex-end;
   padding: 4px 8px;
 }

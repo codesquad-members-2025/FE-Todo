@@ -14,7 +14,12 @@ function toggleHistory() {
 }
 
 function renderHistoryItems(historyList) {
-  const historySection = document.querySelector('#history-section');
+  // 활동기록이 없으면 default 띄우기
+  if (historyList.length === 0) {
+    toggleHistoryDefaultUi(true);
+    return;
+  }
+  const historyContainer = document.querySelector('#history-container');
 
   const historyItemsHtml = historyList.reduce(
     (acc, { username, profileImage, actionText, timestamp }) => {
@@ -25,12 +30,32 @@ function renderHistoryItems(historyList) {
     ''
   );
 
-  addElementToParent(historySection, historyItemsHtml);
+  addElementToParent(historyContainer, historyItemsHtml);
+  toggleDeleteButton(true); // 기록삭제 버튼 보여주기
 }
 
 // Remove history record
 function removeHistoryRecords() {
-  document.getElementById('history-section').innerHTML = '';
+  document.getElementById('history-container').innerHTML = '';
+  toggleHistoryDefaultUi(true);
+  toggleDeleteButton(false); // 기록삭제 버튼 감추기
 }
 
-export { toggleHistory, renderHistoryItems, removeHistoryRecords };
+// Show Default history
+function toggleHistoryDefaultUi(show) {
+  const historyDefault = document.getElementById('history-default');
+  historyDefault.style.display = show ? 'flex' : 'none';
+}
+
+// Show History Footer
+function toggleDeleteButton(show) {
+  const footerElement = document.querySelector('#history footer');
+  footerElement.style.display = show ? 'flex' : 'none';
+}
+
+export {
+  toggleHistory,
+  renderHistoryItems,
+  removeHistoryRecords,
+  toggleHistoryDefaultUi,
+};
