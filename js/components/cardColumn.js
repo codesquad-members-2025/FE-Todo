@@ -1,5 +1,5 @@
-import { createColumn, createTaskCard } from '../components/components.js';
-import { addElementToParent } from './dom.js';
+import { createColumn, createTaskCard } from './template.js';
+import { addElementToParent } from '../utils/dom.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
 function renderColumns(columnList) {

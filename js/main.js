@@ -1,9 +1,9 @@
 import columnData from '../data/columnData.js';
 import historyData from '../data/historyData.js';
-import { renderColumnsAndCards } from './utils/cardColumn.js';
-import { toggleHistory, renderHistoryItems } from './utils/history.js';
-import { sortCards } from './utils/sort.js';
-import { openDeleteModal, openHistoryDeleteModal } from './utils/modal.js';
+import { renderColumnsAndCards } from './components/cardColumn.js';
+import { toggleHistory, renderHistoryItems } from './components/history.js';
+import { sortCards } from './components/sort.js';
+import { openDeleteModal, openHistoryDeleteModal } from './components/modal.js';
 
 //Sort Button
 const sortButton = document.getElementById('sort-btn');

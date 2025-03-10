@@ -1,5 +1,5 @@
-import { createHistoryItem } from '../components/components.js';
-import { addElementToParent } from './dom.js';
+import { createHistoryItem } from './template.js';
+import { addElementToParent } from '../utils/dom.js';
 
 //history 열기
 function toggleHistory() {
