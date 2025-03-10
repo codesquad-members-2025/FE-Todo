@@ -1,18 +1,14 @@
-const headers = document.querySelectorAll(".columnlist__col");
-const btns = Array.from(headers).map((header) => {
-  const addBtn = header.querySelector(".add-task-btn");
-  const closeBtn = header.querySelector(".delete-task-btn");
-  return [addBtn, closeBtn];
+// ✅먼저 추가, 닫기 버튼들을 불러온다.
+const sections = document.querySelectorAll(".columnlist__col");
+sections.forEach((section) => {
+  const addBtn = section.querySelector(".add-task-btn");
+  const closeBtn = section.querySelector(".delete-task-btn");
+  const taskModal = section.querySelector(".task-modal-overlay");
+
+  addBtn.addEventListener("click", () => {
+    taskModal.classList.add("active"); // 모달 보이기
+  });
+  closeBtn.addEventListener("click", () => {
+    taskModal.classList.remove("active"); // 모달 보이기
+  });
 });
-
-/*
-
-const addBtns = document.querySelectorAll(".add-task-btn");
-
-addBtns.forEach((btn)=>{
-    btn.addEventListener("click",(event)=>{
-        const section = event.target.closest("columnlist__col")
-
-    })
-})
-*/

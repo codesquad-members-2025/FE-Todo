@@ -251,9 +251,12 @@ dialog {
   font-size: 14px;
 }
 .task-modal-overlay {
-  display: block;
+  display: none;
   border-radius: 8px;
   box-shadow: 0 1px 4px #6e80913d;
+}
+.task-modal-overlay.active {
+  display: block;
 }
 
 .task-modal > div {
