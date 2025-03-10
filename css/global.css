@@ -36,15 +36,15 @@
   --border-bord: var(--grayscale-400);
 
   /* Bold type (700) */
-  --font-bold-L: 700 24px/1.4 "Pretendard", sans-serif;
-  --font-bold-M: 700 16px/1.4 "Pretendard", sans-serif;
-  --font-bold-R: 700 14px/1.4 "Pretendard", sans-serif;
-  --font-bold-S: 700 12px/1.4 "Pretendard", sans-serif;
+  --font-bold-L: 700 24px/1.2 "Pretendard", sans-serif;
+  --font-bold-M: 700 16px/1.2 "Pretendard", sans-serif;
+  --font-bold-R: 700 14px/1.2 "Pretendard", sans-serif;
+  --font-bold-S: 700 12px/1.2 "Pretendard", sans-serif;
 
   /* Medium type (500) */
-  --font-medium-M: 500 16px/1.4 "Pretendard", sans-serif;
-  --font-medium-R: 500 14px/1.4 "Pretendard", sans-serif;
-  --font-medium-S: 500 12px/1.4 "Pretendard", sans-serif;
+  --font-medium-M: 500 16px/1.2 "Pretendard", sans-serif;
+  --font-medium-R: 500 14px/1.2 "Pretendard", sans-serif;
+  --font-medium-S: 500 12px/1.2 "Pretendard", sans-serif;
 
   /* Typogrephy system */
   --display-bold24: var(--font-bold-L);
