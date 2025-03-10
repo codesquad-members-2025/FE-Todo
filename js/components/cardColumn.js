@@ -1,5 +1,6 @@
 import { createColumn, createTaskCard } from './template.js';
 import { addElementToParent } from '../utils/dom.js';
+import { openCardDeleteModal } from './modal.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
 function renderColumns(columnList) {
@@ -54,9 +55,16 @@ function makeCardRemover(cardId) {
   };
 }
 
+//카드 제거 버튼 이벤트 추가 함수
+function initCardRemoveButton() {
+  const columnSection = document.getElementById('columns-container');
+  columnSection.addEventListener('click', openCardDeleteModal);
+}
+
 export {
   renderColumnsAndCards,
   renderCardsForColumn,
   clearCards,
   makeCardRemover,
+  initCardRemoveButton,
 };

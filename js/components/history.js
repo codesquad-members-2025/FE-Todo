@@ -1,5 +1,6 @@
 import { createHistoryItem } from './template.js';
 import { addElementToParent } from '../utils/dom.js';
+import { openHistoryDeleteModal } from './modal.js';
 
 //history 열기
 function toggleHistory() {
@@ -53,8 +54,21 @@ function toggleDeleteButton(show) {
   footerElement.style.display = show ? 'flex' : 'none';
 }
 
+//History Event Listener
+
+function initHistoryButton() {
+  const historyButton = document.getElementById('history-open-btn');
+  historyButton.addEventListener('click', toggleHistory);
+
+  const historyCloseButton = document.getElementById('history-close-btn');
+  historyCloseButton.addEventListener('click', toggleHistory);
+
+  const historyDeleteButton = document.getElementById('history-delete-btn');
+  historyDeleteButton.addEventListener('click', openHistoryDeleteModal);
+}
+
 export {
-  toggleHistory,
+  initHistoryButton,
   renderHistoryItems,
   removeHistoryRecords,
   toggleHistoryDefaultUi,

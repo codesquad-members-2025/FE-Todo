@@ -34,4 +34,12 @@ function getSortedTasksByDate(columnList, order = 'created') {
   }));
 }
 
-export { sortCards };
+//Sort Button
+function initSortButton(columnData) {
+  const sortButton = document.getElementById('sort-btn');
+  sortButton.addEventListener('click', (event) => {
+    sortCards(columnData, event);
+  });
+}
+
+export { initSortButton };
