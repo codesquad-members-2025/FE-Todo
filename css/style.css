@@ -417,7 +417,7 @@ h1 {
   align-items: center;
 }
 
-.overlay-dark {
+#overlay-dark {
   display: none;
   position: fixed;
   top: 0px;
