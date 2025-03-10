@@ -33,7 +33,7 @@ function createConfirmModal(textContent, deleteCallback) {
 }
 
 // 카드 삭제 모달 오픈
-function openDeleteModal(event) {
+function openCardDeleteModal(event) {
   const button = event.target.closest('.delete-card-btn');
   if (!button) return;
 
@@ -63,4 +63,4 @@ function openHistoryDeleteModal() {
   showModal();
 }
 
-export { showModal, openDeleteModal, openHistoryDeleteModal };
+export { showModal, openCardDeleteModal, openHistoryDeleteModal };
