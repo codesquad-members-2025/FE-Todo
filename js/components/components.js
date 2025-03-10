@@ -49,13 +49,13 @@ function createTaskCard(id, title, content, author) {
 function createHistoryItem(username, profileImage, actionText, timestamp) {
   return `  
     <article class="activity-record">
-      <header>
+      <div class="record-header">
         <img
           src="${profileImage}"
           alt="사용자 프로필 이미지"
           class="profile-img"
         />
-      </header>
+      </div>
       <section class="content">
         <h2 class="username tx-m14 text-default">@${username}</h2>
         <p class="action-text tx-m14 text-default">
