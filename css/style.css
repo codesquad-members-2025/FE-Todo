@@ -282,6 +282,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 8px;
 }
 
 #history header > span {
@@ -366,7 +367,7 @@ body {
   padding: 4px 8px;
 }
 
-#history footer .load-more-btn {
+#history-delete-btn {
   display: flex;
   justify-content: center;
   padding: 7.5px 8px;
