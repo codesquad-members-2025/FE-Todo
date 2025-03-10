@@ -24,6 +24,7 @@ body {
 .header__history-icon {
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 /* Column Container */
@@ -130,7 +131,17 @@ body {
 }
 
 .history-modal__header-close {
-  color: var(--text-default);
+  cursor: pointer;
+
+  button {
+    /* 스타일 초기화 */
+    background-color: transparent;
+    border: none;
+    color: var(--text-default);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
 }
 
 .history-modal__content {
@@ -175,7 +186,7 @@ body {
   margin: 8px;
 }
 
-.history-modal__footer-button {
+.history-modal__footer-btn {
   width: 104px;
   color: var(--text-danger);
   font-weight: bold;
@@ -206,4 +217,46 @@ body {
 
 .history-modal-container {
   transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* 히스토리 삭제 확인 모달 */
+.history-delete-modal {
+  /* display: none; */
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--surface-default);
+}
+
+.history-delete-modal__content {
+  display: grid;
+  grid-template-rows: 32px 1fr 32px 1fr 24px;
+  justify-items: center;
+  align-items: center;
+  background-color: var(--surface-default);
+  width: 400px;
+  height: 150px;
+  border-radius: 15px;
+}
+
+.history-delete-modal__message {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text-default);
+}
+
+.history-delete-modal__buttons {
+  padding: 5px 8px;
+}
+
+#cancel-delete-btn {
+  background-color: var(--surface-alt);
+  color: var(--text-default);
+  font-weight: bold;
+}
+
+#confirm-delete-btn {
+  background-color: var(--text-danger);
+  color: white;
+  font-weight: bold;
 }

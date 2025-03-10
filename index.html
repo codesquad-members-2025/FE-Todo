@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TO-DO</title>
     <link rel="stylesheet" href="./css/style.css" />
-    <script src="./script.js" defer></script>
+    <script src="./app.js" defer></script>
   </head>
   <body>
     <!-- 클래스 네임 컨벤션: BEM 방식 -->
@@ -176,12 +176,8 @@
         <div
           class="history-modal__header-close flex flex-justify-end flex-align-center"
         >
-          <img
-            src="./icons/delete.png"
-            width="16"
-            alt="닫기 버튼"
-          />
-          <h2>닫기</h2>
+          <img src="./icons/delete.png" width="16" alt="닫기 버튼" />
+          <button>닫기</button>
         </div>
       </header>
       <!-- History Modal Content -->
@@ -199,7 +195,7 @@
           <div
             class="history-modal__content-item-right flex flex-column flex-justify-space-between"
           >
-            <h1 id="action-user-name">@SangYoonLee</h1>
+            <p id="action-user-name">@SangYoonLee</p>
             <p id="action-description">
               <strong>블로그에 포스팅할 것</strong>을(를)
               <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>으로
@@ -211,21 +207,26 @@
       </article>
       <!-- History Modal Footer -->
       <footer class="history-modal__footer flex flex-justify-end">
-        <div class="history-modal__footer-button flex flex-center">
+        <div class="history-modal__footer-btn flex flex-center">
           기록 전체 삭제
         </div>
       </footer>
     </aside>
 
-    <!-- 삭제 확인 모달 -->
-    <div id="delete-confirm-modal" class="modal hidden">
-      <div class="modal-content">
-        <p>모든 사용자 활동 기록을 삭제할까요?</p>
-        <div class="modal-buttons">
-          <button id="cancel-delete" class="modal-button cancel">취소</button>
-          <button id="confirm-delete" class="modal-button confirm">삭제</button>
+    <!-- 히스토리 삭제 확인 모달 -->
+    <dialog class="history-delete-modal flex flex-center">
+      <div class="history-delete-modal__content">
+        <div class="empty"></div>
+        <p class="history-delete-modal__message">
+          모든 사용자 활동 기록을 삭제할까요?
+        </p>
+        <div class="empty"></div>
+        <div class="history-delete-modal__buttons flex flex-center">
+          <button id="cancel-delete-btn" class="btn-style">취소</button>
+          <button id="confirm-delete-btn" class="btn-style">삭제</button>
         </div>
+        <div class="empty"></div>
       </div>
-    </div>
+    </dialog>
   </body>
 </html>

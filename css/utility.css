@@ -45,3 +45,11 @@
 .flex-wrap {
   flex-wrap: wrap;
 }
+
+.btn-style {
+  margin: 0px 4px;
+  width: 172px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+}
