@@ -1,5 +1,4 @@
-import columnData from '../data/columnData.js';
-import historyData from '../data/historyData.js';
+import { fetchData } from './utils/fetch.js';
 import {
   renderColumnsAndCards,
   initCardRemoveButton,
@@ -7,17 +6,35 @@ import {
 import { initHistoryButton, renderHistoryItems } from './components/history.js';
 import { initSortButton } from './components/sort.js';
 
-//Sort Button
-initSortButton(columnData);
+const DATA_URLS = {
+  column: './data/columnData.json',
+  history: './data/historyData.json',
+};
+
+async function handleData() {
+  try {
+    const [columnData, historyData] = await Promise.all([
+      fetchData(DATA_URLS.column),
+      fetchData(DATA_URLS.history),
+    ]);
+
+    if (columnData) {
+      initSortButton(columnData);
+      renderColumnsAndCards(columnData);
+    }
+
+    if (historyData) {
+      renderHistoryItems(historyData);
+    }
+  } catch (error) {
+    console.error('데이터 로드 중 오류 발생:', error);
+  }
+}
+
+handleData();
 
 //History Button
 initHistoryButton();
 
 //Card Remove Button
 initCardRemoveButton();
-
-//First render
-renderColumnsAndCards(columnData);
-
-//history Items render
-renderHistoryItems(historyData);
