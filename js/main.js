@@ -11,19 +11,27 @@ const DATA_URLS = {
   history: './data/historyData.json',
 };
 
-async function handleColumnData() {
-  const columnData = await fetchData(DATA_URLS.column);
-  initSortButton(columnData);
-  renderColumnsAndCards(columnData);
+async function handleData() {
+  try {
+    const [columnData, historyData] = await Promise.all([
+      fetchData(DATA_URLS.column),
+      fetchData(DATA_URLS.history),
+    ]);
+
+    if (columnData) {
+      initSortButton(columnData);
+      renderColumnsAndCards(columnData);
+    }
+
+    if (historyData) {
+      renderHistoryItems(historyData);
+    }
+  } catch (error) {
+    console.error('데이터 로드 중 오류 발생:', error);
+  }
 }
 
-async function handleHistoryData() {
-  const historyData = await fetchData(DATA_URLS.history);
-  renderHistoryItems(historyData);
-}
-
-handleColumnData();
-handleHistoryData();
+handleData();
 
 //History Button
 initHistoryButton();
