@@ -41,13 +41,13 @@ function removeHistoryRecords() {
   toggleDeleteButton(false); // 기록삭제 버튼 감추기
 }
 
-// Show Default history
+// Toggle Default history
 function toggleHistoryDefaultUi(show) {
   const historyDefault = document.getElementById('history-default');
   historyDefault.style.display = show ? 'flex' : 'none';
 }
 
-// Show History Footer
+// Toggle History Footer
 function toggleDeleteButton(show) {
   const footerElement = document.querySelector('#history footer');
   footerElement.style.display = show ? 'flex' : 'none';

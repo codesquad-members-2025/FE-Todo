@@ -28,6 +28,7 @@ function createConfirmModal(textContent, deleteCallback) {
     deleteCallback();
     closeModal();
   };
+
   deleteBtn.addEventListener('click', deleteBtn._deleteHandler);
 }
 
@@ -53,7 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 });
 
-// 카드 삭제 모달 오픈
+// 활동기록 삭제 모달 오픈
 function openHistoryDeleteModal() {
   createConfirmModal(
     '모든 사용자 활동 기록을 삭제할까요?',
