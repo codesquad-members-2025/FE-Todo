@@ -1,4 +1,5 @@
 import { makeCardRemover } from './cardColumn.js';
+import { removeHistoryRecords } from './history.js';
 
 function showModal() {
   const dialog = document.getElementById('modal');
@@ -52,4 +53,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 });
 
-export { showModal, openDeleteModal };
+// 카드 삭제 모달 오픈
+function openHistoryDeleteModal() {
+  createConfirmModal(
+    '모든 사용자 활동 기록을 삭제할까요?',
+    removeHistoryRecords
+  );
+  showModal();
+}
+
+export { showModal, openDeleteModal, openHistoryDeleteModal };

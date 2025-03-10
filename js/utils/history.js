@@ -28,4 +28,9 @@ function renderHistoryItems(historyList) {
   addElementToParent(historySection, historyItemsHtml);
 }
 
-export { toggleHistory, renderHistoryItems };
+// Remove history record
+function removeHistoryRecords() {
+  document.getElementById('history-section').innerHTML = '';
+}
+
+export { toggleHistory, renderHistoryItems, removeHistoryRecords };

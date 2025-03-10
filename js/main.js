@@ -3,7 +3,7 @@ import historyData from '../data/historyData.js';
 import { renderColumnsAndCards } from './utils/cardColumn.js';
 import { toggleHistory, renderHistoryItems } from './utils/history.js';
 import { sortCards } from './utils/sort.js';
-import { openDeleteModal } from './utils/modal.js';
+import { openDeleteModal, openHistoryDeleteModal } from './utils/modal.js';
 
 //Sort Button
 const sortButton = document.getElementById('sort-btn');
@@ -17,6 +17,9 @@ historyButton.addEventListener('click', toggleHistory);
 
 const historyCloseButton = document.getElementById('history-close-btn');
 historyCloseButton.addEventListener('click', toggleHistory);
+
+const historyDeleteButton = document.getElementById('history-delete-btn');
+historyDeleteButton.addEventListener('click', openHistoryDeleteModal);
 
 //Card Remove Button
 document.body.addEventListener('click', openDeleteModal);
