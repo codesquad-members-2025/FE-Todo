@@ -3,6 +3,7 @@ const historyListLayer = document.getElementById("historyList-noEmpty");
 const closedButton = document.getElementById("history__closedButton");
 const deleteButton = document.getElementById("delete");
 const cancleButton = document.getElementById("cancleButton");
+const decideDeletButton = document.getElementById("decideDeleteButton");
 
 // 히스토리 리스트 열기
 function openHistoryList() {
@@ -30,8 +31,22 @@ function cancleDelete() {
   alert.style.display = "none";
 }
 
+// 삭제 알림창에서 삭제 버튼 클릭 시 recordHistory 제거
+function decideDelete() {
+  cancleDelete();
+  const recordHistory = document.getElementById("recordHistory");
+  const deleteBox = document.querySelector(".deleteBox");
+  getRecords = recordHistory.children;
+  Array.from(getRecords).forEach((record) => {
+    record.remove();
+  });
+  recordHistory.remove();
+  deleteBox.remove();
+}
+
 // 이벤트 설정
 openButton.addEventListener("click", openHistoryList);
 closedButton.addEventListener("click", closeHistoryList);
 deleteButton.addEventListener("click", confirmDeleteAlert);
 cancleButton.addEventListener("click", cancleDelete);
+decideDeletButton.addEventListener("click", decideDelete);
