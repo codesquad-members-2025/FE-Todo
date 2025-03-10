@@ -7,6 +7,7 @@ body {
   background-color: var(--surface-alt);
   display: flex;
   flex-direction: column;
+  gap: var(--number-400);
 }
 
 header {
@@ -417,7 +418,7 @@ h1 {
 }
 
 .overlay-dark {
-  /* display: none; */
+  display: none;
   position: fixed;
   top: 0px;
   left: 0px;
@@ -427,9 +428,9 @@ h1 {
   z-index: 900;
 }
 
-/* #alert-box {
+#alert-box {
   display: none;
-} */
+}
 
 .alertContent {
   position: fixed;
