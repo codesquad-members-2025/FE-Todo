@@ -97,3 +97,23 @@
   > - 여러 Node 객체를 포함하는 유사 배열 객체
   > - NodeList는 반드시 Node 객체만 포함
   > - 실시간 업데이트 불가능(Static Collection)
+
+---
+
+**innerHTML**
+
+- innerHTML은 HTML DOM에서 각 요소에 대한 읽기, 쓰기가 가능한 속성
+- 이 속성을 사용하면 해당 요소의 HTML 콘텐츠를 가져오거나 수정할 수 있습니다.
+
+  - innerHTML의 역할
+
+    &rarr; 읽기: 해당 요소 내부의 HTML 콘텐츠를 문자열로 반환
+
+    &rarr; 쓰기: 해당 요소 내부의 HTML 콘텐츠를 설정할 때 사용된다
+    즉, 새로운 HTML을 해당 요소 안에 삽입할 수 있습니다.
+
+    > **innerHTML** 은 함수가 아니라 속성이기 때문에 설정할 때는 값으로 직접 할당해야 한다
+
+    ```javascript
+    recordList.innerHTML = "<p>새로운 내용</p>";
+    ```

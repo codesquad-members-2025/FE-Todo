@@ -242,12 +242,12 @@ h1 {
   background-color: unset;
 }
 
-.historyList {
-  /* position: fixed;
+#historyList-noEmpty {
+  position: fixed;
   right: -366px;
   top: 64px;
-  transform: translateX(0); 
-  transition: transform 1s ease-in-out; */
+  transform: translateX(0); /* 처음 위치 설정: translateX(0) -> 변화 없음 */
+  transition: transform 1s ease-in-out; /* 슬라이드 애니메이션을 부드럽게 만들기 위한 트랜지션 */
   background-color: var(--surface-default);
   box-shadow: 0px 16px 16px #6e80913d, 0px 0px 4px #6e809114;
   border-radius: var(--number-200);
@@ -256,35 +256,9 @@ h1 {
   gap: var(--number-100);
 }
 
-#historyList-empty {
-  position: fixed;
-  right: -366px;
-  top: 64px;
-  transform: translateX(0); /* 처음 위치 설정: translateX(0) -> 변화 없음 */
-  transition: transform 1s ease-in-out; /* 슬라이드 애니메이션을 부드럽게 만들기 위한 트랜지션 */
-}
-
-#historyList-empty.active {
-  transform: translateX(-452px); /* 화면 왼쪽으로 이동 */
-}
-
-#historyList-noEmpty {
-  position: fixed;
-  right: -366px;
-  top: 64px;
-  transform: translateX(0); /* 처음 위치 설정: translateX(0) -> 변화 없음 */
-  transition: transform 1s ease-in-out; /* 슬라이드 애니메이션을 부드럽게 만들기 위한 트랜지션 */
-}
-
 #historyList-noEmpty.active {
   transform: translateX(-452px); /* 화면 왼쪽으로 이동 */
 }
-
-/* #historyList-noEmpty {
-  position: fixed;
-  top: 64px;
-  right: 56px;
-} */
 
 .history__header {
   width: 350px;

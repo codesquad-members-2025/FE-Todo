@@ -31,17 +31,20 @@ function cancleDelete() {
   alert.style.display = "none";
 }
 
-// 삭제 알림창에서 삭제 버튼 클릭 시 recordHistory 제거
+// 삭제 알림창에서 삭제 버튼 클릭 시 recordHistory 제거 후 해당 위치에 빈 사용자 기록으로 변경
 function decideDelete() {
   cancleDelete();
   const recordHistory = document.getElementById("recordHistory");
   const deleteBox = document.querySelector(".deleteBox");
-  getRecords = recordHistory.children;
+  let getRecords = recordHistory.children;
+  let recordList = recordHistory.parentElement;
+  console.log(recordList);
   Array.from(getRecords).forEach((record) => {
     record.remove();
   });
   recordHistory.remove();
   deleteBox.remove();
+  recordList.innerHTML = `<div class="record-empty">사용자 활동 기록이 없습니다.</div>`;
 }
 
 // 이벤트 설정
