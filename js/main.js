@@ -1,3 +1,4 @@
+import { fetchData } from './utils/fetch.js';
 import {
   renderColumnsAndCards,
   initCardRemoveButton,
@@ -5,45 +6,19 @@ import {
 import { initHistoryButton, renderHistoryItems } from './components/history.js';
 import { initSortButton } from './components/sort.js';
 
-//Fetch columnDataa
-async function fetchColumnData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('네트워크 응답에 문제가 있습니다.');
-    }
-    const data = await response.json();
-    handleColumnData(data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
+async function handleColumnData() {
+  const columnData = await fetchData('./data/columnData.json');
+  initSortButton(columnData);
+  renderColumnsAndCards(columnData);
 }
 
-function handleColumnData(data) {
-  initSortButton(data);
-  renderColumnsAndCards(data);
+async function handleHistoryData() {
+  const historyData = await fetchData('./data/historyData.json');
+  renderHistoryItems(historyData);
 }
 
-//Fetch historyData
-async function fetchHistoryData(url) {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error('네트워크 응답에 문제가 있습니다.');
-    }
-    const data = await response.json();
-    handleHistoryData(data);
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
-function handleHistoryData(data) {
-  renderHistoryItems(data);
-}
-
-fetchColumnData('./data/columnData.json');
-fetchHistoryData('./data/historyData.json');
+handleColumnData();
+handleHistoryData();
 
 //History Button
 initHistoryButton();
