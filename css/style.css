@@ -391,8 +391,8 @@ dialog[open] {
   transform: translate(-50%, -50%);
 }
 
-#modal #cancel-btn,
-#modal #delete-btn {
+#modal-cancel-btn,
+#modal-delete-btn {
   height: 32px;
   display: flex;
   padding: 7.5px 69.5px;
@@ -400,7 +400,7 @@ dialog[open] {
   border-radius: var(--radius-small);
 }
 
-#modal #delete-btn {
+#modal-delete-btn {
   background-color: var(--surface-danger);
 }
 

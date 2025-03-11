@@ -1,5 +1,5 @@
 import { createHistoryItem } from './template.js';
-import { addElementToParent } from '../utils/dom.js';
+import { addChild } from '../utils/dom.js';
 import { openHistoryDeleteModal } from './modal.js';
 
 //history 열기
@@ -7,11 +7,7 @@ function toggleHistory() {
   const history = document.querySelector('#history');
   const isVisable = window.getComputedStyle(history).display === 'flex';
 
-  if (!isVisable) {
-    history.style.display = 'flex';
-  } else {
-    history.style.display = 'none';
-  }
+  history.style.display = isVisable ? 'none' : 'flex';
 }
 
 function renderHistoryItems(historyList) {
@@ -31,7 +27,7 @@ function renderHistoryItems(historyList) {
     ''
   );
 
-  addElementToParent(historyContainer, historyItemsHtml);
+  addChild(historyContainer, historyItemsHtml);
   toggleDeleteButton(true); // 기록삭제 버튼 보여주기
 }
 

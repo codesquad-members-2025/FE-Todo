@@ -1,5 +1,5 @@
 import { createColumn, createTaskCard } from './template.js';
-import { addElementToParent } from '../utils/dom.js';
+import { addChild } from '../utils/dom.js';
 import { openCardDeleteModal } from './modal.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
@@ -12,7 +12,7 @@ function renderColumns(columnList) {
     ''
   );
 
-  addElementToParent(columnContainer, columnsHtml);
+  addChild(columnContainer, columnsHtml);
 }
 
 // 칼럼에 카드 생성
@@ -25,7 +25,7 @@ function renderCardsForColumn(columnList) {
       ''
     );
 
-    addElementToParent(columnCardList, taskCardsHtml);
+    addChild(columnCardList, taskCardsHtml);
   });
 }
 
