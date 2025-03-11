@@ -221,11 +221,14 @@ body {
 
 /* 히스토리 삭제 확인 모달 */
 .history-delete-modal {
-  /* display: none; */
   border-radius: 10px;
   border: none;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: var(--surface-default);
+}
+
+.history-delete-modal:not([open]) {
+  display: none;
 }
 
 .history-delete-modal__content {

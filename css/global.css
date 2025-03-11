@@ -46,3 +46,7 @@ img {
 strong {
   font-weight: bold;
 }
+
+button:focus {
+  outline: none;
+}
