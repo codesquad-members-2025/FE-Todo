@@ -141,11 +141,21 @@ h1 {
 
 .add-card__input__title {
   font: var(--display-bold14);
+}
+
+.add-card__input__title::placeholder {
   color: var(--text-strong);
 }
 
 .add-card__input__content {
   font: var(--display-medium14);
+  width: 288px;
+  resize: none;
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.add-card__input__content::placeholder {
   color: var(--text-default);
 }
 
