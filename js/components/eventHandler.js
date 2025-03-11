@@ -79,24 +79,18 @@ function initKanbanHandlers() {
     kanban.addEventListener('click', e => {
         const btn = e.target.closest('button');
 
+        // 칸반에서 버튼이 아닌 영역 클릭 시 return
         if (btn === null) return;
-
-        if (btn.classList.contains('column-header__add-btn')) {
-            toggleCardForm(btn);
-        } else if (btn.classList.contains('column-header__close-btn')) {
-            // '컬럼 삭제 로직 실행'
-        } else if (btn.classList.contains('card__cancel-btn')) {
-            toggleCardForm(btn);
-            // '카드 폼 삭제 로직 실행'
-        } else if (btn.classList.contains('card__submit-btn')) {
-            // '카드 생성 로직 실행'
-            createCard(btn);
-        } else if (btn.classList.contains('card__close-btn')) {
-            // '카드 삭제 로직 실행'
-            removeCard(btn);
-        } else if (btn.classList.contains('card__edit-btn')) {
-            // '카드 수정 로직 실행'
-        }
+        
+        // 컬럼 헤더 버튼
+        if (btn.classList.contains('column-header__add-btn')) toggleCardForm(btn);
+        else if (btn.classList.contains('column-header__close-btn'));
+        // 카드 폼 버튼
+        else if (btn.classList.contains('card__cancel-btn')) toggleCardForm(btn);
+        else if (btn.classList.contains('card__submit-btn')) createCard(btn);
+        // 카드 버튼
+        else if (btn.classList.contains('card__close-btn')) removeCard(btn);
+        else if (btn.classList.contains('card__edit-btn'));
     });
 }
 
