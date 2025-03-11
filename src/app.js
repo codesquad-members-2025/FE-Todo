@@ -1,7 +1,5 @@
 import { columnsComponent } from "../components/columns_component";
-import "../css/font/pretendard-subset.css";
-import "../css/font/pretendard.css";
-import "../css/font/pretendardvariable.css";
+import "pretendard/dist/web/static/pretendard.css"; // 폰트 CSS 불러오기
 import "../css/global.css";
 import "../css/reset.css";
 import "../css/style.css";

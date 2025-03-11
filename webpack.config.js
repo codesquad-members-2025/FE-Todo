@@ -1,5 +1,6 @@
 // webpack.config.js
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   // 1) 진입점(시작 파일)
@@ -29,6 +30,10 @@ module.exports = {
   },
   plugins: [
     // 예: HtmlWebpackPlugin 등이 있다면 여기 추가
+    new HtmlWebpackPlugin({
+      template: "./src/index.html", // 원본 HTML 파일
+      filename: "index.html", // 출력될 HTML 파일 이름
+    }),
   ],
   devServer: {
     static: "./dist",
