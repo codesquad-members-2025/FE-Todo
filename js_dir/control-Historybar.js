@@ -1,3 +1,9 @@
+import { setupClickDelegate } from "./body_eventDelegate.js";
+
+setupClickDelegate(".header__history-btn", (el) => {
+  const sideBar = el.closest("body").nextElementSibling;
+});
+
 const historyBtn = document.querySelector(".header__history-btn");
 const historySidebar = document.querySelector(".popover-sidebar");
 const closeBtn = historySidebar.querySelector(".popover-header__closeBtn");
