@@ -1,4 +1,4 @@
-import { createCardFormNode, createCardNode } from './template.js';
+import { createCardNode } from './template.js';
 
 export function initEventHandlers() {
     initHistoryPanel();
@@ -12,7 +12,6 @@ function initHistoryPanel() {
     const panelToggleBtn = document.querySelector('.app-header__history-btn');
     const panelCloseBtn = document.querySelector('.history-panel__close-btn');
     const historyRemoveBtn = document.querySelector('.history-panel__footer-btn');
-
 
     panelToggleBtn.addEventListener('click', () => {
         historyPanel.classList.toggle('history-panel--active');
@@ -33,19 +32,14 @@ function initModal() {
     const confirmBtn = document.querySelector('.modal__confirm-btn');
     const modal = document.querySelector('.modal');
 
+    cancelBtn.addEventListener('click', () => modal.close());
 
-    cancelBtn.addEventListener('click', e => {
-        modal.close();
-    });
-
-    confirmBtn.addEventListener('click', e => {
-        const id = modal.dataset.id;
-
-        if (id === 'null') {
+    confirmBtn.addEventListener('click', () => {
+        if (modal.dataset.type === 'history') {
             removeUserHistory();
         } else {
-            modal.dataset.id = null;
-            document.querySelector('.kanban').querySelector(`[data-id="${id}"]`).remove();
+            document.querySelector(`[data-id="${modal.dataset.cardId}"]`).remove();
+            modal.dataset.cardId = null;
         }
 
         modal.close();
@@ -53,16 +47,16 @@ function initModal() {
 }
 
 // 모달 관련 함수
-function openModal(modalType, id = null) {
+function openModal(type, id = null) {
     const modal = document.querySelector('.modal');
+    const modalText = document.querySelector('.modal__text');
 
-    if (modalType = 'card') {
-        modal.querySelector('.modal__text').innerText = '선택한 카드를 삭제할까요?';
-    } else if (modalType = 'history') {
-        modal.querySelector('.modal__text').innerText = '모든 사용자 활동 기록을 삭제할까요?';
-    }
-    
-    modal.dataset.id = id;
+    const text = type === 'card' ? '선택한 카드를 삭제할까요?' : '모든 사용자 활동 기록을 삭제할까요?';
+
+    modalText.innerText = text;
+    modal.dataset.type = type;
+    modal.dataset.cardId = id;
+
     modal.showModal();
 }
 
@@ -70,9 +64,11 @@ function openModal(modalType, id = null) {
 function removeUserHistory() {
     const empty = document.querySelector('.history-panel__empty');
     const item = document.querySelector('.history-panel__item');
+    const footer = document.querySelector('.history-panel__footer');
 
     empty.style.display = 'flex';
     item.style.display = 'none';
+    footer.style.display = 'none';
     item.innerHTML = "";
 }
 
@@ -81,12 +77,11 @@ function initKanbanHandlers() {
     const kanban = document.querySelector('.kanban');
 
     kanban.addEventListener('click', e => {
-        const btn = getClosestBtn(e.target);
+        const btn = e.target.closest('button');
 
         if (btn === null) return;
 
         if (btn.classList.contains('column-header__add-btn')) {
-            // '카드 폼 생성or삭제 로직 실행'
             toggleCardForm(btn);
         } else if (btn.classList.contains('column-header__close-btn')) {
             // '컬럼 삭제 로직 실행'
@@ -105,12 +100,9 @@ function initKanbanHandlers() {
     });
 }
 
+// 일단 유틸리티 함수긴 함
 function getCurColumn(e) {
     return e.closest('.column');
-}
-
-function getClosestBtn(e) {
-    return e.tagName === 'button' ? e : e.closest('button');
 }
 
 // 첫번째 카드 앞 노드 삽입
@@ -119,16 +111,10 @@ function insertNode(node, column) {
     column.insertBefore(node, firstCard);
 }
 
-// 카드 폼 생성or삭제
+// 카드 폼 토글
 function toggleCardForm(btn) {
-    const curColumn = getCurColumn(btn);
-
-    const cardForm = curColumn.querySelector('.card-form');
-    if (cardForm) {
-        cardForm.remove();
-    } else {
-        insertNode(createCardFormNode(), curColumn)
-    }
+    const cardForm = getCurColumn(btn).querySelector('.card-form');
+    cardForm.classList.toggle('hidden');
 }
 
 // 카드 생성
@@ -138,9 +124,8 @@ function createCard(btn) {
     const titleInput = cardForm.querySelector('.card__title-input').value;
     const bodyInput = cardForm.querySelector('.card__body-input').value;
 
-    const cardNode =  createCardNode(titleInput, bodyInput);
-    insertNode(cardNode, getCurColumn(btn));
-    cardForm.remove();
+    insertNode(createCardNode(titleInput, bodyInput), getCurColumn(btn));
+    toggleCardForm(btn);
 }
 
 // 카드 삭제
