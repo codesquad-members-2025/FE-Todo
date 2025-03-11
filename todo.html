@@ -14,7 +14,7 @@
   <body class="top-layout-container">
     <header class="page-header">
       <h1 class="page-header__logo">TASKIFY</h1>
-      <button class="header__history-btn">
+      <button id="header__history-btn">
         <img src="/icons/history.svg" alt="history-icon" />
       </button>
     </header>
@@ -230,21 +230,21 @@
     </main>
 
     <!-- 히스토리 사이드 바 -->
-    <aside class="popover-sidebar">
+    <aside id="popover-sidebar">
       <div class="history-sidebar__layout">
         <header class="popover-header">
           <h2 class="popover-header__title">사용자 활동 기록</h2>
-          <button class="popover-header__closeBtn">
+          <button id="popover-header__closeBtn">
             <img src="/icons/Symbol.svg" alt="close-icon" />
             <div class="textLabel">닫기</div>
           </button>
         </header>
         <!-- 사용자 활동 기록이 보이는 구간 -->
         <section class="popover__section">
-          <article class="popover__empty-message">
+          <article id="popover__empty-message">
             사용자 활동 기록이 없습니다.
           </article>
-          <ul class="activity-list__ul">
+          <ul id="activity-list__ul">
             <template id="activity-template">
               <li class="activity-list__list">
                 <img src="icons/Image.png" alt="귀여운 개구리" />
@@ -258,7 +258,7 @@
           </ul>
         </section>
         <footer class="popover-footer">
-          <button class="delete-sidebar_button">기록 전체 삭제</button>
+          <button id="delete-sidebar_button">기록 전체 삭제</button>
         </footer>
       </div>
     </aside>
