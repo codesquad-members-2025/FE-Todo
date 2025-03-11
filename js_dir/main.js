@@ -1,5 +1,5 @@
-import { initializeMainHeader } from "./control-mainHeader.js";
 import { SidebarController } from "./control-Historybar.js";
+import { initialize } from "./control-mainHeader.js";
 
-initializeMainHeader();
+initialize();
 SidebarController.initialize();

@@ -22,17 +22,12 @@
 2. - 버튼이 실행되면 해당하는 섹션의 task-modal이 나오게 한다.
 3. - 버튼이 실행되면 해당하는 섹션의 task-modal을 숨긴다.
 
-// // ✅먼저 추가, 닫기 버튼들을 불러온다.
-// const sections = document.querySelectorAll(".columnlist\_\_col");
-// sections.forEach((section) => {
-// const addBtn = section.querySelector(".add-task-btn");
-// const closeBtn = section.querySelector(".delete-task-btn");
-// const taskModal = section.querySelector(".task-modal-overlay");
+---
 
-// addBtn.addEventListener("click", () => {
-// taskModal.classList.add("active"); // 모달 보이기
-// });
-// closeBtn.addEventListener("click", () => {
-// taskModal.classList.remove("active"); // 모달 보이기
-// });
-// });
+# 다시 수정
+
+## 이유는?
+
+- body 태그에 이벤트를 위임하면 모든 클릭 이벤트를 감지해야 하므로, 브라우저가 불필요하게 많은 연산을 수행함.
+- 현재 이 코드에서는 .add-task-btn과 .delete-task-btn 요소는 동적으로 추가되지 않음 → 즉, 굳이 이벤트 위임이 필요하지 않음!
+- 이벤트 위임을 남발하면, 불필요한 이벤트 핸들러 실행으로 인해 성능이 저하될 수 있음.
