@@ -13,7 +13,7 @@ function getCradFormTemplate() {
     `;
 }
 
-function getCardTemplate(title, description, author = 'author by web') {
+function getCardTemplate(title, description, author = 'web') {
     return `
     <article class="card flex-between">
         <div class="card__content flex-column">
@@ -21,7 +21,7 @@ function getCardTemplate(title, description, author = 'author by web') {
                 <h3 class="card__title display-bold14">${title}</h3> <!-- 타이틀 -->
                 <p class="card__description display-medium14">${description}</p> <!-- 바디 -->
             </div>
-            <p class="card__caption display-medium12">${author}</p> <!-- 캡션 -->
+            <p class="card__caption display-medium12">author by ${author}</p> <!-- 캡션 -->
         </div>
         <div class="card__icon-buttons">
             <button class="card__close-btn btn">
