@@ -1,4 +1,11 @@
-import { columnsComponent } from "./components/columns_component";
+import { columnsComponent } from "../components/columns_component";
+import "../css/font/pretendard-subset.css";
+import "../css/font/pretendard.css";
+import "../css/font/pretendardvariable.css";
+import "../css/global.css";
+import "../css/reset.css";
+import "../css/style.css";
+import "../css/utility.css";
 
 // 히스토리 모달 등장하거나 사라지는 구현
 const historyOpenBtn = document.querySelector(".header__history-icon");
