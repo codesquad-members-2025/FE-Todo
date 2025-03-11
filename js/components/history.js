@@ -1,17 +1,9 @@
 import { createHistoryItem } from './template.js';
 import { addChild } from '../utils/dom.js';
 import { openHistoryDeleteModal } from './modal.js';
-
-//history 열기
-function toggleHistory() {
-  const history = document.querySelector('#history');
-  const isVisable = window.getComputedStyle(history).display === 'flex';
-
-  history.style.display = isVisable ? 'none' : 'flex';
-}
+import { loadHistoryData } from '../../store/history.js';
 
 function renderHistoryItems(historyList) {
-  // 활동기록이 없으면 default 띄우기
   if (historyList.length === 0) {
     toggleHistoryDefaultUi(true);
     return;
@@ -38,6 +30,14 @@ function removeHistoryRecords() {
   toggleDeleteButton(false); // 기록삭제 버튼 감추기
 }
 
+//history 열기
+function toggleHistory() {
+  const history = document.querySelector('#history');
+  const isVisable = window.getComputedStyle(history).display === 'flex';
+
+  history.style.display = isVisable ? 'none' : 'flex';
+}
+
 // Toggle Default history
 function toggleHistoryDefaultUi(show) {
   const historyDefault = document.getElementById('history-default');
@@ -51,7 +51,6 @@ function toggleDeleteButton(show) {
 }
 
 //History Event Listener
-
 function initHistoryButton() {
   const historyButton = document.getElementById('history-open-btn');
   historyButton.addEventListener('click', toggleHistory);
@@ -63,9 +62,12 @@ function initHistoryButton() {
   historyDeleteButton.addEventListener('click', openHistoryDeleteModal);
 }
 
-export {
-  initHistoryButton,
-  renderHistoryItems,
-  removeHistoryRecords,
-  toggleHistoryDefaultUi,
-};
+async function initHistory() {
+  const data = await loadHistoryData();
+
+  renderHistoryItems(data);
+
+  initHistoryButton();
+}
+
+export { initHistory, removeHistoryRecords };

@@ -58,4 +58,4 @@ function openHistoryDeleteModal() {
   toggleModal();
 }
 
-export { toggleModal, openCardDeleteModal, openHistoryDeleteModal };
+export { openCardDeleteModal, openHistoryDeleteModal };
