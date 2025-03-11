@@ -21,3 +21,18 @@
 1. 사용자가 각 섹션의 + 버튼 또는 x 버튼을 누를때 event.target을 이용해 타겟 요소를 찾은뒤 closest(".add-task-btn")을 사용해 버튼이 실행되게 한다.
 2. - 버튼이 실행되면 해당하는 섹션의 task-modal이 나오게 한다.
 3. - 버튼이 실행되면 해당하는 섹션의 task-modal을 숨긴다.
+
+// // ✅먼저 추가, 닫기 버튼들을 불러온다.
+// const sections = document.querySelectorAll(".columnlist\_\_col");
+// sections.forEach((section) => {
+// const addBtn = section.querySelector(".add-task-btn");
+// const closeBtn = section.querySelector(".delete-task-btn");
+// const taskModal = section.querySelector(".task-modal-overlay");
+
+// addBtn.addEventListener("click", () => {
+// taskModal.classList.add("active"); // 모달 보이기
+// });
+// closeBtn.addEventListener("click", () => {
+// taskModal.classList.remove("active"); // 모달 보이기
+// });
+// });
