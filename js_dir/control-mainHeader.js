@@ -1,14 +1,13 @@
-// ✅먼저 추가, 닫기 버튼들을 불러온다.
-const sections = document.querySelectorAll(".columnlist__col");
-sections.forEach((section) => {
-  const addBtn = section.querySelector(".add-task-btn");
-  const closeBtn = section.querySelector(".delete-task-btn");
-  const taskModal = section.querySelector(".task-modal-overlay");
+import { setupClickDelegate } from "./body_eventDelegate.js";
 
-  addBtn.addEventListener("click", () => {
-    taskModal.classList.add("active"); // 모달 보이기
+export function initializeMainHeader() {
+  setupClickDelegate("button", (el) => {
+    const parentEl = el.parentElement.parentElement;
+    const modalOverlay = parentEl.nextElementSibling;
+    if (el.classList.contains("add-task-btn")) {
+      modalOverlay.classList.add("active");
+    } else {
+      modalOverlay.classList.remove("active");
+    }
   });
-  closeBtn.addEventListener("click", () => {
-    taskModal.classList.remove("active"); // 모달 보이기
-  });
-});
+}
