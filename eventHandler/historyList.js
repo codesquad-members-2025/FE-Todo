@@ -1,9 +1,9 @@
 const openButton = document.getElementById("historyOpenButton");
 const historyListLayer = document.getElementById("historyList-noEmpty");
 const closedButton = document.getElementById("history__closedButton");
-const deleteButton = document.getElementById("delete");
-const cancleButton = document.getElementById("cancleButton");
-const decideDeletButton = document.getElementById("decideDeleteButton");
+const deleteButton = document.getElementById("deleteButton");
+const cancleButton = document.querySelector(".cancleButton");
+const decideDeletButton = document.querySelector(".decideDeleteButton");
 
 // 히스토리 리스트 열기
 function openHistoryList() {
@@ -18,17 +18,21 @@ function closeHistoryList() {
 // 히스토리 리스트 삭제 알림창 띄우기
 function confirmDeleteAlert() {
   const overlay = document.getElementById("overlay-dark");
-  const alert = document.getElementById("alert-box");
-  overlay.style.display = "block";
-  alert.style.display = "block";
+  const alert = document.querySelector(".alert-box");
+  // overlay.style.display = "block";
+  // alert.style.display = "block";
+  overlay.classList.remove("hidden");
+  alert.classList.remove("hidden");
 }
 
 // 삭제 알림창에서 취소 버튼 클릭 시 알림창 제거
 function cancleDelete() {
   const overlay = document.getElementById("overlay-dark");
-  const alert = document.getElementById("alert-box");
-  overlay.style.display = "none";
-  alert.style.display = "none";
+  const alert = document.querySelector(".alert-box");
+  // overlay.style.display = "none";
+  // alert.style.display = "none";
+  overlay.classList.add("hidden");
+  alert.classList.add("hidden");
 }
 
 // 삭제 알림창에서 삭제 버튼 클릭 시 recordHistory 제거 후 해당 위치에 빈 사용자 기록으로 변경

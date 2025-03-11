@@ -57,7 +57,7 @@
 1. getElementById() &rarr; ID로 단일 요소 선택
 
 - 단 하나의 요소만 반환 (HTMLElement 객체)
-- Id는 문서 내에서 고유해야 하므로 중복 불가능
+- Id는 문서 내에서 고유해야 하므로 **중복 불가능**
 - Id가 존재하지 않으면 null 반환
 
 2. getElementsByClassName() &rarr; 같은 클래스를 가진 모든 요소 선택
@@ -66,6 +66,15 @@
 - 여러 개의 요소가 포함될 수 있음
 - 실시간 컬렉션 &rarr; DOM 변경 시 자동 업데이트됨
 - 요소가 없으면 빈 HTMLCollection 반환
+
+  &rarr; getElementsByClassName()은 HTMLCollection을 반환하기 때문에,  
+  클래스 이름에 해당하는 요소가 하나뿐이라도 컬렉션 형태로 반환한다
+
+  &rarr; **해결 방법**
+
+  1. HTMLCollection 을 배열로 만들어 인덱스로 요소를 선택
+  2. Array.from() 또는 스프레드 연산자를 사용하여 배열로 변환 후 처리
+  3. querySelector() 사용 - 첫번째 요소만 반환하기 때문에 좀 더 편리
 
   **HTMLCollection**
 
@@ -92,16 +101,23 @@
 - NodeList는 배열처럼 여러 개의 요소를 담고 있음 (forEach() 사용 가능)
 - 요소가 없으면 빈 NodeList 반환 ([])
 
-  **Node**
+```javascript
+document.querySelector(".title");
+document.querySelectorAll(".titles");
+```
 
-  > - Node는 DOM 에서 사용되는 기본적인 요소
-  > - Node는 HTML 문서 내에서 모든 요소, 텍스트, 속성 등을 포함하는 가장 기본적인 단위
+&rarr; " " 안에 들어가는 ' #(id) ' / '.(class)' 잊지말기!!!!
 
-  **NodeList**
+**Node**
 
-  > - 여러 Node 객체를 포함하는 유사 배열 객체
-  > - NodeList는 반드시 Node 객체만 포함
-  > - 실시간 업데이트 불가능(Static Collection)
+> - Node는 DOM 에서 사용되는 기본적인 요소
+> - Node는 HTML 문서 내에서 모든 요소, 텍스트, 속성 등을 포함하는 가장 기본적인 단위
+
+**NodeList**
+
+> - 여러 Node 객체를 포함하는 유사 배열 객체
+> - NodeList는 반드시 Node 객체만 포함
+> - 실시간 업데이트 불가능(Static Collection)
 
 ---
 
