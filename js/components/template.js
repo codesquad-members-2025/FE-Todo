@@ -1,5 +1,6 @@
-function getCradFormTemplate() {
-    return `
+function createCardFormNode() {
+    const container = document.createElement('div');
+    container.innerHTML = `
     <article class="card card-form flex-column">
         <div class="card__input-area flex-column">
             <input type="text" class="card__title-input display-bold14" placeholder="제목을 입력하세요">
@@ -11,10 +12,12 @@ function getCradFormTemplate() {
         </div>
     </article>
     `;
+    return container.firstElementChild;
 }
 
-function getCardTemplate(title, description, author = 'web') {
-    return `
+function createCardNode(title, description, author = 'web') {
+    const container = document.createElement('div');
+    container.innerHTML = `
     <article class="card flex-between">
         <div class="card__content flex-column">
             <div class="card__text flex-column">
@@ -33,6 +36,7 @@ function getCardTemplate(title, description, author = 'web') {
         </div>
     </article>
     `;
+    return container.firstElementChild;
 }
 
-export { getCradFormTemplate, getCardTemplate };
+export { createCardFormNode, createCardNode };

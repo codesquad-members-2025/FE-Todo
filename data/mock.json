@@ -1,15 +1,18 @@
 {
     "columns": [
       {
+        "id": 1,
         "title": "해야할 일",
         "count": 2,
         "cards": [
           {
+            "id": 101,
             "title": "GitHub 공부하기",
             "description": "add, commit, push",
             "author": "web"
           },
           {
+            "id": 102,
             "title": "블로그에 포스팅할 것",
             "description": "* GitHub 공부내용\n* 모던 자바스크립트 1장 공부내용",
             "author": "web"
@@ -17,10 +20,12 @@
         ]
       },
       {
+        "id": 2,
         "title": "하고 있는 일",
         "count": 1,
         "cards": [
           {
+            "id": 201,
             "title": "HTML/CSS 공부하기",
             "description": "input 태그 실습",
             "author": "web"
@@ -28,6 +33,7 @@
         ]
       },
       {
+        "id": 3,
         "title": "완료한 일",
         "count": 0,
         "cards": []

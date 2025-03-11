@@ -37,7 +37,7 @@
                 </div>
             </header>
 
-            <article class="card flex-between">
+            <article class="card flex-between" data-id="101">
                 <div class="card__content flex-column">
                     <div class="card__text flex-column">
                         <h3 class="card__title display-bold14">GitHub 공부하기</h3>
@@ -55,7 +55,7 @@
                 </div>
             </article>
 
-            <article class="card flex-between">
+            <article class="card flex-between" data-id="102">
                 <div class="card__content flex-column">
                     <div class="card__text flex-column">
                         <h3 class="card__title display-bold14">블로그에 포스팅할 것</h3>
@@ -92,7 +92,7 @@
                 </div>
             </header>
 
-            <article class="card flex-between">
+            <article class="card flex-between" data-id="201">
                 <div class="card__content flex-column">
                     <div class="card__text flex-column">
                         <h3 class="card__title display-bold14">HTML/CSS 공부하기</h3>
@@ -135,10 +135,10 @@
         <!-- 상단 고정 헤더 -->
         <div class="history-panel__header flex-between">
             <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
-            <div class="history-panel__close-btn flex-center">
+            <button class="history-panel__close-btn btn flex-center">
                 <img src="./assets/icons/close.svg" class="size-16">
                 <span class="history-panel__close-btn-text display-bold14">닫기</span>
-            </div>
+            </button>
         </div>
 
         <!-- 활동 기록 목록 -->
@@ -177,9 +177,9 @@
         </div>
     </aside>
     
-    <dialog class="modal">
+    <dialog class="modal" data-id="null">
         <div class="modal__body flex-column">
-            <p class="modal__text display-medium16">모든 사용자 활동 기록을 삭제할까요?</p>
+            <p class="modal__text display-medium16"></p>
             
             <footer class="modal__footer flex-between">
                 <button class="modal__cancel-btn btn display-bold14">취소</button>
