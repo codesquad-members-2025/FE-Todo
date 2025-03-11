@@ -21,9 +21,9 @@ function initHistoryPanel() {
 function initColumnHeaderHandlers(kanban) {
     kanban.addEventListener('click', e => {
         const btn = getClosestBtn(e.target);
-        if (btn === null) {
-            return;
-        }
+
+        if (btn === null) return;
+
         if (btn.classList.contains('column-header__add-btn')) {
             console.log('카드 폼 생성or삭제 로직 실행');
         } else if (btn.classList.contains('column-header__close-btn')) {
@@ -36,9 +36,9 @@ function initColumnHeaderHandlers(kanban) {
 function initCardFormHandlers(kanban) {
     kanban.addEventListener('click', e =>{
         const btn = getClosestBtn(e.target);
-        if (btn === null) {
-            return;
-        }
+
+        if (btn === null) return;
+
         if (btn.classList.contains('card__cancel-btn')) {
             console.log('카드 폼 삭제 로직 실행');
         } else if (btn.classList.contains('card__submit-btn')) {
@@ -51,9 +51,9 @@ function initCardFormHandlers(kanban) {
 function initCardActionHandlers(kanban) {
     kanban.addEventListener('click', e =>{
         const btn = getClosestBtn(e.target);
-        if (btn === null) {
-            return;
-        }
+
+        if (btn === null) return;
+
         if (btn.classList.contains('card__close-btn')) {
             console.log('카드 삭제 로직 실행');
         } else if (btn.classList.contains('card__edit-btn')) {
