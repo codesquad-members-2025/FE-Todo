@@ -31,3 +31,9 @@
     margin: 0;
     color: var(--text-weak);
 }
+
+.card__close-btn,
+.card__edit-btn {
+    width: 24px;
+    height: 24px;
+}
