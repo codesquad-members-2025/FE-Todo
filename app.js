@@ -12,7 +12,7 @@ const openHistoryModal = () => {
 };
 
 const closeHistoryModal = () => {
-  historyModal.style.cssText = "animation: slideOut 0.3s forwards";
+  historyModal.style.cssText += "animation: slideOut 0.5s forwards;";
   setTimeout(() => {
     historyModal.style.display = "none";
   }, 500);
