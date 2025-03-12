@@ -10,7 +10,7 @@
   <body>
     <header>
       <h1>TESKIFY</h1>
-      <button id="historyOpenButton"><div class="img_history"></div></button>
+      <button id="historyOpenButton"><img src="./images/history.svg" /></button>
     </header>
     <main class="columnList">
       <section class="column column__toDo">
@@ -22,7 +22,7 @@
           <div class="column-header__icons">
             <button class="column-header__plus-icon">
               <svg
-                class="plus_button"
+                class="plus"
                 width="14"
                 height="14"
                 viewBox="0 0 14 14"
@@ -31,6 +31,7 @@
               >
                 <path
                   d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z"
+                  fill="currentColor"
                 />
               </svg>
             </button>
@@ -53,8 +54,19 @@
         <article class="column-cardList toDo-cardList">
           <div class="add-card">
             <div class="add-card__input">
-              <h3 class="add-card__input__title">제목을 입력하세요</h3>
-              <span class="add-card__input__content">내용을 입력하세요</span>
+              <input
+                type="text"
+                class="add-card__input__title"
+                placeholder="제목을 입력하세요"
+              />
+              <textarea
+                class="add-card__input__content"
+                rows="1"
+                maxlength="500"
+                oninput="resizeHeight(this)"
+                placeholder="내용을 입력하세요"
+                wrap="hard"
+              ></textarea>
             </div>
             <div class="add-card__buttons">
               <button class="add-card__cancle-btn">취소</button>
@@ -112,7 +124,7 @@
           <div class="column-header__icons">
             <button class="column-header__plus-icon">
               <svg
-                class="plus_button"
+                class="plus"
                 width="14"
                 height="14"
                 viewBox="0 0 14 14"
@@ -121,6 +133,7 @@
               >
                 <path
                   d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z"
+                  fill="currentColor"
                 />
               </svg>
             </button>
@@ -192,7 +205,7 @@
           <div class="column-header__icons">
             <button class="column-header__plus-icon">
               <svg
-                class="plus_button"
+                class="plus"
                 width="14"
                 height="14"
                 viewBox="0 0 14 14"
@@ -201,6 +214,7 @@
               >
                 <path
                   d="M14 7.99799H8V13.998H6V7.99799H0V5.99799H6V-0.00201416H8V5.99799H14V7.99799Z"
+                  fill="currentColor"
                 />
               </svg>
             </button>
@@ -222,31 +236,104 @@
         </div>
       </section>
     </main>
-    <aside id="historyList">
+    <aside id="historyList-noEmpty">
       <div class="history__header">
         <h4 class="history__header__title">사용자 활동 기록</h4>
-        <button class="history__header__closed">
+        <button id="history__closedButton">
           <div class="history__header__closed-btn">
-            <svg
-              class="closed_button"
-              width="8"
-              height="8"
-              viewBox="0 0 12 12"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
-              />
-            </svg>
+            <img src="images/closed.svg" class="img_closed" />
           </div>
           <span class="history__header__textLabel">닫기</span>
         </button>
       </div>
       <div class="history__recordList">
-        <div class="record-add">사용자 활동 기록이 없습니다.</div>
+        <div id="recordHistory">
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                블로그에 포스팅할 것 <span> 을(를)</span> 하고있는 일
+                <span> 에서 </span><br />
+                해야할 일 <span> 으로 </span> 이동 <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">3분 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                GitHub 공부하기 <span> 을(를)</span> 변경
+                <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">10분 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                HTML/CSS 공부하기 <span> 을(를)</span> 해야할 일
+                <span> 에서 </span><br />
+                하고 있는 일 <span> 으로 </span> 이동 <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">18분 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                HTML/CSS 공부하기 <span> 을(를)</span> 해야할 일
+                <span> 에서 </span><br />
+                등록 <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">1시간 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                블로그에 포스팅할 것 <span> 을(를)</span> 등록
+                <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">3분 전</div>
+            </div>
+          </div>
+          <div class="record">
+            <img src="./images/sam.png" class="userImage" />
+            <div class="historyItem">
+              <div class="userName">@멋진삼</div>
+              <div class="textBody">
+                블로그에 포스팅할 것 <span> 을(를)</span> 등록
+                <span> 하였습니다. </span>
+              </div>
+              <div class="timeStamp">3분 전</div>
+            </div>
+          </div>
+        </div>
+        <div class="deleteBox">
+          <button id="deleteButton">기록 전체 삭제</button>
+        </div>
       </div>
     </aside>
-    <script src="./js/action.js"></script>
+    <div id="overlay-dark" class="hidden"></div>
+    <div class="alert-box hidden">
+      <div class="alertContent">
+        <p>모든 사용자 활동 기록을 삭제할까요?</p>
+        <div class="buttons">
+          <button class="cancleButton">취소</button>
+          <button class="decideDeleteButton">삭제</button>
+        </div>
+      </div>
+    </div>
+    <script src="./eventHandler/historyList.js"></script>
+    <script src="./eventHandler/textarea.js"></script>
   </body>
 </html>
