@@ -68,9 +68,12 @@ function initToggleCardFormButton() {
   columnSection.addEventListener('click', toggleCardForm);
 }
 
-//카드 폼 토글
+//카드 폼 토글 : +버튼 || 폼 삭제 버튼
 function toggleCardForm(event) {
-  const button = event.target.closest('.card-add-btn');
+  const button =
+    event.target.closest('.card-add-btn') ||
+    event.target.closest('.form-cancel-btn');
+
   const column = event.target.closest('.column');
   if (!button) return;
 
