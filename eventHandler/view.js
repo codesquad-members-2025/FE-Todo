@@ -79,21 +79,16 @@ function generateCardsFromList(colum) {
 function historyView(data) {
   const recordHistory = document.getElementById("recordHistory");
   data.historyList.forEach((record) => {
-    let textBody = "";
-    switch (record.action) {
-      case "add":
-        textBody = `${record.title} <span> 을(를)</span> ${record.fromColumn} <span> 에서 </span><br />등록 <span> 하였습니다. </span>`;
-        break;
-      case "remove":
-        textBody = `${record.title} <span> 을(를)</span> ${record.fromColumn} <span> 에서 </span><br />삭제 <span> 하였습니다. </span>`;
-        break;
-      case "update":
-        textBody = `${record.title} <span> 을(를)</span> 변경 <span> 하였습니다. </span>`;
-        break;
-      case "move":
-        textBody = `${record.title} <span> 을(를)</span> ${record.fromColumn} <span> 에서 </span><br /> ${record.toColumn}  <span> 으로 </span> 이동 <span> 하였습니다. </span>`;
-        break;
-    }
+    // let action = record.action;
+    // let title = record.title;
+    // let fromColumn = record.fromColumn;
+    // let toColumn = record.toColumn;
+    let textBody = addTextOnAction(
+      record.action,
+      record.title,
+      record.fromColumn,
+      record.toColumn
+    );
     const recordElement = document.createElement("div");
     recordElement.classList.add("record");
     recordElement.innerHTML = `<img src="${record.photo}" class="userImage" />
@@ -107,6 +102,24 @@ function historyView(data) {
   </div>`;
     recordHistory.appendChild(recordElement);
   });
+}
+
+function addTextOnAction(action, title, fromColumn, toColumn) {
+  let text = "";
+  switch (action) {
+    case "add":
+      text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />등록 <span> 하였습니다. </span>`;
+      return text;
+    case "remove":
+      text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />삭제 <span> 하였습니다. </span>`;
+      return text;
+    case "update":
+      text = `${title} <span> 을(를)</span> 변경 <span> 하였습니다. </span>`;
+      return text;
+    case "move":
+      text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br /> ${toColumn}  <span> 으로 </span> 이동 <span> 하였습니다. </span>`;
+      return text;
+  }
 }
 
 fetchData();
