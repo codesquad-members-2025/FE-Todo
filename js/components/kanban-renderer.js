@@ -1,7 +1,7 @@
 import { createColumnNode, createCardNode } from './template-utils.js';
 
-function render(data) {
-    const kanbanData = data.columns.reduce((fragment, columnObj) => {
+function renderKanban(columns) {
+    const kanbanNodes = columns.reduce((fragment, columnObj) => {
         const { id, title, count, cards } = columnObj;
         const columnNode = createColumnNode(id, title, count);
 
@@ -14,16 +14,11 @@ function render(data) {
         return fragment;
     }, getFragment())
 
-    document.querySelector('.kanban').appendChild(kanbanData);
+    document.querySelector('.kanban').appendChild(kanbanNodes);
 }
 
 function getFragment() {
     return document.createDocumentFragment();
 }
 
-export function initKanban() {
-    fetch(".././data/mock.json")
-        .then(response => response.json())
-        .then(data => render(data))
-        .catch(error => console.error(`데이터 로드 오류: ${error})`));
-}
+export { renderKanban };
