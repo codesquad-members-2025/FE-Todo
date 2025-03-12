@@ -21,5 +21,16 @@ export const data = {
         },
       ],
     },
+    {
+      id: "doing",
+      count: 0,
+      cardList: [
+        {
+          title: "HTML/CSS 공부하기",
+          content: "input 태그 실습",
+          author: "author by web",
+        },
+      ],
+    },
   ],
 };
