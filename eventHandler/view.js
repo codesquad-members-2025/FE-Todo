@@ -1,6 +1,14 @@
-import { data } from "../data/data.js";
+function fetchData() {
+  fetch("../data/data.json") // json파일 가져오기
+    .then((response) => response.json()) // json형식으로
+    .then((data) => {
+      cardView(data); // 불러온 데이터를 처리하기
+      historyView(data);
+    })
+    .catch((error) => console.error("오류 발생:", error));
+}
 
-function cardView() {
+function cardView(data) {
   data.colums.forEach((colum) => {
     if (colum.id === "toDo") {
       generateCardsFromList(colum);
@@ -67,4 +75,23 @@ function generateCardsFromList(colum) {
   });
   countCard.textContent = count;
 }
-cardView();
+
+function historyView(data) {
+  const recordHistory = document.getElementById("recordHistory");
+  data.historyList.forEach((record) => {
+    const recordElement = document.createElement("div");
+    recordElement.classList.add("record");
+    recordElement.innerHTML = `<img src="${record.photo}" class="userImage" />
+    <div class="historyItem">
+      <div class="userName">${record.userName}</div>
+      <div class="textBody">
+        ${record.textBody}
+      </div>
+      <div class="timeStamp">${record.timeStamp}</div>
+    </div>
+  </div>`;
+    recordHistory.appendChild(recordElement);
+  });
+}
+
+fetchData();
