@@ -94,61 +94,65 @@ body {
   color: var(--text-danger);
 }
 
+.text-white {
+  color: var(--text-white-default);
+}
+
 /* Typo style */
 
 /* Line Height */
-.display-bold24,
-.display-bold16,
-.display-bold14,
-.display-bold12,
-.display-medium16,
-.display-medium14,
-.display-medium12 {
+.tx-b24,
+.tx-b16,
+.tx-b14,
+.tx-b12,
+.tx-m16,
+.tx-m14,
+.tx-m12 {
   line-height: var(--line-height-auto);
 }
 
-.display-medium16 {
+.tx-m16 {
   line-height: var(--line-height-22);
 }
 
 /* 글씨 굵기 설정 */
-.display-bold24,
-.display-bold16,
-.display-bold14,
-.display-bold12,
-.selected-bold16,
-.selected-bold14,
-.available-medium16,
-.available-medium14 {
+.tx-b24,
+.tx-b16,
+.tx-b14,
+.tx-b12,
+.tx-sb16,
+.tx-sb14,
+.tx-am16,
+.tx-am14 {
   font-weight: var(--font-weight-bold);
 }
 
-.display-medium16,
-.display-medium14,
-.display-medium12,
-.available-medium16,
-.available-medium14 {
+.tx-m16,
+.tx-m14,
+.tx-m12,
+.tx-am16,
+.tx-am14 {
   font-weight: var(--font-weight-medium);
 }
 
 /* 글씨 크기 설정 */
-.display-bold24 {
+.tx-b24 {
   font-size: var(--font-size-large);
 }
-.display-bold16,
-.display-medium16,
-.selected-bold16,
-.available-medium16 {
+.tx-b16,
+.tx-m16,
+.tx-sb16,
+.tx-am16 {
   font-size: var(--font-size-medium);
 }
-.display-bold14,
-.display-medium14,
-.selected-bold14,
-.available-medium14 {
+.tx-b14,
+.tx-m14,
+.tx-sb14,
+.tx-am14 {
   font-size: var(--font-size-regular);
 }
-.display-bold12,
-.display-medium12 {
+.tx-b12,
+.tx-m12 {
   font-size: var(--font-size-small);
 }
 
@@ -274,27 +278,51 @@ body {
   box-shadow: var(--drop-shadow-floating);
 }
 
-.history-header {
+#history header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px;
 }
 
-.history-header > span {
+#history header > span {
   display: flex;
   padding-left: 8px;
 }
 
-.history-section {
-  padding: 16px;
+#history-section {
+  gap: 1px;
+  padding-right: 4px;
+  max-height: 560px;
+  overflow-y: auto;
 }
 
-.history-section > span {
+/* scrollbar */
+#history-section::-webkit-scrollbar {
+  width: 2px;
+  height: 240px;
+}
+
+#history-section::-webkit-scrollbar-track {
+  background: transparent; /* 트랙 배경 투명 */
+}
+
+/* handle */
+#history-section::-webkit-scrollbar-thumb {
+  background-color: var(--surface-alt);
+  border-radius: 6px;
+}
+
+/* hover event */
+#history-section::-webkit-scrollbar-thumb:hover {
+  background-color: darkgray; /* 호버 시 손잡이 색상 */
+}
+
+#history-default {
   width: 312px;
   display: flex;
   justify-content: center;
-  padding-left: 8px;
+  padding: 16px;
 }
 
 .history-close-btn {
@@ -305,4 +333,84 @@ body {
 
 .history-close-btn > span {
   padding: 0 4px;
+}
+
+/* History Item*/
+
+.activity-record {
+  width: 344px;
+  padding: 16px;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.activity-record .profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-large);
+  border: 1px solid var(--border-default);
+}
+
+.activity-record .content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* History Fotter */
+
+#history footer {
+  display: none;
+  justify-content: flex-end;
+  padding: 4px 8px;
+}
+
+#history-delete-btn {
+  display: flex;
+  justify-content: center;
+  padding: 7.5px 8px;
+}
+
+/* Modal */
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 24px 24px 24px;
+  border: 0;
+  border-radius: var(--radius-medium);
+  background-color: var(--surface-default);
+  box-shadow: var(--drop-shadow-up);
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#modal-cancel-btn,
+#modal-delete-btn {
+  height: 32px;
+  display: flex;
+  padding: 7.5px 69.5px;
+  background-color: var(--surface-alt);
+  border-radius: var(--radius-small);
+}
+
+#modal-delete-btn {
+  background-color: var(--surface-danger);
+}
+
+#modal .button-section span {
+  padding: 0 4px;
+}
+
+#modal .button-section {
+  width: 352px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
 }

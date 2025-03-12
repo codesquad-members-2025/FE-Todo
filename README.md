@@ -23,12 +23,13 @@
 
 ## 폴더 구조
 
-간단한 CRUD 기능뿐만 아니라 애니메이션,필터링 등의 기능을 포함하고 있으므로
-css,js를 분리 및 모듈화를 시킬 수 있는 구조를 선택했습니다.
-이미지나 아이콘도 프로젝트 폴더에 포함시켜야하므로 assets 폴더로 분리히였습니다.
+### [1주차]
+간단한 CRUD 기능뿐만 아니라 애니메이션, 필터링 등의 기능을 포함하고 있으므로, CSS와 JS를 분리하고 모듈화를 할 수 있는 구조를 선택했습니다. 또한, 이미지나 아이콘도 프로젝트 폴더에 포함시켜야 하므로, 이를 `assets` 폴더로 분리했습니다.
+
+### [2주차]
+기능을 추가하다 보니 파일과 폴더로 분리하는 것이 필요하다고 판단하여 구조를 재설계했습니다. `js` 폴더 내에서 entry point로 사용할 `main.js`에서는 각각의 모듈 파일을 실행시키는 초기화 함수만 사용하고, 나머지 로직은 `components` 폴더 내부의 각각의 모듈 파일에서 관리하도록 구성했습니다. `utils` 폴더에서는 자주 사용하는 유틸리티 함수들을 각각의 파일에 넣어 관리합니다. 또한, `main.js`에서 데이터를 관리하고 사용하면 entry point의 책임이 커지기 때문에, 별도의 `store` 폴더를 만들어 데이터 관리 로직을 분리했습니다.
 
 ```
-
 /FE-TODO
 │── index.html
 │── css/
@@ -36,13 +37,25 @@ css,js를 분리 및 모듈화를 시킬 수 있는 구조를 선택했습니다
 │   ├── style.css
 │── js/
 │   ├── main.js
-│   ├── components.js  // 컴포넌트 분리
-│   ├── module.js  // 기능 분리
+│   ├── components/
+│   │   ├── cardColumn.js
+│   │   ├── history.js
+│   │   ├── modal.js
+│   │   ├── template.js
+│   ├── utils/
+│   │   ├── dom.js
+│   │   ├── fetch.js
+│   │   ├── main.js
 │── assets/
 │   ├── icons/
 │   ├── images/
 │── data/
-│   ├── mockdata.js  // mock데이터
+│   ├── columnData.json
+│   ├── historyData.json
+│── store/
+│   ├── column.js
+│   ├── history.js
+
 
 ```
 

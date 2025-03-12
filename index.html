@@ -16,7 +16,7 @@
     <div class="container flex-col">
       <header class="header flex-item-center">
         <div class="header-left">
-          <h1 class="text-strong display-bold24">TASKIFY</h1>
+          <h1 class="text-strong tx-b24">TASKIFY</h1>
           <button
             id="sort-btn"
             class="sort-btn"
@@ -29,7 +29,7 @@
               width="16"
               height="16"
             />
-            <span class="sort-btn-name text-bold display-medium12">생성순</span>
+            <span class="sort-btn-name text-bold tx-m12">생성순</span>
           </button>
         </div>
         <button id="history-open-btn" aria-label="View history">
@@ -37,23 +37,43 @@
         </button>
       </header>
       <aside id="history" class="flex-col">
-        <div class="history-header">
-          <span class="text-strong display-bold16">사용자 활동 기록</span>
+        <header>
+          <span class="text-strong tx-b16">사용자 활동 기록</span>
           <button id="history-close-btn" class="history-close-btn">
             <img src="/assets/icons/closed.svg" width="16" height="16" />
-            <span class="text-default display-bold14">닫기</span>
+            <span class="text-default tx-b14">닫기</span>
           </button>
-        </div>
-        <section class="history-section">
-          <span class="text-weak display-medium14"
+        </header>
+        <section id="history-section" class="flex-col">
+          <span
+            id="history-default"
+            class="text-weak tx-m14"
+            style="display: none"
             >사용자 활동 기록이 없습니다.</span
           >
+          <div id="history-container"></div>
         </section>
+        <footer>
+          <button id="history-delete-btn" class="tx-b14 text-danger">
+            기록 전체 삭제
+          </button>
+        </footer>
       </aside>
       <main class="main" id="columns-container">
         <!-- 컬럼은 JavaScript에서 동적으로 추가 -->
       </main>
     </div>
+    <dialog id="modal">
+      <p id="modal-description" class="text-default tx-m16"></p>
+      <div class="button-section">
+        <button id="modal-cancel-btn" class="text-default tx-b14">
+          <span>취소</span>
+        </button>
+        <button id="modal-delete-btn" class="text-white tx-b14">
+          <span>삭제</span>
+        </button>
+      </div>
+    </dialog>
   </body>
   <script type="module" src="./js/main.js"></script>
 </html>
