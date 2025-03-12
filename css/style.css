@@ -217,7 +217,7 @@ h1 {
   color: var(--text-default);
 }
 
-.show-card__caption {
+.show-card__author {
   margin-top: var(--number-100);
   font: var(--display-medium12);
   color: var(--text-weak);
