@@ -284,10 +284,6 @@ dialog {
   font-size: 14px; /* 🔹 글자 크기 변경 */
 }
 
-.modal__input {
-  border: none;
-}
-
 .modal-button {
   border-radius: 8px;
   height: 32px;

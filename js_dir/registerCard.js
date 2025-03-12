@@ -10,6 +10,10 @@ main.addEventListener("click", (event) => {
     saveTasks(inputData.columnType, taskObj);
     const cardForm = makeTaskCard(inputData.titleValue, inputData.contentValue);
     drawModal(inputData.columnType, cardForm);
+    clearInputFields(button);
+  } else if (button.classList.contains("cancel-button")) {
+    closeTaskModal(button);
+    clearInputFields(button);
   }
 
   //이벤트 핸들러 들어갈 공간
@@ -59,4 +63,15 @@ function drawModal(dataTarget, cardForm) {
     `.columnlist__col[data-type=${dataTarget}]`
   );
   targetSection.appendChild(newElement);
+}
+
+function clearInputFields(button) {
+  const modal = button.closest(".task-modal");
+  modal.querySelector(".title-input").value = null;
+  modal.querySelector(".content-input").value = null;
+}
+
+function closeTaskModal(button) {
+  const modal = button.closest(".task-modal-overlay");
+  modal.classList.toggle("active");
 }
