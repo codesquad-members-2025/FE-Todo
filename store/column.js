@@ -16,4 +16,11 @@ function updateCard(columnId, cardData) {
   targetColumn.tasks.push(cardData);
 }
 
-export { loadColumnData, updateCard };
+function removeCard(columnId, cardId) {
+  const targetColumn = columnData.find((column) => column.id === columnId);
+  const index = targetColumn.tasks.findIndex((item) => item.id === cardId);
+
+  if (index !== -1) targetColumn.tasks.splice(index, 1);
+}
+
+export { loadColumnData, updateCard, removeCard };

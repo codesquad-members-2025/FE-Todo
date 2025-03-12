@@ -36,9 +36,10 @@ function openCardDeleteModal(event) {
   const todoList = button.closest('.card-container');
   if (!todoList) return; // todo-list 내부에서만 동작하도록 제한
 
-  const card = button.closest('.todo-card');
-  if (card) {
-    const cardRemover = makeCardRemover(card.id);
+  const cardId = button.closest('.todo-card').id;
+
+  if (cardId) {
+    const cardRemover = makeCardRemover(cardId);
     createConfirmModal('선택한 카드를 삭제할까요?', cardRemover);
     toggleModal();
   }

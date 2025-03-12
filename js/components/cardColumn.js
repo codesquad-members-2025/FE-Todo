@@ -2,7 +2,7 @@ import { createColumn, createTaskCard } from './template.js';
 import { pushChild, unshiftChild } from '../utils/dom.js';
 import { getISOStringNow } from '../utils/date.js';
 import { openCardDeleteModal } from './modal.js';
-import { loadColumnData, updateCard } from '../../store/column.js';
+import { loadColumnData, updateCard, removeCard } from '../../store/column.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
 function renderColumns(columnList) {
@@ -68,7 +68,10 @@ function clearCards() {
 function makeCardRemover(cardId) {
   return function () {
     const targetCard = document.getElementById(cardId);
+    const columnId = targetCard.closest('.column').id;
     targetCard.remove();
+    //데이터에서도 제거
+    removeCard(columnId, cardId);
   };
 }
 
