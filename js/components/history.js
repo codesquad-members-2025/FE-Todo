@@ -1,5 +1,5 @@
 import { createHistoryItem } from './template.js';
-import { addChild } from '../utils/dom.js';
+import { pushChild } from '../utils/dom.js';
 import { openHistoryDeleteModal } from './modal.js';
 import { loadHistoryData } from '../../store/history.js';
 
@@ -19,7 +19,7 @@ function renderHistoryItems(historyList) {
     ''
   );
 
-  addChild(historyContainer, historyItemsHtml);
+  pushChild(historyContainer, historyItemsHtml);
   toggleDeleteButton(true); // 기록삭제 버튼 보여주기
 }
 

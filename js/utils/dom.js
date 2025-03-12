@@ -1,5 +1,5 @@
 //dom에 요소 추가하는 함수
-function addChild(parentElement, newElement) {
+function pushChild(parentElement, newElement) {
   if (typeof newElement === 'string') {
     parentElement.insertAdjacentHTML('beforeend', newElement);
   } else {
@@ -15,4 +15,4 @@ function unshiftChild(parentElement, newElement) {
   }
 }
 
-export { addChild, unshiftChild };
+export { pushChild, unshiftChild };

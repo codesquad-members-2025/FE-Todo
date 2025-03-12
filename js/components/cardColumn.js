@@ -1,5 +1,5 @@
 import { createColumn, createTaskCard } from './template.js';
-import { addChild, unshiftChild } from '../utils/dom.js';
+import { pushChild, unshiftChild } from '../utils/dom.js';
 import { getISOStringNow } from '../utils/date.js';
 import { openCardDeleteModal } from './modal.js';
 import { loadColumnData, updateCard } from '../../store/column.js';
@@ -14,7 +14,7 @@ function renderColumns(columnList) {
     ''
   );
 
-  addChild(columnContainer, columnsHtml);
+  pushChild(columnContainer, columnsHtml);
 }
 
 // 칼럼에 카드 생성
@@ -27,7 +27,7 @@ function renderCardsForColumn(columnList) {
       ''
     );
 
-    addChild(columnCardList, taskCardsHtml);
+    pushChild(columnCardList, taskCardsHtml);
   });
 }
 
@@ -40,7 +40,7 @@ function renderCard(columnId, cardData) {
 
   // 생성순/최신순에 따라 맞게 카드 넣기
   if (isSortCreated()) {
-    addChild(column, taskCardHtml);
+    pushChild(column, taskCardHtml);
   } else {
     unshiftChild(column, taskCardHtml);
   }
