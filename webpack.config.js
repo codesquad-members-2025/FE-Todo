@@ -12,7 +12,7 @@ module.exports = {
     filename: "bundle.js", // 결과물 파일명
     path: path.resolve(__dirname, "dist"), // 결과물이 생성될 폴더
     clean: true, // 빌드할 때 기존 dist 폴더 정리
-    publicPath: "", // 상대 경로로 설정
+    // publicPath: "", // 상대 경로로 설정
   },
 
   // 3) 모드 설정: development, production, none 중 선택
@@ -31,7 +31,26 @@ module.exports = {
       },
       {
         test: /\.html$/,
-        use: ["html-loader"],
+        use: [
+          {
+            loader: "html-loader",
+            options: {
+              // html-loader가 <img src="./images/hero.png"> 등을 파싱하여
+              // Webpack 모듈로 인식하도록
+              sources: {
+                list: [
+                  {
+                    // 기본값과 유사하게, <img src="...">를 처리
+                    tag: "img",
+                    attribute: "src",
+                    type: "src",
+                  },
+                  // 필요 시, <link>, <source>, <video> 등 추가
+                ],
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(png|jpg|jpeg|gif|svg)$/i, // 이미지 파일 처리
@@ -39,6 +58,10 @@ module.exports = {
         generator: {
           filename: "images/[name][ext]", // 이미지가 dist/images 폴더에 저장됨
         },
+      },
+      {
+        test: /\.json$/,
+        type: "asset/resource", // JSON을 별도 파일로 저장
       },
     ],
   },

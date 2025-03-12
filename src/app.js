@@ -1,4 +1,4 @@
-import { columnsComponent } from "../components/columns_component";
+import { columnsComponent } from "./components/columns_component";
 import "pretendard/dist/web/static/pretendard.css"; // 폰트 CSS 불러오기
 import "./css/global.css";
 import "./css/reset.css";
@@ -62,7 +62,7 @@ historyDeleteApproveBtn.addEventListener("click", () => {
 // 칼럼 동적으로 생성하기
 // 비동기로 mock.json 불러오기
 const fetchMockData = async () => {
-  const response = await fetch("./mock.json");
+  const response = await fetch("/data/mock.json");
   const data = await response.json();
   return data;
 };

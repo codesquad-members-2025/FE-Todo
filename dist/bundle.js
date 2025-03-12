@@ -10,36 +10,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./components/card_component.js":
-/*!**************************************!*\
-  !*** ./components/card_component.js ***!
-  \**************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   cardComponent: () => (/* binding */ cardComponent)\n/* harmony export */ });\n// Task Card Component\nconst cardComponent = ({ title, description, author }) => `\n  <div class=\"task-card flex flex-justify-space-between\">\n    <div class=\"task-card__left\">\n      <h1 class=\"task-card__title\">${title}</h1>\n      <h2 class=\"task-card__description\">${description}</h2>\n      <h3 class=\"task-card__author\">author by ${author}</h3>\n    </div>\n    <div class=\"task-card__right flex flex-column flex-justify-start\">\n      <img\n        class=\"task-card__right-delete-icon\"\n        src=\"./images/delete.png\"\n        width=\"14px\"\n        alt=\"카드를 삭제하는 가위표 아이콘 버튼\"\n      />\n      <img\n        class=\"task-card__right-modify-icon\"\n        src=\"./images/pen.png\"\n        width=\"14px\"\n        alt=\"카드를 수정하는 펜 아이콘 버튼\"\n      />\n    </div>\n  </div>\n`;\n\n\n//# sourceURL=webpack://taskify/./components/card_component.js?");
-
-/***/ }),
-
-/***/ "./components/column_component.js":
-/*!****************************************!*\
-  !*** ./components/column_component.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   columnComponent: () => (/* binding */ columnComponent)\n/* harmony export */ });\n/* harmony import */ var _card_component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./card_component.js */ \"./components/card_component.js\");\n\n\n// 완료한 일 Column\nconst columnComponent = ({ title, cards }) => {\n  const count = cards.length;\n\n  return `\n    <article class=\"column flex flex-column flex-justify-center\">\n      <header class=\"column__header flex flex-justify-space-between\">\n        <div class=\"column__header-left flex flex-align-center\">\n          <h1 class=\"column__header-title\">${title}</h1>\n          <h2 class=\"column__header-card-count\">${count}</h2>\n        </div>\n        <div class=\"column__header-right flex flex-align-center\">\n          <img\n            class=\"column__header-right-icon\"\n            src=\"./images/plus.png\"\n            width=\"14px\"\n            alt=\"할 일(카드)을 추가하는 플러스 아이콘 버튼\"\n          />\n          <img\n            class=\"column__header-right-icon\"\n            src=\"./images/delete.png\"\n            width=\"14px\"\n            alt=\"할 일(카드)을 지우는 가위표 아이콘 버튼\"\n          />\n        </div>\n      </header>\n      <!-- Task Card -->\n      ${cards.map((card) => (0,_card_component_js__WEBPACK_IMPORTED_MODULE_0__.cardComponent)(card)).join(\"\")}\n    </article>\n  `;\n};\n\n\n//# sourceURL=webpack://taskify/./components/column_component.js?");
-
-/***/ }),
-
-/***/ "./components/columns_component.js":
-/*!*****************************************!*\
-  !*** ./components/columns_component.js ***!
-  \*****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   columnsComponent: () => (/* binding */ columnsComponent)\n/* harmony export */ });\n/* harmony import */ var _column_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./column_component */ \"./components/column_component.js\");\n\n\nconst columnsComponent = (data) => {\n  const { columns } = data;\n  return columns.map((column) => (0,_column_component__WEBPACK_IMPORTED_MODULE_0__.columnComponent)(column)).join(\"\");\n};\n\n\n//# sourceURL=webpack://taskify/./components/columns_component.js?");
-
-/***/ }),
-
 /***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/pretendard/dist/web/static/pretendard.css":
 /*!******************************************************************************************************!*\
   !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/pretendard/dist/web/static/pretendard.css ***!
@@ -376,7 +346,37 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_columns_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../components/columns_component */ \"./components/columns_component.js\");\n/* harmony import */ var pretendard_dist_web_static_pretendard_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pretendard/dist/web/static/pretendard.css */ \"./node_modules/pretendard/dist/web/static/pretendard.css\");\n/* harmony import */ var _css_global_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./css/global.css */ \"./src/css/global.css\");\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./css/style.css */ \"./src/css/style.css\");\n/* harmony import */ var _css_utility_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./css/utility.css */ \"./src/css/utility.css\");\n\n // 폰트 CSS 불러오기\n\n\n\n\n\n// 히스토리 모달 등장하거나 사라지는 구현\nconst historyOpenBtn = document.querySelector(\".header__history-icon\");\nconst historyModal = document.querySelector(\".history-modal-container\");\nconst historyCloseBtn = document.querySelector(\".history-modal__header-close\");\n\n// 히스토리 모달 열고 닫기\nconst openHistoryModal = () => {\n  historyModal.style.cssText = `\n    display: grid;\n    animation: slideIn 0.5s forwards;\n  `;\n};\n\nconst closeHistoryModal = () => {\n  historyModal.style.cssText += \"animation: slideOut 0.5s forwards;\";\n  setTimeout(() => {\n    historyModal.style.display = \"none\";\n  }, 500);\n};\n\nhistoryOpenBtn.addEventListener(\"click\", openHistoryModal);\nhistoryCloseBtn.addEventListener(\"click\", closeHistoryModal);\n\n//\n\n// 히스토리 삭제 모달 이벤트\nconst historyDeleteBtn = document.querySelector(\".history-modal__footer-btn\");\nconst historyDeleteModal = document.querySelector(\".history-delete-modal\");\nconst historyDeleteCancelBtn = document.querySelector(\"#cancel-delete-btn\");\nconst historyDeleteApproveBtn = document.querySelector(\"#confirm-delete-btn\");\n\nhistoryDeleteModal.close();\n\n// 모달 열고 닫기\nconst showModal = () => {\n  historyDeleteModal.showModal();\n};\n\nconst deleteModal = () => {\n  historyDeleteModal.close();\n};\n\nhistoryDeleteBtn.addEventListener(\"click\", showModal);\nhistoryDeleteCancelBtn.addEventListener(\"click\", deleteModal);\n\n// 모든 사용자 기록 삭제\nhistoryDeleteApproveBtn.addEventListener(\"click\", () => {\n  // 사용자 기록 삭제\n  // 사용자 기록 삭제 후 모달 닫기\n  historyDeleteModal.close();\n});\n\n//\n\n// 칼럼 동적으로 생성하기\n// 비동기로 mock.json 불러오기\nconst fetchMockData = async () => {\n  const response = await fetch(\"./mock.json\");\n  const data = await response.json();\n  return data;\n};\n\nconst renderColumns = async () => {\n  const data = await fetchMockData();\n  console.log(data);\n\n  // 불러온 데이터를 컴포넌트에 넣어서 렌더링\n  const columnContainer = document.querySelector(\".column-container\");\n  columnContainer.innerHTML += (0,_components_columns_component__WEBPACK_IMPORTED_MODULE_0__.columnsComponent)(data);\n};\n\nrenderColumns();\n\n\n//# sourceURL=webpack://taskify/./src/app.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _components_columns_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/columns_component */ \"./src/components/columns_component.js\");\n/* harmony import */ var pretendard_dist_web_static_pretendard_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pretendard/dist/web/static/pretendard.css */ \"./node_modules/pretendard/dist/web/static/pretendard.css\");\n/* harmony import */ var _css_global_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./css/global.css */ \"./src/css/global.css\");\n/* harmony import */ var _css_reset_css__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./css/reset.css */ \"./src/css/reset.css\");\n/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./css/style.css */ \"./src/css/style.css\");\n/* harmony import */ var _css_utility_css__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./css/utility.css */ \"./src/css/utility.css\");\n\n // 폰트 CSS 불러오기\n\n\n\n\n\n// 히스토리 모달 등장하거나 사라지는 구현\nconst historyOpenBtn = document.querySelector(\".header__history-icon\");\nconst historyModal = document.querySelector(\".history-modal-container\");\nconst historyCloseBtn = document.querySelector(\".history-modal__header-close\");\n\n// 히스토리 모달 열고 닫기\nconst openHistoryModal = () => {\n  historyModal.style.cssText = `\n    display: grid;\n    animation: slideIn 0.5s forwards;\n  `;\n};\n\nconst closeHistoryModal = () => {\n  historyModal.style.cssText += \"animation: slideOut 0.5s forwards;\";\n  setTimeout(() => {\n    historyModal.style.display = \"none\";\n  }, 500);\n};\n\nhistoryOpenBtn.addEventListener(\"click\", openHistoryModal);\nhistoryCloseBtn.addEventListener(\"click\", closeHistoryModal);\n\n//\n\n// 히스토리 삭제 모달 이벤트\nconst historyDeleteBtn = document.querySelector(\".history-modal__footer-btn\");\nconst historyDeleteModal = document.querySelector(\".history-delete-modal\");\nconst historyDeleteCancelBtn = document.querySelector(\"#cancel-delete-btn\");\nconst historyDeleteApproveBtn = document.querySelector(\"#confirm-delete-btn\");\n\nhistoryDeleteModal.close();\n\n// 모달 열고 닫기\nconst showModal = () => {\n  historyDeleteModal.showModal();\n};\n\nconst deleteModal = () => {\n  historyDeleteModal.close();\n};\n\nhistoryDeleteBtn.addEventListener(\"click\", showModal);\nhistoryDeleteCancelBtn.addEventListener(\"click\", deleteModal);\n\n// 모든 사용자 기록 삭제\nhistoryDeleteApproveBtn.addEventListener(\"click\", () => {\n  // 사용자 기록 삭제\n  // 사용자 기록 삭제 후 모달 닫기\n  historyDeleteModal.close();\n});\n\n//\n\n// 칼럼 동적으로 생성하기\n// 비동기로 mock.json 불러오기\nconst fetchMockData = async () => {\n  const response = await fetch(\"/data/mock.json\");\n  const data = await response.json();\n  return data;\n};\n\nconst renderColumns = async () => {\n  const data = await fetchMockData();\n  console.log(data);\n\n  // 불러온 데이터를 컴포넌트에 넣어서 렌더링\n  const columnContainer = document.querySelector(\".column-container\");\n  columnContainer.innerHTML += (0,_components_columns_component__WEBPACK_IMPORTED_MODULE_0__.columnsComponent)(data);\n};\n\nrenderColumns();\n\n\n//# sourceURL=webpack://taskify/./src/app.js?");
+
+/***/ }),
+
+/***/ "./src/components/card_component.js":
+/*!******************************************!*\
+  !*** ./src/components/card_component.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   cardComponent: () => (/* binding */ cardComponent)\n/* harmony export */ });\n// Task Card Component\nconst cardComponent = ({ title, description, author }) => `\n  <div class=\"task-card flex flex-justify-space-between\">\n    <div class=\"task-card__left\">\n      <h1 class=\"task-card__title\">${title}</h1>\n      <h2 class=\"task-card__description\">${description}</h2>\n      <h3 class=\"task-card__author\">author by ${author}</h3>\n    </div>\n    <div class=\"task-card__right flex flex-column flex-justify-start\">\n      <img\n        class=\"task-card__right-delete-icon\"\n        src=\"./images/delete.png\"\n        width=\"14px\"\n        alt=\"카드를 삭제하는 가위표 아이콘 버튼\"\n      />\n      <img\n        class=\"task-card__right-modify-icon\"\n        src=\"./images/pen.png\"\n        width=\"14px\"\n        alt=\"카드를 수정하는 펜 아이콘 버튼\"\n      />\n    </div>\n  </div>\n`;\n\n\n//# sourceURL=webpack://taskify/./src/components/card_component.js?");
+
+/***/ }),
+
+/***/ "./src/components/column_component.js":
+/*!********************************************!*\
+  !*** ./src/components/column_component.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   columnComponent: () => (/* binding */ columnComponent)\n/* harmony export */ });\n/* harmony import */ var _card_component_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./card_component.js */ \"./src/components/card_component.js\");\n\n\n// 완료한 일 Column\nconst columnComponent = ({ title, cards }) => {\n  const count = cards.length;\n\n  return `\n    <article class=\"column flex flex-column flex-justify-center\">\n      <header class=\"column__header flex flex-justify-space-between\">\n        <div class=\"column__header-left flex flex-align-center\">\n          <h1 class=\"column__header-title\">${title}</h1>\n          <h2 class=\"column__header-card-count\">${count}</h2>\n        </div>\n        <div class=\"column__header-right flex flex-align-center\">\n          <img\n            class=\"column__header-right-icon\"\n            src=\"./images/plus.png\"\n            width=\"14px\"\n            alt=\"할 일(카드)을 추가하는 플러스 아이콘 버튼\"\n          />\n          <img\n            class=\"column__header-right-icon\"\n            src=\"./images/delete.png\"\n            width=\"14px\"\n            alt=\"할 일(카드)을 지우는 가위표 아이콘 버튼\"\n          />\n        </div>\n      </header>\n      <!-- Task Card -->\n      ${cards.map((card) => (0,_card_component_js__WEBPACK_IMPORTED_MODULE_0__.cardComponent)(card)).join(\"\")}\n    </article>\n  `;\n};\n\n\n//# sourceURL=webpack://taskify/./src/components/column_component.js?");
+
+/***/ }),
+
+/***/ "./src/components/columns_component.js":
+/*!*********************************************!*\
+  !*** ./src/components/columns_component.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   columnsComponent: () => (/* binding */ columnsComponent)\n/* harmony export */ });\n/* harmony import */ var _column_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./column_component */ \"./src/components/column_component.js\");\n\n\nconst columnsComponent = (data) => {\n  const { columns } = data;\n  return columns.map((column) => (0,_column_component__WEBPACK_IMPORTED_MODULE_0__.columnComponent)(column)).join(\"\");\n};\n\n\n//# sourceURL=webpack://taskify/./src/components/columns_component.js?");
 
 /***/ }),
 
@@ -474,6 +474,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -492,7 +504,25 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	
 /******/ 	/* webpack/runtime/publicPath */
 /******/ 	(() => {
-/******/ 		__webpack_require__.p = "";
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript && document.currentScript.tagName.toUpperCase() === 'SCRIPT')
+/******/ 				scriptUrl = document.currentScript.src;
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) {
+/******/ 					var i = scripts.length - 1;
+/******/ 					while (i > -1 && (!scriptUrl || !/^http(s?):/.test(scriptUrl))) scriptUrl = scripts[i--].src;
+/******/ 				}
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/^blob:/, "").replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/jsonp chunk loading */
