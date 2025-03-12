@@ -421,7 +421,7 @@ h1 {
   display: none;
 }
 
-.alertContent {
+.confirmContent {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -435,13 +435,13 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
-.alertContent p {
+.confirmContent p {
   text-align: center;
   font: var(--display-medium16);
   padding: var(--number-400) var(--number-300) 0 var(--number-300);
 }
 
-.alertContent .buttons {
+.confirmContent .buttons {
   display: flex;
   gap: var(--number-100);
   justify-content: center;
@@ -449,7 +449,7 @@ h1 {
   text-align: center;
 }
 
-.alertContent .cancleButton {
+.confirmContent .cancleButton {
   width: 172px;
   height: 32px;
   background-color: var(--surface-alt);
@@ -458,7 +458,7 @@ h1 {
   color: var(--text-default);
 }
 
-.alertContent .decideDeleteButton {
+.confirmContent .decideDeleteButton {
   width: 172px;
   height: 32px;
   background-color: var(--accent-red);
