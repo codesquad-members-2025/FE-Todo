@@ -1,10 +1,11 @@
 .card {
     width: 320px;
-    background-color: rgba(254, 254, 254, 1);
+    background-color: var(--surface-default);
     border-radius: 16px;
-    border: 1px solid rgba(239, 240, 246, 1);
+    border: 1px solid var(--border-default);
     padding: 16px;
     gap: 16px;
+    box-shadow: 0px 1px 4px 0px rgba(110, 128, 145, 0.24);
 }
 
 .card__content {
@@ -30,4 +31,10 @@
 .card__caption {
     margin: 0;
     color: var(--text-weak);
+}
+
+.card__close-btn,
+.card__edit-btn {
+    width: 24px;
+    height: 24px;
 }

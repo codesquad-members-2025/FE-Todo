@@ -4,10 +4,8 @@
 @import './base/variables.css';
 @import './base/utilities.css';
 
-/* Base styles */
-@import './base/typography.css';  /* 폰트 정의를 먼저 불러옴 */
-
 /* Layout */
+@import './layout/appHeader.css';
 @import './layout/kanban.css';
 
 /* Components */

@@ -11,43 +11,6 @@
 </head>
 
 <body class="flex-column">
-    <!-- 카드 폼 템플릿 -->
-    <template id="card-form-template">
-        <article class="card card-form">
-            <div class="card__text-area">
-                <div class="card__body">
-                    <input type="text" class="card__title-input" placeholder="제목을 입력하세요">
-                    <textarea class="card__body-input" placeholder="내용을 입력하세요"></textarea>
-                </div>
-            </div>
-            <div class="card__button-area">
-                <button type="button" class="card__cancel-btn btn">취소</button>
-                <button type="submit" class="card__submit-btn btn">등록</button>
-            </div>
-        </article>
-    </template>
-
-    <!-- 카드 템플릿 -->
-    <template id="card-template">
-        <article class="card flex-between">
-            <div class="card__content flex-column">
-                <div class="card__text flex-column">
-                    <h3 class="card__title display-bold14"></h3> <!-- 타이틀 -->
-                    <p class="card__description display-medium14"></p> <!-- 바디 -->
-                </div>
-                <p class="card__caption display-medium12">author by web</p> <!-- 캡션 -->
-            </div>
-            <div class="card__icon-buttons">
-                <button class="column-header__add-btn btn">
-                    <img src="./assets/icons/close.svg">
-                </button>
-                <button class="column-header__close-btn btn">
-                    <img src="./assets/icons/edit.svg">
-                </button>
-            </div>
-        </article>
-    </template>
-
     <header class="app-header flex-between">
         <h1 class="app-header__title display-bold24">TASKIFY</h1>
         <button class="app-header__history-btn btn">
@@ -56,153 +19,25 @@
     </header>
 
     <main class="kanban">
-        <section class="column flex-column">
-            <header class="column-header flex-between">
-                <div class="column-header__text-area flex-center">
-                    <h2 class="column-header__title display-bold16">해야할 일</h2>
-                    <span class="badge flex-center">
-                        <span class="badge__text display-medium12">2</span>
-                    </span>
-                </div>
-                <div class="column-header__buttons flex-center">
-                    <button class="column-header__add-btn btn">
-                        <img src="./assets/icons/plus.svg">
-                    </button>
-                    <button class="column-header__close-btn btn"> 
-                        <img src="./assets/icons/close.svg">
-                    </button>
-                </div>
-            </header>
-
-            <article class="card flex-between">
-                <div class="card__content flex-column">
-                    <div class="card__text flex-column">
-                        <h3 class="card__title display-bold14">GitHub 공부하기</h3>
-                        <p class="card__description display-medium14">add, commit, push</p>
-                    </div>
-                    <p class="card__caption display-medium12">author by web</p>
-                </div>
-                <div class="card__icon-buttons">
-                    <button class="column-header__add-btn btn">
-                        <img src="./assets/icons/close.svg">
-                    </button>
-                    <button class="column-header__close-btn btn">
-                        <img src="./assets/icons/edit.svg">
-                    </button>
-                </div>
-            </article>
-
-            <article class="card flex-between">
-                <div class="card__content flex-column">
-                    <div class="card__text flex-column">
-                        <h3 class="card__title display-bold14">블로그에 포스팅할 것</h3>
-                        <p class="card__description display-medium14">* GitHub 공부내용 <br> * 모던 자바스크립트 1장 공부내용</p>
-                    </div>
-                    <p class="card__caption display-medium12">author by web</p>
-                </div>
-                <div class="card__icon-buttons">
-                    <button class="column-header__add-btn btn">
-                        <img src="./assets/icons/close.svg">
-                    </button>
-                    <button class="column-header__close-btn btn">
-                        <img src="./assets/icons/edit.svg">
-                    </button>
-                </div>
-            </article>
-        </section>
-
-        <section class="column flex-column">
-            <header class="column-header flex-between">
-                <div class="column-header__text-area flex-center">
-                    <h2 class="column-header__title display-bold16">하고 있는 일</h2>
-                    <span class="badge flex-center">
-                        <span class="badge__text display-medium12">1</span>
-                    </span>
-                </div>
-                <div class="column-header__buttons flex-center">
-                    <button class="column-header__add-btn btn">
-                        <img src="./assets/icons/plus.svg">
-                    </button>
-                    <button class="column-header__close-btn btn"> 
-                        <img src="./assets/icons/close.svg">
-                    </button>
-                </div>
-            </header>
-
-            <article class="card flex-between">
-                <div class="card__content flex-column">
-                    <div class="card__text flex-column">
-                        <h3 class="card__title display-bold14">HTML/CSS 공부하기</h3>
-                        <p class="card__description display-medium14">input 태그 실습</p>
-                    </div>
-                    <p class="card__caption display-medium12">author by web</p>
-                </div>
-                <div class="card__icon-buttons">
-                    <button class="column-header__add-btn btn">
-                        <img src="./assets/icons/close.svg">
-                    </button>
-                    <button class="column-header__close-btn btn">
-                        <img src="./assets/icons/edit.svg">
-                    </button>
-                </div>
-            </article>
-        </section>
-
-        <section class="column flex-column">
-            <header class="column-header flex-between">
-                <div class="column-header__text-area flex-center">
-                    <h2 class="column-header__title display-bold16">완료한 일</h2>
-                    <span class="badge flex-center">
-                        <span class="badge__text display-medium12">0</span>
-                    </span>
-                </div>
-                <div class="column-header__buttons flex-center">
-                    <button class="column-header__add-btn btn">
-                        <img src="./assets/icons/plus.svg">
-                    </button>
-                    <button class="column-header__close-btn btn"> 
-                        <img src="./assets/icons/close.svg">
-                    </button>
-                </div>
-            </header>
-        </section>
+        <!-- initKanban에서 불러옴 -->
     </main>
 
     <aside class="history-panel flex-column">
         <!-- 상단 고정 헤더 -->
         <div class="history-panel__header flex-between">
             <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
-            <div class="history-panel__close-btn flex-center">
+            <button class="history-panel__close-btn btn flex-center">
                 <img src="./assets/icons/close.svg" class="size-16">
                 <span class="history-panel__close-btn-text display-bold14">닫기</span>
-            </div>
+            </button>
         </div>
 
         <!-- 활동 기록 목록 -->
         <div class="history-panel__list">
             <!-- 비어있을 때 보여줄 영역 -->
-            <div class="history-panel__empty flex-center">
+            <div class="history-panel__empty flex-center hidden">
                 <p class="history-panel__empty-text display-medium14">사용자 활동 기록이 없습니다</p>
             </div>
-            <!-- 활동 기록 아이템 -->
-            <div class="history-panel__item flex-between">
-                <div class="history-panel__item-icon">
-                    <img src="./assets/images/profile.png" class="history-panel__item-image">
-                </div>
-                <div class="history-panel__item-body flex-column">
-                    <!-- 사용자 이름: 링크가 될 수 있으므로 a 태그 사용 -->
-                    <a href="#" class="history-panel__item-username display-medium14">@멋진삼</a>
-
-                    <!-- 활동 내용: 문장이므로 p 태그 -->
-                    <p class="history-panel__item-text display-medium14">
-                        <strong>블로그에 포스팅할 것</strong>을(를) <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>로 이동하였습니다.
-                    </p>
-
-                    <!-- 시간 정보: time 태그 -->
-                    <time class="history-panel__item-timestamp display-medium12" datetime="2024-03-14T15:00">
-                        3분 전
-                    </time>
-                </div>
             </div>
         </div>
 
@@ -216,7 +51,7 @@
     
     <dialog class="modal">
         <div class="modal__body flex-column">
-            <p class="modal__text display-medium16">모든 사용자 활동 기록을 삭제할까요?</p>
+            <p class="modal__text display-medium16"></p>
             
             <footer class="modal__footer flex-between">
                 <button class="modal__cancel-btn btn display-bold14">취소</button>

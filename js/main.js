@@ -1,5 +1,7 @@
-import { initCardForm } from './components/CardForm.js';
-import { initModal } from './components/Modal.js';
+import { initKanban } from './components/renderKanban.js'
+import { initPanel } from './components/renderPanel.js'
+import { initEventHandlers } from './components/eventHandler.js';
 
-initCardForm();
-initModal();
+initPanel();
+initKanban();
+initEventHandlers();
