@@ -1,4 +1,4 @@
-import { data } from "../data/cardData.js";
+import { data } from "../data/data.js";
 
 function cardView() {
   data.colums.forEach((colum) => {
