@@ -1,7 +1,8 @@
 import { createColumn, createTaskCard } from './template.js';
-import { addChild } from '../utils/dom.js';
+import { addChild, unshiftChild } from '../utils/dom.js';
+import { getISOStringNow } from '../utils/date.js';
 import { openCardDeleteModal } from './modal.js';
-import { loadColumnData } from '../../store/column.js';
+import { loadColumnData, updateCard } from '../../store/column.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
 function renderColumns(columnList) {
@@ -30,8 +31,23 @@ function renderCardsForColumn(columnList) {
   });
 }
 
+// 칼럼에 카드 하나 생성
+function renderCard(columnId, cardData) {
+  const { id, title, content, author } = cardData;
+  const column = document.querySelector(`#${columnId} .card-container`);
+
+  const taskCardHtml = createTaskCard(id, title, content, author);
+
+  // 생성순/최신순에 따라 맞게 카드 넣기
+  if (isSortCreated()) {
+    addChild(column, taskCardHtml);
+  } else {
+    unshiftChild(column, taskCardHtml);
+  }
+}
+
 // 칼럼과 카드 렌더링을 호출하는 메인 함수
-function renderColumnsAndCards(columnList) {
+async function renderColumnsAndCards(columnList) {
   renderColumns(columnList); // 칼럼 생성
   renderCardsForColumn(columnList); // 카드 추가
 }
@@ -69,10 +85,9 @@ function initToggleCardFormButton() {
 }
 
 //카드 폼 토글 : +버튼 || 폼 삭제 버튼
-function toggleCardForm(event) {
+function toggleCardForm({ target }) {
   const button =
-    event.target.closest('.card-add-btn') ||
-    event.target.closest('.form-cancel-btn');
+    target.closest('.card-add-btn') || target.closest('.form-cancel-btn');
 
   const column = event.target.closest('.column');
   if (!button) return;
@@ -86,7 +101,7 @@ function toggleCardForm(event) {
 }
 
 //정렬 버튼 클릭 이벤트
-function sortCards(columnList, { currentTarget }) {
+async function sortCards({ currentTarget }) {
   const sortButton = currentTarget;
   const sortButtonName = sortButton.querySelector('.sort-btn-name');
   const currentSortType = sortButton.dataset.type;
@@ -99,11 +114,17 @@ function sortCards(columnList, { currentTarget }) {
   sortButtonName.textContent = buttonText;
 
   // 데이터 정렬
+  const columnList = await loadColumnData();
   const sortedData = getSortedTasksByDate(columnList, newSortType);
 
   // 카드 업데이트
   clearCards();
   renderCardsForColumn(sortedData);
+}
+
+function isSortCreated() {
+  const sortButtonName = document.querySelector('#sort-btn').dataset.type;
+  return sortButtonName === 'created';
 }
 
 // 정렬 함수 (order: 'created' | 'latest')
@@ -119,21 +140,82 @@ function getSortedTasksByDate(columnList, order = 'created') {
 }
 
 //Sort Button
-function initSortButton(columnData) {
+function initSortButton() {
   const sortButton = document.getElementById('sort-btn');
   sortButton.addEventListener('click', (event) => {
-    sortCards(columnData, event);
+    sortCards(event);
   });
+}
+
+// 새 카드 폼 생성
+function createNewCard({ target }) {
+  // 생성버튼을 눌렀는지 검증
+  const createButton = target.closest('.form-create-btn');
+  if (!createButton) return;
+
+  //칼럼 확인
+  const column = target.closest('.column');
+
+  if (!column) return;
+  //inputValue 가져오기
+  const inputData = getInputData(column);
+
+  if (!inputData) return;
+
+  //데이터 업데이트
+  updateCard(column.id, inputData);
+  // ui 추가
+  renderCard(column.id, inputData);
+}
+
+function getInputData(columnEl) {
+  const createdAt = getISOStringNow();
+  const id = 10;
+  const author = isMobile() ? 'mobile' : 'web';
+
+  // value 가져오기
+  const formCard = columnEl.querySelector('.card-form');
+  const [input, textarea] = formCard.querySelectorAll('input, textarea');
+  const title = input.value;
+  const content = textarea.value;
+
+  if (!title || !content) return null; // 데이터 입력하지 않으면 null 반환
+
+  // 객체 생성
+  return makeInputData(id, title, content, author, createdAt);
+}
+
+function isMobile() {
+  return (
+    /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ||
+    navigator.maxTouchPoints > 0
+  );
+}
+
+function makeInputData(id, title, content, author, createdAt) {
+  return {
+    id,
+    title,
+    content,
+    author,
+    createdAt,
+  };
+}
+
+// 새카드 등록 버튼
+function initCreateCardBtn() {
+  const columnSection = document.getElementById('columns-container');
+  columnSection.addEventListener('click', (event) => createNewCard(event));
 }
 
 async function initColumnAndCard() {
   const data = await loadColumnData();
 
   renderColumnsAndCards(data);
-
   initCardRemoveButton();
-  initSortButton(data);
+  initSortButton();
   initToggleCardFormButton();
+  initCreateCardBtn();
 }
 
 export { clearCards, makeCardRemover, initColumnAndCard };

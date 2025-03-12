@@ -11,4 +11,9 @@ async function loadColumnData() {
   return columnData;
 }
 
-export { loadColumnData };
+function updateCard(columnId, cardData) {
+  const targetColumn = columnData.find((column) => column.id === columnId);
+  targetColumn.tasks.push(cardData);
+}
+
+export { loadColumnData, updateCard };

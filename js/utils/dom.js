@@ -7,4 +7,12 @@ function addChild(parentElement, newElement) {
   }
 }
 
-export { addChild };
+function unshiftChild(parentElement, newElement) {
+  if (typeof newElement === 'string') {
+    parentElement.insertAdjacentHTML('afterbegin', newElement);
+  } else {
+    parentElement.prepend(newElement);
+  }
+}
+
+export { addChild, unshiftChild };
