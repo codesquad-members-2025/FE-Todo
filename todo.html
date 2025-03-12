@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo-List</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orioncactus/Pretendard/dist/web/static/pretendard.css"
+    />
+  </head>
+
+  <body class="top-layout-container">
+    <header class="page-header">
+      <h1 class="page-header__logo">TASKIFY</h1>
+      <button id="header__history-btn">
+        <img src="/icons/history.svg" alt="history-icon" />
+      </button>
+    </header>
+
+    <main class="page-main__columnlist">
+      <section class="columnlist__col" data-type="todo">
+        <header class="columnlist__header">
+          <div>
+            <p class="columnlist__tilte">해야할 일</p>
+            <p class="columnlist__count">0</p>
+          </div>
+          <div>
+            <button class="add-task-btn">
+              <img src="/icons/plus_icon.svg" alt="plus-icon" />
+            </button>
+            <button class="delete-task-btn">
+              <img src="/icons/delete_icon.svg" alt="close-button" />
+            </button>
+          </div>
+        </header>
+        <!--  할일 추가 카드 모달 -->
+        <div class="task-modal-overlay" data-type="todo">
+          <div class="task-modal">
+            <div class="modal-content">
+              <input
+                type="text"
+                class="modal__input title-input"
+                placeholder="제목을 입력하세요"
+              />
+              <input
+                type="text"
+                class="modal__input content-input"
+                placeholder="내용을 입력하세요"
+              />
+            </div>
+            <footer class="modal-footer">
+              <button class="modal-button cancel-button">
+                <div class="textLabel">취소</div>
+              </button>
+              <button class="modal-button register-button">
+                <div class="textLabel">등록</div>
+              </button>
+            </footer>
+          </div>
+        </div>
+        <!-- ✅ 할 일 카드들이 추가될 공간 -->
+        <div class="task-list">
+          <div class="todo-card">
+            <article class="todo-card__textarea">
+              <div class="card-textarea__body">
+                <header class="task-title">GitHub 공부하기</header>
+                <p class="task-content">add, commit, push</p>
+              </div>
+              <footer class="card-textarea__caption">author by web</footer>
+            </article>
+            <div class="card-actions">
+              <button class="delete-task-btn">
+                <img src="/icons/delete-task-btn.svg" alt="delete Button" />
+              </button>
+              <button class="edit-task-btn">
+                <img src="/icons/edit.svg" alt="edit Button" />
+              </button>
+            </div>
+          </div>
+
+          <div class="todo-card">
+            <article class="todo-card__textarea">
+              <div class="card-textarea__body">
+                <header class="task-title">블로그에 포스팅 할 것</header>
+                <p class="task-content">
+                  *GitHub 공부내용 <br />*모던 자바스크립트 1장 공부내용
+                </p>
+              </div>
+              <footer class="card-textarea__caption">author by web</footer>
+            </article>
+            <div class="card-actions">
+              <button class="delete-task-btn">
+                <img src="/icons/delete-task-btn.svg" alt="delete Button" />
+              </button>
+              <button class="edit-task-btn">
+                <img src="/icons/edit.svg" alt="edit Button" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="columnlist__col" data-type="doing">
+        <header class="columnlist__header">
+          <div>
+            <p class="columnlist__tilte">하고 있는 일</p>
+            <p class="columnlist__count">0</p>
+          </div>
+          <div>
+            <button class="add-task-btn">
+              <img src="/icons/plus_icon.svg" alt="plus-icon" />
+            </button>
+            <button class="delete-task-btn">
+              <img src="/icons/delete_icon.svg" alt="close-button" />
+            </button>
+          </div>
+        </header>
+        <!--  할일 추가 카드 모달 -->
+        <div class="task-modal-overlay" data-type="doing">
+          <div class="task-modal">
+            <div class="modal-content">
+              <input
+                type="text"
+                class="modal__input title-input"
+                placeholder="제목을 입력하세요"
+              />
+              <input
+                type="text"
+                class="modal__input content-input"
+                placeholder="내용을 입력하세요"
+              />
+            </div>
+            <footer class="modal-footer">
+              <button class="modal-button cancel-button">
+                <div class="textLabel">취소</div>
+              </button>
+              <button class="modal-button register-button">
+                <div class="textLabel">등록</div>
+              </button>
+            </footer>
+          </div>
+        </div>
+        <!-- ✅ 할 일 카드들이 추가될 공간 -->
+        <div class="task-list">
+          <div class="todo-card">
+            <article class="todo-card__textarea">
+              <div class="card-textarea__body">
+                <header class="task-title">GitHub 공부하기</header>
+                <p class="task-content">add, commit, push</p>
+              </div>
+              <footer class="card-textarea__caption">author by web</footer>
+            </article>
+            <div class="card-actions">
+              <button class="delete-task-btn">
+                <img src="/icons/delete-task-btn.svg" alt="delete Button" />
+              </button>
+              <button class="edit-task-btn">
+                <img src="/icons/edit.svg" alt="edit Button" />
+              </button>
+            </div>
+          </div>
+
+          <div class="todo-card">
+            <article class="todo-card__textarea">
+              <div class="card-textarea__body">
+                <header class="task-title">블로그에 포스팅 할 것</header>
+                <p class="task-content">
+                  *GitHub 공부내용 <br />*모던 자바스크립트 1장 공부내용
+                </p>
+              </div>
+              <footer class="card-textarea__caption">author by web</footer>
+            </article>
+            <div class="card-actions">
+              <button class="delete-task-btn">
+                <img src="/icons/delete-task-btn.svg" alt="delete Button" />
+              </button>
+              <button class="edit-task-btn">
+                <img src="/icons/edit.svg" alt="edit Button" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="columnlist__col" data-type="done">
+        <header class="columnlist__header">
+          <div>
+            <p class="columnlist__tilte">완료한 일</p>
+            <p class="columnlist__count">0</p>
+          </div>
+          <div>
+            <button class="add-task-btn">
+              <img src="/icons/plus_icon.svg" alt="plus-icon" />
+            </button>
+            <button class="delete-task-btn">
+              <img src="/icons/delete_icon.svg" alt="close-button" />
+            </button>
+          </div>
+        </header>
+        <!--  할일 추가 카드 모달 -->
+        <div class="task-modal-overlay" data-type="done">
+          <div class="task-modal">
+            <div class="modal-content">
+              <input
+                type="text"
+                class="modal__input title-input"
+                placeholder="제목을 입력하세요"
+              />
+              <input
+                type="text"
+                class="modal__input content-input"
+                placeholder="내용을 입력하세요"
+              />
+            </div>
+            <footer class="modal-footer">
+              <button class="modal-button cancel-button">
+                <div class="textLabel">취소</div>
+              </button>
+              <button class="modal-button register-button">
+                <div class="textLabel">등록</div>
+              </button>
+            </footer>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 히스토리 사이드 바 -->
+    <aside id="popover-sidebar">
+      <div class="history-sidebar__layout">
+        <header class="popover-header">
+          <h2 class="popover-header__title">사용자 활동 기록</h2>
+          <button id="popover-header__closeBtn">
+            <img src="/icons/Symbol.svg" alt="close-icon" />
+            <div class="textLabel">닫기</div>
+          </button>
+        </header>
+        <!-- 사용자 활동 기록이 보이는 구간 -->
+        <section class="popover__section">
+          <article id="popover__empty-message">
+            사용자 활동 기록이 없습니다.
+          </article>
+          <ul id="activity-list__ul">
+            <template id="activity-template">
+              <li class="activity-list__list">
+                <img src="icons/Image.png" alt="귀여운 개구리" />
+                <div class="activity-list__log">
+                  <header class="history-log__header">@멋진영민</header>
+                  <div class="log__activityArea">활동 칸이에용</div>
+                  <div class="log__time">시간</div>
+                </div>
+              </li>
+            </template>
+          </ul>
+        </section>
+        <footer class="popover-footer">
+          <button id="delete-sidebar_button">기록 전체 삭제</button>
+        </footer>
+      </div>
+    </aside>
+    <!-- 활동기록 삭제 모달 -->
+    <dialog id="delete-history__modal">
+      <div class="delete-history__content">
+        <p>모든 사용자 활동 기록을 삭제할까요?</p>
+        <div class="delete-history__buttons">
+          <button class="delete-history__button" id="cancel-button">
+            <div class="textLabel">취소</div>
+          </button>
+          <button class="delete-history__button" id="confirm-delete-button">
+            <div class="textLabel">삭제</div>
+          </button>
+        </div>
+      </div>
+    </dialog>
+
+    <script type="module" src="js_dir/main.js"></script>
+    <script type="module" src="js_dir/registerCard.js"></script>
+  </body>
+</html>

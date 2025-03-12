@@ -1,0 +1,371 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f7f7fc;
+}
+
+p,
+h1,
+h2,
+h3 {
+  padding: 0;
+  margin: 0;
+}
+
+* {
+  border: 1px solid red;
+}
+.normal-shadow {
+  box-shadow: 0px 1px 4px rgba(110, 128, 145, 0.24);
+}
+.up-shadow {
+  box-shadow: 0px 2px 8px rgba(110, 128, 145, 0.32),
+    0px 0px 4px rgba(110, 128, 145, 0.24);
+}
+.floating-shadow {
+  box-shadow: 0px 0px 4px rgba(110, 128, 145, 0.08),
+    0px 16px 16px rgba(110, 128, 145, 0.24);
+}
+
+button {
+  all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.top-layout-container {
+  position: relative;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  font-family: "Pretendard", sans-serif;
+  padding-left: 80px;
+  padding-right: 80px;
+}
+.page-header {
+  border-bottom: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+#header__history-btn {
+  padding: 5px;
+}
+
+.page-header__logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0px;
+}
+.page-main__columnlist {
+  display: flex;
+  justify-content: flex-start;
+  gap: 24px;
+  padding-top: 32px;
+  flex-wrap: wrap;
+}
+.columnlist__col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.columnlist__header {
+  display: flex;
+  align-items: center;
+  padding-left: 16px;
+  padding-right: 16px;
+  gap: 141px;
+}
+.columnlist__header div {
+  font-size: 16px;
+  font-weight: 700;
+  color: #4e4b66;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.columnlist__count {
+  border: 1px solid #eff0f6;
+  color: #a0a3bd;
+  border-radius: 8px;
+  padding: 5px 8px;
+  font-size: 12px;
+}
+.add-task-btn {
+  padding: 5px;
+}
+.delete-task-btn {
+  padding: 6px;
+}
+.history-sidebar__layout {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+  font-size: 14px;
+}
+#popover-sidebar {
+  border-radius: 16px;
+  background-color: #fefefe;
+  position: fixed;
+  inset: 64px auto auto 1018px;
+  top: -100%;
+  transition: top 0.4s ease-in-out;
+  box-shadow: 0px 16px 16px #6e80913d, 0px 0px 4px #6e809114;
+}
+#popover-sidebar.open {
+  top: 64px;
+}
+.popover-header {
+  display: flex;
+  align-items: center;
+  padding: 8px 8px 8px 16px;
+}
+
+.popover-header__title {
+  font-size: 16px;
+  color: #14142b;
+  flex-grow: 1;
+  font-weight: 700;
+}
+#popover-header__closeBtn {
+  display: flex;
+  padding: 8px;
+  color: #6e7191;
+}
+
+.popover__section {
+  max-height: 500px; /* 🔹 모달의 최대 높이 설정 */
+  overflow-y: auto; /* 🔹 로그가 많아지면 스크롤 가능하게 설정 */
+}
+
+#activity-list__ul {
+  display: block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#popover__empty-message {
+  margin: 16px;
+  width: 312px;
+  display: block;
+  text-align: center;
+  color: #a0a3bd;
+}
+.activity-list__list {
+  width: 350px;
+  display: flex;
+  padding: 16px;
+  align-items: flex-start;
+  gap: 16px;
+
+  border-bottom: 1px solid #e0e0e0; /* 🔹 연한 회색 선 추가 */
+}
+.activity-list__list:last-child {
+  border-bottom: none;
+}
+.activity-list img {
+  flex-grow: 0;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  object-fit: cover; /* 비율 유지하면서 크기 조정 */
+}
+
+.popover-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 4px 8px 4px 0;
+  align-items: center;
+}
+#delete-sidebar_button {
+  padding: 7.5px 8px;
+}
+
+.activity-list__log {
+  flex-basis: 256px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.history-log__header {
+  color: #6e7191;
+}
+
+.log__time {
+  font-size: 12px;
+  color: #a0a3bd;
+}
+
+#delete-history__modal {
+  width: 400px;
+  padding: 32px 24px;
+  border-radius: 8px;
+}
+.delete-history__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+dialog::backdrop {
+  background-color: #14212b4d;
+}
+
+dialog {
+  padding: 32px 24px 24px 24px;
+  /* padding: 24px; */
+  border-radius: 8px;
+}
+
+#delete-history__modal .delete-history__buttons {
+  display: flex;
+  flex-direction: row;
+}
+#delete-history__modal p {
+  margin: 0px;
+}
+.textLabel {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.delete-history__button {
+  padding: 7.5px 69.5px;
+}
+
+#confirm-delete-button {
+  color: #fefefe;
+  background-color: #ff3b30;
+}
+
+.task-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #fefefe;
+  padding: 16px;
+  font-size: 14px;
+}
+.task-modal-overlay {
+  display: none;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px #6e80913d;
+}
+.task-modal-overlay.active {
+  display: block;
+}
+
+.task-modal > div {
+  display: flex;
+  flex-direction: column;
+}
+.task-modal footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 8px;
+}
+.title-input::placeholder {
+  color: #14142b; /* 🔹 플레이스홀더 색상 변경 */
+  font-size: 16px; /* 🔹 글자 크기 변경 */
+  font-weight: bold; /* 🔹 글자 두껍게 */
+}
+.content-input::placeholder {
+  color: #6e7191; /* 🔹 플레이스홀더 색상 변경 */
+  font-size: 14px; /* 🔹 글자 크기 변경 */
+}
+
+.modal-button {
+  border-radius: 8px;
+  height: 32px;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal__input {
+  border: none;
+  outline: none; /* 🔹 포커스 시 나타나는 외곽선도 제거 */
+}
+.register-button {
+  background-color: #007aff;
+  opacity: 0.5;
+}
+.register-button:hover {
+  opacity: 1;
+}
+.cancel-button {
+  background-color: #f7f7fc;
+}
+
+.todo-card {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px #6e80913d; /* 🔹 부드러운 그림자 효과 */
+  padding: 16px;
+  gap: 16px;
+}
+.todo-card__textarea {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex-grow: 1; /* 🔹 텍스트 영역이 최대한 확장되도록 -> 근데 왜하는거야?? */
+}
+.task-title {
+  color: #14142b;
+  font-weight: 700;
+}
+.card-textarea__body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.task-content {
+  color: #6e7191;
+}
+
+.card-textarea__caption {
+  font-size: 12px;
+  color: #a0a3bd;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-task-btn {
+  padding: 6px;
+}
+
+.edit-task-btn {
+  padding: 5px;
+}
+
+.delete-task-btn img {
+  width: 12px;
+  height: 12px;
+}
+.edit-task-btn img {
+  width: 14px;
+  height: 14px;
+}
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
