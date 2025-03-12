@@ -99,9 +99,7 @@ button {
 .add-task-btn {
   padding: 5px;
 }
-.delete-task-btn {
-  padding: 6px;
-}
+
 .history-sidebar__layout {
   display: flex;
   flex-direction: column;
@@ -355,9 +353,12 @@ dialog {
   padding: 5px;
 }
 
-.delete-task-btn img {
+.delete-task-btn svg {
   width: 12px;
   height: 12px;
+}
+.delete-task-btn:hover svg {
+  stroke: #ff3b30;
 }
 .edit-task-btn img {
   width: 14px;

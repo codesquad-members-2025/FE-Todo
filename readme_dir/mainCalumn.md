@@ -89,3 +89,5 @@ taskObject = {
 - taskObject.columnType를 통해 카드를 넣을 칼럼의 영역을 정한다.
 
 ### 컬럼 파트(메인 할일 조작 파트)
+
+-
