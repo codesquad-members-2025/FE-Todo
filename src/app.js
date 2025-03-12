@@ -77,3 +77,15 @@ const renderColumns = async () => {
 };
 
 renderColumns();
+
+//
+
+// 카드 생성
+const createCardBtn = document.querySelector("#create-card-btn");
+const deleteColumnBtn = document.querySelector("#delete-column-btn");
+
+const cardInputTitle = document.querySelector("#card-input-title");
+const cardInputDescription = document.querySelector("#card-input-description");
+
+const deleteCardBtn = document.querySelector(".task-create-card__btn-cancel");
+const addCardBtn = document.querySelector(".task-create-card__btn-create");

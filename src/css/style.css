@@ -191,6 +191,7 @@ body {
   width: 104px;
   color: var(--text-danger);
   font-weight: bold;
+  cursor: pointer;
 }
 
 /* 히스토리 모달 애니메이션 */
@@ -263,4 +264,74 @@ body {
   background-color: var(--text-danger);
   color: white;
   font-weight: bold;
+}
+
+/* */
+.task-create-card__input {
+  width: 288px;
+  height: 42px;
+
+  &-title {
+    height: 17px;
+    margin-bottom: 8px;
+  }
+
+  &-description {
+    height: 17px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    border-width: 0;
+    width: 100%;
+  }
+}
+
+#card-input-title {
+  color: #14142b;
+  font-weight: bold;
+
+  &::placeholder {
+    color: #14142b;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+#card-input-description {
+  color: text-default;
+
+  &::placeholder {
+    color: text-default;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.task-create-card__btn {
+  width: 288px;
+  height: 32px;
+
+  button {
+    width: 140px;
+    height: 32px;
+    margin: 0px 4px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
+.task-create-card__btn-create {
+  background-color: var(--surface-brand);
+  color: white;
+}
+
+.task-create-card__btn-cancel {
+  background-color: var(--surface-alt);
 }
