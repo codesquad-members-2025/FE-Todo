@@ -99,10 +99,13 @@ function getCurColumn(e) {
     return e.closest('.column');
 }
 
-// 첫번째 카드 앞 노드 삽입
-function insertNode(node, column) {
-    const firstCard = column.querySelector('.card');
-    column.insertBefore(node, firstCard);
+// 카드 폼 뒤에 카드 삽입
+function insertCard(card, cardForm) {
+    const nextCard = cardForm.nextSibling;
+    const column = cardForm.parentNode;
+
+    if (nextCard) column.insertBefore(card, nextCard)
+    else column.appendChild(card);
 }
 
 // 카드 폼 토글
@@ -118,7 +121,7 @@ function createCard(btn) {
     const titleInput = cardForm.querySelector('.card__title-input').value;
     const bodyInput = cardForm.querySelector('.card__body-input').value;
 
-    insertNode(createCardNode(titleInput, bodyInput), getCurColumn(btn));
+    insertCard(createCardNode(titleInput, bodyInput), cardForm);
     toggleCardForm(btn);
 }
 
