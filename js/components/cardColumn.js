@@ -69,7 +69,7 @@ function clearCards() {
   }
 }
 
-// 카드 제거
+// 카드 제거 함수 반환(고차함수)
 function makeCardRemover(cardId) {
   return function () {
     const targetCard = document.getElementById(cardId);
@@ -97,15 +97,13 @@ function toggleCardForm({ target }) {
   const button =
     target.closest('.card-add-btn') || target.closest('.form-cancel-btn');
 
-  const column = event.target.closest('.column');
   if (!button) return;
 
-  const cardForm = document.querySelector(
-    `#${column.id} .card-list .card-form`
-  );
-  const isVisable = window.getComputedStyle(cardForm).display === 'flex';
+  const cardForm = getCardForm(target);
+  if (!cardForm) return;
 
-  cardForm.style.display = isVisable ? 'none' : 'flex';
+  const isVisible = window.getComputedStyle(cardForm).display === 'flex';
+  cardForm.style.display = isVisible ? 'none' : 'flex';
 }
 
 //정렬 버튼 클릭 이벤트
@@ -144,22 +142,23 @@ function initSortButton() {
 
 // 새 카드 폼 생성
 function createNewCard({ target }) {
-  // 생성버튼을 눌렀는지 검증
   const createButton = target.closest('.form-create-btn');
   if (!createButton) return;
 
-  //칼럼 확인
+  const cardForm = getCardForm(target);
+  if (!cardForm) return;
+
   const column = target.closest('.column');
-
   if (!column) return;
-  //inputValue 가져오기
-  const inputData = getInputData(column);
 
+  const inputData = getInputData(column);
   if (!inputData) return;
 
-  //데이터 업데이트
+  // 입력폼 닫기
+  cardForm.style.display = 'none';
+
+  // 데이터 업데이트 & UI 추가
   updateCard(column.id, inputData);
-  // ui 추가
   renderCard(column.id, inputData);
 }
 
@@ -178,6 +177,14 @@ function getInputData(columnEl) {
 
   // 객체 생성
   return makeInputData(id, title, content, author, createdAt);
+}
+
+//card form 요소 가져오기(공통)
+function getCardForm(target) {
+  const column = target.closest('.column');
+  if (!column) return null;
+
+  return document.querySelector(`#${column.id} .card-list .card-form`);
 }
 
 function isMobile() {
