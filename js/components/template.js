@@ -64,4 +64,30 @@ function getRandomId() {
     return Math.floor(Math.random() * 100000);
 }
 
-export { createColumnNode, createCardNode };
+function createLogNode( { iconName, userName, text, datetime } ) {
+    return templateToNode(`
+        <div class="history-panel__item">
+            <div class="history-panel__item-icon">
+                <img src="./assets/images/${iconName}" class="history-panel__item-image">
+            </div>
+        <div class="history-panel__item-body flex-column">
+
+        <div>
+            <a href="#" class="history-panel__item-username display-medium14">@${userName}</a>
+                <p class="history-panel__item-text display-medium14">
+                    ${text}
+                </p>
+                
+                <time class="history-panel__item-timestamp display-medium12" datetime="${datetime}">
+                    ${calculateDate(datetime)}
+                </time>
+            </div>
+        </div>
+        `)
+    }
+
+    function calculateDate(datetime) {
+        return datetime;
+    }
+
+    export { createColumnNode, createCardNode, createLogNode };

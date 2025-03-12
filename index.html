@@ -19,7 +19,7 @@
     </header>
 
     <main class="kanban">
-        <!-- initKanban에서 생성됨 -->
+        <!-- initKanban에서 불러옴 -->
     </main>
 
     <aside class="history-panel flex-column">
@@ -35,28 +35,9 @@
         <!-- 활동 기록 목록 -->
         <div class="history-panel__list">
             <!-- 비어있을 때 보여줄 영역 -->
-            <div class="history-panel__empty flex-center">
+            <div class="history-panel__empty flex-center hidden">
                 <p class="history-panel__empty-text display-medium14">사용자 활동 기록이 없습니다</p>
             </div>
-            <!-- 활동 기록 아이템 -->
-            <div class="history-panel__item flex-between">
-                <div class="history-panel__item-icon">
-                    <img src="./assets/images/profile.png" class="history-panel__item-image">
-                </div>
-                <div class="history-panel__item-body flex-column">
-                    <!-- 사용자 이름: 링크가 될 수 있으므로 a 태그 사용 -->
-                    <a href="#" class="history-panel__item-username display-medium14">@멋진삼</a>
-
-                    <!-- 활동 내용: 문장이므로 p 태그 -->
-                    <p class="history-panel__item-text display-medium14">
-                        <strong>블로그에 포스팅할 것</strong>을(를) <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>로 이동하였습니다.
-                    </p>
-
-                    <!-- 시간 정보: time 태그 -->
-                    <time class="history-panel__item-timestamp display-medium12" datetime="2024-03-14T15:00">
-                        3분 전
-                    </time>
-                </div>
             </div>
         </div>
 

@@ -63,13 +63,12 @@ function openModal(type, id = null) {
 // 사용자 활동 기록 삭제
 function removeUserHistory() {
     const empty = document.querySelector('.history-panel__empty');
-    const item = document.querySelector('.history-panel__item');
+    const items = document.querySelectorAll('.history-panel__item');
     const footer = document.querySelector('.history-panel__footer');
 
     empty.style.display = 'flex';
-    item.style.display = 'none';
+    items.forEach(item => item.remove());
     footer.style.display = 'none';
-    item.innerHTML = "";
 }
 
 // 칸반 이벤트
