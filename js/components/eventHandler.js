@@ -89,7 +89,7 @@ function initKanbanHandlers() {
         else if (btn.classList.contains('card__cancel-btn')) toggleCardForm(btn);
         else if (btn.classList.contains('card__submit-btn')) createCard(btn);
         // 카드 버튼
-        else if (btn.classList.contains('card__close-btn')) removeCard(btn);
+        else if (btn.classList.contains('card__close-btn')) openCardDeleteModal(btn);
         else if (btn.classList.contains('card__edit-btn'));
     });
 }
@@ -126,8 +126,7 @@ function createCard(btn) {
 }
 
 // 카드 삭제
-function removeCard(btn) {
+function openCardDeleteModal(btn) {
     const card = btn.closest('.card');
-
     openModal('card', card.dataset.id);
 }
