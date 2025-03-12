@@ -1,6 +1,7 @@
 // webpack.config.js
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   // 1) 진입점(시작 파일)
@@ -10,6 +11,8 @@ module.exports = {
   output: {
     filename: "bundle.js", // 결과물 파일명
     path: path.resolve(__dirname, "dist"), // 결과물이 생성될 폴더
+    clean: true, // 빌드할 때 기존 dist 폴더 정리
+    publicPath: "", // 상대 경로로 설정
   },
 
   // 3) 모드 설정: development, production, none 중 선택
@@ -26,6 +29,17 @@ module.exports = {
           "css-loader",
         ],
       },
+      {
+        test: /\.html$/,
+        use: ["html-loader"],
+      },
+      {
+        test: /\.(png|jpg|jpeg|gif|svg)$/i, // 이미지 파일 처리
+        type: "asset/resource",
+        generator: {
+          filename: "images/[name][ext]", // 이미지가 dist/images 폴더에 저장됨
+        },
+      },
     ],
   },
   plugins: [
@@ -33,6 +47,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "./src/index.html", // 원본 HTML 파일
       filename: "index.html", // 출력될 HTML 파일 이름
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "src/images", to: "images" }, // 이미지 폴더를 dist로 복사
+      ],
     }),
   ],
   devServer: {

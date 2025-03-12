@@ -1,9 +1,9 @@
 import { columnsComponent } from "../components/columns_component";
 import "pretendard/dist/web/static/pretendard.css"; // 폰트 CSS 불러오기
-import "../css/global.css";
-import "../css/reset.css";
-import "../css/style.css";
-import "../css/utility.css";
+import "./css/global.css";
+import "./css/reset.css";
+import "./css/style.css";
+import "./css/utility.css";
 
 // 히스토리 모달 등장하거나 사라지는 구현
 const historyOpenBtn = document.querySelector(".header__history-icon");
