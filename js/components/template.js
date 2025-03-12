@@ -4,7 +4,7 @@ function templateToNode(template) {
     return container.firstElementChild;
 }
 
-function createColumnNode(id, title, count, cardNodes) {
+function createColumnNode(id, title, count) {
     return templateToNode(`
     <section class="column flex-column" data-id="${id}">
         <header class="column-header flex-between">
@@ -24,7 +24,7 @@ function createColumnNode(id, title, count, cardNodes) {
             </div>
         </header>
 
-        <article class="card card-form flex-column">
+        <article class="card card-form flex-column hidden">
             <div class="card__input-area flex-column">
                 <input type="text" class="card__title-input display-bold14" placeholder="제목을 입력하세요">
                 <textarea class="card__body-input display-medium14" placeholder="내용을 입력하세요"></textarea>
@@ -34,14 +34,13 @@ function createColumnNode(id, title, count, cardNodes) {
                 <button type="submit" class="card__submit-btn btn display-bold14">등록</button>
             </div>
         </article>
-        ${cardNodes}
     </section>
     `);
 }
 
-function createCardNode(title, description, author = 'web') {
+function createCardNode( {id = getRandomId(), title, description, author = 'web'} ) {
     return templateToNode(`
-    <article class="card flex-between">
+    <article class="card flex-between" data-id="${id}">
         <div class="card__content flex-column">
             <div class="card__text flex-column">
                 <h3 class="card__title display-bold14">${title}</h3>
@@ -59,6 +58,10 @@ function createCardNode(title, description, author = 'web') {
         </div>
     </article>
     `);
+}
+
+function getRandomId() {
+    return Math.floor(Math.random() * 100000);
 }
 
 export { createColumnNode, createCardNode };

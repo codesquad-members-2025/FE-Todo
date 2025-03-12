@@ -1,5 +1,5 @@
-import { render } from './components/renderKanban.js'
+import { initKanban } from './components/renderKanban.js'
 import { initEventHandlers } from './components/eventHandler.js';
 
-render();
+initKanban();
 initEventHandlers();

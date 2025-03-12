@@ -32,7 +32,7 @@ function initModal() {
     const confirmBtn = document.querySelector('.modal__confirm-btn');
     const modal = document.querySelector('.modal');
 
-    cancelBtn.addEventListener('click', () => modal.close());
+    cancelBtn.addEventListener('click', modal.close.bind(modal));
 
     confirmBtn.addEventListener('click', () => {
         if (modal.dataset.type === 'history') {
@@ -77,7 +77,7 @@ function initKanbanHandlers() {
     const kanban = document.querySelector('.kanban');
 
     kanban.addEventListener('click', e => {
-        const btn = e.target.closest('button');
+        const btn = getClosestBtn(e.target);
 
         // 칸반에서 버튼이 아닌 영역 클릭 시 return
         if (btn === null) return;
@@ -99,6 +99,10 @@ function getCurColumn(e) {
     return e.closest('.column');
 }
 
+function getClosestBtn(e) {
+    return e.closest('button');
+}
+
 // 카드 폼 뒤에 카드 삽입
 function insertCard(card, cardForm) {
     const nextCard = cardForm.nextSibling;
@@ -117,11 +121,17 @@ function toggleCardForm(btn) {
 // 카드 생성
 function createCard(btn) {
     const cardForm = btn.closest('.card-form')
+    
+    const titleArea = cardForm.querySelector('.card__title-input');
+    const textArea = cardForm.querySelector('.card__body-input');
+    
+    const { value: titleInput} = titleArea;
+    const { value: textInput} = textArea;
 
-    const titleInput = cardForm.querySelector('.card__title-input').value;
-    const bodyInput = cardForm.querySelector('.card__body-input').value;
+    titleArea.value = '';
+    textArea.value = '';
 
-    insertCard(createCardNode(titleInput, bodyInput), cardForm);
+    insertCard(createCardNode( { title: titleInput, description: textInput } ), cardForm);
     toggleCardForm(btn);
 }
 
