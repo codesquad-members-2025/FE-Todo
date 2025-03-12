@@ -1,6 +1,6 @@
 import { createColumn, createTaskCard } from './template.js';
 import { pushChild, unshiftChild } from '../utils/dom.js';
-import { getISOStringNow, generateUUID } from '../utils/common.js';
+import { getISOStringNow, generateUUID } from '../utils/generalUtils.js';
 import { openCardDeleteModal } from './modal.js';
 import { loadColumnData, updateCard, removeCard } from '../../store/column.js';
 
