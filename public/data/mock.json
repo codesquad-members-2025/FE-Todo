@@ -7,8 +7,8 @@
       "cards": [
         {
           "id": 101,
-          "title": "이론 학습 - 1주차 마스터 스택 공부 + 정리",
-          "description": "자바스크립트 스코프, 브라우저 랜더링, 이벤트 객체, DOM 등의 개념을 공부하고 플래시카드로 정리한다.",
+          "title": "1주차 마스터 스택 공부 + 정리",
+          "description": "자바스크립트 스코프, 브라우저 랜더링, 이벤트 객체, DOM 등의 개념을 플래시카드로 정리한다.",
           "author": "YooN"
         }
       ]
@@ -20,13 +20,13 @@
       "cards": [
         {
           "id": 201,
-          "title": "과제 요구사항 분석 - Feature List 만들어보기",
+          "title": "과제 요구사항 분석",
           "description": "과제의 요구사항들을 잘게 나누어 Task List를 만들고 Trello에 기록한다.",
           "author": "YooN"
         },
         {
           "id": 202,
-          "title": "과제 요구사항 분석 - UI Flow Chart 만들어보기",
+          "title": "UI Flow Chart 만들어보기",
           "description": "요구사항을 바탕으로 UI Flow Chart를 작성한다.",
           "author": "YooN"
         }

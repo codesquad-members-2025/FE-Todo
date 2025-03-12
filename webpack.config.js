@@ -78,7 +78,15 @@ module.exports = {
     }),
   ],
   devServer: {
-    static: "./dist",
+    static: [
+      {
+        directory: path.join(__dirname, "public"), // ✅ public 폴더 서빙
+      },
+      {
+        directory: path.join(__dirname, "dist"), // ✅ dist 폴더 서빙
+      },
+    ],
     port: 8080,
+    open: true,
   },
 };

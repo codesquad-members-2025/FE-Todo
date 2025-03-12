@@ -93,19 +93,20 @@ body {
 }
 
 .task-card__title {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .task-card__description {
   font-size: 14px;
+  line-height: 1.1;
   color: var(--text-default);
   margin-top: 5px;
 }
 
 .task-card__author {
-  color: var(--text-weak);
   font-size: 12px;
+  color: var(--text-weak);
 }
 
 .history-modal-container {
