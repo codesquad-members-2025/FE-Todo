@@ -2,7 +2,12 @@ import { createColumn, createTaskCard } from './template.js';
 import { pushChild, unshiftChild } from '../utils/dom.js';
 import { getISOStringNow, generateUUID } from '../utils/generalUtils.js';
 import { openCardDeleteModal } from './modal.js';
-import { loadColumnData, updateCard, removeCard } from '../../store/column.js';
+import {
+  loadColumnData,
+  updateCard,
+  removeCard,
+  getSortedCardsByDate,
+} from '../../store/column.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
 function renderColumns(columnList) {
@@ -117,8 +122,7 @@ async function sortCards({ currentTarget }) {
   sortButtonName.textContent = buttonText;
 
   // 데이터 정렬
-  const columnList = await loadColumnData();
-  const sortedData = getSortedTasksByDate(columnList, newSortType);
+  const sortedData = getSortedCardsByDate(newSortType);
 
   // 카드 업데이트
   clearCards();
@@ -128,18 +132,6 @@ async function sortCards({ currentTarget }) {
 function isSortCreated() {
   const sortButtonName = document.querySelector('#sort-btn').dataset.type;
   return sortButtonName === 'created';
-}
-
-// 정렬 함수 (order: 'created' | 'latest')
-function getSortedTasksByDate(columnList, order = 'created') {
-  return columnList.map((column) => ({
-    ...column,
-    tasks: [...column.tasks].sort((a, b) => {
-      return order === 'created'
-        ? new Date(a.createdAt) - new Date(b.createdAt) // 생성순
-        : new Date(b.createdAt) - new Date(a.createdAt); // 최신순
-    }),
-  }));
 }
 
 //Sort Button

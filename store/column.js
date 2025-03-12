@@ -23,4 +23,16 @@ function removeCard(columnId, cardId) {
   if (index !== -1) targetColumn.tasks.splice(index, 1);
 }
 
-export { loadColumnData, updateCard, removeCard };
+// 정렬 함수 (order: 'created' | 'latest')
+function getSortedCardsByDate(order = 'created') {
+  return columnData.map((column) => ({
+    ...column,
+    tasks: [...column.tasks].sort((a, b) => {
+      return order === 'created'
+        ? new Date(a.createdAt) - new Date(b.createdAt) // 생성순
+        : new Date(b.createdAt) - new Date(a.createdAt); // 최신순
+    }),
+  }));
+}
+
+export { loadColumnData, updateCard, removeCard, getSortedCardsByDate };
