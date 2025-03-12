@@ -3,12 +3,13 @@ import { makeTaskCard } from "./template.js";
 const main = document.querySelector(".page-main__columnlist");
 main.addEventListener("click", (event) => {
   const button = event.target.closest("button");
-
-  if (button.classlist.contains("register-button")) {
+  if (!button) return;
+  if (button.classList.contains("register-button")) {
     const inputData = getModalInputValues(button);
     const taskObj = createTaskData(inputData);
     saveTasks(inputData.columnType, taskObj);
     const cardForm = makeTaskCard(inputData.titleValue, inputData.contentValue);
+    drawModal(inputData.columnType, cardForm);
   }
 
   //이벤트 핸들러 들어갈 공간
@@ -47,8 +48,15 @@ function saveTasks(columnType, taskObject) {
 }
 
 //카드 템플릿 이용해 카드HMTL을 만드는 함수
-function makeCardForm() {}
+// function makeCardForm() {}
 
 //이렇게 하면 로컬 스토리지에 데이터 저장은 완료.
 //이제 칼럼 영역에 카드를 뿌려야 한다.
-function drawModal(dataTarget, cardForm) {}
+function drawModal(dataTarget, cardForm) {
+  const newElement = document.createElement("div");
+  newElement.innerHTML = cardForm;
+  const targetSection = document.querySelector(
+    `.columnlist__col[data-type=${dataTarget}]`
+  );
+  targetSection.appendChild(newElement);
+}

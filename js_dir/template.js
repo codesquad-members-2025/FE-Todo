@@ -1,4 +1,4 @@
-export function makeTaskCard(title, content) {
+export const makeTaskCard = function (title, content) {
   const taskTemplate = `
                 <div class="todo-card">
                   <article class="todo-card__textarea">
@@ -18,4 +18,6 @@ export function makeTaskCard(title, content) {
                   </div>
                 </div>
               `;
-}
+
+  return taskTemplate;
+};
