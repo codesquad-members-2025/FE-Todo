@@ -42,3 +42,11 @@ img {
   margin: 5px;
   /* width: 14px; */
 }
+
+strong {
+  font-weight: bold;
+}
+
+button:focus {
+  outline: none;
+}

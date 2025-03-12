@@ -1,5 +1,6 @@
 @import "reset.css";
 @import "global.css";
+@import "utility.css";
 
 body {
   font-family: "Pretendard";
@@ -11,8 +12,6 @@ body {
 /* Header */
 .header {
   height: 60px;
-  display: flex;
-  justify-content: space-between;
   padding: 18px 80px;
 }
 
@@ -22,37 +21,24 @@ body {
   color: var(--text-strong);
 }
 
-.header__history {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .header__history-icon {
   width: 24px;
   height: 24px;
+  cursor: pointer;
 }
 
 /* Column Container */
 .column-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
   padding: 18px 80px;
 }
 
 /* Column */
 .column {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   width: 320px;
   margin: 0 24px 50px 0;
 }
 
 .column__header {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
   height: 14px;
   font-size: 20px;
@@ -62,8 +48,6 @@ body {
 }
 
 .column__header-left {
-  display: flex;
-  align-items: center;
   gap: 8px;
 }
 
@@ -82,8 +66,6 @@ body {
 }
 
 .column__header-right {
-  display: flex;
-  align-items: center;
   gap: 10px;
 }
 
@@ -96,8 +78,6 @@ body {
 
 /* Task Card */
 .task-card {
-  display: flex;
-  justify-content: space-between;
   width: 320px;
   height: 104px;
   margin: 0px 0px 10px 0;
@@ -128,15 +108,9 @@ body {
   font-size: 12px;
 }
 
-.task-card__right {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
 .history-modal-container {
-  display: grid;
-  grid-template-rows: 48px 1fr 40px;
+  display: none;
+  grid-template-rows: 48px 1fr 40px 8px;
   gap: 8px;
   position: fixed;
   top: 64px;
@@ -149,18 +123,143 @@ body {
 }
 
 .history-modal__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14.5px 16px;
+  padding: 15px 16px;
+  margin: 8px;
   font-size: 16px;
   font-weight: 700;
   color: var(--text-strong);
 }
 
 .history-modal__header-close {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  cursor: pointer;
+
+  button {
+    /* 스타일 초기화 */
+    background-color: transparent;
+    border: none;
+    color: var(--text-default);
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.history-modal__content {
+  width: 350px;
+  margin: 0px 8px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+}
+
+.history-modal__content-item {
+  width: 344px;
+  height: 113px;
+  padding: 16px;
+}
+
+.history-modal__content-item-left {
+  width: 40px;
+  margin-right: 16px;
+}
+
+.history-modal__content-item-right {
+  width: 256px;
+  height: 81px;
+}
+
+#action-user-name {
   color: var(--text-default);
+}
+
+#action-description {
+  color: var(--text-default);
+}
+
+#action-time {
+  color: var(--text-weak);
+}
+
+.history-modal__footer {
+  width: 350px;
+  height: 40px;
+  padding: 4px 8px 4px 0;
+  margin: 8px;
+}
+
+.history-modal__footer-btn {
+  width: 104px;
+  color: var(--text-danger);
+  font-weight: bold;
+}
+
+/* 히스토리 모달 애니메이션 */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+.history-modal-container {
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+/* 히스토리 삭제 확인 모달 */
+.history-delete-modal {
+  border-radius: 10px;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: var(--surface-default);
+}
+
+.history-delete-modal:not([open]) {
+  display: none;
+}
+
+.history-delete-modal__content {
+  display: grid;
+  grid-template-rows: 32px 1fr 32px 1fr 24px;
+  justify-items: center;
+  align-items: center;
+  background-color: var(--surface-default);
+  width: 400px;
+  height: 150px;
+  border-radius: 15px;
+}
+
+.history-delete-modal__message {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--text-default);
+}
+
+.history-delete-modal__buttons {
+  padding: 5px 8px;
+}
+
+#cancel-delete-btn {
+  background-color: var(--surface-alt);
+  color: var(--text-default);
+  font-weight: bold;
+}
+
+#confirm-delete-btn {
+  background-color: var(--text-danger);
+  color: white;
+  font-weight: bold;
 }
