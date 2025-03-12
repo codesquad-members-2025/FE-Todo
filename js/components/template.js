@@ -22,7 +22,7 @@ function createColumn(id, title, taskCount) {
     ${cardForm}
     <div class="card-container flex-col">
         <!-- 카드 항목은 여기서 동적으로 추가 -->
-     </div>
+    </div>
   </div>
   </section>
 `;
@@ -31,8 +31,8 @@ function createColumn(id, title, taskCount) {
 const cardForm = `
   <article class="card-form card-common flex-col" style="display: none">
   <div class="content-section flex-col">
-    <input type="text" class="form-input text-strong tx-m14" placeholder="여기에 입력하세요" value="">
-    <textarea class="form-textarea text-default tx-m14" placeholder="여기에 자세히 작성하세요"></textarea>
+    <input type="text" class="form-input text-strong tx-m14" placeholder="제목을 입력하세요" value="">
+    <textarea class="form-textarea text-default tx-m14" placeholder="내용을 입력하세요" value=""></textarea>
   </div>
   <div class="button-section">
     <button class="form-cancel-btn form-common-btn text-default tx-b14">
