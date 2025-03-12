@@ -1,26 +1,48 @@
 import { makeTaskCard } from "./template.js";
-
-const main = document.querySelector(".page-main__columnlist");
-main.addEventListener("click", (event) => {
+import {
+  showAlert,
+  closeAlert,
+  deleteModal,
+  getStoredModalData,
+} from "./deleteCardHandler.js";
+const body = document.querySelector(".top-layout-container");
+body.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
-  if (button.classList.contains("register-button")) {
+  if (findContainClass(button, "register-button")) {
     const inputData = getModalInputValues(button);
     const taskObj = createTaskData(inputData);
     saveTasks(inputData.columnType, taskObj);
-    const cardForm = makeTaskCard(inputData.titleValue, inputData.contentValue);
+    const cardForm = makeTaskCard(
+      taskObj.id,
+      inputData.titleValue,
+      inputData.contentValue
+    );
     drawModal(inputData.columnType, cardForm);
     clearInputFields(button);
-  } else if (button.classList.contains("cancel-button")) {
+    closeTaskModal(button);
+  } else if (findContainClass(button, "cancel-button")) {
     closeTaskModal(button);
     clearInputFields(button);
+  } else if (findContainClass(button, "delete-task-btn")) {
+    const modalId = button.closest(".todo-card").id;
+    const modalSection = button.closest(".columnlist__col").dataset.type;
+    showAlert(modalId, modalSection);
+  } else if (button.id === "cancel-button") {
+    closeAlert();
+  } else if (button.id === "confirm-delete-button") {
+    const { id, section } = getStoredModalData();
+    deleteModal(section, id);
+    closeAlert();
   }
 
   //이벤트 핸들러 들어갈 공간
 });
 
 // -----------------------------
-
+function findContainClass(button, target) {
+  return button.classList.contains(target);
+}
 // 입력값을 가져오는 함수
 function getModalInputValues(button) {
   const modal = button.closest(".task-modal");
@@ -46,8 +68,11 @@ function createTaskData(inputData) {
 function saveTasks(columnType, taskObject) {
   const storedData = localStorage.getItem("tasks");
   const tasks = storedData ? JSON.parse(storedData) : {};
-  if (!tasks[columnType]) tasks[columnType] = [];
-  tasks[columnType].push(taskObject);
+  if (!tasks[columnType]) tasks[columnType] = {}; //객체로 초기화
+  tasks[columnType][taskObject.id] = {
+    title: taskObject.title,
+    content: taskObject.content,
+  };
   localStorage.setItem("tasks", JSON.stringify(tasks));
 }
 
