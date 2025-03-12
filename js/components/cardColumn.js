@@ -1,6 +1,6 @@
 import { createColumn, createTaskCard } from './template.js';
 import { pushChild, unshiftChild } from '../utils/dom.js';
-import { getISOStringNow } from '../utils/date.js';
+import { getISOStringNow, generateUUID } from '../utils/common.js';
 import { openCardDeleteModal } from './modal.js';
 import { loadColumnData, updateCard, removeCard } from '../../store/column.js';
 
@@ -173,7 +173,7 @@ function createNewCard({ target }) {
 
 function getInputData(columnEl) {
   const createdAt = getISOStringNow();
-  const id = 10;
+  const id = generateUUID();
   const author = isMobile() ? 'mobile' : 'web';
 
   // value 가져오기
