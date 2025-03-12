@@ -19,7 +19,7 @@ function renderColumns(columnList) {
 // 칼럼에 카드 생성
 function renderCardsForColumn(columnList) {
   columnList.forEach(({ id, tasks }) => {
-    const columnCardList = document.querySelector(`#${id} .card-list`);
+    const columnCardList = document.querySelector(`#${id} .card-container`);
     const taskCardsHtml = tasks.reduce(
       (acc, { id, title, content, author }) =>
         (acc += createTaskCard(id, title, content, author)),
@@ -41,7 +41,7 @@ function clearCards() {
   document.querySelectorAll('.column').forEach(clearCardOfColumn);
 
   function clearCardOfColumn(columnElement) {
-    const columnCardList = columnElement.querySelector('.card-list');
+    const columnCardList = columnElement.querySelector('.card-container');
     if (columnCardList) {
       columnCardList.innerHTML = ''; // 각 칼럼의 카드 리스트만 비우기
     }
@@ -60,6 +60,26 @@ function makeCardRemover(cardId) {
 function initCardRemoveButton() {
   const columnSection = document.getElementById('columns-container');
   columnSection.addEventListener('click', openCardDeleteModal);
+}
+
+//카드 생성 폼 토글 이벤트
+function initToggleCardFormButton() {
+  const columnSection = document.getElementById('columns-container');
+  columnSection.addEventListener('click', toggleCardForm);
+}
+
+//카드 폼 토글
+function toggleCardForm(event) {
+  const button = event.target.closest('.card-add-btn');
+  const column = event.target.closest('.column');
+  if (!button) return;
+
+  const cardForm = document.querySelector(
+    `#${column.id} .card-list .card-form`
+  );
+  const isVisable = window.getComputedStyle(cardForm).display === 'flex';
+
+  cardForm.style.display = isVisable ? 'none' : 'flex';
 }
 
 //정렬 버튼 클릭 이벤트
@@ -110,6 +130,7 @@ async function initColumnAndCard() {
 
   initCardRemoveButton();
   initSortButton(data);
+  initToggleCardFormButton();
 }
 
 export { clearCards, makeCardRemover, initColumnAndCard };

@@ -32,8 +32,8 @@ function openCardDeleteModal(event) {
   const button = event.target.closest('.delete-card-btn');
   if (!button) return;
 
-  // 가장 가까운 .todo-list 안에 있는 .card-list 찾기
-  const todoList = button.closest('.card-list');
+  // 가장 가까운 .todo-list 안에 있는 .card-container 찾기
+  const todoList = button.closest('.card-container');
   if (!todoList) return; // todo-list 내부에서만 동작하도록 제한
 
   const card = button.closest('.todo-card');
