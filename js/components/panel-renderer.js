@@ -1,4 +1,4 @@
-import { createLogNode } from './template.js';
+import { createLogNode } from './template-utils.js';
 
 function renderPanel(data) {
     const logData = data.logs.reduce((fragment, logObj) => {

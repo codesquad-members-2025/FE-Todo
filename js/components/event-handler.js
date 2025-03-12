@@ -1,4 +1,4 @@
-import { createCardNode } from './template.js';
+import { createCardNode } from './template-utils.js';
 
 export function initEventHandlers() {
     initHistoryPanel();

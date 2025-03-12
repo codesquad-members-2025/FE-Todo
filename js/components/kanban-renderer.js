@@ -1,4 +1,4 @@
-import { createColumnNode, createCardNode } from './template.js';
+import { createColumnNode, createCardNode } from './template-utils.js';
 
 function render(data) {
     const kanbanData = data.columns.reduce((fragment, columnObj) => {
