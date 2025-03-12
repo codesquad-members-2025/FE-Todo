@@ -1,6 +1,6 @@
-export const makeTaskCard = function (title, content) {
+export const makeTaskCard = function (id, title, content) {
   const taskTemplate = `
-                <div class="todo-card">
+                <div id ="${id}" class="todo-card">
                   <article class="todo-card__textarea">
                     <div class="card-textarea__body">
                       <header class="task-title">${title}</header>
@@ -22,4 +22,21 @@ export const makeTaskCard = function (title, content) {
               `;
 
   return taskTemplate;
+};
+
+export const makeDeleteAlert = function (alertMessage, cancel) {
+  const alertTemplate = `
+      <div class="delete-history__content">
+        <p>${alertMessage}</p>
+        <div class="delete-history__buttons">
+          <button class="delete-history__button" id="cancel-button">
+            <div class="textLabel">${cancel}</div>
+          </button>
+          <button class="delete-history__button" id="confirm-delete-button">
+            <div class="textLabel">삭제</div>
+          </button>
+        </div>
+      </div>
+   `;
+  return alertTemplate;
 };

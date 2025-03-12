@@ -50,13 +50,33 @@ console.log(target);
 ```JSON
 
 tasks = {
-  todo:[{},{},{}...{}],
+  todo:{{},{},{}...{}},
 
-  doing:[{},{},{}...{}],
+  doing:{{},{},{}...{}},
 
-  done:[{},{},{}...{}]
+  done:{{},{},{}...{}}
 }
 
+```
+
+#### 각 데이터 타입 열의 데이터 구조
+
+```javascript
+ todo:{
+  id1:{
+    title: inputData.titleValue,
+    content: inputData.contentValue,
+  },
+  id2:{
+    title: inputData.titleValue,
+    content: inputData.contentValue,
+  },
+  id3:{
+    title: inputData.titleValue,
+    content: inputData.contentValue,
+  }
+
+ }
 ```
 
 ### 로컬 스토리지에서 데이터를 읽어서 해당하는 컬럼 영역에 넣어줘야한다.
@@ -90,4 +110,18 @@ taskObject = {
 
 ### 컬럼 파트(메인 할일 조작 파트)
 
--
+#### 👀할 일 카드 삭제
+
+- 🔥 전체적인 흐름
+  1. 할일 카드의 삭제 버튼에 클릭 이벤트 발생
+  2. 삭제 경고 dialog를 띄운다.
+  3. "유지"버튼이 눌리면 다시 숨긴다.
+  4. "삭제" 버튼에 클릭 이벤트 발생시 다음과 같이 진행한다.
+  5. 로컬스토리지에서 이벤트가 발생한 카드의 id를 탐색한다.
+  6. 해당하는 id의 데이터를 삭제한다.
+  7. 이제 화면의 카드도 지워야한다.👀
+  8. 클릭이벤트가 발생한 섹션으로 타고올라간다.
+  9. 해당하는 섹션에서 id에 해당하는 카드 모달을 삭제한다.
+- 일단 클릭한 카드의 id를 알아야 로컬 스토리지에서 삭제할 카드의 id를 탐색할 수 있다.
+
+#### 👀할 일 카드 내용 수정
