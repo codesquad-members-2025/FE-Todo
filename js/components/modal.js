@@ -6,7 +6,7 @@ function toggleModal() {
   dialog.open ? dialog.close() : dialog.showModal();
 }
 
-function createConfirmModal(textContent, deleteCallback) {
+function setConfirmModal(textContent, deleteCallback) {
   const dialog = document.getElementById('modal');
   const description = dialog.querySelector('#modal-description');
   description.textContent = textContent;
@@ -40,7 +40,7 @@ function openCardDeleteModal(event) {
 
   if (cardId) {
     const cardRemover = makeCardRemover(cardId);
-    createConfirmModal('선택한 카드를 삭제할까요?', cardRemover);
+    setConfirmModal('선택한 카드를 삭제할까요?', cardRemover);
     toggleModal();
   }
 }
@@ -52,10 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 활동기록 삭제 모달 오픈
 function openHistoryDeleteModal() {
-  createConfirmModal(
-    '모든 사용자 활동 기록을 삭제할까요?',
-    removeHistoryRecords
-  );
+  setConfirmModal('모든 사용자 활동 기록을 삭제할까요?', removeHistoryRecords);
   toggleModal();
 }
 

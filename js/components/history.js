@@ -5,7 +5,7 @@ import { loadHistoryData } from '../../store/history.js';
 
 function renderHistoryItems(historyList) {
   if (historyList.length === 0) {
-    toggleHistoryDefaultUi(true);
+    setHistoryDefaultUI(true);
     return;
   }
   const historyContainer = document.querySelector('#history-container');
@@ -20,14 +20,14 @@ function renderHistoryItems(historyList) {
   );
 
   pushChild(historyContainer, historyItemsHtml);
-  toggleDeleteButton(true); // 기록삭제 버튼 보여주기
+  setHistoryDeleteButton(true); // 기록삭제 버튼 보여주기
 }
 
 // Remove history record
 function removeHistoryRecords() {
   document.getElementById('history-container').innerHTML = '';
-  toggleHistoryDefaultUi(true);
-  toggleDeleteButton(false); // 기록삭제 버튼 감추기
+  setHistoryDefaultUI(true);
+  setHistoryDeleteButton(false); // 기록삭제 버튼 감추기
 }
 
 //history 열기
@@ -39,15 +39,15 @@ function toggleHistory() {
 }
 
 // Toggle Default history
-function toggleHistoryDefaultUi(show) {
+function setHistoryDefaultUI(isVisible) {
   const historyDefault = document.getElementById('history-default');
-  historyDefault.style.display = show ? 'flex' : 'none';
+  historyDefault.style.display = isVisible ? 'flex' : 'none';
 }
 
 // Toggle History Footer
-function toggleDeleteButton(show) {
+function setHistoryDeleteButton(isVisible) {
   const footerElement = document.querySelector('#history footer');
-  footerElement.style.display = show ? 'flex' : 'none';
+  footerElement.style.display = isVisible ? 'flex' : 'none';
 }
 
 //History Event Listener

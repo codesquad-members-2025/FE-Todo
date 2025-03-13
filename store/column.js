@@ -4,7 +4,7 @@ const COLUMN_DATA_URL = './data/columnData.json';
 
 let columnData = null;
 
-async function loadColumnData() {
+async function loadColumnsData() {
   if (columnData === null) {
     columnData = await fetchData(COLUMN_DATA_URL);
   }
@@ -35,4 +35,4 @@ function getSortedCardsByDate(order = 'created') {
   }));
 }
 
-export { loadColumnData, updateCard, removeCard, getSortedCardsByDate };
+export { loadColumnsData, updateCard, removeCard, getSortedCardsByDate };

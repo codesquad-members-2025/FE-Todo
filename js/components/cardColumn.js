@@ -3,17 +3,17 @@ import { pushChild, unshiftChild } from '../utils/dom.js';
 import { getISOStringNow, generateUUID } from '../utils/generalUtils.js';
 import { openCardDeleteModal } from './modal.js';
 import {
-  loadColumnData,
+  loadColumnsData,
   updateCard,
   removeCard,
   getSortedCardsByDate,
 } from '../../store/column.js';
 
 // 전체 칼럼 생성: 초기 랜더링시
-function renderColumns(columnList) {
+function renderColumns(columnsData) {
   const columnContainer = document.querySelector('#columns-container');
 
-  const columnsHtml = columnList.reduce(
+  const columnsHtml = columnsData.reduce(
     (acc, { id, title, taskCount }) =>
       (acc += createColumn(id, title, taskCount)),
     ''
@@ -23,8 +23,8 @@ function renderColumns(columnList) {
 }
 
 // 칼럼에 카드 생성
-function renderCardsForColumn(columnList) {
-  columnList.forEach(({ id, tasks }) => {
+function renderCardsForColumn(columnsData) {
+  columnsData.forEach(({ id, tasks }) => {
     const columnCardList = document.querySelector(`#${id} .card-container`);
     const taskCardsHtml = tasks.reduce(
       (acc, { id, title, content, author }) =>
@@ -52,9 +52,9 @@ function renderCard(columnId, cardData) {
 }
 
 // 칼럼과 카드 렌더링을 호출하는 메인 함수
-async function renderColumnsAndCards(columnList) {
-  renderColumns(columnList); // 칼럼 생성
-  renderCardsForColumn(columnList); // 카드 추가
+async function renderColumnsAndCards(columnsData) {
+  renderColumns(columnsData); // 칼럼 생성
+  renderCardsForColumn(columnsData); // 카드 추가
 }
 
 // 각 칼럼의 카드 전부 제거
@@ -109,7 +109,7 @@ function toggleCardForm({ target }) {
 //정렬 버튼 클릭 이벤트
 async function sortCards({ currentTarget }) {
   const sortButton = currentTarget;
-  const sortButtonName = sortButton.querySelector('.sort-btn-name');
+  const sortButtonLabel = sortButton.querySelector('.sort-btn-label');
   const currentSortType = sortButton.dataset.type;
 
   const newSortType = currentSortType === 'created' ? 'latest' : 'created';
@@ -117,7 +117,7 @@ async function sortCards({ currentTarget }) {
 
   // 상태 변경 및 버튼 텍스트 업데이트
   sortButton.dataset.type = newSortType;
-  sortButtonName.textContent = buttonText;
+  sortButtonLabel.textContent = buttonText;
 
   // 데이터 정렬
   const sortedData = getSortedCardsByDate(newSortType);
@@ -128,8 +128,8 @@ async function sortCards({ currentTarget }) {
 }
 
 function isSortCreated() {
-  const sortButtonName = document.querySelector('#sort-btn').dataset.type;
-  return sortButtonName === 'created';
+  const sortButtonLabel = document.querySelector('#sort-btn').dataset.type;
+  return sortButtonLabel === 'created';
 }
 
 //Sort Button
@@ -211,7 +211,7 @@ function initCreateCardBtn() {
 }
 
 async function initColumnAndCard() {
-  const data = await loadColumnData();
+  const data = await loadColumnsData();
 
   renderColumnsAndCards(data);
   initCardRemoveButton();
