@@ -243,8 +243,7 @@ body {
 }
 
 .form-textarea {
-  height: 100%;
-  max-height: 200px;
+  height: 20px;
   overflow-y: hidden;
 }
 
