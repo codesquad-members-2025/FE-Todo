@@ -59,8 +59,10 @@ function decideDelete() {
 }
 
 // 이벤트 설정
-openButton.addEventListener("click", openHistoryList);
-closedButton.addEventListener("click", closeHistoryList);
-deleteButton.addEventListener("click", confirmDeleteAlert);
-cancleButton.addEventListener("click", cancleDelete);
-decideDeletButton.addEventListener("click", decideDelete);
+export function historyEvent() {
+  openButton.addEventListener("click", openHistoryList);
+  closedButton.addEventListener("click", closeHistoryList);
+  deleteButton.addEventListener("click", confirmDeleteAlert);
+  cancleButton.addEventListener("click", cancleDelete);
+  decideDeletButton.addEventListener("click", decideDelete);
+}
