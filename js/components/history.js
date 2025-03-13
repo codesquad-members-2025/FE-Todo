@@ -3,71 +3,95 @@ import { pushChild } from '../utils/dom.js';
 import { openHistoryDeleteModal } from './modal.js';
 import { loadHistoryData } from '../../store/history.js';
 
+// ──────────────────────────────
+//  1. 캐싱된 DOM 요소(동적이 요소가 아닌 DOM 요소)
+// ──────────────────────────────
+const historyContainer = document.getElementById('history-container');
+const historyDefault = document.getElementById('history-default');
+const historyFooter = document.querySelector('#history footer');
+const historySection = document.getElementById('history');
+
+// ──────────────────────────────
+//  2. 기록 렌더링 및 삭제
+// ──────────────────────────────
+
+// 기록 렌더링
 function renderHistoryItems(historyList) {
   if (historyList.length === 0) {
     setHistoryDefaultUI(true);
     return;
   }
-  const historyContainer = document.querySelector('#history-container');
 
   const historyItemsHtml = historyList.reduce(
-    (acc, { username, profileImage, actionText, timestamp }) => {
+    (items, { username, profileImage, actionText, timestamp }) => {
       return (
-        acc + createHistoryItem(username, profileImage, actionText, timestamp)
+        items + createHistoryItem(username, profileImage, actionText, timestamp)
       );
     },
     ''
   );
 
   pushChild(historyContainer, historyItemsHtml);
-  setHistoryDeleteButton(true); // 기록삭제 버튼 보여주기
+  setHistoryDeleteButton(true);
 }
 
-// Remove history record
+// 기록 삭제
 function removeHistoryRecords() {
-  document.getElementById('history-container').innerHTML = '';
+  historyContainer.innerHTML = '';
   setHistoryDefaultUI(true);
-  setHistoryDeleteButton(false); // 기록삭제 버튼 감추기
+  setHistoryDeleteButton(false);
 }
 
-//history 열기
+// ──────────────────────────────
+//  3. UI 토글 함수
+// ──────────────────────────────
+
+// 히스토리 열기/닫기
 function toggleHistory() {
-  const history = document.querySelector('#history');
-  const isVisable = window.getComputedStyle(history).display === 'flex';
-
-  history.style.display = isVisable ? 'none' : 'flex';
+  setHistoryVisibility(historySection.style.display !== 'flex');
 }
 
-// Toggle Default history
+// 히스토리 표시 여부 설정
+function setHistoryVisibility(isVisible) {
+  historySection.style.display = isVisible ? 'flex' : 'none';
+}
+
+// 기본 UI 표시 여부
 function setHistoryDefaultUI(isVisible) {
-  const historyDefault = document.getElementById('history-default');
   historyDefault.style.display = isVisible ? 'flex' : 'none';
 }
 
-// Toggle History Footer
+// 기록 삭제 버튼 표시 여부
 function setHistoryDeleteButton(isVisible) {
-  const footerElement = document.querySelector('#history footer');
-  footerElement.style.display = isVisible ? 'flex' : 'none';
+  historyFooter.style.display = isVisible ? 'flex' : 'none';
 }
 
-//History Event Listener
-function initHistoryButton() {
-  const historyButton = document.getElementById('history-open-btn');
-  historyButton.addEventListener('click', toggleHistory);
+// ──────────────────────────────
+//  4. 이벤트 핸들링
+// ──────────────────────────────
 
-  const historyCloseButton = document.getElementById('history-close-btn');
-  historyCloseButton.addEventListener('click', toggleHistory);
+// 이벤트 리스너 등록
+function initHistoryButtons() {
+  const buttonMap = new Map([
+    ['#history-open-btn', toggleHistory],
+    ['#history-close-btn', toggleHistory],
+    ['#history-delete-btn', openHistoryDeleteModal],
+  ]);
 
-  const historyDeleteButton = document.getElementById('history-delete-btn');
-  historyDeleteButton.addEventListener('click', openHistoryDeleteModal);
+  buttonMap.forEach((handler, selector) => {
+    const button = document.querySelector(selector);
+    if (button) button.addEventListener('click', handler);
+  });
 }
+
+// ──────────────────────────────
+//  5. 히스토리 초기화
+// ──────────────────────────────
 
 async function initHistory() {
   const data = await loadHistoryData();
-
   renderHistoryItems(data);
-
-  initHistoryButton();
+  initHistoryButtons();
 }
 
 export { initHistory, removeHistoryRecords };

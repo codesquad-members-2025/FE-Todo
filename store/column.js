@@ -18,9 +18,7 @@ function updateCard(columnId, cardData) {
 
 function removeCard(columnId, cardId) {
   const targetColumn = columnData.find((column) => column.id === columnId);
-  const index = targetColumn.tasks.findIndex((item) => item.id === cardId);
-
-  if (index !== -1) targetColumn.tasks.splice(index, 1);
+  targetColumn.tasks = targetColumn.tasks.filter((task) => task.id !== cardId);
 }
 
 // 정렬 함수 (order: 'created' | 'latest')
