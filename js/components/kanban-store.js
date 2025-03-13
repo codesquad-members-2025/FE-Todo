@@ -5,19 +5,48 @@ const Store = (function () {
 
     if (kanbanNodes === null) initStore();
 
-    const setData = ({columns}) => {
+    const setData = ({ columns }) => {
         kanbanNodes = columns;
     }
 
-    const getData = () => {
-        return kanbanNodes;
-    }
-
-    const render = () => {
+    const renderData = () => {
         renderKanban(kanbanNodes);
     }
 
-    return { setData, getData, render }
+    const addCard = (columnId, cardData) => {
+        const column = _findColumn(columnId);
+        if (!column) throw new Error(`Column not found: ID "${columnId}"`);
+        column.cards.push(_createCard(cardData));
+
+        renderData();
+    }
+    
+    const removeCard = (columnId, cardId) => {
+        let curColumn = _findColumn(columnId);
+        curColumn.cards = curColumn.cards.filter(card => card.id !== cardId);
+
+        renderData();
+    }
+    
+    const _createCard = ({ id, title, description, author }) => {
+        return {
+            "id": id,
+            "title": title,
+            "description": description,
+            "author": author
+        }
+    }
+    
+    const _findColumn = (columnId) => {
+        return kanbanNodes.find(column => column.id === columnId);
+    }
+
+    return {
+        setData,
+        renderData,
+        addCard,
+        removeCard,
+    }
 })();
 
 function initStore() {
@@ -25,7 +54,7 @@ function initStore() {
         .then(response => response.json())
         .then(data => {
             Store.setData(data);
-            Store.render();
+            Store.renderData();
         })
         .catch(error => console.error(`데이터 로드 오류: ${error})`));
 }

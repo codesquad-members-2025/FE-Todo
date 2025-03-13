@@ -14,7 +14,7 @@ function renderKanban(columns) {
         return fragment;
     }, getFragment())
 
-    document.querySelector('.kanban').appendChild(kanbanNodes);
+    document.querySelector('.kanban').replaceChildren(kanbanNodes);
 }
 
 function getFragment() {
