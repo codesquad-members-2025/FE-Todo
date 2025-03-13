@@ -97,11 +97,32 @@ h1 {
 .plus {
   width: 14px;
   height: 14px;
-  color: var(--text-weak);
+  background-color: var(--text-weak);
+  mask-image: url("../images/plus.svg");
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
+.closed {
+  width: 12px;
+  height: 12px;
+  background-color: var(--text-weak);
+  mask-image: url("../images/closed.svg");
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
+.edit {
+  width: 14px;
+  height: 14px;
+  background-color: var(--text-weak);
+  mask-image: url("../images/edit.svg");
+  mask-size: cover;
+  mask-repeat: no-repeat;
 }
 
 .plus:hover {
-  color: var(--accent-red);
+  background-color: var(--accent-red);
 }
 .column-header__closedButton {
   width: 24px;
@@ -111,11 +132,6 @@ h1 {
   align-items: center;
   border: none;
   background-color: unset;
-}
-
-.plus,
-.closed {
-  fill: var(--text-weak);
 }
 
 .column-cardList {
