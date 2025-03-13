@@ -50,10 +50,10 @@ function decideDelete() {
 
   // 부모, 자식 관계로 접근
   const recordList = document.querySelector(".history__recordList");
-  while (recordList.firstChild) {
-    // 첫번째 자식요소가 존재하지 않을 때 까지 반복
-    recordList.removeChild(recordList.firstChild);
-  }
+  // while (recordList.firstChild) {
+  //   // 첫번째 자식요소가 존재하지 않을 때 까지 반복
+  //   recordList.removeChild(recordList.firstChild);
+  // }
 
   recordList.innerHTML = `<div class="record-empty">사용자 활동 기록이 없습니다.</div>`;
 }

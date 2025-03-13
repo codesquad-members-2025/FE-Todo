@@ -9,6 +9,7 @@ export function eventAddCard() {
     } else {
       const columnList = event.target.closest(".column-header");
       if (columnList && columnList.nextElementSibling) {
+        const fragment = document.createDocumentFragment();
         const addCardForm = document.createElement("div");
         addCardForm.classList.add("add-card");
         addCardForm.innerHTML = `<div class="add-card__input">
@@ -31,7 +32,8 @@ export function eventAddCard() {
   <button class="add-card__submit-btn">등록</button>
 </div>
 </div>`;
-        columnList.nextElementSibling.prepend(addCardForm);
+        fragment.appendChild(addCardForm);
+        columnList.nextElementSibling.prepend(fragment);
         processAddCard(addCardForm);
       }
     }

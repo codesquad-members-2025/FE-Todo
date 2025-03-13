@@ -28,6 +28,7 @@ function generateCardsFromList(colum) {
   let count = 0;
   const id = document.querySelector(`.${colum.id}-cardList`);
   let countCard = document.getElementsByClassName("count_card")[index];
+  const fragment = document.createDocumentFragment();
   colum.cardList.forEach((cardData) => {
     const cardElement = document.createElement("div");
     cardElement.classList.add("show-card");
@@ -71,13 +72,15 @@ function generateCardsFromList(colum) {
       </button>
     </div>`;
     count++;
-    id.appendChild(cardElement);
+    fragment.appendChild(cardElement);
   });
+  id.appendChild(fragment);
   countCard.textContent = count;
 }
 
 function historyView(data) {
   const recordHistory = document.getElementById("recordHistory");
+  const fragment = document.createDocumentFragment();
   data.historyList.forEach((record) => {
     // let action = record.action;
     // let title = record.title;
@@ -100,8 +103,9 @@ function historyView(data) {
       <div class="timeStamp">${record.timeStamp}</div>
     </div>
   </div>`;
-    recordHistory.appendChild(recordElement);
+    fragment.appendChild(recordElement);
   });
+  recordHistory.appendChild(fragment);
 }
 
 function addTextOnAction(action, title, fromColumn, toColumn) {
@@ -121,5 +125,3 @@ function addTextOnAction(action, title, fromColumn, toColumn) {
       return text;
   }
 }
-
-// fetchData();
