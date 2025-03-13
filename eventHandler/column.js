@@ -1,9 +1,10 @@
 const columnListAll = document.querySelector(".columnList");
 
 export function eventAddCard() {
-  const addButton = columnListAll.querySelector(".column-header__plusButton");
-  addButton.addEventListener("click", function (event) {
-    const existAddCard = columnListAll.querySelector(".add-card");
+  columnListAll.addEventListener("click", function (event) {
+    const existAddCard = event.target
+      .closest(".column-header")
+      .nextElementSibling.querySelector(".add-card");
     if (existAddCard) {
       existAddCard.remove();
     } else {
@@ -47,7 +48,7 @@ wrap="hard"
 
 function processAddCard(addCardForm) {
   addCardForm.addEventListener("click", function (event) {
-    if (event.target.className === "add-card__cancle-btn") {
+    if (event.target.classList.contains("add-card__cancle-btn")) {
       addCardForm.remove();
     } else if (event.target.classList.contains("add-card__submit-btn")) {
       // 이벤트를 addCardForm, 즉 카드 추가 전체 폼에 설정했기 때문에
@@ -76,7 +77,8 @@ function processAddCard(addCardForm) {
 function createShowCard(title, content) {
   // 입력받은 content를 줄바꿈까지 그대로 출력하기 위해 realContent 내용 추가
   // content에 줄바꿈은 \n으로 표시되기에 줄바꿈 태그로 바꿔주기
-  let realContent = content.replace(/\n/g, "<br>");
+  let lineBreakContent = content.replace(/\n/g, "<br>");
+  let realContent = lineBreakContent.replace(/\s/g, "&nbsp;");
   const cardElement = document.createElement("div");
   cardElement.classList.add("show-card");
   cardElement.innerHTML = `<div class="show-card__total">
