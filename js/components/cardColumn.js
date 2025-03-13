@@ -88,12 +88,19 @@ function createNewCard(target) {
 
   closeCardForm(formCard);
   saveAndRenderCard(column.id, inputData);
+  resetValues(formCard);
 }
 
 // 카드 데이터 저장 & UI 업데이트
 function saveAndRenderCard(columnId, inputData) {
   updateCard(columnId, inputData);
   renderCard(columnId, inputData);
+}
+
+// 입력 값 초기화
+function resetValues(formCard) {
+  formCard.querySelector('input').value = '';
+  formCard.querySelector('textarea').value = '';
 }
 
 // 카드 제거 함수 반환 (고차함수)
