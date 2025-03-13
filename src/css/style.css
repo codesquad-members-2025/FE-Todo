@@ -3,7 +3,7 @@
 @import "utility.css";
 
 body {
-  font-family: "Pretendard";
+  font-family: "Pretendard", sans-serif;
   background-color: #f5f5f5;
   margin: 0;
   color: var(--text-strong);
@@ -93,19 +93,20 @@ body {
 }
 
 .task-card__title {
-  font-size: 18px;
+  font-size: 14px;
   font-weight: bold;
 }
 
 .task-card__description {
   font-size: 14px;
+  line-height: 1.1;
   color: var(--text-default);
   margin-top: 5px;
 }
 
 .task-card__author {
-  color: var(--text-weak);
   font-size: 12px;
+  color: var(--text-weak);
 }
 
 .history-modal-container {
@@ -133,7 +134,7 @@ body {
 .history-modal__header-close {
   cursor: pointer;
 
-  button {
+  p {
     /* 스타일 초기화 */
     background-color: transparent;
     border: none;
@@ -167,15 +168,14 @@ body {
   height: 81px;
 }
 
-#action-user-name {
+.action-user-name {
+  color: var(--text-default);
+}
+.action-description {
   color: var(--text-default);
 }
 
-#action-description {
-  color: var(--text-default);
-}
-
-#action-time {
+.action-time {
   color: var(--text-weak);
 }
 
@@ -190,6 +190,7 @@ body {
   width: 104px;
   color: var(--text-danger);
   font-weight: bold;
+  cursor: pointer;
 }
 
 /* 히스토리 모달 애니메이션 */
@@ -244,7 +245,7 @@ body {
 
 .history-delete-modal__message {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   color: var(--text-default);
 }
 
@@ -252,14 +253,95 @@ body {
   padding: 5px 8px;
 }
 
-#cancel-delete-btn {
+.cancel-delete-btn {
   background-color: var(--surface-alt);
   color: var(--text-default);
   font-weight: bold;
+  width: 172px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  margin-right: 8px;
 }
 
-#confirm-delete-btn {
+.confirm-delete-btn {
   background-color: var(--text-danger);
   color: white;
   font-weight: bold;
+  width: 172px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+/* */
+.task-create-card__input {
+  width: 288px;
+  height: 42px;
+
+  &-title {
+    height: 17px;
+    margin-bottom: 8px;
+  }
+
+  &-description {
+    height: 17px;
+    margin-bottom: 8px;
+  }
+
+  input {
+    border-width: 0;
+    width: 100%;
+  }
+}
+
+.card-input-title {
+  color: #14142b;
+  font-weight: bold;
+
+  &::placeholder {
+    color: #14142b;
+    font-weight: bold;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.card-input-description {
+  color: text-default;
+
+  &::placeholder {
+    color: text-default;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+
+.task-create-card__btn {
+  width: 288px;
+  height: 32px;
+
+  button {
+    width: 140px;
+    height: 32px;
+    margin: 0px 4px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
+.task-create-card__btn-create {
+  background-color: var(--surface-brand);
+  color: white;
+}
+
+.task-create-card__btn-cancel {
+  background-color: var(--surface-alt);
 }
