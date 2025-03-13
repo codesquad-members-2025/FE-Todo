@@ -1,9 +1,15 @@
-import { columnsComponent } from "./components/columns_component";
+import { renderColumns } from "./data";
 import "pretendard/dist/web/static/pretendard.css"; // 폰트 CSS 불러오기
 import "./css/global.css";
 import "./css/reset.css";
 import "./css/style.css";
 import "./css/utility.css";
+
+// 이벤트 위임
+
+const BodyContainer = document.body;
+
+//
 
 // 히스토리 모달 등장하거나 사라지는 구현
 const historyOpenBtn = document.querySelector(".header__history-icon");
@@ -60,22 +66,6 @@ historyDeleteApproveBtn.addEventListener("click", () => {
 //
 
 // 칼럼 동적으로 생성하기
-// 비동기로 mock.json 불러오기
-const fetchMockData = async () => {
-  const response = await fetch("/data/mock.json");
-  const data = await response.json();
-  return data;
-};
-
-const renderColumns = async () => {
-  const data = await fetchMockData();
-  console.log(data);
-
-  // 불러온 데이터를 컴포넌트에 넣어서 렌더링
-  const columnContainer = document.querySelector(".column-container");
-  columnContainer.innerHTML += columnsComponent(data);
-};
-
 renderColumns();
 
 //
