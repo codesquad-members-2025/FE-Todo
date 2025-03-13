@@ -4,19 +4,22 @@ const columnListAll = document.querySelector(".columnList");
 
 export function eventAddCard() {
   columnListAll.addEventListener("click", function (event) {
-    const existAddCard = event.target
-      .closest(".column-header")
-      .nextElementSibling.querySelector(".add-card");
-    if (existAddCard) {
-      existAddCard.remove();
-    } else {
-      const columnList = event.target.closest(".column-header");
-      if (columnList && columnList.nextElementSibling) {
-        const fragment = document.createDocumentFragment();
-        const addCardForm = createAddCardForm();
-        fragment.appendChild(addCardForm);
-        columnList.nextElementSibling.prepend(fragment);
-        processAddCard(addCardForm);
+    const plusButton = event.target.closest(".column-header__plusButton");
+    if (plusButton) {
+      const columnHeader = plusButton.closest(".column-header");
+      const existAddCard =
+        columnHeader.nextElementSibling.querySelector(".add-card");
+      if (existAddCard) {
+        existAddCard.remove();
+      } else {
+        const columnList = event.target.closest(".column-header");
+        if (columnList && columnList.nextElementSibling) {
+          const fragment = document.createDocumentFragment();
+          const addCardForm = createAddCardForm();
+          fragment.appendChild(addCardForm);
+          columnList.nextElementSibling.prepend(fragment);
+          processAddCard(addCardForm);
+        }
       }
     }
   });
