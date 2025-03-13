@@ -40,7 +40,7 @@ function generateCardsFromList(colum) {
     <div class="show-card__icons">
       <button class="show-card__cancle-icon">
         <svg
-          class="closed_button"
+          class="closed"
           width="12"
           height="12"
           viewBox="0 0 12 12"
@@ -54,7 +54,7 @@ function generateCardsFromList(colum) {
       </button>
       <button class="show-card__edit-icon">
         <svg
-          class="edit_button"
+          class="edit"
           width="14"
           height="14"
           viewBox="0 0 16 16"
