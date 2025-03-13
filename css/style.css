@@ -76,7 +76,7 @@ h1 {
   font: var(--display-medium12);
 }
 
-.column-header__icons {
+.column-header__buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -84,7 +84,7 @@ h1 {
   gap: var(--number-100);
 }
 
-.column-header__plus-icon {
+.column-header__plusButton {
   width: 24px;
   height: 24px;
   display: flex;
@@ -103,7 +103,7 @@ h1 {
 .plus:hover {
   color: var(--accent-red);
 }
-.column-header__closed-icon {
+.column-header__closedButton {
   width: 24px;
   height: 24px;
   display: flex;
@@ -113,8 +113,8 @@ h1 {
   background-color: unset;
 }
 
-.plus_button,
-.closed_button {
+.plus,
+.closed {
   fill: var(--text-weak);
 }
 
@@ -228,7 +228,7 @@ h1 {
   flex-direction: column;
 }
 
-.edit_button {
+.edit {
   stroke: var(--text-weak);
 }
 
