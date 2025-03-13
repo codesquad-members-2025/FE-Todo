@@ -54,12 +54,18 @@ const Store = (function () {
         }
     }
 
+    // history-Logger에서 사용되는 함수
+    const getColumnTitle = (columnId) => {
+        return kanbanNodes.find(column => column.id == columnId).title;
+    }
+
     return {
         setData,
         renderData,
         addCard,
         removeCard,
         removeColumn,
+        getColumnTitle
     }
 })();
 

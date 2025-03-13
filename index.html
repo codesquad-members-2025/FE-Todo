@@ -19,40 +19,18 @@
     </header>
 
     <main class="kanban">
-        <!-- initKanban에서 불러옴 -->
+        <!-- 렌더링 -->
     </main>
 
-    <aside class="history-panel flex-column">
-        <!-- 상단 고정 헤더 -->
-        <div class="history-panel__header flex-between">
-            <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
-            <button class="history-panel__close-btn btn flex-center">
-                <img src="./assets/icons/close.svg" class="size-16">
-                <span class="history-panel__close-btn-text display-bold14">닫기</span>
-            </button>
-        </div>
-
-        <!-- 활동 기록 목록 -->
-        <div class="history-panel__list">
-            <!-- 비어있을 때 보여줄 영역 -->
-            <div class="history-panel__empty flex-center hidden">
-                <p class="history-panel__empty-text display-medium14">사용자 활동 기록이 없습니다</p>
-            </div>
-            </div>
-        </div>
-
-        <!-- 하단 고정 푸터 -->
-        <div class="history-panel__footer flex-end">
-            <button class="history-panel__footer-btn btn">
-                <span class="history-panel__footer-btn-text display-bold14">기록 전체 삭제</span>
-            </button>
-        </div>
-    </aside>
+    <div class="history-panel__container">
+        <!-- 렌더링 -->
+    </div>
     
+
     <dialog class="modal">
         <div class="modal__body flex-column">
             <p class="modal__text display-medium16"></p>
-            
+
             <footer class="modal__footer flex-between">
                 <button class="modal__cancel-btn btn display-bold14">취소</button>
                 <button class="modal__confirm-btn btn">삭제</button>

@@ -38,7 +38,7 @@ function createColumnNode(id, title, count) {
     `);
 }
 
-function createCardNode( {id = getRandomId(), title, description, author = 'web'} ) {
+function createCardNode({ id = getRandomId(), title, description, author = 'web' }) {
     return templateToNode(`
     <article class="card flex-between" data-id="${id}">
         <div class="card__content flex-column">
@@ -64,30 +64,52 @@ function getRandomId() {
     return Math.floor(Math.random() * 100000);
 }
 
-function createLogNode( { iconName, userName, text, datetime } ) {
+function createLogNode({ iconName, userName, text, datetime }) {
     return templateToNode(`
         <div class="history-panel__item">
             <div class="history-panel__item-icon">
                 <img src="./assets/images/${iconName}" class="history-panel__item-image">
             </div>
-        <div class="history-panel__item-body flex-column">
-
         <div>
+
+        <div class="history-panel__item-body flex-column">
             <a href="#" class="history-panel__item-username display-medium14">@${userName}</a>
                 <p class="history-panel__item-text display-medium14">
                     ${text}
                 </p>
                 
                 <time class="history-panel__item-timestamp display-medium12" datetime="${datetime}">
-                    ${calculateDate(datetime)}
+                    미구현
                 </time>
             </div>
         </div>
-        `)
-    }
+        `);
+}
 
-    function calculateDate(datetime) {
-        return datetime;
-    }
+function createPanelNode(logNodes, isEmpty = false) {
+    return templateToNode(`
+        <aside class="history-panel flex-column">
+            <div class="history-panel__header flex-between">
+                <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
+                <button class="history-panel__close-btn btn flex-center">
+                    <img src="./assets/icons/close.svg" class="size-16">
+                    <span class="history-panel__close-btn-text display-bold14">닫기</span>
+                </button>
+            </div>
+            
+            <div class="history-panel__list">
+                <div class="history-panel__empty flex-center${isEmpty ? '' : ' hidden'}">
+                    <p class="history-panel__empty-text display-medium14">사용자 활동 기록이 없습니다</p>
+                </div>
+            </div>
+            
+            <div class="history-panel__footer flex-end${isEmpty ? ' hidden' : ''}">
+                <button class="history-panel__footer-btn btn">
+                    <span class="history-panel__footer-btn-text display-bold14">기록 전체 삭제</span>
+                </button>
+            </div>
+        </aside>
+        `);
+}
 
-    export { createColumnNode, createCardNode, createLogNode };
+export { createColumnNode, createCardNode, createLogNode, createPanelNode };

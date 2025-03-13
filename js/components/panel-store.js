@@ -9,15 +9,28 @@ const Store = (function () {
         historyLogs = logs;
     }
 
-    const getData = () => {
-        return historyLogs;
+    const addLogEntry = ({ iconName, userName, text, datetime }) => {
+        historyLogs.unshift({
+            iconName: iconName,
+            userName: userName,
+            text: text,
+            datetime: datetime
+        });
+
+        renderData();
     }
 
-    const render = () => {
+    const removeAllLogEntry = () => {
+        historyLogs = [];
+
+        renderData();
+    }
+ 
+    const renderData = () => {
         renderPanel(historyLogs);
     }
 
-    return { setData, getData, render }
+    return { setData, addLogEntry, renderData, removeAllLogEntry };
 })();
 
 function initStore() {
@@ -25,7 +38,7 @@ function initStore() {
         .then(response => response.json())
         .then(data => {
             Store.setData(data);
-            Store.render();
+            Store.renderData();
         })
         .catch(error => console.error(`데이터 로드 오류: ${error})`));
 }

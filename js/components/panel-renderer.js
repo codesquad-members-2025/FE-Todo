@@ -1,12 +1,16 @@
-import { createLogNode } from './template-utils.js';
+import { createLogNode, createPanelNode } from './template-utils.js';
 
 function renderPanel(logs) {
+    const PanelNode = createPanelNode(logs.length === 0 ? true : false);
+
     const logNodes = logs.reduce((fragment, logObj) => {
         fragment.appendChild(createLogNode(logObj));
         return fragment;
     }, getFragment());
 
-    document.querySelector('.history-panel__list').appendChild(logNodes);
+    PanelNode.querySelector('.history-panel__list').appendChild(logNodes);
+    
+    document.querySelector('.history-panel__container').replaceChildren(PanelNode);
 }
 
 function getFragment() {

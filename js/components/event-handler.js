@@ -1,6 +1,6 @@
 import KanbanStore from './kanban-store.js';
 import PanelStore from './panel-store.js';
-import { createCardNode } from './template-utils.js';
+import { addLogEntry } from './history-logger.js';
 
 export function initEventHandlers() {
     initHistoryPanel();
@@ -10,21 +10,24 @@ export function initEventHandlers() {
 
 // 히스토리 패널 이벤트
 function initHistoryPanel() {
-    const historyPanel = document.querySelector('.history-panel');
+    const panelContainer = document.querySelector('.history-panel__container');
     const panelToggleBtn = document.querySelector('.app-header__history-btn');
-    const panelCloseBtn = document.querySelector('.history-panel__close-btn');
-    const historyRemoveBtn = document.querySelector('.history-panel__footer-btn');
 
     panelToggleBtn.addEventListener('click', () => {
+        const historyPanel = panelContainer.querySelector('.history-panel');
         historyPanel.classList.toggle('history-panel--active');
     });
+    
+    panelContainer.addEventListener('click', e => {
+        const btn = getClosestBtn(e.target);
+        const historyPanel = panelContainer.querySelector('.history-panel');
+        
+        // 패널널에서 버튼이 아닌 영역 클릭 시 return
+        if (btn === null) return;
 
-    panelCloseBtn.addEventListener('click', () => {
-        historyPanel.classList.toggle('history-panel--active');
-    });
-
-    historyRemoveBtn.addEventListener('click', () => {
-        openModal('history');
+        if (btn.classList.contains('history-panel')) historyPanel.classList.toggle('history-panel--active');
+        else if (btn.classList.contains('history-panel__close-btn')) historyPanel.classList.toggle('history-panel--active');
+        else if (btn.classList.contains('history-panel__footer-btn')) openModal('history');
     });
 }
 
@@ -73,13 +76,7 @@ function openModal(type, id = null) {
 
 // 사용자 활동 기록 삭제
 function removeUserHistory() {
-    const empty = document.querySelector('.history-panel__empty');
-    const items = document.querySelectorAll('.history-panel__item');
-    const footer = document.querySelector('.history-panel__footer');
-
-    empty.style.display = 'flex';
-    items.forEach(item => item.remove());
-    footer.style.display = 'none';
+    PanelStore.removeAllLogEntry();
 }
 
 // 칸반 이벤트
@@ -113,6 +110,10 @@ function getClosestBtn(e) {
     return e.closest('button');
 }
 
+function getCurColumnTitle(e) {
+    return KanbanStore.getColumnTitle(getCurColumn(e).dataset.id);
+}
+
 // 카드 폼 토글
 function toggleCardForm(btn) {
     const cardForm = getCurColumn(btn).querySelector('.card-form');
@@ -121,7 +122,8 @@ function toggleCardForm(btn) {
 
 // 카드 생성
 function createCard(btn) {
-    const cardForm = btn.closest('.card-form')
+    const cardForm = btn.closest('.card-form');
+    const curColumn = getCurColumn(btn);
 
     const titleArea = cardForm.querySelector('.card__title-input');
     const textArea = cardForm.querySelector('.card__body-input');
@@ -141,12 +143,28 @@ function createCard(btn) {
 
     KanbanStore.addCard(getCurColumn(btn).dataset.id, cardData);
     toggleCardForm(btn);
+
+    // 사용자 활동 기록에 historyLogEntry 추가
+    const logData = {
+        cardTitle: titleInput,
+        columnTitle: getCurColumnTitle(btn)
+    }
+
+    addLogEntry('add', logData);
 }
 
 // 카드 삭제
 function openCardDeleteModal(btn) {
     const card = btn.closest('.card');
     openModal('card', card.dataset.id);
+
+    // 사용자 활동 기록에 historyLogEntry 추가
+    const logData = {
+        cardTitle: card.querySelector('.card__title').textContent,
+        columnTitle: getCurColumnTitle(btn)
+    }
+
+    addLogEntry('remove', logData);
 }
 
 // 칼럼 삭제
