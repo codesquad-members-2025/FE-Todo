@@ -2,7 +2,8 @@ import { createColumnNode, createCardNode } from './template-utils.js';
 
 function renderKanban(columns) {
     const kanbanNodes = columns.reduce((fragment, columnObj) => {
-        const { id, title, count, cards } = columnObj;
+        const { id, title, cards } = columnObj;
+        const count = cards.length;
         const columnNode = createColumnNode(id, title, count);
 
         cards.forEach(card => {

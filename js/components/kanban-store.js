@@ -14,20 +14,26 @@ const Store = (function () {
     }
 
     const addCard = (columnId, cardData) => {
-        const column = _findColumn(columnId);
+        const column = _findColumn({ columnId: columnId });
         if (!column) throw new Error(`Column not found: ID "${columnId}"`);
-        column.cards.push(_createCard(cardData));
+        column.cards.unshift(_createCard(cardData));
 
         renderData();
     }
-    
-    const removeCard = (columnId, cardId) => {
-        let curColumn = _findColumn(columnId);
-        curColumn.cards = curColumn.cards.filter(card => card.id !== cardId);
+
+    const removeCard = (cardId) => {
+        let curColumn = _findColumn({ cardId: cardId });
+        curColumn.cards = curColumn.cards.filter(card => card.id != cardId);
 
         renderData();
     }
-    
+
+    const removeColumn = (columnId) => {
+        kanbanNodes = kanbanNodes.filter(column => column.id != columnId)
+
+        renderData();
+    }
+
     const _createCard = ({ id, title, description, author }) => {
         return {
             "id": id,
@@ -36,9 +42,16 @@ const Store = (function () {
             "author": author
         }
     }
-    
-    const _findColumn = (columnId) => {
-        return kanbanNodes.find(column => column.id === columnId);
+
+    const _findColumn = ({ columnId, cardId }) => {
+        // 컬럼 아이디가 있을 경우
+        if (columnId) return kanbanNodes.find(column => column.id == columnId);
+        // 카드 아이디만 있을 경우
+        else if (cardId) {
+            return kanbanNodes.find(column => {
+                return column.cards.find(card => card.id == cardId);
+            });
+        }
     }
 
     return {
@@ -46,6 +59,7 @@ const Store = (function () {
         renderData,
         addCard,
         removeCard,
+        removeColumn,
     }
 })();
 
