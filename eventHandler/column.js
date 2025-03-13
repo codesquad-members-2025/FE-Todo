@@ -27,19 +27,21 @@ function createAddCardForm() {
 type="text"
 class="add-card__input__title"
 placeholder="제목을 입력하세요"
+required placeholder="여기에 입력하세요"
 />
 <textarea
 class="add-card__input__content"
 rows="1"
 maxlength="500"
-oninput="resizeHeight(this)"
+oninput="resizeHeight(this); checkContentLength(this);"
 placeholder="내용을 입력하세요"
 wrap="hard"
+required placeholder="여기에 입력하세요"
 ></textarea>
 </div>
 <div class="add-card__buttons">
 <button class="add-card__cancle-btn">취소</button>
-<button class="add-card__submit-btn">등록</button>
+<button type="submit" class="add-card__submit-btn">등록</button>
 </div>
 </div>`;
   return addCardForm;

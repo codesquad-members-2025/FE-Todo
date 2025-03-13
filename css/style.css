@@ -189,6 +189,10 @@ h1 {
   text-align: center;
 }
 
+.vitalize {
+  opacity: 100%;
+}
+
 .show-card {
   margin-top: 10px;
   background-color: var(--surface-default);
