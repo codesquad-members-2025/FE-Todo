@@ -134,7 +134,7 @@ body {
 .history-modal__header-close {
   cursor: pointer;
 
-  button {
+  p {
     /* 스타일 초기화 */
     background-color: transparent;
     border: none;
@@ -168,15 +168,14 @@ body {
   height: 81px;
 }
 
-#action-user-name {
+.action-user-name {
+  color: var(--text-default);
+}
+.action-description {
   color: var(--text-default);
 }
 
-#action-description {
-  color: var(--text-default);
-}
-
-#action-time {
+.action-time {
   color: var(--text-weak);
 }
 
@@ -246,7 +245,7 @@ body {
 
 .history-delete-modal__message {
   font-size: 16px;
-  font-weight: bold;
+  font-weight: 500;
   color: var(--text-default);
 }
 
@@ -254,16 +253,27 @@ body {
   padding: 5px 8px;
 }
 
-#cancel-delete-btn {
+.cancel-delete-btn {
   background-color: var(--surface-alt);
   color: var(--text-default);
   font-weight: bold;
+  width: 172px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  margin-right: 8px;
 }
 
-#confirm-delete-btn {
+.confirm-delete-btn {
   background-color: var(--text-danger);
   color: white;
   font-weight: bold;
+  width: 172px;
+  height: 32px;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
 }
 
 /* */
@@ -287,7 +297,7 @@ body {
   }
 }
 
-#card-input-title {
+.card-input-title {
   color: #14142b;
   font-weight: bold;
 
@@ -300,7 +310,7 @@ body {
   }
 }
 
-#card-input-description {
+.card-input-description {
   color: text-default;
 
   &::placeholder {

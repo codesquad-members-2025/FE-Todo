@@ -12,18 +12,20 @@ export const columnComponent = ({ title, cards }) => {
           <h2 class="column__header-card-count">${count}</h2>
         </div>
         <div class="column__header-right flex flex-align-center">
-          <img
-            class="column__header-right-icon"
-            src="./images/plus.png"
-            width="14px"
-            alt="할 일(카드)을 추가하는 플러스 아이콘 버튼"
-          />
-          <img
-            class="column__header-right-icon"
-            src="./images/delete.png"
-            width="14px"
-            alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
-          />
+          <div class="column__header-right-icon">
+            <img
+              src="./images/plus.png"
+              width="14px"
+              alt="할 일(카드)을 추가하는 플러스 아이콘 버튼"
+            />
+          </div> 
+          <div class="column__header-right-icon">
+            <img
+              src="./images/delete.png"
+              width="14px"
+              alt="할 일(카드)을 지우는 가위표 아이콘 버튼"
+            />
+          </div>
         </div>
       </header>
       <!-- Task Card -->

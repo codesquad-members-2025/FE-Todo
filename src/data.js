@@ -10,7 +10,6 @@ const fetchMockData = async () => {
 
 export const renderColumns = async () => {
   const data = await fetchMockData();
-  console.log(data);
 
   // 불러온 데이터를 컴포넌트에 넣어서 렌더링
   const columnContainer = document.querySelector(".column-container");

@@ -3,11 +3,11 @@ export const CreateCardComponent = ({ title, description, author }) => `
   <div class="task-create-card task-card flex-column flex-justify-space-between">
     <div class="task-create-card__input flex-column flex-center">
       <div class="task-create-card__input-title flex flex-center">
-        <input id="card-input-title" placeholder="제목을 입력하세요" />
+        <input class="card-input-title" placeholder="제목을 입력하세요" />
       </div>
       <div class="task-create-card__input-description flex flex-center">
         <input
-          id="card-input-description"
+          class="card-input-description"
           type="text"
           placeholder="내용을 입력하세요"
         />
