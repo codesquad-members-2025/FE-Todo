@@ -13,11 +13,15 @@ body.addEventListener("click", (event) => {
     const inputData = getModalInputValues(button);
     const taskObj = createTaskData(inputData);
     saveTasks(inputData.columnType, taskObj);
+    //위에는 유저가 스토어에 저장하는 과정
+
+    //아래는 스토어에서 받아와야하는것 근데 지금은 스코프에 있으니까 쓰는거
     const cardForm = makeTaskCard(
       taskObj.id,
       inputData.titleValue,
       inputData.contentValue
     );
+    //스코프에 있던 정보 이용해서 dom API로 조작하는거
     drawModal(inputData.columnType, cardForm);
     clearInputFields(button);
     closeTaskModal(button);
@@ -84,9 +88,9 @@ function saveTasks(columnType, taskObject) {
 function drawModal(dataTarget, cardForm) {
   const newElement = document.createElement("div");
   newElement.innerHTML = cardForm;
-  const targetSection = document.querySelector(
-    `.columnlist__col[data-type=${dataTarget}]`
-  );
+  const targetSection = document
+    .querySelector(`.columnlist__col[data-type=${dataTarget}]`)
+    .querySelector(".task-list");
   targetSection.appendChild(newElement);
 }
 
