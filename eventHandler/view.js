@@ -2,7 +2,6 @@ export function fetchData() {
   fetch("../data/data.json") // json파일 가져오기
     .then((response) => response.json()) // json형식으로
     .then((data) => {
-      console.log(data);
       cardView(data); // 불러온 데이터를 처리하기
       historyView(data);
     })
