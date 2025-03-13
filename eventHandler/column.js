@@ -3,7 +3,7 @@ const columnList = document.querySelector(".columnList");
 export function eventAddCard() {
   const addButton = columnList.querySelector(".column-header__plusButton");
   addButton.addEventListener("click", function (event) {
-    const existAddCard = document.querySelector(".add-card");
+    const existAddCard = columnList.querySelector(".add-card");
     if (existAddCard) {
       existAddCard.remove();
     } else {
@@ -32,14 +32,14 @@ export function eventAddCard() {
 </div>
 </div>`;
         columnList.nextElementSibling.prepend(addCardForm);
+        processAddCard(addCardForm);
       }
     }
-    // processAddCard(existAddCard);
   });
 }
 
-// function processAddCard(addCardForm) {
-//   addCardForm.addEventListener("click", function (event) {
-//     if (event.target.className === "add-card__cancle-btn") addCardForm.remove();
-//   });
-// }
+function processAddCard(addCardForm) {
+  addCardForm.addEventListener("click", function (event) {
+    if (event.target.className === "add-card__cancle-btn") addCardForm.remove();
+  });
+}
