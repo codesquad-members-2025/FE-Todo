@@ -8,5 +8,8 @@
   },
   "author": "wan0514",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "http-server": "^14.1.1"
+  }
 }

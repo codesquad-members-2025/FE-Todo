@@ -1,61 +1,74 @@
 import { makeCardRemover } from './cardColumn.js';
 import { removeHistoryRecords } from './history.js';
 
-function toggleModal() {
-  const dialog = document.getElementById('modal');
-  dialog.open ? dialog.close() : dialog.showModal();
+// ──────────────────────────────
+// 1. 캐싱된 DOM 요소
+// ──────────────────────────────
+const modal = document.getElementById('modal');
+const modalDescription = modal.querySelector('#modal-description');
+const modalDeleteBtn = modal.querySelector('#modal-delete-btn');
+const modalCancelBtn = modal.querySelector('#modal-cancel-btn');
+
+// ──────────────────────────────
+// 2. Modal Toggle 기능
+// ──────────────────────────────
+
+// 모달 열기
+function openModal() {
+  modal.showModal();
 }
 
-function createConfirmModal(textContent, deleteCallback) {
-  const dialog = document.getElementById('modal');
-  const description = dialog.querySelector('#modal-description');
-  description.textContent = textContent;
+// 모달 닫기
+function closeModal() {
+  modal.close();
+}
 
-  const deleteBtn = dialog.querySelector('#modal-delete-btn');
+function setConfirmModal(textContent, deleteCallback) {
+  modalDescription.textContent = textContent;
+  setDeleteButtonHandler(deleteCallback);
+  openModal();
+}
 
-  // 기존 삭제 버튼 이벤트 제거
-  if (deleteBtn._deleteHandler) {
-    deleteBtn.removeEventListener('click', deleteBtn._deleteHandler);
-  }
-
-  // 새로운 삭제 이벤트 핸들러 등록
-  deleteBtn._deleteHandler = () => {
+// 삭제 버튼 핸들링 : onclick이 기존 함수를 자동으로 덮어씌워줌
+function setDeleteButtonHandler(deleteCallback) {
+  modalDeleteBtn.onclick = () => {
     deleteCallback();
-    toggleModal();
+    closeModal();
   };
-
-  deleteBtn.addEventListener('click', deleteBtn._deleteHandler);
 }
+
+// ──────────────────────────────
+// 2. 삭제 모달 핸들링
+// ──────────────────────────────
 
 // 카드 삭제 모달 오픈
-function openCardDeleteModal(event) {
-  const button = event.target.closest('.delete-card-btn');
-  if (!button) return;
+function openDeleteCardModal(target) {
+  const todoCard = target.closest('.todo-card');
+  if (!todoCard) return; // 카드가 없으면 종료
 
-  // 가장 가까운 .todo-list 안에 있는 .card-list 찾기
-  const todoList = button.closest('.card-list');
-  if (!todoList) return; // todo-list 내부에서만 동작하도록 제한
+  const cardId = todoCard.id;
+  if (!cardId) return;
 
-  const card = button.closest('.todo-card');
-  if (card) {
-    const cardRemover = makeCardRemover(card.id);
-    createConfirmModal('선택한 카드를 삭제할까요?', cardRemover);
-    toggleModal();
-  }
+  const cardRemover = makeCardRemover(cardId);
+  setConfirmModal('선택한 카드를 삭제할까요?', cardRemover);
+  openModal();
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  const cancelBtn = document.querySelector('#modal-cancel-btn');
-  if (cancelBtn) cancelBtn.addEventListener('click', toggleModal);
-});
 
 // 활동기록 삭제 모달 오픈
 function openHistoryDeleteModal() {
-  createConfirmModal(
-    '모든 사용자 활동 기록을 삭제할까요?',
-    removeHistoryRecords
-  );
-  toggleModal();
+  setConfirmModal('모든 사용자 활동 기록을 삭제할까요?', removeHistoryRecords);
+  openModal();
 }
 
-export { openCardDeleteModal, openHistoryDeleteModal };
+// ──────────────────────────────
+// 🟢 4. 모달 초기화(취소 버튼만)
+//  TODO 삭제버튼이 동적으로 생성되기 때문에, 취소버튼을 따로 뺐으나 더 좋은 방법이 있을지 찾아보기
+// ──────────────────────────────
+
+function initModalCloseEvent() {
+  modalCancelBtn.addEventListener('click', closeModal);
+}
+
+initModalCloseEvent();
+
+export { openDeleteCardModal, openHistoryDeleteModal };

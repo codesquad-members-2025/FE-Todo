@@ -1,0 +1,64 @@
+:root {
+  /* Grayscale colors */
+  --grayscale-50: #fefefe;
+  --grayscale-100: #f7f7fc;
+  --grayscale-200: #eff0f6;
+  --grayscale-300: #d9dbe9;
+  --grayscale-400: #bec1d5;
+  --grayscale-500: #a0a3bd;
+  --grayscale-600: #6e7191;
+  --grayscale-700: #4e4b66;
+  --grayscale-800: #2a2a44;
+  --grayscale-900: #14142b;
+
+  /* Accent colors */
+  --accent-blue: #007aff;
+  --accent-red: #ff3b30;
+
+  /* Text colors */
+  --text-strong: var(--grayscale-900);
+  --text-bold: var(--grayscale-700);
+  --text-default: var(--grayscale-600);
+  --text-weak: var(--grayscale-500);
+  --text-white-default: var(--grayscale-50);
+  --text-white-weak: var(--grayscale-100);
+  --text-brand: var(--accent-blue);
+  --text-danger: var(--accent-red);
+
+  /* Surface colors */
+  --surface-default: var(--grayscale-50);
+  --surface-alt: var(--grayscale-100);
+  --surface-brand: var(--accent-blue);
+  --surface-danger: var(--accent-red);
+
+  /* Border colors */
+  --border-default: var(--grayscale-200);
+  --border-bord: var(--grayscale-400);
+
+  /* Radius */
+  --radius-small: 8px;
+  --radius-medium: 16px;
+  --radius-large: 50%;
+
+  /* Drop Shadow */
+  --drop-shadow-normal: 0 1px 4px rgba(110, 128, 145, 0.24);
+
+  --drop-shadow-up: 0 2px 8px rgba(110, 128, 145, 0.32);
+
+  --drop-shadow-floating: 0 0 4px rgba(110, 128, 145, 0.08),
+    0 16px 16px rgba(110, 128, 145, 0.24);
+
+  /* Font Size  */
+  --font-size-large: 24px;
+  --font-size-medium: 16px;
+  --font-size-regular: 14px;
+  --font-size-small: 12px;
+
+  /* Font Weights */
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+
+  /* Line Height */
+  --line-height-auto: auto;
+  --line-height-22: 22px;
+}

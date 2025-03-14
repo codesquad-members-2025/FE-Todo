@@ -1,0 +1,83 @@
+@import url('./variable.css');
+
+/* Typo Color */
+.text-strong {
+  color: var(--text-strong);
+}
+.text-bold {
+  color: var(--text-bold);
+}
+.text-default {
+  color: var(--text-default);
+}
+.text-weak {
+  color: var(--text-weak);
+}
+.text-brand {
+  color: var(--text-brand);
+}
+.text-danger {
+  color: var(--text-danger);
+}
+
+.text-white {
+  color: var(--text-white-default);
+}
+
+/* Typo style */
+
+/* Line Height */
+.tx-b24,
+.tx-b16,
+.tx-b14,
+.tx-b12,
+.tx-m16,
+.tx-m14,
+.tx-m12 {
+  line-height: var(--line-height-auto);
+}
+
+.tx-m16 {
+  line-height: var(--line-height-22);
+}
+
+/* 글씨 굵기 설정 */
+.tx-b24,
+.tx-b16,
+.tx-b14,
+.tx-b12,
+.tx-sb16,
+.tx-sb14,
+.tx-am16,
+.tx-am14 {
+  font-weight: var(--font-weight-bold);
+}
+
+.tx-m16,
+.tx-m14,
+.tx-m12,
+.tx-am16,
+.tx-am14 {
+  font-weight: var(--font-weight-medium);
+}
+
+/* 글씨 크기 설정 */
+.tx-b24 {
+  font-size: var(--font-size-large);
+}
+.tx-b16,
+.tx-m16,
+.tx-sb16,
+.tx-am16 {
+  font-size: var(--font-size-medium);
+}
+.tx-b14,
+.tx-m14,
+.tx-sb14,
+.tx-am14 {
+  font-size: var(--font-size-regular);
+}
+.tx-b12,
+.tx-m12 {
+  font-size: var(--font-size-small);
+}
