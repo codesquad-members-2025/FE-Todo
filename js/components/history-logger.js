@@ -1,21 +1,42 @@
-import panelStore from './panel-store.js';
+import panelStore from '../store/panel-store.js';
 
-export function addLogEntry(type, { cardTitle, columnTitle, beforeColTitle, afterColTitle }) {
-    const data = {
+function createLogEntry(type, { cardId = null, columnId = null, afterColumnId = null }) {
+    const textInfo = panelStore.getTextInfo(type, { cardId, columnId, afterColumnId });
+    const logEntry = {
         iconName: 'flog.png',
         userName: '나고',
-        text: getLogText(type, { cardTitle, columnTitle, beforeColTitle, afterColTitle }),
+        text: createText(type, textInfo),
         datetime: getISODate(new Date()),
     }
-    return panelStore.addLogEntry(data);
+    panelStore.addLogEntry(logEntry);
 }
 
-function getLogText(type, { cardTitle, columnTitle, beforeColTitle, afterColTitle }) {
-    if (type === 'add') return createAddLog(cardTitle, columnTitle);
-    else if (type === 'remove') return createRemoveLog(cardTitle, columnTitle);
-    else if (type === 'update') return createUpdateLog(cardTitle);
-    else if (type === 'move') return createMoveLog(cardTitle, beforeColTitle, afterColTitle);
+
+// type이 받을 매개변수 종류
+// addCard, addColumn, editCard, removeCard, removeColumn  => { cardId, columnId }
+// editCard => { cardId }
+// moveCard => { cardId, columnId, afterColumnId }
+// undo, redo => { ? }
+
+// 반환되는 값 종류
+// addCard, addColumn, editCard, removeCard, removeColumn  => { cardTitle, columnTitle }
+// editCard => { cardTitle }
+// moveCard => { cardTitle, columnTitle, afterColumnTitle }
+// undo, redo => { ? }
+
+// 하나로 퉁친다면?
+function createText(type, { cardTitle, columnTitle, afterColumnTitle }) {
+    if (type === 'addCard')           return `${S(cardTitle)}을(를) ${S(columnTitle)}에 ${S('등록')}하였습니다.`;
+    else if (type === 'removeCard')   return ``;
+    else if (type === 'editCard')     return ``;
+    else if (type === 'moveCard')     return ``;
+    else if (type === 'addColumn')    return ``;
+    else if (type === 'removeColumn') return ``;
+    else if (type === 'editColumn')   return ``;
+    else if (type === 'undo')         return ``;
+    else if (type === 'redo')         return ``;
 }
+
 
 function createAddLog(cardTitle, columnTitle) {
     return `${S(cardTitle)}을(를) ${S(columnTitle)}에 ${S('등록')}하였습니다.`;
@@ -38,5 +59,10 @@ function S(text) {
 }
 
 function getISODate(date) {
-    return date.toISOString().slice(0, 19); // 초 단위까지 자르고 Z 제거
+    const pad = num => String(num).padStart(2, '0');
+    
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}` +
+           `T${pad(date.getHours())}:${pad(date.getMinutes())}:${pad(date.getSeconds())}`;
 }
+
+export default createLogEntry;

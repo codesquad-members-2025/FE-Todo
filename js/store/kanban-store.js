@@ -1,4 +1,4 @@
-import { renderKanban } from './kanban-renderer.js';
+import { renderKanban } from '../components/kanban-renderer.js';
 
 const Store = (function () {
     let kanbanNodes = null;
@@ -43,7 +43,7 @@ const Store = (function () {
         }
     }
 
-    const _findColumn = ({ columnId, cardId }) => {
+    const _findColumn = ({ columnId = null, cardId = null}) => {
         // 컬럼 아이디가 있을 경우
         if (columnId) return kanbanNodes.find(column => column.id == columnId);
         // 카드 아이디만 있을 경우
@@ -59,13 +59,19 @@ const Store = (function () {
         return kanbanNodes.find(column => column.id == columnId).title;
     }
 
+    const getCardTitle = (cardId) => {
+        let curColumn = _findColumn({ cardId: cardId });
+        return curColumn.cards.find(card => card.id == cardId).title;
+    }
+
     return {
         setData,
         renderData,
         addCard,
         removeCard,
         removeColumn,
-        getColumnTitle
+        getColumnTitle,
+        getCardTitle
     }
 })();
 

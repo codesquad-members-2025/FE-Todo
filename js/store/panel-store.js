@@ -1,4 +1,5 @@
-import { renderPanel } from './panel-renderer.js';
+import KanbanStore from './kanban-store.js';
+import { renderPanel } from '../components/panel-renderer.js';
 
 const Store = (function () {
     let historyLogs = null;
@@ -20,6 +21,14 @@ const Store = (function () {
         renderData();
     }
 
+    const getTextInfo = (type, { cardId, columnId, afterColumnId }) => {
+        return {
+            cardTitle: _getCardTitle(cardId),
+            columnTitle: _getColumnTitle(columnId),
+            afterColumnTitle: _getColumnTitle(columnId)
+        }
+    }
+
     const removeAllLogEntry = () => {
         historyLogs = [];
 
@@ -30,7 +39,15 @@ const Store = (function () {
         renderPanel(historyLogs);
     }
 
-    return { setData, addLogEntry, renderData, removeAllLogEntry };
+    const _getCardTitle = (cardId) => {
+        return KanbanStore.getCardTitle(cardId);
+    }
+
+    const _getColumnTitle = (columnId) => {
+        return KanbanStore.getColumnTitle(columnId)
+    }
+
+    return { setData, addLogEntry, renderData, removeAllLogEntry, getTextInfo };
 })();
 
 function initStore() {

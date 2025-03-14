@@ -1,12 +1,12 @@
-import KanbanStore from './kanban-store.js';
-import PanelStore from './panel-store.js';
-import { addLogEntry } from './history-logger.js';
+import KanbanStore from '../store/kanban-store.js';
+import PanelStore from '../store/panel-store.js';
+import { addLogEntry } from '../components/history-logger.js';
 
-export function initEventHandlers() {
-    initHistoryPanel();
-    initModal();
-    initKanbanHandlers();
-}
+// export function initEventHandlers() {
+//     initHistoryPanel();
+//     initModal();
+//     initKanban();
+// }
 
 // 히스토리 패널 이벤트
 function initHistoryPanel() {
@@ -80,7 +80,7 @@ function removeUserHistory() {
 }
 
 // 칸반 이벤트
-function initKanbanHandlers() {
+function initKanban() {
     const kanban = document.querySelector('.kanban');
 
     kanban.addEventListener('click', e => {
@@ -177,3 +177,5 @@ function removeColumn(btn) {
 function getRandomId() {
     return Math.floor(Math.random() * 100000);
 }
+
+export { initKanban };

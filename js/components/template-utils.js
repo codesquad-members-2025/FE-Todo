@@ -73,20 +73,22 @@ function createLogNode({ iconName, userName, text, datetime }) {
         <div>
 
         <div class="history-panel__item-body flex-column">
-            <a href="#" class="history-panel__item-username display-medium14">@${userName}</a>
-                <p class="history-panel__item-text display-medium14">
-                    ${text}
-                </p>
+            <a href="#" class="history-panel__item-username display-medium14">
+                @${userName}
+            </a>
+
+            <p class="history-panel__item-text display-medium14">
+                ${text}
+            </p>
                 
-                <time class="history-panel__item-timestamp display-medium12" datetime="${datetime}">
-                    미구현
-                </time>
-            </div>
+            <time class="history-panel__item-timestamp display-medium12" datetime="${datetime}">
+                미구현
+            </time>
         </div>
         `);
 }
 
-function createPanelNode(logNodes, isEmpty = false) {
+function createPanelNode(isEmpty = false) {
     return templateToNode(`
         <aside class="history-panel flex-column">
             <div class="history-panel__header flex-between">
