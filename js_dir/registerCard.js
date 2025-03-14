@@ -10,8 +10,8 @@ body.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
   if (findContainClass(button, "register-button")) {
-    const inputData = getModalInputValues(button);
-    const taskObj = createTaskData(inputData);
+    const inputData = getModalInputValues(button); //상태변경
+    const taskObj = createTaskData(inputData); //상태변경
     saveTasks(inputData.columnType, taskObj);
     //위에는 유저가 스토어에 저장하는 과정
 

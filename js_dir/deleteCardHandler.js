@@ -16,9 +16,6 @@ export function closeAlert() {
   alertModal.close();
 }
 
-// 삭제 버튼이벤트 핸들러
-function deleteHandler() {}
-
 // function findModalId(target) {
 //   return target.closest(".todo-card").id;
 // }
