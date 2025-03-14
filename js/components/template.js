@@ -11,19 +11,19 @@ function createColumn(id, title, taskCount) {
       </div>
       <div class="column-area-right">
         <button class="card-add-btn" aria-label="Add task">
-          <img src="./assets/icons/plus.svg" alt="Add a new task" />
+          <div class="plus-icon svg-24 svg-color-weak" role="img" aria-label="Add a new task"></div>
         </button>
         <button aria-label="Delete column">
-          <img src="./assets/icons/closed.svg" alt="Delete this column" />
+          <div class="closed-icon svg-24 svg-color-weak" role="img" aria-label="Delete this column"></div>
         </button>
       </div>
     </div>
     <div class="card-list flex-col">
-    ${cardForm}
-    <div class="card-container flex-col">
+      ${cardForm}
+      <div class="card-container flex-col">
         <!-- 카드 항목은 여기서 동적으로 추가 -->
+      </div>
     </div>
-  </div>
   </section>
 `;
 }
@@ -56,11 +56,11 @@ function createTaskCard(id, title, content, author) {
       <h6 class="text-weak tx-m12">author by ${author}</h6>
     </div>
     <div class="button-section flex-col">
-      <button class= "delete-card-btn" aria-label="Delete task">
-        <img src="./assets/icons/closed.svg" alt="Delete this task" />
+      <button class="delete-card-btn" aria-label="Delete task">
+        <div class="closed-icon svg-24 svg-color-weak" role="img" aria-label="Delete this task"></div>
       </button>
-      <button aria-label="Edit task">
-        <img src="./assets/icons/edit.svg" alt="Edit this task" />
+      <button class="edit-card-btn" aria-label="Edit task">
+        <div class="edit-icon svg-24 svg-color-weak" role="img" aria-label="Edit this task"></div>
       </button>
     </div>
   </article>

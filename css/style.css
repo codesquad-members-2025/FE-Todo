@@ -1,67 +1,6 @@
-:root {
-  /* Grayscale colors */
-  --grayscale-50: #fefefe;
-  --grayscale-100: #f7f7fc;
-  --grayscale-200: #eff0f6;
-  --grayscale-300: #d9dbe9;
-  --grayscale-400: #bec1d5;
-  --grayscale-500: #a0a3bd;
-  --grayscale-600: #6e7191;
-  --grayscale-700: #4e4b66;
-  --grayscale-800: #2a2a44;
-  --grayscale-900: #14142b;
-
-  /* Accent colors */
-  --accent-blue: #007aff;
-  --accent-red: #ff3b30;
-
-  /* Text colors */
-  --text-strong: var(--grayscale-900);
-  --text-bold: var(--grayscale-700);
-  --text-default: var(--grayscale-600);
-  --text-weak: var(--grayscale-500);
-  --text-white-default: var(--grayscale-50);
-  --text-white-weak: var(--grayscale-100);
-  --text-brand: var(--accent-blue);
-  --text-danger: var(--accent-red);
-
-  /* Surface colors */
-  --surface-default: var(--grayscale-50);
-  --surface-alt: var(--grayscale-100);
-  --surface-brand: var(--accent-blue);
-  --surface-danger: var(--accent-red);
-
-  /* Border colors */
-  --border-default: var(--grayscale-200);
-  --border-bord: var(--grayscale-400);
-
-  /* Radius */
-  --radius-small: 8px;
-  --radius-medium: 16px;
-  --radius-large: 50%;
-
-  /* Drop Shadow */
-  --drop-shadow-normal: 0 1px 4px rgba(110, 128, 145, 0.24);
-
-  --drop-shadow-up: 0 2px 8px rgba(110, 128, 145, 0.32);
-
-  --drop-shadow-floating: 0 0 4px rgba(110, 128, 145, 0.08),
-    0 16px 16px rgba(110, 128, 145, 0.24);
-
-  /* Font Size  */
-  --font-size-large: 24px;
-  --font-size-medium: 16px;
-  --font-size-regular: 14px;
-  --font-size-small: 12px;
-
-  /* Font Weights */
-  --font-weight-bold: 700;
-  --font-weight-medium: 500;
-
-  /* Line Height */
-  --line-height-auto: auto;
-  --line-height-22: 22px;
-}
+@import url('./variable.css');
+@import url('./svg.css');
+@import url('./font.css');
 
 body {
   display: flex;
@@ -72,88 +11,6 @@ body {
   padding: 0;
   font-family: 'Pretendard', sans-serif;
   background-color: var(--surface-default);
-}
-
-/* Typo Color */
-.text-strong {
-  color: var(--text-strong);
-}
-.text-bold {
-  color: var(--text-bold);
-}
-.text-default {
-  color: var(--text-default);
-}
-.text-weak {
-  color: var(--text-weak);
-}
-.text-brand {
-  color: var(--text-brand);
-}
-.text-danger {
-  color: var(--text-danger);
-}
-
-.text-white {
-  color: var(--text-white-default);
-}
-
-/* Typo style */
-
-/* Line Height */
-.tx-b24,
-.tx-b16,
-.tx-b14,
-.tx-b12,
-.tx-m16,
-.tx-m14,
-.tx-m12 {
-  line-height: var(--line-height-auto);
-}
-
-.tx-m16 {
-  line-height: var(--line-height-22);
-}
-
-/* 글씨 굵기 설정 */
-.tx-b24,
-.tx-b16,
-.tx-b14,
-.tx-b12,
-.tx-sb16,
-.tx-sb14,
-.tx-am16,
-.tx-am14 {
-  font-weight: var(--font-weight-bold);
-}
-
-.tx-m16,
-.tx-m14,
-.tx-m12,
-.tx-am16,
-.tx-am14 {
-  font-weight: var(--font-weight-medium);
-}
-
-/* 글씨 크기 설정 */
-.tx-b24 {
-  font-size: var(--font-size-large);
-}
-.tx-b16,
-.tx-m16,
-.tx-sb16,
-.tx-am16 {
-  font-size: var(--font-size-medium);
-}
-.tx-b14,
-.tx-m14,
-.tx-sb14,
-.tx-am14 {
-  font-size: var(--font-size-regular);
-}
-.tx-b12,
-.tx-m12 {
-  font-size: var(--font-size-small);
 }
 
 /* Common Structure styles */
@@ -216,7 +73,6 @@ body {
   gap: 8px;
 }
 
-.card-list,
 .card-container {
   gap: 10px;
 }
@@ -231,6 +87,10 @@ body {
 
 .todo-card {
   display: flex;
+}
+
+.card-form {
+  margin-bottom: 10px;
 }
 
 .card-form .button-section {
@@ -321,6 +181,8 @@ body {
   border-radius: var(--radius-medium);
   background-color: var(--surface-default);
   box-shadow: var(--drop-shadow-floating);
+
+  z-index: 10;
 }
 
 #history header {

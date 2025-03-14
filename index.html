@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TASKIFY</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link
       href="https://cdn.jsdelivr.net/npm/@pretendard/core/css/pretendard.css"
       rel="stylesheet"
@@ -23,24 +24,32 @@
             aria-label="Sort tasks"
             data-type="created"
           >
-            <img
-              src="/assets/icons/arrowBoth.svg"
-              alt="Sort tasks"
-              width="16"
-              height="16"
-            />
+            <div
+              class="arrow-icon svg-16 svg-color-default"
+              role="img"
+              aria-label="View task history"
+            ></div>
             <span class="sort-btn-label text-bold tx-m12">생성순</span>
           </button>
         </div>
         <button id="history-open-btn" aria-label="View history">
-          <img src="./assets/icons/history.svg" alt="View task history" />
+          <div
+            class="history-icon svg-24 svg-color-default"
+            role="img"
+            aria-label="View task history"
+          ></div>
         </button>
       </header>
       <aside id="history" class="flex-col">
         <header>
           <span class="text-strong tx-b16">사용자 활동 기록</span>
           <button id="history-close-btn" class="history-close-btn">
-            <img src="/assets/icons/closed.svg" width="16" height="16" />
+            <div
+              class="closed-icon svg-16 svg-color-default"
+              role="img"
+              aria-label="Add a new task"
+            ></div>
+            <!-- <img src="/assets/icons/closed.svg" width="16" height="16" /> -->
             <span class="text-default tx-b14">닫기</span>
           </button>
         </header>

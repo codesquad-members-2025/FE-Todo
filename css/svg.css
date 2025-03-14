@@ -1,0 +1,50 @@
+@import url('./variable.css');
+
+.svg-24 {
+  width: 24px;
+  height: 24px;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
+.svg-16 {
+  width: 16px;
+  height: 16px;
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
+.svg-color-weak {
+  background-color: var(--text-weak);
+}
+
+.svg-color-default {
+  background-color: var(--text-default);
+}
+
+.plus-icon {
+  -webkit-mask-image: url('/assets/icons/plus.svg');
+  mask-image: url('/assets/icons/plus.svg');
+}
+
+.closed-icon {
+  -webkit-mask-image: url('/assets/icons/closed.svg');
+  mask-image: url('/assets/icons/closed.svg');
+}
+
+.edit-icon {
+  -webkit-mask-image: url('/assets/icons/edit.svg');
+  mask-image: url('/assets/icons/edit.svg');
+}
+
+.arrow-icon {
+  -webkit-mask-image: url('/assets/icons/arrowBoth.svg');
+  mask-image: url('/assets/icons/arrowBoth.svg');
+}
+
+.history-icon {
+  -webkit-mask-image: url('/assets/icons/history.svg');
+  mask-image: url('/assets/icons/history.svg');
+}
