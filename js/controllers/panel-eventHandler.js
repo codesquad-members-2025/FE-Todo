@@ -4,22 +4,22 @@ function initHistoryPanel() {
     const panelContainer = document.querySelector('.history-panel__container');
     const panelToggleBtn = document.querySelector('.app-header__history-btn');
 
-    bindPanelToggleButton(panelToggleBtn, panelContainer);
-    delegatePanelEvents(panelContainer)
+    handlePanelToggleBtn(panelToggleBtn, panelContainer);
+    handlePanelEvents(panelContainer)
 }
 
-function bindPanelToggleButton(panelToggleBtn, panelContainer) {
+function handlePanelToggleBtn(panelToggleBtn, panelContainer) {
     panelToggleBtn.addEventListener('click', () => togglePanel(panelContainer));
 }
 
-function delegatePanelEvents(panelContainer) {
+function handlePanelEvents(panelContainer) {
     panelContainer.addEventListener('click', (e) => {
         const btn = e.target.closest('button');
 
         if (btn === null) return;
 
         if (btn.classList.contains('history-panel__close-btn')) togglePanel(panelContainer);
-        else if (btn.classList.contains('history-panel__footer-btn')) openModal('removeHistory');
+        else if (btn.classList.contains('history-panel__footer-btn')) openModal('removeHistory', {});
     })
 }
 

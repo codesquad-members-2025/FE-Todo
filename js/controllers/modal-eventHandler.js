@@ -7,32 +7,24 @@ function initModal() {
     const modalCancelBtn = modal.querySelector('.modal__cancel-btn');
     const modalConfirmBtn = modal.querySelector('.modal__confirm-btn');
 
-    bindModalCancelButton(modal, modalCancelBtn);
-    bindModalConfirmButton(modal, modalConfirmBtn);
+    handleModalCancelBtn(modal, modalCancelBtn);
+    handleModalConfirmBtn(modal, modalConfirmBtn);
 }
 
-function bindModalCancelButton(modal, modalCancelBtn) {
+function handleModalCancelBtn(modal, modalCancelBtn) {
     modalCancelBtn.addEventListener('click', () => modal.close());
 }
 
-function bindModalConfirmButton(modal, modalConfirmBtn) {
+function handleModalConfirmBtn(modal, modalConfirmBtn) {
     modalConfirmBtn.addEventListener('click', () => {
         const cardId = modal.dataset.cardId;
         const columnId = modal.dataset.columnId;
         const type = modal.dataset.type;
         
-        // 스토어 갱신하기 전에 logEntry 생성
-        // 스토어 갱신이 먼저되면 LogEntry 생성 시 스토어에서 정보를 찾을 수 없음
-        const ids = {
-            cardId: cardId,
-            columnId: columnId
-        }
-        if (type !== 'removeHistory') {
-            console.log('create logEntry type: ' + type)
-            createLogEntry(type, ids);
-        }
+        // 스토어에서 제거 전에 logEntry 생성
+        if (type !== 'removeHistory') createLogEntry(type, { cardId, columnId });
 
-        // 분기 처리
+        // 스토어에서 제거
         if (type === 'removeCard') KanbanStore.removeCard(cardId);
         else if (type === 'removeColumn') KanbanStore.removeColumn(columnId);
         else if (type === 'removeHistory') PanelStore.removeAllLogEntry();
@@ -41,8 +33,7 @@ function bindModalConfirmButton(modal, modalConfirmBtn) {
     });
 }
 
-function configModal(type, { cardId = null, columnId = null }) {
-    console.log(type)
+function configModal(type, { cardId = '', columnId = '' }) {
     const modal = document.querySelector('.modal');
     const modalText = document.querySelector('.modal__text');
 
@@ -57,7 +48,7 @@ function configModal(type, { cardId = null, columnId = null }) {
     modalText.innerText = text;
 }
 
-function openModal(type, { cardId = null, columnId = null }) {
+function openModal(type, { cardId = '', columnId = '' }) {
     const modal = document.querySelector('.modal');
     configModal(type, { cardId, columnId });
     modal.showModal();

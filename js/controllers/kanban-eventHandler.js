@@ -4,11 +4,10 @@ import createLogEntry from '../components/history-logger.js';
 
 function initKanban() {
     const kanban = document.querySelector('.kanban');
-
-    delegateKanbanEvents(kanban);
+    handleKanbanEvents(kanban);
 }
 
-function delegateKanbanEvents(kanban) {
+function handleKanbanEvents(kanban) {
     kanban.addEventListener('click', (e) => {
         const btn = e.target.closest('button');
 
@@ -24,16 +23,6 @@ function delegateKanbanEvents(kanban) {
         else if (btn.classList.contains('card__close-btn')) openCardDeleteModal(btn);
         else if (btn.classList.contains('card__edit-btn'));
     })
-}
-
-// 유틸리티 함수
-function getCurColumn(e) {
-    return e.closest('.column');
-}
-
-// 유틸리티 함수
-function getCurColumnTitle(e) {
-    return KanbanStore.getColumnTitle(getCurColumn(e).dataset.id);
 }
 
 // 카드 폼 토글
@@ -85,7 +74,7 @@ function removeCardFormInput(cardForm) {
 // 카드 삭제
 function openCardDeleteModal(btn) {
     const card = btn.closest('.card');
-    openModal('removeCard', { cardId: card.dataset.id });
+    openModal('removeCard', { cardId: card.dataset.id, columnId: getCurColumn(btn).dataset.id });
     // logEntry 생성은 modal에서
 }
 
@@ -96,9 +85,16 @@ function removeColumn(btn) {
     // logEntry 생성은 modal에서
 }
 
-// 랜덤 아이디 부여
+// 유틸리티 함수
 function getRandomId() {
     return Math.floor(Math.random() * 100000);
+}
+
+function getCurColumn(e) {
+    return e.closest('.column');
+}
+function getCurColumnTitle(e) {
+    return KanbanStore.getColumnTitle(getCurColumn(e).dataset.id);
 }
 
 export default initKanban;

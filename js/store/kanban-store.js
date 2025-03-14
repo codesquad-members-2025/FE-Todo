@@ -7,6 +7,7 @@ const Store = (function () {
 
     const setData = ({ columns }) => {
         kanbanNodes = columns;
+        renderData();
     }
 
     const renderData = () => {
@@ -15,22 +16,18 @@ const Store = (function () {
 
     const addCard = (columnId, cardData) => {
         const column = _findColumn({ columnId: columnId });
-        if (!column) throw new Error(`Column not found: ID "${columnId}"`);
         column.cards.unshift(_createCard(cardData));
-
         renderData();
     }
 
     const removeCard = (cardId) => {
         let curColumn = _findColumn({ cardId: cardId });
         curColumn.cards = curColumn.cards.filter(card => card.id != cardId);
-
         renderData();
     }
 
     const removeColumn = (columnId) => {
         kanbanNodes = kanbanNodes.filter(column => column.id != columnId)
-
         renderData();
     }
 
@@ -55,13 +52,21 @@ const Store = (function () {
     }
 
     // history-Logger에서 사용되는 함수
-    const getColumnTitle = (columnId) => {
-        return kanbanNodes.find(column => column.id == columnId).title;
+    const getTextInfo = ({ cardId, columnId, afterColumnId }) => {
+        return {
+            cardTitle: cardId ? _getCardTitle(cardId) : '',
+            columnTitle: columnId ? _getColumnTitle(columnId) : '',
+            afterColumnTitle: afterColumnId ? _getColumnTitle(afterColumnId) : ''
+        }
     }
 
-    const getCardTitle = (cardId) => {
+    const _getCardTitle = (cardId) => {
         let curColumn = _findColumn({ cardId: cardId });
         return curColumn.cards.find(card => card.id == cardId).title;
+    }
+
+    const _getColumnTitle = (columnId) => {
+        return kanbanNodes.find(column => column.id == columnId).title;
     }
 
     return {
@@ -70,18 +75,14 @@ const Store = (function () {
         addCard,
         removeCard,
         removeColumn,
-        getColumnTitle,
-        getCardTitle
+        getTextInfo
     }
 })();
 
 function initStore() {
     fetch(".././data/mock.json")
         .then(response => response.json())
-        .then(data => {
-            Store.setData(data);
-            Store.renderData();
-        })
+        .then(data => Store.setData(data))
         .catch(error => console.error(`데이터 로드 오류: ${error})`));
 }
 

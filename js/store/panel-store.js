@@ -1,4 +1,3 @@
-import KanbanStore from './kanban-store.js';
 import { renderPanel } from '../components/panel-renderer.js';
 
 const Store = (function () {
@@ -8,6 +7,7 @@ const Store = (function () {
 
     const setData = ({logs}) => {
         historyLogs = logs;
+        renderData();
     }
 
     const addLogEntry = ({ iconName, userName, text, datetime }) => {
@@ -17,21 +17,11 @@ const Store = (function () {
             text: text,
             datetime: datetime
         });
-
         renderData();
-    }
-
-    const getTextInfo = (type, { cardId, columnId, afterColumnId }) => {
-        return {
-            cardTitle: _getCardTitle(cardId),
-            columnTitle: _getColumnTitle(columnId),
-            afterColumnTitle: _getColumnTitle(columnId)
-        }
     }
 
     const removeAllLogEntry = () => {
         historyLogs = [];
-
         renderData();
     }
  
@@ -39,24 +29,13 @@ const Store = (function () {
         renderPanel(historyLogs);
     }
 
-    const _getCardTitle = (cardId) => {
-        return KanbanStore.getCardTitle(cardId);
-    }
-
-    const _getColumnTitle = (columnId) => {
-        return KanbanStore.getColumnTitle(columnId)
-    }
-
-    return { setData, addLogEntry, renderData, removeAllLogEntry, getTextInfo };
+    return { setData, addLogEntry, renderData, removeAllLogEntry };
 })();
 
 function initStore() {
     fetch(".././data/mockPanel.json")
         .then(response => response.json())
-        .then(data => {
-            Store.setData(data);
-            Store.renderData();
-        })
+        .then(data => Store.setData(data))
         .catch(error => console.error(`데이터 로드 오류: ${error})`));
 }
 
