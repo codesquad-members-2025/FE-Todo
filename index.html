@@ -12,7 +12,13 @@
 
 <body class="flex-column">
     <header class="app-header flex-between">
-        <h1 class="app-header__title display-bold24">TASKIFY</h1>
+        <div class="app-header__left-container flex-center">
+            <h1 class="app-header__title display-bold24">TASKIFY</h1>
+            <button class="app-header__sort-btn btn">
+                <img src="./assets/icons/arrowBoth.svg">
+                <span class="app-header__sort-text display-medium12">생성 순</span>
+            </button>
+        </div>
         <button class="app-header__history-btn btn">
             <img src="./assets/icons/history.svg">
         </button>
@@ -25,7 +31,17 @@
     <container class="history-panel__container">
         <!-- 렌더링 -->
     </container>
-    
+
+
+    <button class="undo-btn btn">
+        <img src="./assets/icons/undo.svg">
+    </button>
+    <button class="redo-btn btn">
+        <img src="./assets/icons/redo.svg">
+    </button>
+    <button class="column-add-btn btn">
+        <img src="./assets/icons/plus-white.svg">
+    </button>
 
     <dialog class="modal">
         <div class="modal__body flex-column">
@@ -33,7 +49,7 @@
 
             <footer class="modal__footer flex-between">
                 <button class="modal__cancel-btn btn display-bold14">취소</button>
-                <button class="modal__confirm-btn btn">삭제</button>
+                <button class="modal__confirm-btn btn display-bold14">삭제</button>
             </footer>
         </div>
     </dialog>
