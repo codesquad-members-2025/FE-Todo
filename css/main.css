@@ -7,7 +7,7 @@
 /* Components */
 @import url('./components/header.css');
 @import url('./components/column.css');
-@import url('./components/card.css');
+@import url('./components/task.css');
 @import url('./components/modal.css');
 @import url('./components/history.css');
 

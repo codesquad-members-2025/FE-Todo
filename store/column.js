@@ -11,18 +11,18 @@ async function loadColumnsData() {
   return columnData;
 }
 
-function updateCard(columnId, cardData) {
+function updateTask(columnId, taskData) {
   const targetColumn = columnData.find((column) => column.id === columnId);
-  targetColumn.tasks.push(cardData);
+  targetColumn.tasks.push(taskData);
 }
 
-function removeCard(columnId, cardId) {
+function removeTask(columnId, taskId) {
   const targetColumn = columnData.find((column) => column.id === columnId);
-  targetColumn.tasks = targetColumn.tasks.filter((task) => task.id !== cardId);
+  targetColumn.tasks = targetColumn.tasks.filter((task) => task.id !== taskId);
 }
 
 // 정렬 함수 (order: 'created' | 'latest')
-function getSortedCardsByDate(order = 'created') {
+function getSortedTasksByDate(order = 'created') {
   return columnData.map((column) => ({
     ...column,
     tasks: [...column.tasks].sort((a, b) => {
@@ -33,4 +33,4 @@ function getSortedCardsByDate(order = 'created') {
   }));
 }
 
-export { loadColumnsData, updateCard, removeCard, getSortedCardsByDate };
+export { loadColumnsData, updateTask, removeTask, getSortedTasksByDate };

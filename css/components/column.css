@@ -6,12 +6,12 @@
   background-color: var(--surface-alt);
 }
 
-.column {
+.kanban-column {
   width: 320px;
   gap: 10px;
 }
 
-.column-area {
+.kanban-column-header {
   display: flex;
   gap: 8px;
   height: 24px;
@@ -19,21 +19,20 @@
   padding: 0 16px;
 }
 
-.column-area-left {
+.kanban-column-title {
   gap: 8px;
   width: 100%;
 }
 
-.column-area-right {
+.kanban-column-actions {
   display: flex;
   gap: 8px;
 }
 
-.number-box {
+.task-counter {
   width: 24px;
   height: 24px;
   border: 1px solid var(--border-default);
   border-radius: var(--radius-small);
-
   justify-content: center;
 }

@@ -1,10 +1,10 @@
 @import url('../base/variables.css');
 
-.card-container {
+.task-container {
   gap: 10px;
 }
 
-.card-common {
+.task-common {
   gap: 16px;
   padding: 16px;
   background-color: var(--surface-default);
@@ -12,33 +12,33 @@
   box-shadow: var(--drop-shadow-normal);
 }
 
-.todo-card {
+.task-item {
   display: flex;
 }
 
-.card-form {
+.task-form {
   margin-bottom: 10px;
 }
 
-.card-form .button-section {
+.task-form .task-form-actions {
   display: flex;
   gap: 8px;
 }
 
-.form-input::placeholder {
+.task-input::placeholder {
   color: var(--text-strong);
 }
 
-.form-textarea {
+.task-textarea {
   height: 20px;
   overflow-y: hidden;
 }
 
-.form-textarea::placeholder {
+.task-textarea::placeholder {
   color: var(--text-default);
 }
 
-.form-common-btn {
+.task-btn {
   height: 32px;
   display: flex;
   padding: 7.5px 53.5px;
@@ -46,23 +46,23 @@
   border-radius: var(--radius-small);
 }
 
-.form-create-btn {
+.task-save-btn {
   background-color: var(--surface-brand);
 }
 
-.card-form .button-section span {
+.task-form .task-form-actions span {
   padding: 0 4px;
 }
 
-.card-form .button-section {
+.task-form .task-form-actions {
   width: 288px;
   display: flex;
   justify-content: space-between;
   gap: 8px;
 }
 
-/* card form content */
-.content-section {
+/* task form content */
+.task-item-content {
   width: 100%;
   gap: 8px;
 }

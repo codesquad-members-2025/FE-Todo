@@ -1,12 +1,12 @@
 import { createColumn, createTaskCard } from './template.js';
 import { pushChild, unshiftChild } from '../utils/dom.js';
 import { getISOStringNow, generateUUID } from '../utils/generalUtils.js';
-import { openDeleteCardDialog } from './dialog.js';
+import { openDeleteTaskDialog } from './dialog.js';
 import {
   loadColumnsData,
-  updateCard,
-  removeCard,
-  getSortedCardsByDate,
+  updateTask,
+  removeTask,
+  getSortedTasksByDate,
 } from '../../store/column.js';
 
 // ──────────────────────────────
@@ -14,11 +14,11 @@ import {
 // ──────────────────────────────
 
 // 전체 칼럼과 카드 렌더링
-async function initColumnAndCard() {
+async function initColumnAndTask() {
   const columnsData = await loadColumnsData();
 
   renderColumns(columnsData);
-  renderCardsForColumn(columnsData);
+  renderTasksForColumn(columnsData);
 
   initKanbanEvents();
   initSortButton();
@@ -29,8 +29,8 @@ function renderColumns(columnsData) {
   const columnContainer = document.querySelector('#kanban-board');
 
   const columnsHtml = columnsData.reduce(
-    (acc, { id, title, taskCount }) =>
-      (acc += createColumn(id, title, taskCount)),
+    (columnsHtml, { id, title, taskCount }) =>
+      (columnsHtml += createColumn(id, title, taskCount)),
     ''
   );
 
@@ -38,24 +38,24 @@ function renderColumns(columnsData) {
 }
 
 // 칼럼에 카드 생성
-function renderCardsForColumn(columnsData) {
+function renderTasksForColumn(columnsData) {
   columnsData.forEach(({ id, tasks }) => {
-    const columnCardList = document.querySelector(`#${id} .card-container`);
+    const columnTaskList = document.querySelector(`#${id} .task-container`);
 
-    const taskCardsHtml = tasks.reduce(
-      (acc, { id, title, content, author }) =>
-        (acc += createTaskCard(id, title, content, author)),
+    const taskItemsHtml = tasks.reduce(
+      (tasksHtml, { id, title, content, author }) =>
+        (tasksHtml += createTaskCard(id, title, content, author)),
       ''
     );
 
-    pushChild(columnCardList, taskCardsHtml);
+    pushChild(columnTaskList, taskItemsHtml);
   });
 }
 
 // 칼럼에 카드 하나 생성
-function renderCard(columnId, cardData) {
-  const { id, title, content, author } = cardData;
-  const column = document.querySelector(`#${columnId} .card-container`);
+function renderTask(columnId, taskData) {
+  const { id, title, content, author } = taskData;
+  const column = document.querySelector(`#${columnId} .task-container`);
   const taskCardHtml = createTaskCard(id, title, content, author);
 
   if (isSortCreated()) {
@@ -76,55 +76,55 @@ function isSortCreated() {
 // ──────────────────────────────
 
 // 새 카드 생성
-function createNewCard(target) {
+function createNewTask(target) {
   const column = getColumn(target);
   if (!column) return;
 
-  const formCard = getCardForm(column);
-  if (!formCard) return;
+  const taskForm = getTaskForm(column);
+  if (!taskForm) return;
 
-  const inputData = collectInputData(formCard);
+  const inputData = collectInputData(taskForm);
   if (!inputData) return;
 
-  closeCardForm(formCard);
-  saveAndRenderCard(column.id, inputData);
-  resetValues(formCard);
+  closeTaskForm(taskForm);
+  saveAndRenderTask(column.id, inputData);
+  resetValues(taskForm);
 }
 
 // 카드 데이터 저장 & UI 업데이트
-function saveAndRenderCard(columnId, inputData) {
-  updateCard(columnId, inputData);
-  renderCard(columnId, inputData);
+function saveAndRenderTask(columnId, inputData) {
+  updateTask(columnId, inputData);
+  renderTask(columnId, inputData);
 }
 
 // 입력 값 초기화
-function resetValues(formCard) {
-  formCard.querySelector('input').value = '';
-  formCard.querySelector('textarea').value = '';
+function resetValues(taskForm) {
+  taskForm.querySelector('input').value = '';
+  taskForm.querySelector('textarea').value = '';
 }
 
 // 카드 제거 함수 반환 (고차함수)
-function makeCardRemover(cardId) {
+function makeTaskRemover(taskId) {
   return () => {
-    const targetCard = document.getElementById(cardId);
-    const column = targetCard.closest('.column');
+    const targetTask = document.getElementById(taskId);
+    const column = targetTask.closest('.kanban-column');
     const columnId = column.id;
 
-    removeCard(columnId, cardId); // 데이터 제거
-    targetCard.remove(); // UI 제거
+    removeTask(columnId, taskId); // 데이터 제거
+    targetTask.remove(); // UI 제거
   };
 }
 
 // 각 칼럼의 카드 전부 제거
-function clearCards() {
-  document.querySelectorAll('.column').forEach(clearCardOfColumn);
+function clearTasks() {
+  document.querySelectorAll('.kanban-column').forEach(clearTasksOfColumn);
 }
 
 // 특정 칼럼의 카드 제거
-function clearCardOfColumn(columnElement) {
-  const columnCardList = columnElement.querySelector('.card-container');
-  if (columnCardList) {
-    columnCardList.innerHTML = ''; // 카드 리스트 비우기
+function clearTasksOfColumn(columnElement) {
+  const columnTaskList = columnElement.querySelector('.task-container');
+  if (columnTaskList) {
+    columnTaskList.innerHTML = '';
   }
 }
 
@@ -133,7 +133,7 @@ function clearCardOfColumn(columnElement) {
 // ──────────────────────────────
 
 // 정렬 버튼 클릭 이벤트
-async function sortCards({ currentTarget }) {
+async function sortTasks({ currentTarget }) {
   const sortButton = currentTarget;
   const sortButtonLabel = sortButton.querySelector('.task-sort__label');
   const currentSortType = sortButton.dataset.type;
@@ -141,7 +141,7 @@ async function sortCards({ currentTarget }) {
   const { newSortType, buttonText } = toggleSortType(currentSortType);
 
   updateSortButtonUI(sortButton, sortButtonLabel, newSortType, buttonText);
-  applySortedCards(newSortType);
+  applySortedTasks(newSortType);
 }
 
 // 정렬 타입 변경
@@ -158,10 +158,10 @@ function updateSortButtonUI(button, label, newSortType, buttonText) {
 }
 
 // 정렬 후 UI 반영
-function applySortedCards(sortType) {
-  const sortedData = getSortedCardsByDate(sortType);
-  clearCards();
-  renderCardsForColumn(sortedData);
+function applySortedTasks(sortType) {
+  const sortedData = getSortedTasksByDate(sortType);
+  clearTasks();
+  renderTasksForColumn(sortedData);
 }
 
 // ──────────────────────────────
@@ -173,15 +173,15 @@ function initKanbanEvents() {
   const columnSection = document.getElementById('kanban-board');
 
   const clickHandlers = new Map([
-    ['.card-add-btn', toggleCardForm],
-    ['.delete-card-btn', openDeleteCardDialog],
-    ['.form-cancel-btn', toggleCardForm],
-    ['.form-create-btn', createNewCard],
+    ['.task-add-btn', toggleTaskForm],
+    ['.task-delete-btn', openDeleteTaskDialog],
+    ['.task-cancel-btn', toggleTaskForm],
+    ['.task-save-btn', createNewTask],
   ]);
 
   columnSection.addEventListener('click', ({ target }) => {
     const closestBtn = target.closest('button');
-    if (closestBtn === null) return; // 다른 곳 누르면 실행 X
+    if (closestBtn === null) return;
 
     for (const [selector, handler] of clickHandlers) {
       if (closestBtn.matches(selector)) {
@@ -195,7 +195,7 @@ function initKanbanEvents() {
 // Sort Button 이벤트 초기화
 function initSortButton() {
   const sortButton = document.getElementById('task-sort-btn');
-  sortButton.addEventListener('click', sortCards);
+  sortButton.addEventListener('click', sortTasks);
 }
 
 // ──────────────────────────────
@@ -203,29 +203,29 @@ function initSortButton() {
 // ──────────────────────────────
 
 // 카드 폼 토글
-function toggleCardForm(target) {
+function toggleTaskForm(target) {
   const column = getColumn(target);
-  const cardForm = getCardForm(column);
-  if (!cardForm) return;
+  const taskForm = getTaskForm(column);
+  if (!taskForm) return;
 
-  const isVisible = window.getComputedStyle(cardForm).display === 'flex';
-  cardForm.style.display = isVisible ? 'none' : 'flex';
+  const isVisible = window.getComputedStyle(taskForm).display === 'flex';
+  taskForm.style.display = isVisible ? 'none' : 'flex';
 }
 
 // 칼럼 요소 가져오기
 function getColumn(target) {
-  return target.closest('.column');
+  return target.closest('.kanban-column');
 }
 
 // 카드 폼 가져오기
-function getCardForm(column) {
-  return column?.querySelector('.card-form') || null;
+function getTaskForm(column) {
+  return column?.querySelector('.task-form') || null;
 }
 
 // 입력 데이터 수집 및 검증
-function collectInputData(formCard) {
-  const input = formCard.querySelector('input');
-  const textarea = formCard.querySelector('textarea');
+function collectInputData(taskForm) {
+  const input = taskForm.querySelector('input');
+  const textarea = taskForm.querySelector('textarea');
 
   const title = input?.value;
   const content = textarea?.value;
@@ -250,8 +250,8 @@ function detectDeviceType() {
 }
 
 // 입력 폼 닫기
-function closeCardForm(formCard) {
-  formCard.style.display = 'none';
+function closeTaskForm(taskForm) {
+  taskForm.style.display = 'none';
 }
 
-export { clearCards, makeCardRemover, initColumnAndCard };
+export { clearTasks, makeTaskRemover, initColumnAndTask };

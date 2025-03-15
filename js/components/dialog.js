@@ -1,4 +1,4 @@
-import { makeCardRemover } from './cardColumn.js';
+import { makeTaskRemover } from './taskColumn.js';
 import { removeActivityRecords } from './activity.js';
 
 // ──────────────────────────────
@@ -40,16 +40,16 @@ function setDeleteButtonHandler(deleteCallback) {
 // 2. 삭제 모달 핸들링
 // ──────────────────────────────
 
-// 카드 삭제 모달 오픈
-function openDeleteCardDialog(target) {
-  const todoCard = target.closest('.todo-card');
-  if (!todoCard) return; // 카드가 없으면 종료
+// 작업 삭제 모달 오픈
+function openDeleteTaskDialog(target) {
+  const taskItem = target.closest('.task-item');
+  if (!taskItem) return; // 작업이 없으면 종료
 
-  const cardId = todoCard.id;
-  if (!cardId) return;
+  const taskId = taskItem.id;
+  if (!taskId) return;
 
-  const cardRemover = makeCardRemover(cardId);
-  setConfirmDialog('선택한 카드를 삭제할까요?', cardRemover);
+  const taskRemover = makeTaskRemover(taskId);
+  setConfirmDialog('선택한 작업을 삭제할까요?', taskRemover);
   openDialog();
 }
 
@@ -73,4 +73,4 @@ function initDialogCloseEvent() {
 
 initDialogCloseEvent();
 
-export { openDeleteCardDialog, openActivityDeleteDialog };
+export { openDeleteTaskDialog, openActivityDeleteDialog };
