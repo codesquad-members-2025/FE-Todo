@@ -1,6 +1,6 @@
 /* Base */
 @import url('./base/reset.css');
-@import url('./base/variable.css');
+@import url('./base/variables.css');
 @import url('./base/font.css');
 @import url('./base/common.css');
 
@@ -13,4 +13,3 @@
 
 /* Utils */
 @import url('./utils/svg.css');
-@import url('./utils/animations.css');
