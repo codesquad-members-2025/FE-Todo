@@ -37,3 +37,11 @@
     width: 24px;
     height: 24px;
 }
+
+.card__close-btn:hover svg path {
+    fill: var(--text-danger);
+}
+
+.card__edit-btn:hover svg path {
+    fill: var(--text-strong);
+}
