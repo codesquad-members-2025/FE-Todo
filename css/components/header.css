@@ -1,0 +1,28 @@
+@import url('../base/variables.css');
+
+.header {
+  justify-content: space-between;
+  height: 64px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sort-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 75px;
+  height: 24px;
+
+  border: 1px solid var(--border-bord);
+  border-radius: var(--radius-small);
+}
+
+.sort-btn-label {
+  padding: 1.5px 4px;
+}

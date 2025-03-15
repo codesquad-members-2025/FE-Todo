@@ -1,0 +1,39 @@
+@import url('../base/variables.css');
+
+.main {
+  display: flex;
+  gap: 24px;
+  background-color: var(--surface-alt);
+}
+
+.column {
+  width: 320px;
+  gap: 10px;
+}
+
+.column-area {
+  display: flex;
+  gap: 8px;
+  height: 24px;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.column-area-left {
+  gap: 8px;
+  width: 100%;
+}
+
+.column-area-right {
+  display: flex;
+  gap: 8px;
+}
+
+.number-box {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-small);
+
+  justify-content: center;
+}
