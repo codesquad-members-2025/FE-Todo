@@ -70,7 +70,7 @@ function createShowCard(title, content) {
       <span class="show-card__author">author by web</span>
     </div>
     <div class="show-card__icons">
-      <button class="show-card__cancle-icon">
+      <button class="show-card__cancle-icon delete">
         <svg
           class="closed"
           width="12"
