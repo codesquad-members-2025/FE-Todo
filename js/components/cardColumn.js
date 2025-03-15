@@ -1,7 +1,7 @@
 import { createColumn, createTaskCard } from './template.js';
 import { pushChild, unshiftChild } from '../utils/dom.js';
 import { getISOStringNow, generateUUID } from '../utils/generalUtils.js';
-import { openDeleteCardModal } from './modal.js';
+import { openDeleteCardDialog } from './dialog.js';
 import {
   loadColumnsData,
   updateCard,
@@ -174,7 +174,7 @@ function initKanbanEvents() {
 
   const clickHandlers = new Map([
     ['.card-add-btn', toggleCardForm],
-    ['.delete-card-btn', openDeleteCardModal],
+    ['.delete-card-btn', openDeleteCardDialog],
     ['.form-cancel-btn', toggleCardForm],
     ['.form-create-btn', createNewCard],
   ]);

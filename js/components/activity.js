@@ -1,6 +1,6 @@
 import { createActivityRecord } from './template.js';
 import { pushChild } from '../utils/dom.js';
-import { openActivityDeleteModal } from './modal.js';
+import { openActivityDeleteDialog } from './dialog.js';
 import { loadActivityData } from '../../store/activity.js';
 
 // ──────────────────────────────
@@ -76,7 +76,7 @@ function initActivityPanelButtons() {
   const buttonMap = new Map([
     ['#activity-panel-open-btn', toggleActivityPanel],
     ['#activity-panel-close-btn', toggleActivityPanel],
-    ['#activity-clear-btn', openActivityDeleteModal],
+    ['#activity-clear-btn', openActivityDeleteDialog],
   ]);
 
   buttonMap.forEach((handler, selector) => {

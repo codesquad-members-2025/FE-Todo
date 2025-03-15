@@ -1,7 +1,7 @@
 @import url('../base/variables.css');
 
 /* Modal */
-dialog[open] {
+#confirm-dialog[open] {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,8 +18,8 @@ dialog[open] {
   transform: translate(-50%, -50%);
 }
 
-#modal-cancel-btn,
-#modal-delete-btn {
+#confirm-dialog__cancel-btn,
+#confirm-dialog__confirm-btn {
   height: 32px;
   display: flex;
   padding: 7.5px 69.5px;
@@ -27,15 +27,15 @@ dialog[open] {
   border-radius: var(--radius-small);
 }
 
-#modal-delete-btn {
+#confirm-dialog__confirm-btn {
   background-color: var(--surface-danger);
 }
 
-#modal .button-section span {
+.confirm-dialog__buttons span {
   padding: 0 4px;
 }
 
-#modal .button-section {
+.confirm-dialog__buttons {
   width: 352px;
   display: flex;
   justify-content: space-between;
