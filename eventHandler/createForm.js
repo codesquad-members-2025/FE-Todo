@@ -9,8 +9,8 @@ export function createShowCardForm(cardData) {
       <span class="show-card__author">${cardData.author}</span>
     </div>
     <div class="show-card__icons">
-      <button class="show-card__cancle-icon">
-      <div class="closed"></div>
+      <button class="show-card__cancle-icon delete">
+      <div class="closed "></div>
       </button>
       <button class="show-card__edit-icon">
         <div class="edit">

@@ -121,7 +121,8 @@ h1 {
   mask-repeat: no-repeat;
 }
 
-.plus:hover {
+.plus:hover,
+.closed:hover {
   background-color: var(--accent-red);
 }
 .column-header__closedButton {
