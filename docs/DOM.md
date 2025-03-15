@@ -160,3 +160,34 @@ title.remove();
 ```javascript
 document.body.removeChild(title);
 ```
+
+---
+
+**document.createElement()**
+
+- createElement()는 새로운 HTML 요소를 생성하는 메서드
+- 하지만 생성된 요소는 아직 DOM에 추가되지 않은 상태
+- 이 후 appendChild() 또는 insertBefore() 같은 메서드를 사용하여 실제 문서에 삽입해야 한다
+
+  - 기본 문법
+
+  ```javascript
+  const newElement = document.createElement("태그이름");
+  ```
+
+> "태그이름": 생성할 HTML 태그명을 문자열 형태로 입력  
+> 반환값은 해당 태그를 가진 새로운 요소 객체(Element)이다
+
+**insertBefore**
+
+- insertBefore() 메서드는 기존 요소 앞에 새로운 요소를 삽입하는 메서드
+- 즉, 특정 부모 요소 내에서 지정한 자식 요소 앞에 새 요소를 배치할 수 있다
+
+  - 기본 문법
+
+  **parentNode.insertBefore(newElement, referenceElement);**
+
+  > parentNode: 삽입할 요소를 포함하는 부모 요소  
+  > newElement: 새로 삽입할 요소  
+  > referenceElement: newElement가 이 요소 앞에 삽입됨  
+  >  (referenceElement가 null이면 appendChild()처럼 마지막에 추가됨)

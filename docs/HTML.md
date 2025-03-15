@@ -151,6 +151,8 @@
   - readonly : 읽기 전용 (수정 불가)
   - disabled : 비활성화 (입력 불가)
   - required : 필수 입력 값 설정 (폼 제출 시)
+    - required replaceholder = "" 를 사용하면  
+      브라우저가 기본적으로 "이 필드를 작성하세요" 같은 메시지를 표시해줌
   - autofocus : 페이지 로드 시 자동 포커스
   - spellcheck : 맞춤법 검사 (true / false)
   - name : 폼 데이터 전송 시 변수 이름
@@ -182,6 +184,7 @@
 2. textarea \_\_ JavaScript 이벤트 관련 속성
 
 - oninput : 입력할 때마다 이벤트 실행
+  - textarea.value 를 사용하면 입력한 값을 알 수 있다
 - onchange : 내용이 변경되고 포커스를 잃으면 실행
 - onfocus : 클릭 또는 탭으로 포커스되면 실행
 - onblur : 포커스를 잃으면 실행
