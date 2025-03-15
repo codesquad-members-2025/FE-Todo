@@ -10,10 +10,10 @@ export function createShowCardForm(cardData) {
     </div>
     <div class="show-card__icons">
       <button class="show-card__cancle-icon delete">
-      <div class="closed "></div>
+      <div class="closed"></div>
       </button>
       <button class="show-card__edit-icon">
-        <div class="edit">
+        <div class="edit"></div>
       </button>
     </div>`;
   return cardElement;
