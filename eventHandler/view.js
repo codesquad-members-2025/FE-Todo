@@ -29,7 +29,8 @@ function generateCardsFromList(colum) {
   else if (colum.id === "done") index = 2;
   let count = 0;
   const id = document.querySelector(`.${colum.id}-cardList`);
-  let countCard = document.getElementsByClassName("count_card")[index];
+  const columnHeader = id.previousElementSibling;
+  let countCard = columnHeader.querySelector(".count_card");
   const fragment = document.createDocumentFragment();
   colum.cardList.forEach((cardData) => {
     const cardElement = createShowCardForm(cardData);

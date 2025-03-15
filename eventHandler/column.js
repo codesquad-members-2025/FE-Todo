@@ -44,8 +44,11 @@ function processAddCard(addCardForm) {
       const createCardForm = createShowCard(title, content);
       const findAddCardElement = event.target.closest(".add-card");
       const cardList = findAddCardElement.parentElement;
+      const cardCount =
+        cardList.previousElementSibling.querySelector(".count_card");
       findAddCardElement.remove();
       cardList.prepend(createCardForm);
+      cardCount.textContent = Number(cardCount.textContent) + 1;
     }
   });
 }

@@ -32,6 +32,8 @@ function processCard(card) {
       if (event.target.className === "decideDeleteButton") {
         cancleDelete();
         card.remove();
+        const countCard = document.querySelector(".count_card");
+        countCard.textContent = Number(countCard.textContent) - 1;
       }
     },
     { once: true }
