@@ -29,7 +29,7 @@
             <span class="task-sort__label text-bold tx-m12">생성순</span>
           </button>
         </div>
-        <button id="history-open-btn" aria-label="View history">
+        <button id="activity-panel-open-btn" aria-label="View history">
           <div
             class="history-icon svg-24 svg-color-default"
             role="img"
@@ -37,30 +37,32 @@
           ></div>
         </button>
       </header>
-      <aside id="history-sidebar" class="flex-col">
+      <aside id="activity-panel" class="flex-col">
         <header>
           <span class="text-strong tx-b16">사용자 활동 기록</span>
-          <button id="history-close-btn" class="history-close-btn">
+          <button
+            id="activity-panel-close-btn"
+            class="activity-panel-close-btn"
+          >
             <div
               class="closed-icon svg-16 svg-color-default"
               role="img"
               aria-label="Add a new task"
             ></div>
-            <!-- <img src="/assets/icons/closed.svg" width="16" height="16" /> -->
             <span class="text-default tx-b14">닫기</span>
           </button>
         </header>
-        <section id="history-section" class="flex-col">
+        <section id="activity-panel-content" class="flex-col">
           <span
-            id="history-default"
+            id="activity-empty-state"
             class="text-weak tx-m14"
             style="display: none"
             >사용자 활동 기록이 없습니다.</span
           >
-          <div id="history-container"></div>
+          <div id="activity-list-container"></div>
         </section>
-        <footer>
-          <button id="history-delete-btn" class="tx-b14 text-danger">
+        <footer id="activity-panel-footer">
+          <button id="activity-clear-btn" class="tx-b14 text-danger">
             기록 전체 삭제
           </button>
         </footer>

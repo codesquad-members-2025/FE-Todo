@@ -2,7 +2,7 @@
 
 /* History */
 
-#history-sidebar {
+#activity-panel {
   display: none;
   gap: 8px;
   position: fixed;
@@ -17,19 +17,19 @@
   z-index: 10;
 }
 
-#history-sidebar header {
+#activity-panel header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px;
 }
 
-#history-sidebar header > span {
+#activity-panel header > span {
   display: flex;
   padding-left: 8px;
 }
 
-#history-section {
+#activity-panel-content {
   gap: 1px;
   padding-right: 4px;
   max-height: 560px;
@@ -37,40 +37,40 @@
 }
 
 /* scrollbar */
-#history-section::-webkit-scrollbar {
+#activity-panel-content::-webkit-scrollbar {
   width: 2px;
   height: 240px;
 }
 
-#history-section::-webkit-scrollbar-track {
+#activity-panel-content::-webkit-scrollbar-track {
   background: transparent; /* 트랙 배경 투명 */
 }
 
 /* handle */
-#history-section::-webkit-scrollbar-thumb {
+#activity-panel-content::-webkit-scrollbar-thumb {
   background-color: var(--surface-alt);
   border-radius: 6px;
 }
 
 /* hover event */
-#history-section::-webkit-scrollbar-thumb:hover {
+#activity-panel-content::-webkit-scrollbar-thumb:hover {
   background-color: darkgray; /* 호버 시 손잡이 색상 */
 }
 
-#history-default {
+#activity-empty-state {
   width: 312px;
   display: flex;
   justify-content: center;
   padding: 16px;
 }
 
-.history-close-btn {
+.activity-panel-close-btn {
   display: flex;
   align-items: center;
   padding: 7.5px 8px;
 }
 
-.history-close-btn > span {
+.activity-panel-close-btn > span {
   padding: 0 4px;
 }
 
@@ -100,13 +100,13 @@
 
 /* History Fotter */
 
-#history-sidebar footer {
+#activity-panel footer {
   display: none;
   justify-content: flex-end;
   padding: 4px 8px;
 }
 
-#history-delete-btn {
+#activity-clear-btn {
   display: flex;
   justify-content: center;
   padding: 7.5px 8px;

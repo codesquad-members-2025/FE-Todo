@@ -67,7 +67,7 @@ function createTaskCard(id, title, content, author) {
 `;
 }
 
-function createHistoryItem(username, profileImage, actionText, timestamp) {
+function createActivityRecord(username, profileImage, actionText, timestamp) {
   return `  
     <article class="activity-record">
       <div class="record-header">
@@ -90,4 +90,4 @@ function createHistoryItem(username, profileImage, actionText, timestamp) {
   `;
 }
 
-export { createColumn, createTaskCard, createHistoryItem };
+export { createColumn, createTaskCard, createActivityRecord };

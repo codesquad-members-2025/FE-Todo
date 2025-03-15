@@ -1,5 +1,5 @@
 import { makeCardRemover } from './cardColumn.js';
-import { removeHistoryRecords } from './history.js';
+import { removeActivityRecords } from './activity.js';
 
 // ──────────────────────────────
 // 1. 캐싱된 DOM 요소
@@ -55,8 +55,8 @@ function openDeleteCardModal(target) {
 }
 
 // 활동기록 삭제 모달 오픈
-function openHistoryDeleteModal() {
-  setConfirmModal('모든 사용자 활동 기록을 삭제할까요?', removeHistoryRecords);
+function openActivityDeleteModal() {
+  setConfirmModal('모든 사용자 활동 기록을 삭제할까요?', removeActivityRecords);
   openModal();
 }
 
@@ -71,4 +71,4 @@ function initModalCloseEvent() {
 
 initModalCloseEvent();
 
-export { openDeleteCardModal, openHistoryDeleteModal };
+export { openDeleteCardModal, openActivityDeleteModal };

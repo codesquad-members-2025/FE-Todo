@@ -1,5 +1,5 @@
 import { initColumnAndCard } from './components/cardColumn.js';
-import { initHistory } from './components/history.js';
+import { initActivityPanel } from './components/activity.js';
 
 initColumnAndCard();
-initHistory();
+initActivityPanel();
