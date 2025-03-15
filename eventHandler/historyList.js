@@ -2,8 +2,6 @@ const openButton = document.getElementById("historyOpenButton");
 const historyListLayer = document.getElementById("historyList-noEmpty");
 const closedButton = document.getElementById("history__closedButton");
 const deleteButton = document.getElementById("deleteButton");
-const cancleButton = document.querySelector(".cancleButton");
-const decideDeletButton = document.querySelector(".decideDeleteButton");
 
 // 히스토리 리스트 열기
 function openHistoryList() {
@@ -17,44 +15,36 @@ function closeHistoryList() {
 
 // 히스토리 리스트 삭제 알림창 띄우기
 function confirmDeleteAlert() {
-  const overlay = document.getElementById("overlay-dark");
-  const confirm = document.querySelector(".confirm-box");
-  // overlay.style.display = "block";
-  // alert.style.display = "block";
-  overlay.classList.remove("hidden");
-  confirm.classList.remove("hidden");
+  // 먼저 모달창을 추가할 요소를 찾아
+  const modal = document.querySelector(".DeleteConfirmationModal");
+  // 그 다음 그 요소 내에 html 내용을 추가해
+  const confirmLayer = document.createElement("div");
+  confirmLayer.classList.add("deleteAlert");
+  confirmLayer.innerHTML = `<div id="overlay-dark"></div>
+  <div class="confirm-box">
+    <div class="confirmContent">
+      <p>모든 사용자 활동 기록을 삭제할까요?</p>
+      <div class="buttons">
+        <button class="cancleButton">취소</button>
+        <button class="decideDeleteButton">삭제</button>
+      </div>
+    </div>
+  </div>`;
+  modal.appendChild(confirmLayer);
+  // 그 다음 화면에 뜨게끔 만들어
+  document.body.appendChild(modal);
 }
 
 // 삭제 알림창에서 취소 버튼 클릭 시 알림창 제거
 function cancleDelete() {
-  const overlay = document.getElementById("overlay-dark");
-  const confirm = document.querySelector(".confirm-box");
-  // overlay.style.display = "none";
-  // alert.style.display = "none";
-  overlay.classList.add("hidden");
-  confirm.classList.add("hidden");
+  document.querySelector(".deleteAlert").remove();
 }
 
 // 삭제 알림창에서 삭제 버튼 클릭 시 recordHistory 제거 후 해당 위치에 빈 사용자 기록으로 변경
 function decideDelete() {
   cancleDelete();
-  // const recordHistory = document.getElementById("recordHistory");
-  // const deleteBox = document.querySelector(".deleteBox");
-  // let getRecords = recordHistory.children;
-  // let recordList = recordHistory.parentElement;
-  //  Array.from(getRecords).forEach((record) => {
-  //    record.remove();
-  //  });
-  // recordHistory.remove();
-  // deleteBox.remove();
 
-  // 부모, 자식 관계로 접근
   const recordList = document.querySelector(".history__recordList");
-  // while (recordList.firstChild) {
-  //   // 첫번째 자식요소가 존재하지 않을 때 까지 반복
-  //   recordList.removeChild(recordList.firstChild);
-  // }
-
   recordList.innerHTML = `<div class="record-empty">사용자 활동 기록이 없습니다.</div>`;
 }
 
@@ -63,6 +53,9 @@ export function historyEvent() {
   openButton.addEventListener("click", openHistoryList);
   closedButton.addEventListener("click", closeHistoryList);
   deleteButton.addEventListener("click", confirmDeleteAlert);
-  cancleButton.addEventListener("click", cancleDelete);
-  decideDeletButton.addEventListener("click", decideDelete);
+  document.addEventListener("click", (event) => {
+    if (event.target.id === "historyOpenButton") return openHistoryList();
+    if (event.target.className === "cancleButton") return cancleDelete();
+    if (event.target.className === "decideDeleteButton") return decideDelete();
+  });
 }

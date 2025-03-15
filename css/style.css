@@ -459,6 +459,7 @@ h1 {
 .confirmContent p {
   text-align: center;
   font: var(--display-medium16);
+  color: var(--text-default);
   padding: var(--number-400) var(--number-300) 0 var(--number-300);
 }
 
