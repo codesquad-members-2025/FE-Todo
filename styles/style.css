@@ -14,6 +14,7 @@
 @import './components/card.css';
 @import './components/column.css';
 @import './components/modal.css';
+@import './components/fixedBtn.css';
 
 /* 전역 스타일 */
 * {
