@@ -24,9 +24,24 @@ function rocordListDeleteAlert() {
   modal.appendChild(confirmLayer);
   // 그 다음 화면에 뜨게끔 만들어
   document.body.appendChild(modal);
+
+  processRecordList();
 }
 
-function createDeleteConfirmModal(title) {
+function processRecordList() {
+  const modal = document.querySelector(".deleteAlert");
+  const cancelButton = modal.querySelector(".cancleButton");
+  const deleteButton = modal.querySelector(".decideDeleteButton");
+
+  cancelButton.addEventListener("click", () => {
+    cancleDelete();
+  });
+  deleteButton.addEventListener("click", () => {
+    decideDelete();
+  });
+}
+
+export function createDeleteConfirmModal(title) {
   const confirmLayer = document.createElement("div");
   confirmLayer.classList.add("deleteAlert");
   confirmLayer.innerHTML = `<div id="overlay-dark"></div>
@@ -43,7 +58,7 @@ function createDeleteConfirmModal(title) {
 }
 
 // 삭제 알림창에서 취소 버튼 클릭 시 알림창 제거
-function cancleDelete() {
+export function cancleDelete() {
   document.querySelector(".deleteAlert").remove();
 }
 
@@ -60,9 +75,4 @@ export function historyEvent() {
   openButton.addEventListener("click", openHistoryList);
   closedButton.addEventListener("click", closeHistoryList);
   deleteButton.addEventListener("click", rocordListDeleteAlert);
-  document.addEventListener("click", (event) => {
-    if (event.target.id === "historyOpenButton") return openHistoryList();
-    if (event.target.className === "cancleButton") return cancleDelete();
-    if (event.target.className === "decideDeleteButton") return decideDelete();
-  });
 }
