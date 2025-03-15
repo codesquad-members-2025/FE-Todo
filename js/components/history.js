@@ -8,8 +8,8 @@ import { loadHistoryData } from '../../store/history.js';
 // ──────────────────────────────
 const historyContainer = document.getElementById('history-container');
 const historyDefault = document.getElementById('history-default');
-const historyFooter = document.querySelector('#history footer');
-const historySection = document.getElementById('history');
+const historyFooter = document.querySelector('#history-sidebar footer');
+const historySection = document.getElementById('history-sidebar');
 
 // ──────────────────────────────
 //  2. 기록 렌더링 및 삭제

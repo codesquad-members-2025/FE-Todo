@@ -22,7 +22,7 @@ body {
   align-items: center;
 }
 
-.container {
+.app-layout {
   gap: 32px;
   width: 1440px;
   height: 100vh;

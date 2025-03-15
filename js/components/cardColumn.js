@@ -26,7 +26,7 @@ async function initColumnAndCard() {
 
 // 전체 칼럼 생성
 function renderColumns(columnsData) {
-  const columnContainer = document.querySelector('#columns-container');
+  const columnContainer = document.querySelector('#kanban-board');
 
   const columnsHtml = columnsData.reduce(
     (acc, { id, title, taskCount }) =>
@@ -67,7 +67,7 @@ function renderCard(columnId, cardData) {
 
 // 생성순 정렬 여부 반환
 function isSortCreated() {
-  const sortButtonLabel = document.querySelector('#sort-btn').dataset.type;
+  const sortButtonLabel = document.querySelector('#task-sort-btn').dataset.type;
   return sortButtonLabel === 'created';
 }
 
@@ -135,7 +135,7 @@ function clearCardOfColumn(columnElement) {
 // 정렬 버튼 클릭 이벤트
 async function sortCards({ currentTarget }) {
   const sortButton = currentTarget;
-  const sortButtonLabel = sortButton.querySelector('.sort-btn-label');
+  const sortButtonLabel = sortButton.querySelector('.task-sort__label');
   const currentSortType = sortButton.dataset.type;
 
   const { newSortType, buttonText } = toggleSortType(currentSortType);
@@ -170,7 +170,7 @@ function applySortedCards(sortType) {
 
 // Kanban 이벤트 위임
 function initKanbanEvents() {
-  const columnSection = document.getElementById('columns-container');
+  const columnSection = document.getElementById('kanban-board');
 
   const clickHandlers = new Map([
     ['.card-add-btn', toggleCardForm],
@@ -194,7 +194,7 @@ function initKanbanEvents() {
 
 // Sort Button 이벤트 초기화
 function initSortButton() {
-  const sortButton = document.getElementById('sort-btn');
+  const sortButton = document.getElementById('task-sort-btn');
   sortButton.addEventListener('click', sortCards);
 }
 

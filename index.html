@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <div class="container flex-col">
-      <header class="header flex-item-center">
-        <div class="header-left">
+    <div class="app-layout flex-col">
+      <header class="app-header flex-item-center">
+        <div class="app-header__left">
           <h1 class="text-strong tx-b24">TASKIFY</h1>
           <button
-            id="sort-btn"
-            class="sort-btn"
+            id="task-sort-btn"
             aria-label="Sort tasks"
             data-type="created"
           >
@@ -27,7 +26,7 @@
               role="img"
               aria-label="View task history"
             ></div>
-            <span class="sort-btn-label text-bold tx-m12">생성순</span>
+            <span class="task-sort__label text-bold tx-m12">생성순</span>
           </button>
         </div>
         <button id="history-open-btn" aria-label="View history">
@@ -38,7 +37,7 @@
           ></div>
         </button>
       </header>
-      <aside id="history" class="flex-col">
+      <aside id="history-sidebar" class="flex-col">
         <header>
           <span class="text-strong tx-b16">사용자 활동 기록</span>
           <button id="history-close-btn" class="history-close-btn">
@@ -66,7 +65,7 @@
           </button>
         </footer>
       </aside>
-      <main class="main" id="columns-container">
+      <main id="kanban-board">
         <!-- 컬럼은 JavaScript에서 동적으로 추가 -->
       </main>
     </div>

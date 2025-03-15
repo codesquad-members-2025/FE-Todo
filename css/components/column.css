@@ -1,6 +1,6 @@
 @import url('../base/variables.css');
 
-.main {
+#kanban-board {
   display: flex;
   gap: 24px;
   background-color: var(--surface-alt);

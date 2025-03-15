@@ -1,17 +1,17 @@
 @import url('../base/variables.css');
 
-.header {
+.app-header {
   justify-content: space-between;
   height: 64px;
 }
 
-.header-left {
+.app-header__left {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.sort-btn {
+#task-sort-btn {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,6 +23,6 @@
   border-radius: var(--radius-small);
 }
 
-.sort-btn-label {
+.task-sort__label {
   padding: 1.5px 4px;
 }

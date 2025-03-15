@@ -2,7 +2,7 @@
 
 /* History */
 
-#history {
+#history-sidebar {
   display: none;
   gap: 8px;
   position: fixed;
@@ -17,14 +17,14 @@
   z-index: 10;
 }
 
-#history header {
+#history-sidebar header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px;
 }
 
-#history header > span {
+#history-sidebar header > span {
   display: flex;
   padding-left: 8px;
 }
@@ -100,7 +100,7 @@
 
 /* History Fotter */
 
-#history footer {
+#history-sidebar footer {
   display: none;
   justify-content: flex-end;
   padding: 4px 8px;
