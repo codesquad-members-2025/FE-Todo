@@ -7,19 +7,19 @@ export function eventAddCard() {
     const plusButton = event.target.closest(".column-header__plusButton");
     if (plusButton) {
       const columnHeader = plusButton.closest(".column-header");
-      const existAddCard =
-        columnHeader.nextElementSibling.querySelector(".add-card");
-      if (existAddCard) {
-        existAddCard.remove();
-      } else {
-        const columnList = event.target.closest(".column-header");
-        if (columnList && columnList.nextElementSibling) {
-          const fragment = document.createDocumentFragment();
-          const addCardForm = createAddCardForm();
-          fragment.appendChild(addCardForm);
-          columnList.nextElementSibling.prepend(fragment);
-          processAddCard(addCardForm);
-        }
+      const existAddCard = columnHeader.nextElementSibling.firstChild;
+      // nextElementSibling 까지 -> column-cardList
+      // firstChild 까지 -> column-cardList 밑의 첫번째 자식요소
+      if (existAddCard.classList.contains("add-card"))
+        return existAddCard.remove();
+
+      const columnList = columnHeader.nextElementSibling;
+      if (columnHeader && columnList) {
+        const fragment = document.createDocumentFragment();
+        const addCardForm = createAddCardForm();
+        fragment.appendChild(addCardForm);
+        columnList.prepend(fragment);
+        processAddCard(addCardForm);
       }
     }
   });
@@ -27,30 +27,34 @@ export function eventAddCard() {
 
 function processAddCard(addCardForm) {
   addCardForm.addEventListener("click", function (event) {
-    if (event.target.classList.contains("add-card__cancle-btn")) {
-      addCardForm.remove();
-    } else if (event.target.classList.contains("add-card__submit-btn")) {
+    if (event.target.classList.contains("add-card__cancle-btn"))
+      return addCardForm.remove();
+    if (event.target.classList.contains("add-card__submit-btn")) {
       // 이벤트를 addCardForm, 즉 카드 추가 전체 폼에 설정했기 때문에
       // 이전 처럼 className으로 접근하면 제대로 처리되지 않을 수 있기 때문에
       // classList.contains()로 접근하여 조건을 확인할 수 있다
+
       const title = addCardForm.querySelector(".add-card__input__title").value;
       const content = addCardForm.querySelector(
         ".add-card__input__content"
       ).value;
-      if (
-        title.replace(/\s/g, "").length === 0 ||
-        content.replace(/\s/g, "").length === 0
-      ) {
-        alert("제목, 내용 모두 입력해주세요");
-      } else {
-        const createCardForm = createShowCard(title, content);
-        const findAddCardElement = event.target.closest(".add-card");
-        const cardList = findAddCardElement.parentElement;
-        findAddCardElement.remove();
-        cardList.prepend(createCardForm);
-      }
+      if (TextLengthWithoutGap(title, content))
+        return alert("제목, 내용 모두 입력해주세요");
+
+      const createCardForm = createShowCard(title, content);
+      const findAddCardElement = event.target.closest(".add-card");
+      const cardList = findAddCardElement.parentElement;
+      findAddCardElement.remove();
+      cardList.prepend(createCardForm);
     }
   });
+}
+
+function TextLengthWithoutGap(title, content) {
+  const titleWithoutGap = title.replace(/\s/g, "").length;
+  const contentWithoutGap = content.replace(/\s/g, "").length;
+  if (titleWithoutGap === 0 || contentWithoutGap === 0) return true;
+  return false;
 }
 
 function createShowCard(title, content) {
