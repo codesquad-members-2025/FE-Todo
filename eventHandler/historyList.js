@@ -14,25 +14,32 @@ function closeHistoryList() {
 }
 
 // 히스토리 리스트 삭제 알림창 띄우기
-function confirmDeleteAlert() {
+function rocordListDeleteAlert() {
+  const title = "모든 사용자 활동 기록을";
   // 먼저 모달창을 추가할 요소를 찾아
   const modal = document.querySelector(".DeleteConfirmationModal");
   // 그 다음 그 요소 내에 html 내용을 추가해
+
+  const confirmLayer = createDeleteConfirmModal(title);
+  modal.appendChild(confirmLayer);
+  // 그 다음 화면에 뜨게끔 만들어
+  document.body.appendChild(modal);
+}
+
+function createDeleteConfirmModal(title) {
   const confirmLayer = document.createElement("div");
   confirmLayer.classList.add("deleteAlert");
   confirmLayer.innerHTML = `<div id="overlay-dark"></div>
   <div class="confirm-box">
     <div class="confirmContent">
-      <p>모든 사용자 활동 기록을 삭제할까요?</p>
+      <p>${title} 삭제할까요?</p>
       <div class="buttons">
         <button class="cancleButton">취소</button>
         <button class="decideDeleteButton">삭제</button>
       </div>
     </div>
   </div>`;
-  modal.appendChild(confirmLayer);
-  // 그 다음 화면에 뜨게끔 만들어
-  document.body.appendChild(modal);
+  return confirmLayer;
 }
 
 // 삭제 알림창에서 취소 버튼 클릭 시 알림창 제거
@@ -52,7 +59,7 @@ function decideDelete() {
 export function historyEvent() {
   openButton.addEventListener("click", openHistoryList);
   closedButton.addEventListener("click", closeHistoryList);
-  deleteButton.addEventListener("click", confirmDeleteAlert);
+  deleteButton.addEventListener("click", rocordListDeleteAlert);
   document.addEventListener("click", (event) => {
     if (event.target.id === "historyOpenButton") return openHistoryList();
     if (event.target.className === "cancleButton") return cancleDelete();
