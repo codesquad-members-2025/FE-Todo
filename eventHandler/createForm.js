@@ -1,7 +1,7 @@
 export function createShowCardForm(cardData) {
   const cardElement = document.createElement("div");
   cardElement.classList.add("show-card");
-  const contentWithLineBreak = cardData.content.replace(/\n/g, "<br>");
+  const contentWithLineBreak = cardData.content.replace(/\n/g, "<br/>");
   let realContent = contentWithLineBreak.replace(/\s/g, "&nbsp;");
   cardElement.innerHTML = `<div class="show-card__total">
       <h3 class="show-card__title">${cardData.title}</h3>
@@ -63,7 +63,7 @@ export function createAddCardForm() {
   addCardForm.classList.add("add-card");
   addCardForm.innerHTML = `<div class="add-card__input">
     <input type="text" class="add-card__input__title" placeholder="제목을 입력하세요"/>
-    <textarea class="add-card__input__content" rows="1" maxlength="500"
+    <textarea class="add-card__input__content" rows="1" maxlength="500" onclick = "resizeHeight(this)"
       oninput="resizeHeight(this); checkContentLength(this);" placeholder="내용을 입력하세요"
       wrap="hard"></textarea>
   </div>

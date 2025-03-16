@@ -28,7 +28,11 @@ export function eventAddCard() {
 
 export function processAddCard(addCardForm) {
   const isEmpty = isFormEmpty(addCardForm);
+  // 처리해야할 카드가 비어있는지 확인함
+  // 비어있을 경우 -> 새로운 카드를 추가 기능
   if (isEmpty) return newAddCard(addCardForm);
+
+  // 비어있지 않을 경우 -> 수정하는 기능
 }
 
 function isFormEmpty(card) {
@@ -74,7 +78,7 @@ function TextLengthWithoutGap(title, content) {
 function createShowCard(title, content) {
   // 입력받은 content를 줄바꿈까지 그대로 출력하기 위해 realContent 내용 추가
   // content에 줄바꿈은 \n으로 표시되기에 줄바꿈 태그로 바꿔주기
-  let lineBreakContent = content.replace(/\n/g, "<br>");
+  let lineBreakContent = content.replace(/\n/g, "<br/>");
   let realContent = lineBreakContent.replace(/\s/g, "&nbsp;");
   const cardElement = document.createElement("div");
   cardElement.classList.add("show-card");
