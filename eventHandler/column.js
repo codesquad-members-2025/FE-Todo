@@ -27,18 +27,28 @@ export function eventAddCard() {
 }
 
 export function processAddCard(addCardForm) {
-  addCardForm.addEventListener("click", function (event) {
+  const isEmpty = isFormEmpty(addCardForm);
+  if (isEmpty) return newAddCard(addCardForm);
+}
+
+function isFormEmpty(card) {
+  const title = card.querySelector(".add-card__input__title").value;
+  const content = card.querySelector(".add-card__input__content").value;
+  if (title.length !== 0 && content.length !== 0) return false;
+  else if (title.length === 0 && content.length === 0) return true;
+}
+
+function newAddCard(card) {
+  card.addEventListener("click", function (event) {
     if (event.target.classList.contains("add-card__cancle-btn"))
-      return addCardForm.remove();
+      return card.remove();
     if (event.target.classList.contains("add-card__submit-btn")) {
       // 이벤트를 addCardForm, 즉 카드 추가 전체 폼에 설정했기 때문에
       // 이전 처럼 className으로 접근하면 제대로 처리되지 않을 수 있기 때문에
       // classList.contains()로 접근하여 조건을 확인할 수 있다
 
-      const title = addCardForm.querySelector(".add-card__input__title").value;
-      const content = addCardForm.querySelector(
-        ".add-card__input__content"
-      ).value;
+      const title = card.querySelector(".add-card__input__title").value;
+      const content = card.querySelector(".add-card__input__content").value;
       if (TextLengthWithoutGap(title, content))
         return alert("제목, 내용 모두 입력해주세요");
 
