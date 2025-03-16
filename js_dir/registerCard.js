@@ -1,14 +1,18 @@
-import { makeTaskCard } from "./template.js";
+import { makeTaskCard } from "./template/template.js";
 import {
   showAlert,
   closeAlert,
   deleteModal,
   getStoredModalData,
 } from "./deleteCardHandler.js";
+
+//이벤트 위임
 const body = document.querySelector(".top-layout-container");
 body.addEventListener("click", (event) => {
   const button = event.target.closest("button");
   if (!button) return;
+
+  //✅ 카드 추가
   if (findContainClass(button, "register-button")) {
     const inputData = getModalInputValues(button); //상태변경
     const taskObj = createTaskData(inputData); //상태변경
@@ -25,7 +29,9 @@ body.addEventListener("click", (event) => {
     drawModal(inputData.columnType, cardForm);
     clearInputFields(button);
     closeTaskModal(button);
-  } else if (findContainClass(button, "cancel-button")) {
+  }
+  //✅ 카드 삭제
+  else if (findContainClass(button, "cancel-button")) {
     closeTaskModal(button);
     clearInputFields(button);
   } else if (findContainClass(button, "delete-task-btn")) {
@@ -47,7 +53,7 @@ body.addEventListener("click", (event) => {
 function findContainClass(button, target) {
   return button.classList.contains(target);
 }
-// 입력값을 가져오는 함수
+// 입력값을 가져오는 함수 (컨트롤러에서 상태 변경 읽어오는 역할)
 function getModalInputValues(button) {
   const modal = button.closest(".task-modal");
 
@@ -84,7 +90,7 @@ function saveTasks(columnType, taskObject) {
 // function makeCardForm() {}
 
 //이렇게 하면 로컬 스토리지에 데이터 저장은 완료.
-//이제 칼럼 영역에 카드를 뿌려야 한다.
+//이제b 칼럼 영역에 카드를 뿌려야 한다.
 function drawModal(dataTarget, cardForm) {
   const newElement = document.createElement("div");
   newElement.innerHTML = cardForm;

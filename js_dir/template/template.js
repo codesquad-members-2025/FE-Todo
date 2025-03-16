@@ -1,6 +1,6 @@
-export const makeTaskCard = function (id, title, content) {
+export const makeTaskCard = function (title, content) {
   const taskTemplate = `
-                <div id ="${id}" class="todo-card">
+                
                   <article class="todo-card__textarea">
                     <div class="card-textarea__body">
                       <header class="task-title">${title}</header>
@@ -18,7 +18,6 @@ export const makeTaskCard = function (id, title, content) {
                       <img src="/icons/edit.svg" alt="edit Button" />
                     </button>
                   </div>
-                </div>
               `;
 
   return taskTemplate;

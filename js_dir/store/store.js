@@ -1,14 +1,18 @@
 import { getStoreData } from "./mergeData.js";
-import { makeTaskCard } from "./template.js";
 
 export const store = {
   state: {}, //store의 데이터객체가 담길 공간
 
+  // 컨트롤러 통해서 이벤트 감지해서 받아와야한다.
+  init() {
+    this.state = getStoreData() || {}; // 목업 데이터 & 로컬 데이터 머지 (한 번만 실행)
+  },
   getState() {
-    this.state = getStoreData(); //현재 상태 불러오기
+    return this.state;
   },
 
   //데이터를 store로 내보내기
+  //컨트롤러 통해서 받아와야한다.
   setState() {
     localStorage.setItem("tasks", JSON.stringify(this.state));
   },

@@ -1,4 +1,4 @@
-import { makeDeleteAlert } from "./template.js";
+import { makeDeleteAlert } from "./template/template.js";
 const alertModal = document.getElementById("delete-history__modal");
 let storedModalData = {};
 export function showAlert(modalId, modalSection) {
