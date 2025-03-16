@@ -249,10 +249,6 @@ h1 {
   flex-direction: column;
 }
 
-.edit {
-  stroke: var(--text-weak);
-}
-
 .show-card__cancle-icon {
   width: 24px;
   height: 24px;

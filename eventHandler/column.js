@@ -18,6 +18,7 @@ export function eventAddCard() {
         const fragment = document.createDocumentFragment();
         const addCardForm = createAddCardForm();
         fragment.appendChild(addCardForm);
+        console.log(columnList);
         columnList.prepend(fragment);
         processAddCard(addCardForm);
       }
@@ -76,7 +77,7 @@ function createShowCard(title, content) {
       <button class="show-card__cancle-icon delete">
       <div class="closed"></div>
       </button>
-      <button class="show-card__edit-icon edit">
+      <button class="show-card__edit-icon">
       <div class="edit"></div>
       </button>
     </div>`;
