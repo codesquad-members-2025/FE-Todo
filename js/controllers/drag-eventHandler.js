@@ -15,7 +15,8 @@ function handleCardDrag(kanban) {
     kanban.addEventListener('dragstart', (e) => {
         e.preventDefault();
         const card = e.target;
-        if(!card) return;
+
+        if(!card || !card.draggable) return;
 
         isDragging = true;
         copy = createCopy(card);
