@@ -26,7 +26,7 @@ export function eventAddCard() {
   });
 }
 
-function processAddCard(addCardForm) {
+export function processAddCard(addCardForm) {
   addCardForm.addEventListener("click", function (event) {
     if (event.target.classList.contains("add-card__cancle-btn"))
       return addCardForm.remove();
