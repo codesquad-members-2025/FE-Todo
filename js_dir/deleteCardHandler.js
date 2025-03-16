@@ -1,4 +1,4 @@
-import { makeDeleteAlert } from "./template.js";
+import { makeDeleteAlert } from "./template/template.js";
 const alertModal = document.getElementById("delete-history__modal");
 let storedModalData = {};
 export function showAlert(modalId, modalSection) {
@@ -15,9 +15,6 @@ export function getStoredModalData() {
 export function closeAlert() {
   alertModal.close();
 }
-
-// 삭제 버튼이벤트 핸들러
-function deleteHandler() {}
 
 // function findModalId(target) {
 //   return target.closest(".todo-card").id;

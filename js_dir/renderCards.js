@@ -1,5 +1,5 @@
 import { mergeObjects } from "./mergerObj.js";
-import { makeTaskCard } from "./template.js";
+import { makeTaskCard } from "./template/template.js";
 
 //✅ 스토어 개념으로 가져다 쓰고 전체 교체하는 형식이면 dom조작 더 쉬워짐 -> 리팩토링 필요
 export async function renderCards() {

@@ -223,11 +223,11 @@ dialog {
   border-radius: 8px;
 }
 
-#delete-history__modal .delete-history__buttons {
+#delete_modal .delete-history__buttons {
   display: flex;
   flex-direction: row;
 }
-#delete-history__modal p {
+#delete_modal p {
   margin: 0px;
 }
 .textLabel {
