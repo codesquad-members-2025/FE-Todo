@@ -9,9 +9,10 @@
 //   renderCards(); // 🚀 새로고침 시 자동 실행
 // });
 import { store } from "../store/store.js";
-import { initialize } from "./controller/control-mainHeader.js"; // 이벤트 핸들러 등록
-
+import { sectionHeaderInit } from "../controller/control-mainHeader.js"; // 이벤트 핸들러 등록
+import { kanbanDetector } from "./eventHandler.js";
 document.addEventListener("DOMContentLoaded", () => {
   store.init();
-  initialize();
+  sectionHeaderInit();
+  kanbanDetector();
 });

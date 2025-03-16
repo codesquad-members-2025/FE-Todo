@@ -1,7 +1,8 @@
 import { taskCard } from "../component/CardUi.js";
 import { store } from "../store/store.js";
-import { taskCard } from "../component/CardUi.js";
+import { inputModal } from "../component/inputModalUi.js";
 
+//input 태그에 입력값이 없으면 버튼 비활성화 로직 구현 필요
 export const inputModalController = {
   getValues: function (button) {
     const modal = button.closest(".task-modal");
@@ -41,7 +42,9 @@ export const inputModalController = {
     const [inputData, taskObj] = this.processInput(button);
     store.addTask(inputData.columnType, taskObj);
     const { id, title, content } = taskObj;
+    //카드 생성부분 로직도 한번 묶어보자
     taskCard.create(id, title, content);
     taskCard.draw(inputData.columnType);
+    inputModal.clearAndClose(button);
   },
 };

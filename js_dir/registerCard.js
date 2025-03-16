@@ -29,6 +29,8 @@ body.addEventListener("click", (event) => {
     drawModal(inputData.columnType, cardForm);
     clearInputFields(button);
     closeTaskModal(button);
+
+    //위의 과정을 컨트롤러 호출 하나로 정리
   }
   //✅ 카드 삭제
   else if (findContainClass(button, "cancel-button")) {
