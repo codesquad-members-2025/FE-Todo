@@ -31,8 +31,7 @@ export function processAddCard(addCardForm) {
   // 처리해야할 카드가 비어있는지 확인함
   // 비어있을 경우 -> 새로운 카드를 추가 기능
   if (isEmpty) return newAddCard(addCardForm);
-
-  // 비어있지 않을 경우 -> 수정하는 기능
+  return;
 }
 
 function isFormEmpty(card) {
@@ -96,4 +95,58 @@ function createShowCard(title, content) {
       </button>
     </div>`;
   return cardElement;
+}
+
+export function update() {
+  document.addEventListener("click", (event) => {
+    const editButton = event.target.closest(".edit");
+    if (!editButton) return;
+    // edit 클릭 시
+    // 가장 가까운 카드를 찾아서 해당 내용을 그대로 유지한 상태로 입력 폼 작성
+    const cardTotalContent = event.target.closest(".show-card");
+    const title = cardTotalContent.querySelector("h3").textContent;
+    let content = cardTotalContent.querySelector("span").innerHTML;
+    content = content.replace(/<br\/?>/g, "\n");
+    content = content.replace(/&nbsp;/g, " ");
+
+    const cardList = cardTotalContent.parentElement;
+    // 입력 폼 만들기
+    const modifyCard = createAddCardForm();
+
+    // 해당 위치에 배치 -> 기존 자식 요소 앞에 새로운 요소를 넣는다
+    cardList.insertBefore(modifyCard, cardTotalContent);
+    cardTotalContent.classList.add("hidden");
+
+    // 기존 내용을 담게 하기
+    modifyCard.querySelector("input").value = title;
+    modifyCard.querySelector("textarea").value = content;
+    processAddCard(modifyCard);
+    updateCard(modifyCard);
+    cardTotalContent.classList.remove("hidden");
+  });
+}
+
+function updateCard(card) {
+  card.addEventListener("click", function (event) {
+    if (event.target.classList.contains("add-card__cancle-btn"))
+      return card.remove();
+    if (event.target.classList.contains("add-card__submit-btn")) {
+      console.log(event.target);
+      // 이벤트를 addCardForm, 즉 카드 추가 전체 폼에 설정했기 때문에
+      // 이전 처럼 className으로 접근하면 제대로 처리되지 않을 수 있기 때문에
+      // classList.contains()로 접근하여 조건을 확인할 수 있다
+
+      const title = card.querySelector(".add-card__input__title").value;
+      const content = card.querySelector(".add-card__input__content").value;
+      if (TextLengthWithoutGap(title, content))
+        return alert("제목, 내용 모두 입력해주세요");
+
+      const createCardForm = createShowCard(title, content);
+      const findAddCardElement = event.target.closest(".add-card");
+      const cardList = findAddCardElement.parentElement;
+
+      cardList.insertBefore(createCardForm, findAddCardElement);
+      findAddCardElement.remove();
+    }
+  });
 }
