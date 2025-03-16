@@ -122,16 +122,20 @@ export function update() {
     modifyCard.querySelector("textarea").value = content;
     processAddCard(modifyCard);
     updateCard(modifyCard);
-    cardTotalContent.classList.remove("hidden");
+    // cardTotalContent.classList.remove("hidden"); 얘를 지우고 취소버튼 등록 버튼 작성해보기
   });
 }
 
 function updateCard(card) {
   card.addEventListener("click", function (event) {
-    if (event.target.classList.contains("add-card__cancle-btn"))
-      return card.remove();
+    // 카드 수정 전에 hidden시킨 카드 찾기
+    const previousCard = event.target.closest(".add-card").nextElementSibling;
+    if (event.target.classList.contains("add-card__cancle-btn")) {
+      card.remove();
+      previousCard.classList.remove("hidden");
+    }
+
     if (event.target.classList.contains("add-card__submit-btn")) {
-      console.log(event.target);
       // 이벤트를 addCardForm, 즉 카드 추가 전체 폼에 설정했기 때문에
       // 이전 처럼 className으로 접근하면 제대로 처리되지 않을 수 있기 때문에
       // classList.contains()로 접근하여 조건을 확인할 수 있다
@@ -147,6 +151,7 @@ function updateCard(card) {
 
       cardList.insertBefore(createCardForm, findAddCardElement);
       findAddCardElement.remove();
+      previousCard.remove();
     }
   });
 }
