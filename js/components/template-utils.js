@@ -28,7 +28,7 @@ function createColumnNode(id, title, count) {
             </div>
         </header>
 
-        <article class="card card-form flex-column hidden">
+        <article class="card-form flex-column hidden">
             <div class="card__input-area flex-column">
                 <input type="text" class="card__title-input display-bold14" placeholder="제목을 입력하세요">
                 <textarea class="card__body-input display-medium14" placeholder="내용을 입력하세요"></textarea>
@@ -44,7 +44,7 @@ function createColumnNode(id, title, count) {
 
 function createCardNode({ id = getRandomId(), title, description, author = 'web' }) {
     return templateToNode(`
-    <article class="card flex-between" data-id="${id}">
+    <article class="card flex-between" data-id="${id}" draggable="true">
         <div class="card__content flex-column">
             <div class="card__text flex-column">
                 <h3 class="card__title display-bold14">${title}</h3>
@@ -102,7 +102,7 @@ function createPanelNode(isEmpty = false) {
             <div class="history-panel__header flex-between">
                 <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
                 <button class="history-panel__close-btn btn flex-center">
-                    <img src="./assets/icons/close.svg" class="size-16">
+                    <img src="./assets/icons/close.svg">
                     <span class="history-panel__close-btn-text display-bold14">닫기</span>
                 </button>
             </div>

@@ -1,4 +1,4 @@
-.card {
+.card, .card-form, .card-copy {
     width: 320px;
     background-color: var(--surface-default);
     border-radius: 8px;
@@ -32,16 +32,20 @@
     color: var(--text-weak);
 }
 
-.card__close-btn,
-.card__edit-btn {
-    width: 24px;
-    height: 24px;
-}
-
 .card__close-btn:hover svg path {
     fill: var(--text-danger);
 }
 
 .card__edit-btn:hover svg path {
     fill: var(--text-strong);
+}
+
+.card:active {
+    opacity: 0.3;
+}
+
+.card-copy {
+    position: absolute;
+    box-shadow: 0px 0px 4px 0px #6E809114;
+    box-shadow: 0px 16px 16px 0px #6E80913D;
 }

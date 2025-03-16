@@ -39,6 +39,11 @@
     height: 32px;
 }
 
+.history-panel__close-btn > img {
+    width: 16px;
+    height: 16px;
+}
+
 /* 닫기 버튼의 텍스트 */
 .history-panel__close-btn-text {
     padding: 0px 4px;
