@@ -1,4 +1,4 @@
-import { makeTaskCard } from "../template/template.js";
+import { makeTaskCard, makeCalumnTemplate } from "../template/template.js";
 //카드 폼을 만드는 역할
 const makeCard = {};
 

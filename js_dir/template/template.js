@@ -23,9 +23,9 @@ export const makeTaskCard = function (title, content) {
   return taskTemplate;
 };
 
-export const makeDeleteAlert = function (alertMessage, cancel) {
+export const makeDeleteAlert = function (type, alertMessage, cancel) {
   const alertTemplate = `
-      <div class="delete-history__content">
+      <div class="delete-history__content ${type}">
         <p>${alertMessage}</p>
         <div class="delete-history__buttons">
           <button class="delete-history__button" id="cancel-button">

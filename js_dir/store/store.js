@@ -4,8 +4,8 @@ export const store = {
   state: {}, //store의 데이터객체가 담길 공간
 
   // 컨트롤러 통해서 이벤트 감지해서 받아와야한다.
-  init() {
-    this.state = getStoreData() || {}; // 목업 데이터 & 로컬 데이터 머지 (한 번만 실행)
+  async init() {
+    this.state = (await getStoreData()) || {}; // 목업 데이터 & 로컬 데이터 머지 (한 번만 실행)
   },
   getState() {
     return this.state;
