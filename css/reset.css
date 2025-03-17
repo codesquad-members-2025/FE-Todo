@@ -28,3 +28,25 @@ button {
 body {
   font-family: Arial, sans-serif;
 }
+
+/* 기본 input 및 textarea 스타일 초기화 */
+input,
+textarea {
+  all: unset; /* 모든 기본 스타일 제거 */
+  box-sizing: border-box; /* 박스 크기 조정 */
+  width: 100%; /* 필요한 경우 width 설정 */
+  margin: 0; /* 기본 margin 제거 */
+  padding: 0; /* 기본 padding 제거 */
+}
+
+/* placeholder 스타일 */
+input::placeholder,
+textarea::placeholder {
+  color: #ccc; /* placeholder 텍스트 색상 */
+}
+
+/* 포커스 시 기본 outline 제거 */
+input:focus,
+textarea:focus {
+  outline: none;
+}
