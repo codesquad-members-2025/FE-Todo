@@ -76,7 +76,7 @@ h1 {
   font: var(--display-medium12);
 }
 
-.column-header__icons {
+.column-header__buttons {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -84,7 +84,7 @@ h1 {
   gap: var(--number-100);
 }
 
-.column-header__plus-icon {
+.column-header__plusButton {
   width: 24px;
   height: 24px;
   display: flex;
@@ -97,13 +97,35 @@ h1 {
 .plus {
   width: 14px;
   height: 14px;
-  color: var(--text-weak);
+  background-color: var(--text-weak);
+  mask-image: url("../images/plus.svg");
+  mask-size: cover;
+  mask-repeat: no-repeat;
 }
 
-.plus:hover {
-  color: var(--accent-red);
+.closed {
+  width: 12px;
+  height: 12px;
+  background-color: var(--text-weak);
+  mask-image: url("../images/closed.svg");
+  mask-size: cover;
+  mask-repeat: no-repeat;
 }
-.column-header__closed-icon {
+
+.edit {
+  width: 14px;
+  height: 14px;
+  background-color: var(--text-weak);
+  mask-image: url("../images/edit.svg");
+  mask-size: cover;
+  mask-repeat: no-repeat;
+}
+
+.plus:hover,
+.closed:hover {
+  background-color: var(--accent-red);
+}
+.column-header__closedButton {
   width: 24px;
   height: 24px;
   display: flex;
@@ -111,11 +133,6 @@ h1 {
   align-items: center;
   border: none;
   background-color: unset;
-}
-
-.plus_button,
-.closed_button {
-  fill: var(--text-weak);
 }
 
 .column-cardList {
@@ -189,6 +206,10 @@ h1 {
   text-align: center;
 }
 
+.vitalize {
+  opacity: 100%;
+}
+
 .show-card {
   margin-top: 10px;
   background-color: var(--surface-default);
@@ -217,7 +238,7 @@ h1 {
   color: var(--text-default);
 }
 
-.show-card__caption {
+.show-card__author {
   margin-top: var(--number-100);
   font: var(--display-medium12);
   color: var(--text-weak);
@@ -226,10 +247,6 @@ h1 {
 .show-card__icons {
   display: flex;
   flex-direction: column;
-}
-
-.edit_button {
-  stroke: var(--text-weak);
 }
 
 .show-card__cancle-icon {
@@ -396,7 +413,7 @@ h1 {
   height: 32px;
   font: var(--display-bold14);
   color: var(--accent-red);
-  padding: var(--number-50) var(--number-100);
+  padding: var(--number-50) var(--number-200);
   display: flex;
   align-items: center;
 }
@@ -421,7 +438,7 @@ h1 {
   display: none;
 }
 
-.alertContent {
+.confirmContent {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -435,13 +452,14 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
-.alertContent p {
+.confirmContent p {
   text-align: center;
   font: var(--display-medium16);
+  color: var(--text-default);
   padding: var(--number-400) var(--number-300) 0 var(--number-300);
 }
 
-.alertContent .buttons {
+.confirmContent .buttons {
   display: flex;
   gap: var(--number-100);
   justify-content: center;
@@ -449,7 +467,7 @@ h1 {
   text-align: center;
 }
 
-.alertContent .cancleButton {
+.confirmContent .cancleButton {
   width: 172px;
   height: 32px;
   background-color: var(--surface-alt);
@@ -458,7 +476,7 @@ h1 {
   color: var(--text-default);
 }
 
-.alertContent .decideDeleteButton {
+.confirmContent .decideDeleteButton {
   width: 172px;
   height: 32px;
   background-color: var(--accent-red);

@@ -1,0 +1,112 @@
+{
+  "colums": [
+    {
+      "id": "toDo",
+      "count": 0,
+      "cardList": [
+        {
+          "title": "GitHub 공부하기",
+          "content": "add, commit, push",
+          "author": "author by web"
+        },
+        {
+          "title": "블로그에 포스팅할 것",
+          "content": "* GitHub 공부내용 \n* 모던 자바스크립트 1장 공부내용",
+          "author": "author by web"
+        },
+        {
+          "title": "GitHub 공부하기",
+          "content": "add, commit, push",
+          "author": "author by web"
+        }
+      ]
+    },
+    {
+      "id": "doing",
+      "count": 0,
+      "cardList": [
+        {
+          "title": "HTML/CSS 공부하기",
+          "content": "input 태그 실습",
+          "author": "author by web"
+        }
+      ]
+    },
+    {
+      "id": "done",
+      "count": 0,
+      "cardList": [
+        {
+          "title": "HTML/CSS 공부하기",
+          "content": "input 태그 실습",
+          "author": "author by web"
+        }
+      ]
+    }
+  ],
+  "historyList": [
+    {
+      "photo": "./images/sam.png",
+      "userName": "@멋진삼",
+      "action": "move",
+      "title": "블로그에 포스팅할 것",
+      "fromColumn": "하고있는 일",
+      "toColumn": "해야할 일 ",
+      "timeStamp": "3분 전"
+    },
+    {
+      "photo": "./images/sam.png",
+      "userName": "@멋진삼",
+      "action": "update",
+      "title": "GitHub 공부하기",
+      "fromColumn": "null",
+      "toColumn": "null",
+      "timeStamp": "10분 전"
+    },
+    {
+      "photo": "./images/sam.png",
+      "userName": "@멋진삼",
+      "action": "move",
+      "title": "HTML/CSS 공부하기",
+      "fromColumn": "해야할 일",
+      "toColumn": "하고 있는 일",
+      "timeStamp": "18분 전"
+    },
+    {
+      "photo": "./images/sam.png",
+      "userName": "@멋진삼",
+      "action": "remove",
+      "title": "HTML/CSS 공부하기",
+      "fromColumn": "해야할 일",
+      "toColumn": "null",
+      "timeStamp": "1시간 전"
+    },
+    {
+      "photo": "./images/sam.png",
+      "userName": "@멋진삼",
+      "action": "add",
+      "title": "HTML/CSS 공부하기",
+      "fromColumn": "해야할 일",
+      "toColumn": "null",
+      "timeStamp": "1시간 전"
+    },
+    {
+      "photo": "./images/sam.png",
+      "userName": "@멋진삼",
+      "action": "add",
+      "title": "HTML/CSS 공부하기",
+      "fromColumn": "해야할 일",
+      "toColumn": "null",
+      "timeStamp": "1시간 전"
+    },
+    {
+      "photo": "./images/sam.png",
+      "userName": "@멋진삼",
+      "action": "move",
+      "title": "HTML/CSS 공부하기",
+      "fromColumn": "해야할 일",
+      "toColumn": "완료한 일",
+      "timeStamp": "1시간 전"
+    }
+  ]
+}
