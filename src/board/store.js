@@ -1,4 +1,4 @@
-import { fetchData } from '../js/utils/fetch.js';
+import { fetchData } from '../shared/utils/fetch.js';
 
 const COLUMN_DATA_URL = './data/columnData.json';
 
