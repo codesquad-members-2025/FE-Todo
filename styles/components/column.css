@@ -37,3 +37,11 @@
     width: 24px;
     height: 24px;
 }
+
+.column-header__close-btn:hover svg path {
+    fill: var(--text-danger);
+}
+
+.column-header__add-btn:hover svg path {
+    fill: var(--text-strong);
+}

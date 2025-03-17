@@ -33,20 +33,6 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
-    /* 텍스트 색상 적용 안됨 img 써서*/
-    color: var(--text-weak);
-}
-
-
-/* 아래 유틸리티 필요한지 모르겠네 svg로 바꾸면 필요 없는데 */
-.size-24 {
-    width: 24px;
-    height: 24px;
-}
-
-.size-16 {
-    width: 16px;
-    height: 16px;
 }
 
 .hidden { display: none; }

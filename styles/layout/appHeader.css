@@ -1,3 +1,20 @@
 .app-header {
     align-items: center;
 }
+
+.app-header__left-container {
+    gap: 16px;
+}
+
+.app-header__sort-btn {
+    width: 75px;
+    height: 24px;
+    padding: 0px 7px;
+    border: 1px solid var(--border-bord);
+    border-radius: 8px;
+}
+
+.app-header__sort-text {
+    width: 43px;
+    color: var(--text-bold);
+}
