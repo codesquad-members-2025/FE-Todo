@@ -13,6 +13,7 @@ import { initialize, kanbanDetector, historyBar } from "./eventHandler.js"; //??
 import { taskModal } from "../controller/taskModalController.js";
 
 await store.init();
+store.logInit();
 taskModal.renderTaskCards();
 initialize();
 kanbanDetector();

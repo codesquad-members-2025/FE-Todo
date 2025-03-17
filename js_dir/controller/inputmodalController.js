@@ -11,16 +11,6 @@ export const inputModalController = {
     const columnType = modal.closest(".task-modal-overlay").dataset.type;
     return { columnType, titleValue, contentValue };
   },
-  /*
-  기본적으로 등록버튼 비활성화,, 이 로직이 참으로 바뀌면 버튼 활성화
-  validateInput: function (inputData) {
-    if (!inputData.titleValue || !inputData.contentValue) {
-      //버튼 비활성화 로직
-      return false;
-    }
-    return true;
-  },
-  */
 
   createTaskData: function (inputData) {
     const id = Date.now().toString();
@@ -46,5 +36,6 @@ export const inputModalController = {
     taskCard.create(id, title, content);
     taskCard.draw(inputData.columnType);
     inputModal.clearAndClose(button);
+    return [title, inputData.columnType, id];
   },
 };

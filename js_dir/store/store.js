@@ -2,6 +2,7 @@ import { getStoreData } from "./mergeData.js";
 
 export const store = {
   state: {}, //store의 데이터객체가 담길 공간
+  logData: [],
 
   // 컨트롤러 통해서 이벤트 감지해서 받아와야한다.
   async init() {
@@ -30,5 +31,28 @@ export const store = {
   removeTask(dataType, id) {
     delete this.state[dataType][id];
     this.setState(); //데이터 업데이트
+  },
+
+  //------------------------------------------
+  //------------------------------------------
+  //초반 한번만 실행
+  logInit() {
+    const storedLogs = localStorage.getItem("logs");
+    const logs = storedLogs ? JSON.parse(storedLogs) : [];
+    this.logData = logs;
+  },
+  getLogData() {
+    return this.logData;
+  },
+  setLogData() {
+    localStorage.setItem("logs", JSON.stringify(this.logData));
+  },
+  addLog(logContent, id) {
+    this.logData.push([logContent, id]);
+    this.setLogData();
+  },
+  removeLogs() {
+    this.logData = [];
+    this.setLogData();
   },
 };
