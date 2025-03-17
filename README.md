@@ -59,7 +59,8 @@
 
 <br/>
 
-## 학습 일지
-✍🏻 바로가기!
+## 학습 일지 (주요 고민과 해결과정 정리)
+
+<a href="https://github.com/SangYoonLee1231/FE-Todo/wiki/%ED%95%99%EC%8A%B5-%EC%9D%BC%EC%A7%80-(%EA%B3%A0%EB%AF%BC%EA%B3%BC-%ED%95%B4%EA%B2%B0)">✍🏻 바로가기!</a>
 
 <br/>
