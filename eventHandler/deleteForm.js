@@ -31,9 +31,12 @@ function processCard(card) {
       if (event.target.className === "cancleButton") return cancleDelete();
       if (event.target.className === "decideDeleteButton") {
         cancleDelete();
-        card.remove();
-        const countCard = document.querySelector(".count_card");
+
+        const columnHeader =
+          card.closest(".column-cardList").previousElementSibling;
+        const countCard = columnHeader.querySelector(".count_card");
         countCard.textContent = Number(countCard.textContent) - 1;
+        card.remove();
       }
     },
     { once: true }
