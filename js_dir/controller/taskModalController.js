@@ -19,4 +19,5 @@ export const taskModal = {
     taskCard.delete(this.targetId);
     DeleteAlert.closeDeleteModal();
   },
+  renderCards: function () {},
 };

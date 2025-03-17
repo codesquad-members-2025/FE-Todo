@@ -40,7 +40,7 @@ export const makeDeleteAlert = function (alertMessage, cancel) {
   return alertTemplate;
 };
 
-export const makeCalumnTemplate = function () {
+export const makeCalumnTemplate = function (title, count, dataType, cards) {
   `
   <section class="columnlist__col" data-type="todo">
         <header class="columnlist__header">
