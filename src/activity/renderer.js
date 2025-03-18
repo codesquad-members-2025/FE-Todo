@@ -2,10 +2,12 @@ import { pushChild } from '../shared/utils/dom.js';
 import { createActivityRecord } from './template.js';
 
 // 캐싱된 DOM 요소
-const activityContainer = document.getElementById('activity-list-container');
-const activityDefault = document.getElementById('activity-empty-state');
-const activityFooter = document.getElementById('activity-panel-footer');
 const activityPanel = document.getElementById('activity-panel');
+const activityContainer = activityPanel.querySelector(
+  '#activity-list-container'
+);
+const activityDefault = activityPanel.querySelector('#activity-empty-state');
+const activityFooter = activityPanel.querySelector('footer');
 
 // 기록 렌더링
 function renderActivityRecords(activityListData) {

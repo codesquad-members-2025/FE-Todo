@@ -10,7 +10,13 @@ function sortTasks({ currentTarget }) {
 
   const { newSortType, buttonText } = toggleSortType(currentSortType);
 
-  updateSortButtonUI(sortButton, sortButtonLabel, newSortType, buttonText);
+  updateSortButtonUI({
+    button: sortButton,
+    label: sortButtonLabel,
+    newSortType,
+    buttonText,
+  });
+
   applySortedTasks(newSortType);
 }
 
@@ -22,7 +28,7 @@ function toggleSortType(currentSortType) {
 }
 
 // 버튼 UI 업데이트
-function updateSortButtonUI(button, label, newSortType, buttonText) {
+function updateSortButtonUI({ button, label, newSortType, buttonText }) {
   button.dataset.type = newSortType;
   label.textContent = buttonText;
 }

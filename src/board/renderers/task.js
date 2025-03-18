@@ -20,11 +20,9 @@ function renderTask(columnId, taskData) {
   const column = document.querySelector(`#${columnId} .task-container`);
   const taskCardHtml = createTaskCard(id, title, content, author);
 
-  if (isSortCreated()) {
-    pushChild(column, taskCardHtml);
-  } else {
-    unshiftChild(column, taskCardHtml);
-  }
+  isSortCreated()
+    ? pushChild(column, taskCardHtml)
+    : unshiftChild(column, taskCardHtml);
 }
 
 function isSortCreated() {
@@ -38,9 +36,7 @@ function clearTasks() {
 
 function clearTasksOfColumn(columnElement) {
   const columnTaskList = columnElement.querySelector('.task-container');
-  if (columnTaskList) {
-    columnTaskList.innerHTML = '';
-  }
+  columnTaskList && (columnTaskList.innerHTML = '');
 }
 
 export {
