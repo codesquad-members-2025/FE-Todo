@@ -1,5 +1,5 @@
 // src/board/handlers/taskHandlers.js
-import { updateTask, removeTask } from '../store.js';
+import { addTask, removeTask, updateTask } from '../store.js';
 import { renderTask } from '../renderers/task.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
 import {
@@ -7,6 +7,7 @@ import {
   getISOStringNow,
   detectDeviceType,
 } from '../../shared/utils/common.js';
+import { createEditForm } from '../renderers/template.js';
 
 // 새 카드 생성
 function createNewTask(target) {
@@ -82,7 +83,7 @@ function collectInputData(taskForm) {
 
 // 카드 데이터 저장 & UI 업데이트
 function saveAndRenderTask(columnId, inputData) {
-  updateTask(columnId, inputData);
+  addTask(columnId, inputData);
   renderTask(columnId, inputData);
 }
 
@@ -97,4 +98,69 @@ function closeTaskForm(taskForm) {
   taskForm.style.display = 'none';
 }
 
-export { toggleTaskForm, openDeleteTaskDialog, createNewTask };
+// 수정 폼 열기
+function toggleModifyFrom(target) {
+  const targetCard = target.closest('.task-item');
+  const originalTaskCard = targetCard.cloneNode(true);
+
+  const editForm = getEditForm(originalTaskCard);
+  targetCard.replaceWith(editForm);
+}
+
+// 수정 폼 만들기
+function getEditForm(originalTaskCard) {
+  const title = originalTaskCard.querySelector('.task-title').textContent;
+  const content = originalTaskCard.querySelector('.task-content').textContent;
+
+  const editFormElement = createEditForm(title, content);
+
+  attachFormEvents(originalTaskCard, editFormElement);
+
+  // 수정 폼 반환
+  return editFormElement;
+}
+
+function attachFormEvents(originalTaskCard, editFormElement) {
+  const cancelButton = editFormElement.querySelector('.task-cancel-btn');
+  const saveButton = editFormElement.querySelector('.task-save-btn');
+
+  cancelButton.addEventListener('click', () => {
+    restoreOriginalTask(originalTaskCard, editFormElement);
+  });
+
+  saveButton.addEventListener('click', () =>
+    saveEdit(originalTaskCard, editFormElement)
+  );
+}
+
+//원래 요소로 복원하는 함수 (취소 및 저장 후 모두 사용)
+function restoreOriginalTask(originalTaskCard, editFormElement) {
+  editFormElement.replaceWith(originalTaskCard);
+}
+
+//수정 내용 저장 및 원래 요소 복원
+function saveEdit(originalTaskCard, editFormElement) {
+  const editedTitle = editFormElement.querySelector('input').value;
+  const edittedContent = editFormElement.querySelector('textarea').value;
+
+  const title = originalTaskCard.querySelector('.task-title');
+  const content = originalTaskCard.querySelector('.task-content');
+
+  title.textContent = editedTitle;
+  content.textContent = edittedContent;
+
+  updateTask({
+    id: originalTaskCard.id,
+    title: editedTitle,
+    content: edittedContent,
+  });
+
+  restoreOriginalTask(originalTaskCard, editFormElement);
+}
+
+export {
+  toggleTaskForm,
+  openDeleteTaskDialog,
+  createNewTask,
+  toggleModifyFrom,
+};

@@ -11,9 +11,27 @@ async function loadColumnsData() {
   return columnData;
 }
 
-function updateTask(columnId, taskData) {
+function addTask(columnId, taskData) {
   const targetColumn = columnData.find((column) => column.id === columnId);
   targetColumn.tasks.push(taskData);
+}
+
+function updateTask(updatedTask) {
+  const targetColumn = columnData.find((column) =>
+    column.tasks.some((task) => task.id === updatedTask.id)
+  );
+
+  const taskIndex = targetColumn.tasks.findIndex(
+    (task) => task.id === updatedTask.id
+  );
+
+  if (taskIndex !== -1) {
+    targetColumn.tasks[taskIndex] = {
+      ...targetColumn.tasks[taskIndex],
+      title: updatedTask.title,
+      content: updatedTask.content,
+    };
+  }
 }
 
 function removeTask(columnId, taskId) {
@@ -33,4 +51,10 @@ function getSortedTasksByDate(order = 'created') {
   }));
 }
 
-export { loadColumnsData, updateTask, removeTask, getSortedTasksByDate };
+export {
+  loadColumnsData,
+  addTask,
+  removeTask,
+  getSortedTasksByDate,
+  updateTask,
+};

@@ -3,6 +3,7 @@ import {
   toggleTaskForm,
   createNewTask,
   openDeleteTaskDialog,
+  toggleModifyFrom,
 } from './taskHandlers.js';
 
 import { sortTasks } from './sortHandlers.js';
@@ -16,6 +17,7 @@ function initKanbanEvents() {
     ['.task-delete-btn', openDeleteTaskDialog],
     ['.task-cancel-btn', toggleTaskForm],
     ['.task-save-btn', createNewTask],
+    ['.task-edit-btn', toggleModifyFrom],
   ]);
 
   columnSection.addEventListener('click', ({ target }) => {

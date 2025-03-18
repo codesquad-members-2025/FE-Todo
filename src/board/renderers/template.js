@@ -41,19 +41,38 @@ const taskForm = `
         <span>취소</span>
       </button>
       <button class="task-save-btn task-btn text-white tx-b14">
-        <span>저장</span>
+        <span>등록</span>
       </button>
     </div>
   </article>
 `;
+
+function createEditForm(title, content) {
+  return stringToNode(`
+  <article class="task-form task-common flex-col">
+    <div class="task-form-content flex-col">
+      <input type="text" class="task-input text-strong tx-m14" placeholder="제목을 입력하세요" value="${title}">
+      <textarea class="task-textarea text-default tx-m14" placeholder="내용을 입력하세요" value="">${content}</textarea>
+    </div>
+    <div class="task-form-actions">
+      <button class="task-cancel-btn task-btn text-default tx-b14">
+        <span>취소</span>
+      </button>
+      <button class="task-save-btn task-btn text-white tx-b14">
+        <span>수정</span>
+      </button>
+    </div>
+  </article>
+`);
+}
 
 // Task 카드 컴포넌트 생성
 function createTaskCard(id, title, content, author) {
   return stringToNode(`
   <article class="task-item task-common" id="${id}">
     <div class="task-item-content flex-col">
-      <h3 class="text-strong tx-b14">${title}</h3>
-      <p class="text-default tx-m14">${content}</p>
+      <h3 class="task-title text-strong tx-b14">${title}</h3>
+      <p class="task-content text-default tx-m14">${content}</p>
       <h6 class="text-weak tx-m12">author by ${author}</h6>
     </div>
     <div class="task-item-actions flex-col">
@@ -68,4 +87,4 @@ function createTaskCard(id, title, content, author) {
 `);
 }
 
-export { createColumn, createTaskCard };
+export { createColumn, createTaskCard, createEditForm };
