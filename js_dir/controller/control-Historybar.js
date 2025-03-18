@@ -21,6 +21,7 @@ export const historyBarController = {
   },
   deleteLog: function () {
     historyModalUi.deleteHistory();
+    store.removeLogs();
   },
   addHisotryLog: function (taskDataArr, action, targetColumn = "null") {
     const [title, currentColumn, id] = taskDataArr;
@@ -48,7 +49,13 @@ export const historyBarController = {
   renderLogData: function () {
     const storedLogData = store.getLogData();
     storedLogData.forEach((logDataArr) => {
-      historyModalUi.makeRegisterLog(...logDataArr);
+      historyModalUi.makeRegisterLog({
+        title: logDataArr[0],
+        currentColumn: logDataArr[1],
+        targetColumn: logDataArr[2],
+        id: logDataArr[3],
+        action: logDataArr[4],
+      });
       historyModalUi.drawRegisterLog();
     });
   },
