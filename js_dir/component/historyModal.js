@@ -33,14 +33,25 @@ export const historyModalUi = {
     DeleteAlert.closeDeleteModal(); //이거는 다른 모듈에서 조작할까?
   },
 
-  makeRegisterLog: function (title, columnType = "null", id, action) {
+  makeRegisterLog: function ({
+    title,
+    currentColumn = "null",
+    targetColumn = "null",
+    id,
+    action,
+  }) {
+    let logColumnType = "";
+    const newLog = makeLogNode();
     const time = Math.floor((Date.now().toString() - id) / (1000 * 60));
     const logTitle = `<strong>${title}</strong>`;
-    const logColumnType = `<strong>${columnType}에</strong>`;
-    if (!columnType) logColumnType = null;
+    if (action === "이동") {
+      logColumnType = `<strong>${currentColumn}</strong>에서 <strong>${targetColumn}</strong>으로`;
+    } else {
+      logColumnType = currentColumn
+        ? `<strong>${currentColumn}</strong>에`
+        : "";
+    }
     const content = `${logTitle}을(를)${logColumnType} <strong>${action}</strong>하였습니다.`;
-    const newLog = document.createElement("li"); //이 과정도 메서드로 따로 빼자
-    newLog.classList.add("activity-list__list");
     newLog.innerHTML = makeLog(content, time);
     this.logNodes.push(newLog);
     // return [content, id];
@@ -55,6 +66,26 @@ export const historyModalUi = {
     this.targetUl.appendChild(fragment);
     this.logNodes = [];
   },
+  //------------------------------------------------------개선 설계 파트
+  //------------------------------------------------------
+  // BettermakeRegisterLog: function (title, columnType = "null", id, action) {
+  //   const time = Math.floor((Date.now().toString() - id) / (1000 * 60));
+  //   const logTitle = `<strong>${title}</strong>`;
+  //   const logColumnType = `<strong>${columnType}에</strong>`;
+  //   if (!columnType) logColumnType = null;
+  //   const content = `${logTitle}을(를)${logColumnType} <strong>${action}</strong>하였습니다.`;
+  //   const newLog = document.createElement("li"); //이 과정도 메서드로 따로 빼자
+  //   newLog.classList.add("activity-list__list");
+  //   newLog.innerHTML = makeLog(content, time);
+  //   this.logNodes.push(newLog);
+  //   // return [content, id];
+  // },
 };
+
+function makeLogNode() {
+  const newLog = document.createElement("li");
+  newLog.classList.add("activity-list__list");
+  return newLog;
+}
 
 historyModalUi.init();

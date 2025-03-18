@@ -22,7 +22,7 @@ export function kanbanDetector() {
     if (findContainClass(button, "register-button")) {
       const taskDataArr = inputModalController.processAddTask(button);
       //데이터 추가한 사실을 컨트롤러에게 전달
-      historyBarController.addRegisterLog(taskDataArr);
+      historyBarController.addHisotryLog(taskDataArr, "등록");
       //로그 추가 기능도 컨트롤러에게 전달
     } else if (findContainClass(button, "cancel-button")) {
       inputModal.clearAndClose(button);
