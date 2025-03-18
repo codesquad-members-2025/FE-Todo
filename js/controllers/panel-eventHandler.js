@@ -19,7 +19,7 @@ function handlePanelEvents(panelContainer) {
         if (btn === null) return;
 
         if (btn.classList.contains('history-panel__close-btn')) togglePanel(panelContainer);
-        else if (btn.classList.contains('history-panel__footer-btn')) openModal('removeHistory', {});
+        else if (btn.classList.contains('history-panel__footer-btn')) openModal({ type: 'historyRemove' });
     })
 }
 

@@ -14,15 +14,13 @@ function handleCardDrag(kanban) {
 
     kanban.addEventListener('dragstart', (e) => {
         e.preventDefault();
-        const card = e.target;
+        const { target: card } = e;
 
-        if(!card || !card.draggable) return;
+        if (!card || !card.draggable) return;
 
         isDragging = true;
         copy = createCopy(card);
-
-        offsetX = e.offsetX;
-        offsetY = e.offsetY;
+        [offsetX, offsetY] = [e.offsetX, e.offsetY];
 
         updateDragPosition(copy, e.clientX, e.clientY, offsetX, offsetY);
     });
@@ -31,8 +29,7 @@ function handleCardDrag(kanban) {
         if (!isDragging) return;
         updateDragPosition(copy, e.clientX, e.clientY, offsetX, offsetY);
     })
-    
-    
+
     html.addEventListener('mouseup', (e) => {
         if (!isDragging) return;
         copy.remove();
