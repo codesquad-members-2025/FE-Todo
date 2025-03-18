@@ -1,5 +1,6 @@
+import { stringToNode } from '../shared/utils/dom.js';
 function createActivityRecord(username, profileImage, actionText, timestamp) {
-  return `  
+  return stringToNode(`  
     <article class="activity-record">
       <div class="record-header">
         <img
@@ -18,7 +19,7 @@ function createActivityRecord(username, profileImage, actionText, timestamp) {
         </p>
       </section>
     </article>
-  `;
+  `);
 }
 
 export { createActivityRecord };

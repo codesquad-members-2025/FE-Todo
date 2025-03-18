@@ -1,4 +1,4 @@
-import { pushChild } from '../shared/utils/dom.js';
+import { getFragment } from '../shared/utils/dom.js';
 import { createActivityRecord } from './template.js';
 
 // 캐싱된 DOM 요소
@@ -16,17 +16,19 @@ function renderActivityRecords(activityListData) {
     return;
   }
 
-  const activityRecordsHtml = activityListData.reduce(
-    (recordsHtml, { username, profileImage, actionText, timestamp }) => {
-      return (
-        recordsHtml +
+  const fragment = activityListData.reduce(
+    (frag, { username, profileImage, actionText, timestamp }) => {
+      frag.appendChild(
         createActivityRecord(username, profileImage, actionText, timestamp)
       );
+
+      return frag;
     },
-    ''
+    getFragment()
   );
 
-  pushChild(activityContainer, activityRecordsHtml);
+  // pushChild(activityContainer, activityRecordsHtml);
+  activityContainer.appendChild(fragment);
   setActivityDeleteButton(true);
 }
 

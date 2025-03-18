@@ -1,5 +1,4 @@
-import { renderColumns } from './renderers/column.js';
-import { renderTasksForColumn } from './renderers/task.js';
+import { renderBoard } from './renderers/column.js';
 import { initKanbanEvents, initSortButton } from './handlers/eventHandlers.js';
 import { loadColumnsData } from './store.js';
 
@@ -7,9 +6,7 @@ import { loadColumnsData } from './store.js';
 async function initializeBoard() {
   const columnsData = await loadColumnsData();
 
-  renderColumns(columnsData);
-  // renderTasksForColumn(columnsData);
-
+  renderBoard(columnsData);
   initKanbanEvents();
   initSortButton();
 }

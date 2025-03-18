@@ -1,23 +1,26 @@
-import { pushChild } from '../../shared/utils/dom.js';
+import { getFragment } from '../../shared/utils/dom.js';
 import { createColumn, createTaskCard } from './template.js';
 
-// 전체 칼럼 생성
-function renderColumns(columnsData) {
+// 전체 보드(column + card) 생성
+function renderBoard(columnsData) {
   const columnContainer = document.querySelector('#kanban-board');
-  const fragment = document.createDocumentFragment();
 
-  columnsData.forEach(({ id, title, taskCount, tasks }) => {
-    const columnElement = createColumn(id, title, taskCount);
-    const taskContainer = columnElement.querySelector('.task-container');
+  const fragment = columnsData.reduce(
+    (frag, { id, title, taskCount, tasks }) => {
+      const columnElement = createColumn(id, title, taskCount);
+      const taskContainer = columnElement.querySelector('.task-container');
 
-    tasks.forEach(({ id, title, content, author }) => {
-      pushChild(taskContainer, createTaskCard(id, title, content, author));
-    });
+      tasks.forEach(({ id, title, content, author }) => {
+        taskContainer.appendChild(createTaskCard(id, title, content, author));
+      });
 
-    pushChild(fragment, columnElement);
-  });
+      frag.appendChild(columnElement);
+      return frag;
+    },
+    getFragment()
+  );
 
-  pushChild(columnContainer, fragment);
+  columnContainer.appendChild(fragment);
 }
 
-export { renderColumns };
+export { renderBoard };

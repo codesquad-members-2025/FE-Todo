@@ -1,17 +1,16 @@
-import { pushChild, unshiftChild } from '../../shared/utils/dom.js';
+import { getFragment } from '../../shared/utils/dom.js';
 import { createTaskCard } from './template.js';
 
-function renderTasksForColumn(columnsData) {
+function renderTasksInColumn(columnsData) {
   columnsData.forEach(({ id, tasks }) => {
     const columnTaskList = document.querySelector(`#${id} .task-container`);
-    const fragment = document.createDocumentFragment();
 
-    tasks.forEach(({ id, title, content, author }) => {
-      const taskCard = createTaskCard(id, title, content, author);
-      pushChild(fragment, taskCard);
-    });
+    const fragment = tasks.reduce((frag, { id, title, content, author }) => {
+      frag.appendChild(createTaskCard(id, title, content, author));
+      return frag;
+    }, getFragment());
 
-    pushChild(columnTaskList, fragment);
+    columnTaskList.appendChild(fragment);
   });
 }
 
@@ -21,8 +20,8 @@ function renderTask(columnId, taskData) {
   const taskCardHtml = createTaskCard(id, title, content, author);
 
   isSortCreated()
-    ? pushChild(column, taskCardHtml)
-    : unshiftChild(column, taskCardHtml);
+    ? column.appendChild(taskCardHtml)
+    : column.insertBefore(taskCardHtml);
 }
 
 function isSortCreated() {
@@ -40,7 +39,7 @@ function clearTasksOfColumn(columnElement) {
 }
 
 export {
-  renderTasksForColumn,
+  renderTasksInColumn,
   renderTask,
   clearTasks,
   clearTasksOfColumn,
