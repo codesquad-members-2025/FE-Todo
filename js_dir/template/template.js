@@ -52,3 +52,21 @@ export const makeLog = function (content, time) {
 
   return log;
 };
+
+export const editModal = function (title, content) {
+  const editModal = ` <div class="task-modal">
+  <div class="modal-content">
+    <textarea type="text" class="modal__input title-input">${title}</textarea>
+    <textarea class="modal__input content-input">${content}</textarea>
+  </div>
+  <footer class="modal-footer">
+    <button class="modal-button cancel-button edit">
+      <div class="textLabel">취소</div>
+    </button>
+    <button class="modal-button register-button edit">
+      <div class="textLabel">저장</div>
+    </button>
+  </footer>
+</div>`;
+  return editModal;
+};

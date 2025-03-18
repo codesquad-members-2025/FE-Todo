@@ -32,4 +32,12 @@ export const taskCard = {
     const cardModal = document.getElementById(id);
     cardModal.remove();
   },
+  replaceWithInputModal: function (targetModal, replaceModal) {
+    targetModal.replaceWith(replaceModal);
+  },
+  editCard: function (cardModal, title, content) {
+    cardModal.querySelector(".task-title").innerText = title;
+    cardModal.querySelector(".task-content").innerText = content;
+    return cardModal;
+  },
 };

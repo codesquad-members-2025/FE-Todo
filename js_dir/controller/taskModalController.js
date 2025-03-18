@@ -1,17 +1,25 @@
 import { DeleteAlert } from "../component/deleteAlertModal.js";
 import { store } from "../store/store.js";
 import { taskCard } from "../component/CardUi.js";
+import { inputModal } from "../component/inputModalUi.js";
+import { inputModalController } from "./inputmodalController.js";
 
 export const taskModal = {
+  cardModal: null,
   titleValue: null,
   targetSection: null,
   targetId: null,
+  taskContent: null,
 
   setTargetCard: function (button) {
-    const cardModal = button.closest(".todo-card");
-    this.titleValue = cardModal.querySelector(".task-title").textContent;
-    this.targetSection = cardModal.closest(".columnlist__col").dataset.type;
-    this.targetId = cardModal.id;
+    this.cardModal = button.closest(".todo-card");
+    this.titleValue = this.cardModal.querySelector(".task-title").textContent;
+    this.targetId = this.cardModal.id;
+    button.classList.contains("edit-task-btn")
+      ? (this.taskContent =
+          this.cardModal.querySelector(".task-content").textContent)
+      : (this.targetSection =
+          this.cardModal.closest(".columnlist__col").dataset.type);
   },
   showDeleteModal: function (button) {
     this.setTargetCard(button);
@@ -38,5 +46,33 @@ export const taskModal = {
   parseCardModal: function () {
     const taskDataArr = [this.titleValue, this.targetSection, this.targetId];
     return taskDataArr;
+  },
+
+  //편집 로직 여기에 넣기!
+  tryEdit: function (button) {
+    this.setTargetCard(button);
+    const newInputModal = inputModal.createInputModal(
+      this.titleValue,
+      this.taskContent
+    );
+    this.cardClone = this.cardModal.cloneNode(true);
+    taskCard.replaceWithInputModal(this.cardModal, newInputModal);
+  },
+  confirmEdit: function (button) {
+    this.inputModal = button.closest(".task-modal");
+    const { columnType, titleValue, contentValue } =
+      inputModalController.getValues(button);
+    const editedCard = taskCard.editCard(
+      this.cardClone,
+      titleValue,
+      contentValue
+    );
+    this.cardClone = editedCard;
+    taskCard.replaceWithInputModal(this.inputModal, this.cardClone);
+    store.editTask(this.targetId, columnType, titleValue, contentValue);
+  },
+  cancelEdit: function (button) {
+    this.inputModal = button.closest(".task-modal");
+    taskCard.replaceWithInputModal(this.inputModal, this.cardClone);
   },
 };
