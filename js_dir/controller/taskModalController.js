@@ -3,11 +3,15 @@ import { store } from "../store/store.js";
 import { taskCard } from "../component/CardUi.js";
 
 export const taskModal = {
-  targetId: null,
+  titleValue: null,
   targetSection: null,
+  targetId: null,
+
   setTargetCard: function (button) {
-    this.targetId = button.closest(".todo-card").id;
-    this.targetSection = button.closest(".columnlist__col").dataset.type;
+    const cardModal = button.closest(".todo-card");
+    this.titleValue = cardModal.querySelector(".task-title").textContent;
+    this.targetSection = cardModal.closest(".columnlist__col").dataset.type;
+    this.targetId = cardModal.id;
   },
   showDeleteModal: function (button) {
     this.setTargetCard(button);
@@ -30,5 +34,9 @@ export const taskModal = {
       });
       taskCard.draw(dataType);
     });
+  },
+  parseCardModal: function () {
+    const taskDataArr = [this.titleValue, this.targetSection, this.targetId];
+    return taskDataArr;
   },
 };

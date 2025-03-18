@@ -343,6 +343,7 @@ dialog {
 .card-actions {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .delete-task-btn {
@@ -359,10 +360,6 @@ dialog {
 }
 .delete-task-btn:hover svg {
   stroke: #ff3b30;
-}
-.edit-task-btn img {
-  width: 14px;
-  height: 14px;
 }
 
 .task-list {

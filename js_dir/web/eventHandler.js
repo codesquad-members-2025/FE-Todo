@@ -22,7 +22,7 @@ export function kanbanDetector() {
     if (findContainClass(button, "register-button")) {
       const taskDataArr = inputModalController.processAddTask(button);
       //데이터 추가한 사실을 컨트롤러에게 전달
-      historyBarController.addRegisterLog(taskDataArr);
+      historyBarController.addHisotryLog(taskDataArr, "등록");
       //로그 추가 기능도 컨트롤러에게 전달
     } else if (findContainClass(button, "cancel-button")) {
       inputModal.clearAndClose(button);
@@ -35,7 +35,10 @@ export function kanbanDetector() {
       button.id === "confirm-delete-button" &&
       button.closest(".taskModal")
     ) {
-      taskModal.deleteTaskModal();
+      taskModal.deleteTaskModal(); //this.targetSection, this.targetId 만 전달__title value필요
+      //히스토리 컨트롤러 호출-> 삭제 로그 띄어라!
+      const taskDataArr = taskModal.parseCardModal();
+      historyBarController.addHisotryLog(taskDataArr, "삭제");
     } else if (
       button.id === "confirm-delete-button" &&
       button.closest(".historyModal")

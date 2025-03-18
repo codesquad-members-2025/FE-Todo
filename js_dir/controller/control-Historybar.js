@@ -21,17 +21,41 @@ export const historyBarController = {
   },
   deleteLog: function () {
     historyModalUi.deleteHistory();
+    store.removeLogs();
   },
-  addRegisterLog: function (taskDataArr) {
-    const [title, columnType, id] = taskDataArr;
-    historyModalUi.makeRegisterLog(title, columnType, id, "등록");
+  addHisotryLog: function (taskDataArr, action, targetColumn = "null") {
+    const [title, currentColumn, id] = taskDataArr;
+    if (action === "이동") {
+      historyModalUi.makeRegisterLog({
+        title: title,
+        currentColumn: currentColumn,
+        targetColumn: targetColumn,
+        id: id,
+        action: action,
+      });
+    } else {
+      historyModalUi.makeRegisterLog({
+        title: title,
+        currentColumn: currentColumn,
+        id: id,
+        action: action,
+      });
+    }
+
     historyModalUi.drawRegisterLog();
-    store.addLog(title, columnType, id, "등록");
+    const lodDataArr = [title, currentColumn, targetColumn, id, action];
+    store.addLog(lodDataArr);
   },
   renderLogData: function () {
     const storedLogData = store.getLogData();
     storedLogData.forEach((logDataArr) => {
-      historyModalUi.makeRegisterLog(...logDataArr);
+      historyModalUi.makeRegisterLog({
+        title: logDataArr[0],
+        currentColumn: logDataArr[1],
+        targetColumn: logDataArr[2],
+        id: logDataArr[3],
+        action: logDataArr[4],
+      });
       historyModalUi.drawRegisterLog();
     });
   },
