@@ -1,5 +1,6 @@
 import { historyModalUi } from "../component/historyModal.js";
 import { DeleteAlert } from "../component/deleteAlertModal.js";
+import { store } from "../store/store.js";
 export const historyBarController = {
   toggleHistoryModal: function () {
     historyModalUi.toggleSidebar();
@@ -16,9 +17,24 @@ export const historyBarController = {
     DeleteAlert.showDeleteModal();
   },
   closeAlert: function () {
-    DeleteAlert.closeDeleteModal;
+    DeleteAlert.closeDeleteModal();
   },
   deleteLog: function () {
     historyModalUi.deleteHistory();
   },
+  addRegisterLog: function (taskDataArr) {
+    const [title, columnType, id] = taskDataArr;
+    historyModalUi.makeRegisterLog(title, columnType, id, "등록");
+    historyModalUi.drawRegisterLog();
+    store.addLog(title, columnType, id, "등록");
+  },
+  renderLogData: function () {
+    const storedLogData = store.getLogData();
+    storedLogData.forEach((logDataArr) => {
+      historyModalUi.makeRegisterLog(...logDataArr);
+      historyModalUi.drawRegisterLog();
+    });
+  },
 };
+
+//밀리세컨즈
