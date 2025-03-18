@@ -9,7 +9,7 @@
 @import url('./components/column.css');
 @import url('./components/task.css');
 @import url('./components/modal.css');
-@import url('./components/history.css');
+@import url('./components/activity.css');
 
 /* Utils */
 @import url('./utils/svg.css');
