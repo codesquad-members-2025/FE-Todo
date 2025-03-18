@@ -47,8 +47,8 @@ export const store = {
   setLogData() {
     localStorage.setItem("logs", JSON.stringify(this.logData));
   },
-  addLog(logContent, id) {
-    this.logData.push([logContent, id]);
+  addLog(title, columnType, id, action) {
+    this.logData.push([title, columnType, id, action]);
     this.setLogData();
   },
   removeLogs() {

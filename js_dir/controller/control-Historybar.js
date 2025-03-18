@@ -24,20 +24,15 @@ export const historyBarController = {
   },
   addRegisterLog: function (taskDataArr) {
     const [title, columnType, id] = taskDataArr;
-    const time = Math.floor((Date.now().toString() - id) / (1000 * 60));
-    const registerLogData = historyModalUi.makeRegisterLog(
-      title,
-      columnType,
-      time
-    );
+    historyModalUi.makeRegisterLog(title, columnType, id, "등록");
     historyModalUi.drawRegisterLog();
-    store.addLog(registerLogData, id);
-    store.setLogData();
+    store.addLog(title, columnType, id, "등록");
   },
   renderLogData: function () {
-    let logData = store.getLogData();
-    logData.forEach(([logContent, id]) => {
-      historyModalUi.makeRegisterLog;
+    const storedLogData = store.getLogData();
+    storedLogData.forEach((logDataArr) => {
+      historyModalUi.makeRegisterLog(...logDataArr);
+      historyModalUi.drawRegisterLog();
     });
   },
 };

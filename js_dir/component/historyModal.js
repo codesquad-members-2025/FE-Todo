@@ -33,15 +33,17 @@ export const historyModalUi = {
     DeleteAlert.closeDeleteModal(); //이거는 다른 모듈에서 조작할까?
   },
 
-  makeRegisterLog: function (title, columnType, time) {
+  makeRegisterLog: function (title, columnType = "null", id, action) {
+    const time = Math.floor((Date.now().toString() - id) / (1000 * 60));
     const logTitle = `<strong>${title}</strong>`;
-    const logColumnType = `<strong>${columnType}</strong>`;
-    const content = `${logTitle}을(를)${logColumnType}에 <strong>등록</strong>하였습니다.`;
-    const newLog = document.createElement("li");
+    const logColumnType = `<strong>${columnType}에</strong>`;
+    if (!columnType) logColumnType = null;
+    const content = `${logTitle}을(를)${logColumnType} <strong>${action}</strong>하였습니다.`;
+    const newLog = document.createElement("li"); //이 과정도 메서드로 따로 빼자
     newLog.classList.add("activity-list__list");
     newLog.innerHTML = makeLog(content, time);
     this.logNodes.push(newLog);
-    return content;
+    // return [content, id];
   },
   drawRegisterLog: function () {
     this.emptyMessage.style.display = "none";

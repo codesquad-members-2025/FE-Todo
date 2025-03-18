@@ -11,10 +11,12 @@
 import { store } from "../store/store.js";
 import { initialize, kanbanDetector, historyBar } from "./eventHandler.js"; //??여기 다시 수정하기
 import { taskModal } from "../controller/taskModalController.js";
+import { historyBarController } from "../controller/control-Historybar.js";
 
 await store.init();
 store.logInit();
 taskModal.renderTaskCards();
+historyBarController.renderLogData();
 initialize();
 kanbanDetector();
 historyBar();
