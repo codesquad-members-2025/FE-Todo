@@ -19,12 +19,18 @@ export function kanbanDetector() {
     const button = event.target.closest("button");
     if (!button) return;
     //✅ 카드 추가
-    if (findContainClass(button, "register-button")) {
+    if (
+      findContainClass(button, "register-button") &&
+      !findContainClass(button, "edit")
+    ) {
       const taskDataArr = inputModalController.processAddTask(button);
       //데이터 추가한 사실을 컨트롤러에게 전달
       historyBarController.addHisotryLog(taskDataArr, "등록");
       //로그 추가 기능도 컨트롤러에게 전달
-    } else if (findContainClass(button, "cancel-button")) {
+    } else if (
+      findContainClass(button, "cancel-button") &&
+      !findContainClass(button, "edit")
+    ) {
       inputModal.clearAndClose(button);
     } else if (findContainClass(button, "delete-task-btn")) {
       //컨트롤러에게 상황 전달 -> 삭제 모달 만들어서 띄워야함,, 이때 클릭한 모달의 id,section을 기억해야한다.
@@ -44,10 +50,21 @@ export function kanbanDetector() {
       button.closest(".historyModal")
     ) {
       historyBarController.deleteLog();
+    } else if (findContainClass(button, "edit-task-btn")) {
+      taskModal.tryEdit(button);
+    } else if (
+      findContainClass(button, "register-button") &&
+      findContainClass(button, "edit")
+    ) {
+      taskModal.confirmEdit(button);
+    } else if (
+      findContainClass(button, "cancel-button") &&
+      findContainClass(button, "edit")
+    ) {
+      taskModal.cancelEdit(button);
     }
   });
 }
-
 export function historyBar() {
   const historyBtn = document.getElementById("header__history-btn");
   const historyBar = historyModalUi.historySidebar;

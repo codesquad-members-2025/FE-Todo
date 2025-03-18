@@ -32,6 +32,11 @@ export const store = {
     delete this.state[dataType][id];
     this.setState(); //데이터 업데이트
   },
+  editTask(id, columnType, title, content) {
+    this.state[columnType][id].title = title;
+    this.state[columnType][id].content = content;
+    this.setState();
+  },
 
   //------------------------------------------
   //------------------------------------------

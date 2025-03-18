@@ -66,20 +66,6 @@ export const historyModalUi = {
     this.targetUl.appendChild(fragment);
     this.logNodes = [];
   },
-  //------------------------------------------------------개선 설계 파트
-  //------------------------------------------------------
-  // BettermakeRegisterLog: function (title, columnType = "null", id, action) {
-  //   const time = Math.floor((Date.now().toString() - id) / (1000 * 60));
-  //   const logTitle = `<strong>${title}</strong>`;
-  //   const logColumnType = `<strong>${columnType}에</strong>`;
-  //   if (!columnType) logColumnType = null;
-  //   const content = `${logTitle}을(를)${logColumnType} <strong>${action}</strong>하였습니다.`;
-  //   const newLog = document.createElement("li"); //이 과정도 메서드로 따로 빼자
-  //   newLog.classList.add("activity-list__list");
-  //   newLog.innerHTML = makeLog(content, time);
-  //   this.logNodes.push(newLog);
-  //   // return [content, id];
-  // },
 };
 
 function makeLogNode() {
