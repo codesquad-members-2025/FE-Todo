@@ -21,6 +21,7 @@ function handleModalConfirmBtn(modal, modalConfirmBtn) {
         const cardId = modal.dataset.cardId;
         const columnId = modal.dataset.columnId;
 
+
         // 스토어에서 제거 전에 logEntry 생성
         if (actionType !== 'historyRemove') createLogEntry({ actionType, cardId, columnId });
 
