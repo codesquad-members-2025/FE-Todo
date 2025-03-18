@@ -1,12 +1,11 @@
-export function createShowCardForm(cardData) {
+export function createShowCardForm(title, content) {
   const cardElement = document.createElement("div");
   cardElement.classList.add("show-card");
-  const contentWithLineBreak = cardData.content.replace(/\n/g, "<br/>");
-  let realContent = contentWithLineBreak.replace(/\s/g, "&nbsp;");
+  const realContent = content.replace(/\n/g, "<br/>").replace(/\s/g, "&nbsp;");
   cardElement.innerHTML = `<div class="show-card__total">
-      <h3 class="show-card__title">${cardData.title}</h3>
+      <h3 class="show-card__title">${title}</h3>
       <span class="show-card__content">${realContent}</span>
-      <span class="show-card__author">${cardData.author}</span>
+      <span class="show-card__author">author by web</span>
     </div>
     <div class="show-card__icons">
       <button class="show-card__cancle-icon delete">
@@ -43,16 +42,16 @@ export function createRecordForm(record) {
 function addTextOnAction(action, title, fromColumn, toColumn) {
   let text = "";
   switch (action) {
-    case "add":
+    case "addCard":
       text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />등록 <span> 하였습니다. </span>`;
       return text;
-    case "remove":
+    case "removeCard":
       text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />삭제 <span> 하였습니다. </span>`;
       return text;
-    case "update":
+    case "updateCard":
       text = `${title} <span> 을(를)</span> 변경 <span> 하였습니다. </span>`;
       return text;
-    case "move":
+    case "moveCard":
       text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br /> ${toColumn}  <span> 으로 </span> 이동 <span> 하였습니다. </span>`;
       return text;
   }

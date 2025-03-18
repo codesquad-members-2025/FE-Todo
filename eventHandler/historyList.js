@@ -16,13 +16,12 @@ function closeHistoryList() {
 // 히스토리 리스트 삭제 알림창 띄우기
 function rocordListDeleteAlert() {
   const title = "모든 사용자 활동 기록을";
-  // 먼저 모달창을 추가할 요소를 찾아
+
   const modal = document.querySelector(".DeleteConfirmationModal");
-  // 그 다음 그 요소 내에 html 내용을 추가해
 
   const confirmLayer = createDeleteConfirmModal(title);
   modal.appendChild(confirmLayer);
-  // 그 다음 화면에 뜨게끔 만들어
+
   document.body.appendChild(modal);
 
   processRecordList();

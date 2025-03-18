@@ -6,7 +6,7 @@
       "cardList": [
         {
           "title": "GitHub 공부하기",
-          "content": "add, commit, push",
+          "content": "addCard, commit, push",
           "author": "author by web"
         },
         {
@@ -16,7 +16,7 @@
         },
         {
           "title": "GitHub 공부하기",
-          "content": "add, commit, push",
+          "content": "addCard, commit, push",
           "author": "author by web"
         }
       ]
@@ -48,7 +48,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "move",
+      "action": "moveCard",
       "title": "블로그에 포스팅할 것",
       "fromColumn": "하고있는 일",
       "toColumn": "해야할 일 ",
@@ -57,7 +57,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "update",
+      "action": "updateCard",
       "title": "GitHub 공부하기",
       "fromColumn": "null",
       "toColumn": "null",
@@ -66,7 +66,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "move",
+      "action": "moveCard",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "하고 있는 일",
@@ -75,7 +75,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "remove",
+      "action": "removeCard",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
@@ -84,7 +84,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "add",
+      "action": "addCard",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
@@ -93,7 +93,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "add",
+      "action": "addCard",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
@@ -102,7 +102,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "move",
+      "action": "moveCard",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "완료한 일",
