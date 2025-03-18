@@ -101,61 +101,66 @@ function closeTaskForm(taskForm) {
 // 수정 폼 열기
 function toggleModifyFrom(target) {
   const targetCard = target.closest('.task-item');
-  const originalTaskCard = targetCard.cloneNode(true);
-
-  const editForm = getEditForm(originalTaskCard);
-  targetCard.replaceWith(editForm);
+  const editor = new TaskEditor(targetCard);
+  editor.showEditForm();
 }
 
-// 수정 폼 만들기
-function getEditForm(originalTaskCard) {
-  const title = originalTaskCard.querySelector('.task-title').textContent;
-  const content = originalTaskCard.querySelector('.task-content').textContent;
+class TaskEditor {
+  constructor(taskCard) {
+    this.taskCard = taskCard;
+    this.originalTaskCard = taskCard.cloneNode(true);
+    this.editForm = this.createEditForm();
+  }
 
-  const editFormElement = createEditForm(title, content);
+  createEditForm() {
+    const title = this.taskCard.querySelector('.task-title').textContent;
+    const content = this.taskCard.querySelector('.task-content').textContent;
+    const editFormElement = createEditForm(title, content);
 
-  attachFormEvents(originalTaskCard, editFormElement);
+    this.attachFormEvents(editFormElement);
 
-  // 수정 폼 반환
-  return editFormElement;
-}
+    return editFormElement;
+  }
 
-function attachFormEvents(originalTaskCard, editFormElement) {
-  const cancelButton = editFormElement.querySelector('.task-cancel-btn');
-  const saveButton = editFormElement.querySelector('.task-save-btn');
+  attachFormEvents(editFormElement) {
+    editFormElement
+      .querySelector('.task-cancel-btn')
+      .addEventListener('click', () => {
+        this.restoreOriginalTask();
+      });
 
-  cancelButton.addEventListener('click', () => {
-    restoreOriginalTask(originalTaskCard, editFormElement);
-  });
+    editFormElement
+      .querySelector('.task-save-btn')
+      .addEventListener('click', () => {
+        this.saveEdit();
+      });
+  }
 
-  saveButton.addEventListener('click', () =>
-    saveEdit(originalTaskCard, editFormElement)
-  );
-}
+  restoreOriginalTask() {
+    this.editForm.replaceWith(this.originalTaskCard);
+  }
 
-//원래 요소로 복원하는 함수 (취소 및 저장 후 모두 사용)
-function restoreOriginalTask(originalTaskCard, editFormElement) {
-  editFormElement.replaceWith(originalTaskCard);
-}
+  saveEdit() {
+    const editedTitle = this.editForm.querySelector('input').value;
+    const editedContent = this.editForm.querySelector('textarea').value;
 
-//수정 내용 저장 및 원래 요소 복원
-function saveEdit(originalTaskCard, editFormElement) {
-  const editedTitle = editFormElement.querySelector('input').value;
-  const edittedContent = editFormElement.querySelector('textarea').value;
+    this.originalTaskCard.querySelector('.task-title').textContent =
+      editedTitle;
+    this.originalTaskCard.querySelector('.task-content').textContent =
+      editedContent;
 
-  const title = originalTaskCard.querySelector('.task-title');
-  const content = originalTaskCard.querySelector('.task-content');
+    updateTask({
+      id: this.originalTaskCard.id,
+      title: editedTitle,
+      content: editedContent,
+    });
 
-  title.textContent = editedTitle;
-  content.textContent = edittedContent;
+    this.restoreOriginalTask();
+  }
 
-  updateTask({
-    id: originalTaskCard.id,
-    title: editedTitle,
-    content: edittedContent,
-  });
-
-  restoreOriginalTask(originalTaskCard, editFormElement);
+  showEditForm() {
+    this.taskCard.replaceWith(this.editForm);
+  }
 }
 
 export {
