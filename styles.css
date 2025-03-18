@@ -353,13 +353,18 @@ dialog {
 .edit-task-btn {
   padding: 5px;
 }
+.edit-task-btn img:hover {
+  filter: brightness(0) saturate(100%) invert(35%) sepia(19%) saturate(26%)
+    hue-rotate(325deg) brightness(96%) contrast(94%);
+}
 
 .delete-task-btn svg {
   width: 12px;
   height: 12px;
 }
-.delete-task-btn:hover svg {
-  stroke: #ff3b30;
+.delete-task-btn img:hover {
+  filter: brightness(0) saturate(100%) invert(49%) sepia(91%) saturate(4973%)
+    hue-rotate(341deg) brightness(104%) contrast(110%);
 }
 
 .task-list {

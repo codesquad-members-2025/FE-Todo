@@ -10,9 +10,7 @@ export const makeTaskCard = function (title, content) {
                   </article>
                   <div class="card-actions">
                     <button class="delete-task-btn">
-                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z" fill="#A0A3BD"/>
-</svg>
+                      <img src="/icons/delete-task-btn.svg" alt="delete Button" />
                     </button>
                     <button class="edit-task-btn">
                       <img src="/icons/edit.svg" alt="edit Button" />
