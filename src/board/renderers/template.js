@@ -1,6 +1,8 @@
+import { stringToNode } from '../../shared/utils/dom.js';
+
 // Column 컴포넌트 생성
 function createColumn(id, title, taskCount) {
-  return `
+  return stringToNode(`
   <section class="kanban-column flex-col" id="${id}">
     <div class="kanban-column-header">
       <div class="kanban-column-title flex-item-center">
@@ -25,7 +27,7 @@ function createColumn(id, title, taskCount) {
       </div>
     </div>
   </section>
-`;
+`);
 }
 
 const taskForm = `
@@ -47,7 +49,7 @@ const taskForm = `
 
 // Task 카드 컴포넌트 생성
 function createTaskCard(id, title, content, author) {
-  return `
+  return stringToNode(`
   <article class="task-item task-common" id="${id}">
     <div class="task-item-content flex-col">
       <h3 class="text-strong tx-b14">${title}</h3>
@@ -63,7 +65,7 @@ function createTaskCard(id, title, content, author) {
       </button>
     </div>
   </article>
-`;
+`);
 }
 
 export { createColumn, createTaskCard };

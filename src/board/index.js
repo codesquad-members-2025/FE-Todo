@@ -8,7 +8,7 @@ async function initializeBoard() {
   const columnsData = await loadColumnsData();
 
   renderColumns(columnsData);
-  renderTasksForColumn(columnsData);
+  // renderTasksForColumn(columnsData);
 
   initKanbanEvents();
   initSortButton();

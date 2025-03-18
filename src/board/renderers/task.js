@@ -4,14 +4,14 @@ import { createTaskCard } from './template.js';
 function renderTasksForColumn(columnsData) {
   columnsData.forEach(({ id, tasks }) => {
     const columnTaskList = document.querySelector(`#${id} .task-container`);
+    const fragment = document.createDocumentFragment();
 
-    const taskItemsHtml = tasks.reduce(
-      (tasksHtml, { id, title, content, author }) =>
-        (tasksHtml += createTaskCard(id, title, content, author)),
-      ''
-    );
+    tasks.forEach(({ id, title, content, author }) => {
+      const taskCard = createTaskCard(id, title, content, author);
+      pushChild(fragment, taskCard);
+    });
 
-    pushChild(columnTaskList, taskItemsHtml);
+    pushChild(columnTaskList, fragment);
   });
 }
 
