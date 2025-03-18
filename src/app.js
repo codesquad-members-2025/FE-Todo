@@ -7,20 +7,39 @@ import "./css/reset.css";
 import "./css/utility.css";
 import "./css/style.css";
 
-// 데이터 불러오기
-const data = await fetchMockData();
+import { Actions } from "./store/actions.js";
+import { Dispatcher } from "./store/dispatcher.js";
+import { Store } from "./store/store.js";
 
-// 칼럼 동적으로 생성하기
-// 칼럼, 카드 랜더링
-const renderColumns = (data) => {
-  // 불러온 데이터를 컴포넌트에 넣어서 렌더링
+// 데이터 불러오기
+fetch("/data/mock.json")
+  .then((response) => response.json())
+  .then((data) => {
+    // mock.json의 칼럼, 카드 데이터 확인 후 Store에 저장
+    // 예시로 columns에 빈 카드 배열을 초기화하는 과정
+    data.forEach((column) => {
+      // 카드 배열이 없다고 가정하면 초기화
+      if (!column.cards) {
+        column.cards = [];
+      }
+    });
+    Store.state.columns = data;
+    // 초기 데이터 기준으로 id 카운터 설정
+    Store.initializeIdCounters();
+    // 첫 렌더링
+    renderColumns();
+  });
+
+// 2) View 업데이트 함수
+const renderColumns = () => {
   const columnContainer = document.querySelector(".column-container");
-  columnContainer.innerHTML += columnsComponent(data);
+  // Store에 있는 columns 데이터를 가져와서
+  // columnsComponent 컴포넌트 함수(HTML 문자열 생성)를 호출
+  columnContainer.innerHTML = columnsComponent(Store.getState().columns);
 };
 
-renderColumns(data);
-
-console.log(data);
+// 3) 상태 변경 감지 (구독)
+Store.subscribe(renderColumns);
 
 //
 
@@ -113,13 +132,34 @@ document.body.addEventListener("click", (event) => {
       const articleElement = actionElement.closest("article");
       articleElement.innerHTML += CreateCardComponent();
     },
+    "task-create-card__btn-create": () => {
+      // 카드 생성
+      // 부모 태그 중 article 태그를 찾아서
+      const columnElement = actionElement.closest("article");
+      const columnId = columnElement.dataset.id; // 수정 필요
+      // column의 id 값을 어떻게 읽을 것인가..
+
+      // Store에 카드 추가
+      const cardData = {
+        title: cardInputTitle.value,
+        description: cardInputDescription.value,
+      };
+      const newCard = {
+        id: Date.now(),
+        title: "New Task",
+        description: "Task description",
+      };
+      // 상태를 직접 변경하지 않고, Action을 통해 Dispatcher로 전달
+      Dispatcher.dispatch(Actions.addCard(columnId, newCard));
+    },
     "card-input-title": () => {},
     "card-input-description": () => {},
-    "header__history": openHistoryModal,
+    header__history: openHistoryModal,
     "history-modal__header-close": closeHistoryModal,
-    "history-modal__footer-btn": showModal
+    "history-modal__footer-btn": showModal,
   };
 
+  // 실제로 액션을 실행하는 부분
   if (actionHandlers[action]) {
     actionHandlers[action]();
   }
