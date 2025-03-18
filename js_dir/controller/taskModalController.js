@@ -48,7 +48,6 @@ export const taskModal = {
     return taskDataArr;
   },
 
-  //편집 로직 여기에 넣기!
   tryEdit: function (button) {
     this.setTargetCard(button);
     const newInputModal = inputModal.createInputModal(

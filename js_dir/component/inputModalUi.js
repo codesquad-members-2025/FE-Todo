@@ -19,7 +19,7 @@ export const inputModal = {
     this.closeModal(modal);
   },
   createInputModal: function (title, content) {
-    const inputModal = document.createElement("div"); // <div> 요소 생성
+    const inputModal = document.createElement("div");
     inputModal.classList.add("task-modal-overlay");
     inputModal.innerHTML = editModal(title, content);
     inputModal.style.display = "block";
