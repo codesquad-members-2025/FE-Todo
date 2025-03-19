@@ -42,9 +42,6 @@ export function kanbanDetector() {
       button.closest(".taskModal")
     ) {
       taskModal.deleteTaskModal(); //this.targetSection, this.targetId 만 전달__title value필요
-      //히스토리 컨트롤러 호출-> 삭제 로그 띄어라!
-      const taskDataArr = taskModal.parseCardModal();
-      historyBarController.addHisotryLog(taskDataArr, "삭제");
     } else if (
       button.id === "confirm-delete-button" &&
       button.closest(".historyModal")
