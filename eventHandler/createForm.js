@@ -8,7 +8,7 @@ export function createShowCardForm(title, content) {
       <span class="show-card__author">author by web</span>
     </div>
     <div class="show-card__icons">
-      <button class="show-card__cancle-icon delete">
+      <button class="show-card__cancel-icon delete">
       <div class="closed"></div>
       </button>
       <button class="show-card__edit-icon">
@@ -42,16 +42,16 @@ export function createRecordForm(record) {
 function addTextOnAction(action, title, fromColumn, toColumn) {
   let text = "";
   switch (action) {
-    case "addCard":
+    case "ADD_CARD":
       text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />등록 <span> 하였습니다. </span>`;
       return text;
-    case "removeCard":
+    case "REMOVE_CARD":
       text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />삭제 <span> 하였습니다. </span>`;
       return text;
-    case "updateCard":
+    case "UPDATE_CARD":
       text = `${title} <span> 을(를)</span> 변경 <span> 하였습니다. </span>`;
       return text;
-    case "moveCard":
+    case "MOVE_CARD":
       text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br /> ${toColumn}  <span> 으로 </span> 이동 <span> 하였습니다. </span>`;
       return text;
   }
@@ -67,7 +67,7 @@ export function createAddCardForm() {
       wrap="hard"></textarea>
   </div>
   <div class="add-card__buttons">
-    <button class="add-card__cancle-btn">취소</button>
+    <button class="add-card__cancel-btn">취소</button>
     <button type="submit" class="add-card__submit-btn">등록</button>
   </div>
   </div>`;

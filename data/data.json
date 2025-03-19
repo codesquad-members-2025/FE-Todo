@@ -48,7 +48,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "moveCard",
+      "action": "MOVE_CARD",
       "title": "블로그에 포스팅할 것",
       "fromColumn": "하고있는 일",
       "toColumn": "해야할 일 ",
@@ -57,7 +57,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "updateCard",
+      "action": "UPDATE_CARD",
       "title": "GitHub 공부하기",
       "fromColumn": "null",
       "toColumn": "null",
@@ -66,7 +66,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "moveCard",
+      "action": "MOVE_CARD",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "하고 있는 일",
@@ -75,7 +75,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "removeCard",
+      "action": "REMOVE_CARD",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
@@ -84,7 +84,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "addCard",
+      "action": "ADD_CARD",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
@@ -93,7 +93,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "addCard",
+      "action": "ADD_CARD",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
@@ -102,7 +102,7 @@
     {
       "photo": "./images/sam.png",
       "userName": "@멋진삼",
-      "action": "moveCard",
+      "action": "MOVE_CARD",
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "완료한 일",

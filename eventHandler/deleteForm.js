@@ -1,4 +1,4 @@
-import { cancleDelete, createDeleteConfirmModal } from "./historyList.js";
+import { cancelDelete, createDeleteConfirmModal } from "./historyList.js";
 
 export function deleteCardHandler() {
   document.addEventListener("click", (event) => {
@@ -26,9 +26,9 @@ function processCard(card) {
     "click",
     ({ target }) => {
       const { className } = target;
-      if (className === "cancleButton") return cancleDelete();
+      if (className === "cancelButton") return cancelDelete();
       if (className === "decideDeleteButton") {
-        cancleDelete();
+        cancelDelete();
 
         const columnHeader =
           card.closest(".column-cardList").previousElementSibling;

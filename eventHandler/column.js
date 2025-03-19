@@ -39,7 +39,7 @@ function isFormEmpty(card) {
 function newAddCard(card) {
   card.addEventListener("click", function ({ target }) {
     const { classList } = target;
-    if (classList.contains("add-card__cancle-btn")) return card.remove();
+    if (classList.contains("add-card__cancel-btn")) return card.remove();
     if (classList.contains("add-card__submit-btn")) {
       const title = card.querySelector(".add-card__input__title").value;
       const content = card.querySelector(".add-card__input__content").value;
@@ -94,7 +94,7 @@ function updateCard(card) {
   card.addEventListener("click", function ({ target }) {
     const { classList } = target;
     const previousCard = target.closest(".add-card").nextElementSibling;
-    if (classList.contains("add-card__cancle-btn")) {
+    if (classList.contains("add-card__cancel-btn")) {
       card.remove();
       previousCard.classList.remove("hidden");
     }
