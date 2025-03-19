@@ -44,7 +44,7 @@ function createCard(btn) {
     
     // 히스토리 패널에 "카드 생성" 로그 추가
     createLogEntry({
-        type: 'cardAdd',
+        actionType: 'cardAdd',
         cardId: newCardData.id,
         columnId: getCurColumn(btn).dataset.id
     });
