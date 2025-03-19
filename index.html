@@ -9,18 +9,15 @@
       href="https://cdn.jsdelivr.net/npm/@pretendard/core/css/pretendard.css"
       rel="stylesheet"
     />
-    <!-- 📌 순서 중요! reset.css를 먼저 불러오고, style.css를 불러와야 함! -->
-    <link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body>
-    <div class="container flex-col">
-      <header class="header flex-item-center">
-        <div class="header-left">
+    <div class="app-layout flex-col">
+      <header class="app-header flex-item-center">
+        <div class="app-header__left">
           <h1 class="text-strong tx-b24">TASKIFY</h1>
           <button
-            id="sort-btn"
-            class="sort-btn"
+            id="task-sort-btn"
             aria-label="Sort tasks"
             data-type="created"
           >
@@ -29,10 +26,10 @@
               role="img"
               aria-label="View task history"
             ></div>
-            <span class="sort-btn-label text-bold tx-m12">생성순</span>
+            <span class="task-sort__label text-bold tx-m12">생성순</span>
           </button>
         </div>
-        <button id="history-open-btn" aria-label="View history">
+        <button id="activity-panel-open-btn" aria-label="View history">
           <div
             class="history-icon svg-24 svg-color-default"
             role="img"
@@ -40,49 +37,51 @@
           ></div>
         </button>
       </header>
-      <aside id="history" class="flex-col">
+      <aside id="activity-panel" class="flex-col">
         <header>
           <span class="text-strong tx-b16">사용자 활동 기록</span>
-          <button id="history-close-btn" class="history-close-btn">
+          <button
+            id="activity-panel-close-btn"
+            class="activity-panel-close-btn"
+          >
             <div
               class="closed-icon svg-16 svg-color-default"
               role="img"
               aria-label="Add a new task"
             ></div>
-            <!-- <img src="/assets/icons/closed.svg" width="16" height="16" /> -->
             <span class="text-default tx-b14">닫기</span>
           </button>
         </header>
-        <section id="history-section" class="flex-col">
+        <section id="activity-panel-content" class="flex-col">
           <span
-            id="history-default"
+            id="activity-empty-state"
             class="text-weak tx-m14"
             style="display: none"
             >사용자 활동 기록이 없습니다.</span
           >
-          <div id="history-container"></div>
+          <div id="activity-list-container"></div>
         </section>
-        <footer>
-          <button id="history-delete-btn" class="tx-b14 text-danger">
+        <footer id="activity-panel-footer">
+          <button id="activity-clear-btn" class="tx-b14 text-danger">
             기록 전체 삭제
           </button>
         </footer>
       </aside>
-      <main class="main" id="columns-container">
+      <main id="kanban-board">
         <!-- 컬럼은 JavaScript에서 동적으로 추가 -->
       </main>
     </div>
-    <dialog id="modal">
-      <p id="modal-description" class="text-default tx-m16"></p>
-      <div class="button-section">
-        <button id="modal-cancel-btn" class="text-default tx-b14">
+    <dialog id="confirm-dialog">
+      <p id="confirm-dialog__message" class="text-default tx-m16"></p>
+      <div class="confirm-dialog__buttons">
+        <button id="confirm-dialog__cancel-btn" class="text-default tx-b14">
           <span>취소</span>
         </button>
-        <button id="modal-delete-btn" class="text-white tx-b14">
+        <button id="confirm-dialog__confirm-btn" class="text-white tx-b14">
           <span>삭제</span>
         </button>
       </div>
     </dialog>
   </body>
-  <script type="module" src="./js/main.js"></script>
+  <script type="module" src="./src/main.js"></script>
 </html>

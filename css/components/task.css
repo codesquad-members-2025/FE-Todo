@@ -1,0 +1,68 @@
+@import url('../base/variables.css');
+
+.task-container {
+  gap: 10px;
+}
+
+.task-common {
+  gap: 16px;
+  padding: 16px;
+  background-color: var(--surface-default);
+  border-radius: var(--radius-small);
+  box-shadow: var(--drop-shadow-normal);
+}
+
+.task-item {
+  display: flex;
+}
+
+.task-form {
+  margin-bottom: 10px;
+}
+
+.task-form .task-form-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-input::placeholder {
+  color: var(--text-strong);
+}
+
+.task-textarea {
+  height: 20px;
+  overflow-y: hidden;
+}
+
+.task-textarea::placeholder {
+  color: var(--text-default);
+}
+
+.task-btn {
+  height: 32px;
+  display: flex;
+  padding: 7.5px 53.5px;
+  background-color: var(--surface-alt);
+  border-radius: var(--radius-small);
+}
+
+.task-save-btn {
+  background-color: var(--surface-brand);
+}
+
+.task-form .task-form-actions span {
+  padding: 0 4px;
+}
+
+.task-form .task-form-actions {
+  width: 288px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* task form content */
+.task-item-content {
+  width: 100%;
+  gap: 8px;
+}

@@ -1,0 +1,43 @@
+@import url('../base/variables.css');
+
+/* Modal */
+#confirm-dialog[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 24px 24px 24px;
+  border: 0;
+  border-radius: var(--radius-medium);
+  background-color: var(--surface-default);
+  box-shadow: var(--drop-shadow-up);
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#confirm-dialog__cancel-btn,
+#confirm-dialog__confirm-btn {
+  height: 32px;
+  display: flex;
+  padding: 7.5px 69.5px;
+  background-color: var(--surface-alt);
+  border-radius: var(--radius-small);
+}
+
+#confirm-dialog__confirm-btn {
+  background-color: var(--surface-danger);
+}
+
+.confirm-dialog__buttons span {
+  padding: 0 4px;
+}
+
+.confirm-dialog__buttons {
+  width: 352px;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
