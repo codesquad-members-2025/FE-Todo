@@ -79,7 +79,8 @@ const Store = (function () {
         addCard,
         removeCard,
         removeColumn,
-        getTextInfo
+        getTextInfo,
+        getData
     }
 })();
 
