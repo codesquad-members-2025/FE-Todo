@@ -1,4 +1,4 @@
-import { setActivityVisibility } from './renderer.js';
+import { setElementVisivility } from './renderer.js';
 import { setConfirmDialog } from '../shared/components/dialog/index.js';
 import { removeActivityRecords } from './renderer.js';
 
@@ -11,8 +11,7 @@ function initActivityHandlers() {
   ]);
 
   buttonMap.forEach((handler, selector) => {
-    const button = document.querySelector(selector);
-    if (button) button.addEventListener('click', handler);
+    document.querySelector(selector)?.addEventListener('click', handler);
   });
 }
 
@@ -27,7 +26,8 @@ function openActivityDeleteDialog() {
 // 활동 패널 토글
 function toggleActivityPanel() {
   const activityPanel = document.getElementById('activity-panel');
-  setActivityVisibility(activityPanel.style.display !== 'flex');
+  const isPanelVisible = activityPanel.style.display !== 'flex';
+  setElementVisivility(activityPanel, isPanelVisible);
 }
 
 export { initActivityHandlers };

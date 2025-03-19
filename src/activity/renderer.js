@@ -12,7 +12,8 @@ const activityFooter = activityPanel.querySelector('footer');
 // 기록 렌더링
 function renderActivityRecords(activityListData) {
   if (activityListData.length === 0) {
-    setActivityDefaultUI(true);
+    setElementVisivility(activityDefault, true);
+
     return;
   }
 
@@ -27,35 +28,19 @@ function renderActivityRecords(activityListData) {
     getFragment()
   );
 
-  // pushChild(activityContainer, activityRecordsHtml);
   activityContainer.appendChild(fragment);
-  setActivityDeleteButton(true);
+  setElementVisivility(activityFooter, true);
 }
 
-// UI 상태 관리 함수들
-function setActivityVisibility(isVisible) {
-  activityPanel.style.display = isVisible ? 'flex' : 'none';
-}
-
-function setActivityDefaultUI(isVisible) {
-  activityDefault.style.display = isVisible ? 'flex' : 'none';
-}
-
-function setActivityDeleteButton(isVisible) {
-  activityFooter.style.display = isVisible ? 'flex' : 'none';
+function setElementVisivility(targetElement, isVisible) {
+  targetElement.style.display = isVisible ? 'flex' : 'none';
 }
 
 // 기록 삭제
 function removeActivityRecords() {
   activityContainer.innerHTML = '';
-  setActivityDefaultUI(true);
-  setActivityDeleteButton(false);
+  setElementVisivility(activityDefault, true);
+  setElementVisivility(activityFooter, false);
 }
 
-export {
-  renderActivityRecords,
-  setActivityVisibility,
-  setActivityDefaultUI,
-  setActivityDeleteButton,
-  removeActivityRecords,
-};
+export { renderActivityRecords, setElementVisivility, removeActivityRecords };

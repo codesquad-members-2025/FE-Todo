@@ -12,12 +12,9 @@ import TaskEditor from '../renderers/taskEditor.js';
 // 새 카드 생성
 function createNewTask(target) {
   const column = getColumn(target);
-  if (!column) return;
+  const taskForm = column && getTaskForm(column);
+  const inputData = taskForm && collectInputData(taskForm);
 
-  const taskForm = getTaskForm(column);
-  if (!taskForm) return;
-
-  const inputData = collectInputData(taskForm);
   if (!inputData) return;
 
   closeTaskForm(taskForm);
@@ -64,11 +61,8 @@ function getTaskForm(column) {
 
 // 입력 데이터 수집 및 검증
 function collectInputData(taskForm) {
-  const input = taskForm.querySelector('input');
-  const textarea = taskForm.querySelector('textarea');
-
-  const title = input?.value;
-  const content = textarea?.value;
+  const { value: title } = taskForm.querySelector('input') || {};
+  const { value: content } = taskForm.querySelector('textarea') || {};
 
   if (!title || !content) return null;
 
