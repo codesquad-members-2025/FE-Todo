@@ -1,4 +1,4 @@
-import { renderKanban } from '../components/kanban-renderer.js';
+import { updateKanbanBoard } from '../components/kanban-renderer.js';
 
 const Store = (function () {
     let kanbanNodes = null;
@@ -11,7 +11,7 @@ const Store = (function () {
     }
 
     const renderData = () => {
-        renderKanban(kanbanNodes);
+        updateKanbanBoard(kanbanNodes);
     }
 
     const addCard = (columnId, cardData) => {
