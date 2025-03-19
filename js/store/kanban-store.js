@@ -10,8 +10,12 @@ const Store = (function () {
         renderData();
     }
 
+    const getData = () => {
+        return kanbanNodes;
+    }
+
     const renderData = () => {
-        updateKanbanBoard(kanbanNodes);
+        updateKanbanBoard(getData());
     }
 
     const addCard = (columnId, cardData) => {
