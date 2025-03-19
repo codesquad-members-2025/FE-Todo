@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TO-DO</title>
+    <link rel="stylesheet" href="../src/css/style.css" />
+    <!-- <script type="module" src="./app.js"></script> -->
+  <script defer src="bundle.js"></script></head>
+  <body>
+    <!-- 클래스 네임 컨벤션: BEM 방식 -->
+    <!-- Header -->
+    <header class="header flex flex-justify-space-between">
+      <div class="header__logo">
+        <h1 class="header__logo-name">TASKIFY</h1>
+      </div>
+      <div class="header__history flex flex-center">
+        <img
+          class="header__history-icon"
+          src="images/history.png"
+          alt="히스토리 아이콘"
+        />
+      </div>
+    </header>
+
+    <!-- Column Container -->
+    <section class="column-container flex flex-align-start flex-wrap">
+      <!-- Column 동적 생성!!-->
+    </section>
+
+    <!-- History Modal -->
+    <aside class="history-modal-container">
+      <!-- History Modal Header -->
+      <header
+        class="history-modal__header flex flex-justify-space-between flex-align-center"
+      >
+        <div class="history-modal__header-title">
+          <h1>사용자 활동 기록</h1>
+        </div>
+        <div
+          class="history-modal__header-close flex flex-justify-end flex-align-center"
+        >
+          <img src="images/delete.png" width="16" alt="닫기 버튼" />
+          <button>닫기</button>
+        </div>
+      </header>
+      <!-- History Modal Content -->
+      <article class="history-modal__content flex flex-column">
+        <!-- History Modal Content Item -->
+        <div class="history-modal__content-item flex">
+          <div class="history-modal__content-item-left flex-center">
+            <img
+              class="history-modal__content-item-left-icon"
+              src="images/action_icon.png"
+              width="40px"
+              alt="사용자 액션 아이콘"
+            />
+          </div>
+          <div
+            class="history-modal__content-item-right flex flex-column flex-justify-space-between"
+          >
+            <p id="action-user-name">@SangYoonLee</p>
+            <p id="action-description">
+              <strong>블로그에 포스팅할 것</strong>을(를)
+              <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>으로
+              이동하였습니다.
+            </p>
+            <p id="action-time">3분 전</p>
+          </div>
+        </div>
+      </article>
+      <!-- History Modal Footer -->
+      <footer class="history-modal__footer flex flex-justify-end">
+        <div class="history-modal__footer-btn flex flex-center">
+          기록 전체 삭제
+        </div>
+      </footer>
+    </aside>
+
+    <!-- 히스토리 삭제 확인 모달 -->
+    <dialog class="history-delete-modal flex flex-center">
+      <div class="history-delete-modal__content">
+        <div class="empty"></div>
+        <p class="history-delete-modal__message">
+          모든 사용자 활동 기록을 삭제할까요?
+        </p>
+        <div class="empty"></div>
+        <div class="history-delete-modal__buttons flex flex-center">
+          <button id="cancel-delete-btn" class="btn-style">취소</button>
+          <button id="confirm-delete-btn" class="btn-style">삭제</button>
+        </div>
+        <div class="empty"></div>
+      </div>
+    </dialog>
+    <!-- <script src="bundle.js"></script> -->
+  </body>
+</html>
