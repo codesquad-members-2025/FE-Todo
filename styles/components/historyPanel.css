@@ -39,6 +39,14 @@
     height: 32px;
 }
 
+.history-panel__close-btn svg path {
+    fill: var(--text-default);
+}
+
+.history-panel__close-btn:hover svg path {
+    fill: var(--text-danger);
+}
+
 .history-panel__close-btn > img {
     width: 16px;
     height: 16px;

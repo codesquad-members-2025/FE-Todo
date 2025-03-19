@@ -33,7 +33,7 @@ const Store = (function () {
 })();
 
 function initStore() {
-    fetch(".././data/mockPanel.json")
+    fetch(".././mock/panel.json")
         .then(response => response.json())
         .then(data => Store.setData(data))
         .catch(error => console.error(`데이터 로드 오류: ${error})`));

@@ -1,6 +1,7 @@
 import KanbanStore from '../store/kanban-store.js';
 import { openModal } from './modal-eventHandler.js';
 import createLogEntry from '../components/history-logger.js';
+import { getRandomId } from '../utils/index.js'
 
 function initKanban() {
     const kanban = document.querySelector('.kanban');
@@ -18,10 +19,12 @@ function handleKanbanEvents(kanban) {
         else if (btn.classList.contains('column-header__close-btn')) removeColumn(btn);
         // 카드 폼 버튼
         else if (btn.classList.contains('card__cancel-btn')) toggleCardForm(btn);
-        else if (btn.classList.contains('card__submit-btn')) createCard(btn);
+        else if (btn.classList.contains('card__submit-btn')) {
+            createCard(btn);
+            toggleCardForm(btn);
+        }
         // 카드 버튼
         else if (btn.classList.contains('card__close-btn')) openCardDeleteModal(btn);
-        else if (btn.classList.contains('card__edit-btn'));
     })
 }
 
@@ -34,29 +37,48 @@ function toggleCardForm(btn) {
 // 카드 생성
 function createCard(btn) {
     const cardForm = btn.closest('.card-form');
-    const newCardData =  getCardData(cardForm);
+    const newCardData = getCardData(cardForm);
+    
     // 스토어에 카드 생성, 매개변수로 (칼럼ID, 카드데이터) 전달
     KanbanStore.addCard(getCurColumn(btn).dataset.id, newCardData);
-    // 카드 폼 토글
-    toggleCardForm(btn);
-    // 히스토리 패널에 생성 로그 추가
-    const logEntryIds = {
+    
+    // 히스토리 패널에 "카드 생성" 로그 추가
+    createLogEntry({
+        type: 'cardAdd',
         cardId: newCardData.id,
         columnId: getCurColumn(btn).dataset.id
-    }
-    createLogEntry('addCard', logEntryIds);
-    // 카드 폼 input 삭제
-    removeCardFormInput(cardForm);
+    });
 }
 
-// 카드 데이터 생성
+// 카드 삭제
+function openCardDeleteModal(btn) {
+    const card = btn.closest('.card');
+    openModal({
+        type: 'cardRemove',
+        cardId: card.dataset.id,
+        columnId: getCurColumn(btn).dataset.id
+    });
+    // createLogEntry 호출은 modal-evnetHandler에서 comfirm 버튼 클릭 시 호츌
+}
+
+// 칼럼 삭제
+function removeColumn(btn) {
+    const column = btn.closest('.column');
+    openModal({
+        type: 'columnRemove',
+        columnId: column.dataset.id
+    });
+    // createLogEntry 호출은 modal-evnetHandler에서 comfirm 버튼 클릭 시 호출
+}
+
+// createCard의 헬퍼함수
 function getCardData(cardForm) {
     const titleArea = cardForm.querySelector('.card__title-input');
     const textArea = cardForm.querySelector('.card__body-input');
-    
+
     const { value: titleInput } = titleArea;
     const { value: textInput } = textArea;
-    
+
     return {
         id: getRandomId(),
         title: titleInput,
@@ -65,36 +87,9 @@ function getCardData(cardForm) {
     }
 }
 
-// 카드 폼 입력값 삭제
-function removeCardFormInput(cardForm) {
-    titleArea.value = '';
-    textArea.value = '';
-}
-
-// 카드 삭제
-function openCardDeleteModal(btn) {
-    const card = btn.closest('.card');
-    openModal('removeCard', { cardId: card.dataset.id, columnId: getCurColumn(btn).dataset.id });
-    // logEntry 생성은 modal에서
-}
-
-// 칼럼 삭제
-function removeColumn(btn) {
-    const column = btn.closest('.column');
-    openModal('removeColumn', { columnId: column.dataset.id });
-    // logEntry 생성은 modal에서
-}
-
-// 유틸리티 함수
-function getRandomId() {
-    return Math.floor(Math.random() * 100000);
-}
-
+// 칸반 핸들러의 작은 유틸함수들
 function getCurColumn(e) {
     return e.closest('.column');
-}
-function getCurColumnTitle(e) {
-    return KanbanStore.getColumnTitle(getCurColumn(e).dataset.id);
 }
 
 export default initKanban;

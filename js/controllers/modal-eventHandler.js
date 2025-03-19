@@ -16,41 +16,42 @@ function handleModalCancelBtn(modal, modalCancelBtn) {
 }
 
 function handleModalConfirmBtn(modal, modalConfirmBtn) {
-    modalConfirmBtn.addEventListener('click', () => {
+    modalConfirmBtn.addEventListener('click', () => { 
+        const actionType = modal.dataset.type;
         const cardId = modal.dataset.cardId;
         const columnId = modal.dataset.columnId;
-        const type = modal.dataset.type;
-        
+
+
         // 스토어에서 제거 전에 logEntry 생성
-        if (type !== 'removeHistory') createLogEntry(type, { cardId, columnId });
+        if (actionType !== 'historyRemove') createLogEntry({ actionType, cardId, columnId });
 
         // 스토어에서 제거
-        if (type === 'removeCard') KanbanStore.removeCard(cardId);
-        else if (type === 'removeColumn') KanbanStore.removeColumn(columnId);
-        else if (type === 'removeHistory') PanelStore.removeAllLogEntry();
+        if (actionType === 'cardRemove') KanbanStore.removeCard(cardId);
+        else if (actionType === 'columnRemove') KanbanStore.removeColumn(columnId);
+        else if (actionType === 'historyRemove') PanelStore.removeAllLogEntry();
 
         modal.close();
     });
 }
 
-function configModal(type, { cardId = '', columnId = '' }) {
+function configModal({ type: textType, cardId = '', columnId = '' }) {
     const modal = document.querySelector('.modal');
     const modalText = document.querySelector('.modal__text');
 
     let text = '';
-    if (type === 'removeCard') text = '선택한 카드를 삭제할까요?';
-    else if (type === 'removeColumn') text = '선택한 칼럼을 삭제할까요?';
-    else if (type === 'removeHistory') text = '모든 사용자 활동 기록을 삭제할까요?';
+    if (textType === 'cardRemove') text = '선택한 카드를 삭제할까요?';
+    else if (textType === 'columnRemove') text = '선택한 컬럼을 삭제할까요?';
+    else if (textType === 'historyRemove') text = '모든 사용자 활동 기록을 삭제할까요?';
 
     modal.dataset.cardId = cardId;
     modal.dataset.columnId = columnId;
-    modal.dataset.type = type;
+    modal.dataset.type = textType;
     modalText.innerText = text;
 }
 
-function openModal(type, { cardId = '', columnId = '' }) {
+function openModal({ type, cardId = '', columnId = '' }) {
     const modal = document.querySelector('.modal');
-    configModal(type, { cardId, columnId });
+    configModal({ type, cardId, columnId });
     modal.showModal();
 }
 

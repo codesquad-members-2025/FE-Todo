@@ -102,7 +102,9 @@ function createPanelNode(isEmpty = false) {
             <div class="history-panel__header flex-between">
                 <h2 class="history-panel__title display-bold16">사용자 활동 기록</h2>
                 <button class="history-panel__close-btn btn flex-center">
-                    <img src="./assets/icons/close.svg">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M7.2 18L6 16.8L10.8 12L6 7.2L7.2 6L12 10.8L16.8 6L18 7.2L13.2 12L18 16.8L16.8 18L12 13.2L7.2 18Z" fill="#A0A3BD"/>
+                    </svg>
                     <span class="history-panel__close-btn-text display-bold14">닫기</span>
                 </button>
             </div>
