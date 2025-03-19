@@ -15,11 +15,11 @@ export const taskModal = {
     this.cardModal = button.closest(".todo-card");
     this.titleValue = this.cardModal.querySelector(".task-title").textContent;
     this.targetId = this.cardModal.id;
-    button.classList.contains("edit-task-btn")
-      ? (this.taskContent =
-          this.cardModal.querySelector(".task-content").textContent)
-      : (this.targetSection =
-          this.cardModal.closest(".columnlist__col").dataset.type);
+    if (button.classList.contains("edit-task-btn"))
+      this.taskContent =
+        this.cardModal.querySelector(".task-content").textContent;
+    this.targetSection =
+      this.cardModal.closest(".columnlist__col").dataset.type;
   },
   showDeleteModal: function (button) {
     this.setTargetCard(button);
@@ -52,7 +52,8 @@ export const taskModal = {
     this.setTargetCard(button);
     const newInputModal = inputModal.createInputModal(
       this.titleValue,
-      this.taskContent
+      this.taskContent,
+      this.targetSection
     );
     this.cardClone = this.cardModal.cloneNode(true);
     taskCard.replaceWithInputModal(this.cardModal, newInputModal);

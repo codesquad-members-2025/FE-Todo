@@ -65,6 +65,7 @@ export function kanbanDetector() {
     }
   });
 }
+
 export function historyBar() {
   const historyBtn = document.getElementById("header__history-btn");
   const historyBar = historyModalUi.historySidebar;
