@@ -1,4 +1,4 @@
-const initialize = function () {
+const sectionHeaderInit = function () {
   const sections = document.querySelectorAll(".columnlist__col");
 
   sections.forEach((section) => {
@@ -15,4 +15,4 @@ const initialize = function () {
   });
 };
 
-export { initialize };
+export { sectionHeaderInit };
