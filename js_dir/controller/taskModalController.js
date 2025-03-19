@@ -3,6 +3,7 @@ import { store } from "../store/store.js";
 import { taskCard } from "../component/CardUi.js";
 import { inputModal } from "../component/inputModalUi.js";
 import { inputModalController } from "./inputmodalController.js";
+import { historyBarController } from "./control-Historybar.js";
 
 export const taskModal = {
   cardModal: null,
@@ -15,11 +16,11 @@ export const taskModal = {
     this.cardModal = button.closest(".todo-card");
     this.titleValue = this.cardModal.querySelector(".task-title").textContent;
     this.targetId = this.cardModal.id;
-    button.classList.contains("edit-task-btn")
-      ? (this.taskContent =
-          this.cardModal.querySelector(".task-content").textContent)
-      : (this.targetSection =
-          this.cardModal.closest(".columnlist__col").dataset.type);
+    if (button.classList.contains("edit-task-btn"))
+      this.taskContent =
+        this.cardModal.querySelector(".task-content").textContent;
+    this.targetSection =
+      this.cardModal.closest(".columnlist__col").dataset.type;
   },
   showDeleteModal: function (button) {
     this.setTargetCard(button);
@@ -27,7 +28,10 @@ export const taskModal = {
     DeleteAlert.showDeleteModal();
   },
   deleteTaskModal: function () {
+    const timeStamp = Date.now().toString();
     store.removeTask(this.targetSection, this.targetId);
+    const taskDataArr = [this.titleValue, this.targetSection, timeStamp];
+    historyBarController.addHisotryLog(taskDataArr, "삭제");
     taskCard.delete(this.targetId);
     DeleteAlert.closeDeleteModal();
   },
@@ -52,12 +56,14 @@ export const taskModal = {
     this.setTargetCard(button);
     const newInputModal = inputModal.createInputModal(
       this.titleValue,
-      this.taskContent
+      this.taskContent,
+      this.targetSection
     );
     this.cardClone = this.cardModal.cloneNode(true);
     taskCard.replaceWithInputModal(this.cardModal, newInputModal);
   },
   confirmEdit: function (button) {
+    const timeStamp = Date.now().toString();
     this.inputModal = button.closest(".task-modal");
     const { columnType, titleValue, contentValue } =
       inputModalController.getValues(button);
@@ -67,8 +73,10 @@ export const taskModal = {
       contentValue
     );
     this.cardClone = editedCard;
-    taskCard.replaceWithInputModal(this.inputModal, this.cardClone);
+    const taskDataArr = [titleValue, columnType, timeStamp];
+    historyBarController.addHisotryLog(taskDataArr, "변경");
     store.editTask(this.targetId, columnType, titleValue, contentValue);
+    taskCard.replaceWithInputModal(this.inputModal, this.cardClone);
   },
   cancelEdit: function (button) {
     this.inputModal = button.closest(".task-modal");

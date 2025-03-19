@@ -52,9 +52,8 @@ export const historyModalUi = {
         : "";
     }
     const content = `${logTitle}을(를)${logColumnType} <strong>${action}</strong>하였습니다.`;
-    newLog.innerHTML = makeLog(content, time);
-    this.logNodes.push(newLog);
-    // return [content, id];
+    this.logNodes.push(newLog); //먼저 데이터를 보낸뒤에
+    newLog.innerHTML = makeLog(content, time); //화면에 표시하는 것이 흐름상 올바름
   },
   drawRegisterLog: function () {
     this.emptyMessage.style.display = "none";
