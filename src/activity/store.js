@@ -16,8 +16,3 @@ function clearActivityData() {
 }
 
 export { loadActivityData, clearActivityData };
-
-// 활동 기록 데이터 가져오기
-export function getActivityData() {
-  return activityData;
-}
