@@ -1,4 +1,6 @@
 import { getFragment } from '../shared/utils/dom.js';
+import { getTimeAgo } from '../shared/utils/common.js';
+import { parseContent } from './handlers.js';
 import { createActivityRecord } from './template.js';
 
 // 캐싱된 DOM 요소
@@ -18,9 +20,12 @@ function renderActivityRecords(activityListData) {
   }
 
   const fragment = activityListData.reduce(
-    (frag, { username, profileImage, actionText, timestamp }) => {
+    (frag, { task, username, profileImage, timeStamp, action, details }) => {
+      const parsedContent = parseContent(task, action, details);
+      const timeAgo = getTimeAgo(timeStamp);
+
       frag.appendChild(
-        createActivityRecord(username, profileImage, actionText, timestamp)
+        createActivityRecord(username, profileImage, parsedContent, timeAgo)
       );
 
       return frag;

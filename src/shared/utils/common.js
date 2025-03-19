@@ -18,4 +18,30 @@ function detectDeviceType() {
     : 'web';
 }
 
-export { generateUUID, getISOStringNow, detectDeviceType };
+function getTimeAgo(timestamp) {
+  const now = new Date();
+  const pastDate = new Date(timestamp);
+  const diffInMilliseconds = now - pastDate;
+
+  const diffInMinutes = Math.floor(diffInMilliseconds / 60000);
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+  const diffInWeeks = Math.floor(diffInDays / 7);
+  const diffInMonths = Math.floor(diffInDays / 30);
+
+  if (diffInMinutes < 60) {
+    return `${diffInMinutes}분`;
+  } else if (diffInHours < 24) {
+    return `${diffInHours}시간`;
+  } else if (diffInDays < 7) {
+    return `${diffInDays}일`;
+  } else if (diffInWeeks < 4) {
+    return `${diffInWeeks}주`;
+  } else if (diffInMonths < 12) {
+    return `${diffInMonths}개월`;
+  } else {
+    return `${Math.floor(diffInMonths / 12)}년`;
+  }
+}
+
+export { generateUUID, getISOStringNow, detectDeviceType, getTimeAgo };

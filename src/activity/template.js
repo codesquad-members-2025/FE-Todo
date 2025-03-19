@@ -1,5 +1,6 @@
 import { stringToNode } from '../shared/utils/dom.js';
-function createActivityRecord(username, profileImage, actionText, timestamp) {
+
+function createActivityRecord(username, profileImage, content, timeAgo) {
   return stringToNode(`  
     <article class="activity-record">
       <div class="record-header">
@@ -11,11 +12,11 @@ function createActivityRecord(username, profileImage, actionText, timestamp) {
       </div>
       <section class="content flex-col">
         <h2 class="username tx-m14 text-default">@${username}</h2>
-        <p class="action-text tx-m14 text-default">
-          ${actionText}
+        <p class="action-text tx-m14 text-default tx-m14">
+        ${content}
         </p>
         <p class="timestamp tx-m12 text-weak">
-          <time>${timestamp} 전</time>
+          <time>${timeAgo} 전</time>
         </p>
       </section>
     </article>

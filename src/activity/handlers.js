@@ -32,4 +32,26 @@ function toggleActivityPanel() {
   setElementVisivility(activityPanel, isPanelVisible);
 }
 
-export { initActivityHandlers };
+function parseContent(task, action, details = {}) {
+  const actionMap = {
+    move: '이동',
+    add: '등록',
+    remove: '삭제',
+    update: '변경',
+  };
+
+  const taskText = `<span class="tx-b14 text-bold">${task}</span>을(를) `;
+  const actionText = `<span class="tx-b14 text-bold">${actionMap[action]}</span>하였습니다.`;
+
+  const contentMap = {
+    add: `<span class="tx-b14 text-bold">${details?.column || ''}</span>에서`,
+    remove: '',
+    update: '',
+    move: `<span class="tx-b14 text-bold">${details?.from || ''}</span>에서 
+           <span class="tx-b14 text-bold">${details?.to || ''}</span>으로`,
+  };
+
+  return `${taskText}${contentMap[action]} ${actionText}`;
+}
+
+export { initActivityHandlers, parseContent };
