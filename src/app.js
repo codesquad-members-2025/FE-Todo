@@ -1,4 +1,5 @@
 import { columnsComponent } from "./components/columns_component";
+import { CreateCardComponent } from "./components/create_card_component";
 import { fetchMockData } from "./data";
 
 import "pretendard/dist/web/static/pretendard.css"; // 폰트 CSS 불러오기
@@ -17,13 +18,14 @@ fetch("/data/mock.json")
   .then((data) => {
     // mock.json의 칼럼, 카드 데이터 확인 후 Store에 저장
     // 예시로 columns에 빈 카드 배열을 초기화하는 과정
-    data.forEach((column) => {
+    const { columns } = data;
+    columns.forEach((column) => {
       // 카드 배열이 없다고 가정하면 초기화
       if (!column.cards) {
         column.cards = [];
       }
     });
-    Store.state.columns = data;
+    Store.state.columns = columns;
     // 초기 데이터 기준으로 id 카운터 설정
     Store.initializeIdCounters();
     // 첫 렌더링
@@ -131,26 +133,18 @@ document.body.addEventListener("click", (event) => {
       // article 태그의 자식 노드에 CreateCardComponent를 추가
       const articleElement = actionElement.closest("article");
       articleElement.innerHTML += CreateCardComponent();
+      console.log(actionElement.className);
     },
     "task-create-card__btn-create": () => {
       // 카드 생성
-      // 부모 태그 중 article 태그를 찾아서
       const columnElement = actionElement.closest("article");
-      const columnId = columnElement.dataset.id; // 수정 필요
-      // column의 id 값을 어떻게 읽을 것인가..
-
-      // Store에 카드 추가
+      const columnId = parseInt(columnElement.dataset.id, 10); // 숫자형 id로 변환
       const cardData = {
-        title: cardInputTitle.value,
-        description: cardInputDescription.value,
+        title: cardInputTitle.value || "New Task",
+        description: cardInputDescription.value || "Task description",
       };
-      const newCard = {
-        id: Date.now(),
-        title: "New Task",
-        description: "Task description",
-      };
-      // 상태를 직접 변경하지 않고, Action을 통해 Dispatcher로 전달
-      Dispatcher.dispatch(Actions.addCard(columnId, newCard));
+      // Store에 카드 추가, id는 Store에서 생성됨
+      Dispatcher.dispatch(Actions.addCard(columnId, cardData));
     },
     "card-input-title": () => {},
     "card-input-description": () => {},

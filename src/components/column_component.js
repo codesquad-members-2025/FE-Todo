@@ -1,11 +1,12 @@
 import { cardComponent } from "./card_component.js";
 
 // 완료한 일 Column
-export const columnComponent = ({ title, cards }) => {
+export const columnComponent = ({ id, title, cards }) => {
   const count = cards.length;
 
   return `
-    <article class="column flex flex-column flex-justify-center">
+    <article class="column flex flex-column flex-justify-center column-id="${id}">
+      <!-- Column Header -->
       <header class="column__header flex flex-justify-space-between">
         <div class="column__header-left flex flex-align-center">
           <h1 class="column__header-title">${title}</h1>

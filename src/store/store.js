@@ -1,6 +1,6 @@
 import { ActionTypes } from "./actions.js";
 
-class Store {
+class StoreClass {
   constructor() {
     // 어플리케이션에서 관리할 모든 상태
     this.state = {
@@ -61,76 +61,83 @@ class Store {
     return ++this.lastCardIdByColumn[columnId];
   }
 
+  // 새로운 카드 추가 메서드
+  addCard(columnId, card) {
+    const newCard = {
+      ...card,
+      id: this.generateCardId(columnId),
+    };
+    this.state.columns = this.state.columns.map((column) => {
+      if (column.id === columnId) {
+        this.addHistory(`${column.title}에 카드 "${card.title}" 추가`);
+        return {
+          ...column,
+          cards: [...column.cards, newCard],
+        };
+      }
+      return column;
+    });
+  }
+
+  // 카드 삭제 메서드
+  deleteCard(columnId, cardId) {
+    this.state.columns = this.state.columns.map((column) => {
+      if (column.id === columnId) {
+        this.addHistory(`${column.title}의 카드 제거`);
+        return {
+          ...column,
+          cards: column.cards.filter((card) => card.id !== cardId),
+        };
+      }
+      return column;
+    });
+  }
+
+  // 카드 수정 메서드
+  updateCard(columnId, cardId, updatedData) {
+    this.state.columns = this.state.columns.map((column) => {
+      if (column.id === columnId) {
+        this.addHistory(`${column.title}의 카드 수정`);
+        return {
+          ...column,
+          cards: column.cards.map((card) =>
+            card.id === cardId ? { ...card, ...updatedData } : card
+          ),
+        };
+      }
+      return column;
+    });
+    this.addHistory(`Card updated.`);
+  }
+
+  // 히스토리 추가: emitChange() 제거 - handleAction에서 한 번만 호출
+  addHistory(message) {
+    this.state.history.push({ message, timestamp: new Date().toISOString() });
+  }
+
   handleAction(action) {
     switch (action.type) {
       case ActionTypes.ADD_CARD:
-        const newCard = {
-          ...action.payload.card,
-          id: this.generateCardId(action.payload.columnId),
-        };
-        this.state.columns = this.state.columns.map((column) => {
-          if (column.id === action.payload.columnId) {
-            this.addHistory(
-              `${column.title}에 카드 "${action.payload.card.title}" 추가`
-            );
-            return {
-              ...column,
-              cards: [...column.cards, newCard],
-            };
-          }
-          return column;
-        });
+        this.addCard(action.payload.columnId, action.payload.card);
         break;
-
       case ActionTypes.DELETE_CARD:
-        this.state.columns = this.state.columns.map((column) => {
-          if (column.id === action.payload.columnId) {
-            this.addHistory(`${column.title}의 카드 제거`);
-            return {
-              ...column,
-              cards: column.cards.filter(
-                (card) => card.id !== action.payload.cardId
-              ),
-            };
-          }
-          return column;
-        });
+        this.deleteCard(action.payload.columnId, action.payload.cardId);
         break;
-
       case ActionTypes.UPDATE_CARD:
-        this.state.columns = this.state.columns.map((column) => {
-          if (column.id === action.payload.columnId) {
-            this.addHistory(`${column.title}의 카드 수정`);
-            return {
-              ...column,
-              cards: column.cards.map((card) =>
-                card.id === action.payload.cardId
-                  ? { ...card, ...action.payload.updatedData }
-                  : card
-              ),
-            };
-          }
-          return column;
-        });
-        this.addHistory(`Card updated.`);
+        this.updateCard(
+          action.payload.columnId,
+          action.payload.cardId,
+          action.payload.updatedData
+        );
         break;
-
       case ActionTypes.ADD_HISTORY:
         this.state.history.push(action.payload);
         break;
-
       default:
-        return; // 어떤 Action 타입에도 해당되지 않으면 아무것도 하지 않음
+        return;
     }
-
-    // 상태가 실제로 변한 후, 모든 리스너에게 업데이트 알림
-    this.emitChange();
-  }
-
-  addHistory(message) {
-    this.state.history.push({ message, timestamp: new Date().toISOString() });
     this.emitChange();
   }
 }
 
-export const Store = new Store();
+export const Store = new StoreClass();
