@@ -63,6 +63,9 @@ class StoreClass {
 
   // 새로운 카드 추가 메서드
   addCard(columnId, card) {
+    //
+    console.log(columnId, card);
+    //
     const newCard = {
       ...card,
       id: this.generateCardId(columnId),

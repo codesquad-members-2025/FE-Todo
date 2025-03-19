@@ -91,19 +91,6 @@ const cardInputDescription = document.querySelector(".card-input-description");
 const deleteCardBtn = document.querySelector(".task-create-card__btn-cancel");
 const addCardBtn = document.querySelector(".task-create-card__btn-create");
 
-const renderCreateCard = (data) => {
-  // 불러온 데이터를 컴포넌트에 넣어서 렌더링
-  const columnContainer = document.querySelector(".column-container");
-  columnContainer.innerHTML += columnsComponent(data);
-};
-
-document
-  .querySelector(".column__header-right-icon")
-  .addEventListener("click", () => {
-    // 부모 태그 중 article 태그를 찾아서
-    // article 태그의 자식 노드에 CreareCardComponent를 추가
-  });
-
 //
 
 // 이벤트 위임
@@ -120,31 +107,61 @@ document.body.addEventListener("click", (event) => {
 
   // 각 액션에 따른 기능 실행 using object literal
   const actionHandlers = {
+    // 히스토리 페널 열기
     "open-history-modal": openHistoryModal,
+    // 히스토리 페널 닫기
     "close-history-modal": closeHistoryModal,
+    // 히스토리 페널에서 '기록 전체 삭제' 버튼 클릭 시 확인용 모달 등장
     "open-delete-modal": showModal,
+    // 확인용 모달의 삭제 버튼을 눌렀을 때
     "cancel-delete-btn": deleteModal,
+    // 확인용 모달의 취소 버튼을 눌렀을 때
     "confirm-delete-btn": () => {
       // 사용자 기록 삭제 후 모달 닫기
       historyDeleteModal.close();
     },
+    // 칼럼의 + 버튼 눌렀을 때 카드 생성용 컴포넌트 생성
     "column__header-right-icon": () => {
       // 부모 태그 중 article 태그를 찾아서
       // article 태그의 자식 노드에 CreateCardComponent를 추가
-      const articleElement = actionElement.closest("article");
-      articleElement.innerHTML += CreateCardComponent();
-      console.log(actionElement.className);
+      const columnElement = actionElement.closest("article");
+      columnElement.innerHTML += CreateCardComponent(); // 카드 생성 컴포넌트 추가
     },
+    // 카드 생성용 컴포넌트에서 '등록' 버튼 눌렀을 때
     "task-create-card__btn-create": () => {
       // 카드 생성
       const columnElement = actionElement.closest("article");
-      const columnId = parseInt(columnElement.dataset.id, 10); // 숫자형 id로 변환
+      const columnIdClass = columnElement.className.split(" ").slice(-1)[0];
+      const columnId = parseInt(columnIdClass.split("=")[1], 10); // 숫자형 id로 변환
+
+      const cardId = Store.generateCardId(columnId);
+      const titleInput = columnElement.querySelector(".card-input-title");
+      const descriptionInput = columnElement.querySelector(
+        ".card-input-description"
+      );
+      // console.log(titleInput.value, descriptionInput.value);
+      // 카드 데이터 생성
       const cardData = {
-        title: cardInputTitle.value || "New Task",
-        description: cardInputDescription.value || "Task description",
+        id: cardId,
+        title: titleInput.value || "New Task",
+        description: descriptionInput.value || "Task description",
+        author: "YooN",
       };
       // Store에 카드 추가, id는 Store에서 생성됨
       Dispatcher.dispatch(Actions.addCard(columnId, cardData));
+      // 생성 컴포넌트 제거
+      const createCardElement = actionElement.closest(".task-create-card");
+      if (createCardElement) {
+        createCardElement.remove();
+      }
+    },
+    // 카드 생성용 컴포넌트에서 '취소' 버튼 눌렀을 때
+    "task-create-card__btn-cancel": () => {
+      // 생성 컴포넌트 취소 시 제거
+      const createCardElement = actionElement.closest(".task-create-card");
+      if (createCardElement) {
+        createCardElement.remove();
+      }
     },
     "card-input-title": () => {},
     "card-input-description": () => {},
@@ -157,14 +174,4 @@ document.body.addEventListener("click", (event) => {
   if (actionHandlers[action]) {
     actionHandlers[action]();
   }
-});
-
-// input 문자열 추적 이벤트
-document.body.addEventListener("input", (event) => {
-  const actionElement = event.target.closest("input");
-  if (!actionElement) return;
-
-  const action = actionElement.className.split(" ")[0];
-
-  console.log(action);
 });

@@ -1,5 +1,4 @@
-// Create Task Card Component
-export const CreateCardComponent = ({ title, description, author }) => `
+export const CreateCardComponent = () => `
   <div class="task-create-card task-card flex-column flex-justify-space-between">
     <div class="task-create-card__input flex-column flex-center">
       <div class="task-create-card__input-title flex flex-center">
