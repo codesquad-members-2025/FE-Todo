@@ -12,24 +12,23 @@ import { sortTasks } from './sortHandlers.js';
 function initKanbanEvents() {
   const columnSection = document.getElementById('kanban-board');
 
-  const clickHandlers = new Map([
-    ['.task-add-btn', toggleTaskForm],
-    ['.task-delete-btn', openDeleteTaskDialog],
-    ['.task-cancel-btn', toggleTaskForm],
-    ['.task-save-btn', createNewTask],
-    ['.task-edit-btn', toggleModifyFrom],
-  ]);
+  const clickHandlers = {
+    '.task-add-btn': toggleTaskForm,
+    '.task-delete-btn': openDeleteTaskDialog,
+    '.task-cancel-btn': toggleTaskForm,
+    '.task-save-btn': createNewTask,
+    '.task-edit-btn': toggleModifyFrom,
+  };
 
   columnSection.addEventListener('click', ({ target }) => {
     const closestBtn = target.closest('button');
     if (closestBtn === null) return;
 
-    for (const [selector, handler] of clickHandlers) {
-      if (closestBtn.matches(selector)) {
-        handler(closestBtn);
-        break;
-      }
-    }
+    const selector = Object.keys(clickHandlers).find((key) =>
+      closestBtn.matches(key)
+    );
+
+    selector && clickHandlers[selector](closestBtn);
   });
 }
 

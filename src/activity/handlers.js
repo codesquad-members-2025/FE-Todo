@@ -4,14 +4,16 @@ import { removeActivityRecords } from './renderer.js';
 
 // 이벤트 리스너 등록
 function initActivityHandlers() {
-  const buttonMap = new Map([
-    ['#activity-panel-open-btn', toggleActivityPanel],
-    ['#activity-panel-close-btn', toggleActivityPanel],
-    ['#activity-clear-btn', openActivityDeleteDialog],
-  ]);
+  const buttonMap = {
+    '#activity-panel-open-btn': toggleActivityPanel,
+    '#activity-panel-close-btn': toggleActivityPanel,
+    '#activity-clear-btn': openActivityDeleteDialog,
+  };
 
-  buttonMap.forEach((handler, selector) => {
-    document.querySelector(selector)?.addEventListener('click', handler);
+  Object.keys(buttonMap).forEach((selector) => {
+    document
+      .querySelector(selector)
+      ?.addEventListener('click', buttonMap[selector]);
   });
 }
 

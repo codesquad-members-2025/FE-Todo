@@ -1,5 +1,5 @@
 // src/board/handlers/taskHandlers.js
-import { addTask, removeTask, updateTask } from '../store.js';
+import { addTask, removeTask } from '../store.js';
 import { renderTask } from '../renderers/task.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
 import {

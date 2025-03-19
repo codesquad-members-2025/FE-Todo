@@ -47,6 +47,7 @@ const taskForm = `
   </article>
 `;
 
+//TODO edit/create form을 하나의 form 레이아웃으로 재사용
 function createEditForm(title, content) {
   return stringToNode(`
   <article class="task-form task-common flex-col">
