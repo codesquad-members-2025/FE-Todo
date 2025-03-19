@@ -33,7 +33,7 @@ function generateCardsFromList(colum) {
   let countCard = columnHeader.querySelector(".count_card");
   const fragment = document.createDocumentFragment();
   colum.cardList.forEach((cardData) => {
-    const cardElement = createShowCardForm(cardData);
+    const cardElement = createShowCardForm(cardData.title, cardData.content);
     count++;
     fragment.appendChild(cardElement);
   });
