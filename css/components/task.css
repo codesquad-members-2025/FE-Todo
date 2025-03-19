@@ -29,6 +29,10 @@
   color: var(--text-strong);
 }
 
+.task-form-content {
+  gap: 8px;
+}
+
 .task-textarea {
   height: 20px;
   overflow-y: hidden;
