@@ -22,6 +22,16 @@ body {
   align-items: center;
 }
 
+.flex-content-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-content-between {
+  display: flex;
+  justify-content: space-between;
+}
+
 .app-layout {
   gap: 32px;
   width: 1440px;

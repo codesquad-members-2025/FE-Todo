@@ -37,7 +37,5 @@
 
 .confirm-dialog__buttons {
   width: 352px;
-  display: flex;
-  justify-content: space-between;
   gap: 8px;
 }

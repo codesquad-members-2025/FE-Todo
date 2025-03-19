@@ -9,7 +9,7 @@ function createActivityRecord(username, profileImage, actionText, timestamp) {
           class="profile-img"
         />
       </div>
-      <section class="content">
+      <section class="content flex-col">
         <h2 class="username tx-m14 text-default">@${username}</h2>
         <p class="action-text tx-m14 text-default">
           ${actionText}

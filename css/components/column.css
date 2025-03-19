@@ -12,10 +12,8 @@
 }
 
 .kanban-column-header {
-  display: flex;
   gap: 8px;
   height: 24px;
-  justify-content: space-between;
   padding: 0 16px;
 }
 
@@ -34,5 +32,4 @@
   height: 24px;
   border: 1px solid var(--border-default);
   border-radius: var(--radius-small);
-  justify-content: center;
 }
