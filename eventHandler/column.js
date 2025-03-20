@@ -1,3 +1,4 @@
+import { store } from "../store/store.js";
 import { createAddCardForm, createShowCardForm } from "./createForm.js";
 import { cancelDelete, createDeleteConfirmModal } from "./historyList.js";
 
@@ -47,6 +48,9 @@ function newAddCard(card) {
 
       if (textLengthWithoutGap(title, content))
         return alert("제목, 내용 모두 입력해주세요");
+
+      const columnId = target.closest(".column-cardList").dataset.columnId;
+      store.addCard(columnId, title, content); // 카드가 추가될 때 store 접근하여 저장
 
       const createCardForm = createShowCardForm(title, content);
       const findAddCardElement = target.closest(".add-card");
