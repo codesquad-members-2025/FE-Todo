@@ -13,7 +13,7 @@ import TaskEditor from '../renderers/taskEditor.js';
 
 // 새 카드 생성
 async function createNewTask(target) {
-  const column = getColumn(target);
+  const column = getColumnElement(target);
   const taskForm = column && getTaskForm(column);
   const inputData = taskForm && collectInputData(taskForm);
 
@@ -41,7 +41,7 @@ async function createNewTask(target) {
 function openDeleteTaskDialog(target) {
   const taskCard = target.closest('.task-item');
   const taskTitle = taskCard.querySelector('.task-title').innerText;
-  const columnTitle = getColumnTitle(getColumn(taskCard).id);
+  const columnTitle = getColumnTitle(getColumnElement(taskCard).id);
 
   setConfirmDialog('이 태스크를 삭제할까요?', async () => {
     const timeStamp = getISOStringNow();
@@ -63,7 +63,7 @@ function openDeleteTaskDialog(target) {
 function makeTaskRemover(taskId) {
   return () => {
     const targetTask = document.getElementById(taskId);
-    const column = targetTask.closest('.kanban-column');
+    const column = getColumnElement(targetTask);
     const columnId = column.id;
 
     removeTask(columnId, taskId);
@@ -73,7 +73,7 @@ function makeTaskRemover(taskId) {
 
 // 카드 폼 토글
 function toggleTaskForm(target) {
-  const column = getColumn(target);
+  const column = getColumnElement(target);
   const taskForm = getTaskForm(column);
   if (!taskForm) return;
 
@@ -82,7 +82,7 @@ function toggleTaskForm(target) {
 }
 
 // 칼럼 요소 가져오기
-function getColumn(target) {
+function getColumnElement(target) {
   return target.closest('.kanban-column');
 }
 
