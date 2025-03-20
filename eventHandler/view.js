@@ -1,17 +1,24 @@
+import { store } from "../store/store.js";
 import { createRecordForm, createShowCardForm } from "./createForm.js";
 
-export function fetchData() {
-  fetch("../data/data.json") // json파일 가져오기
-    .then((response) => response.json()) // json형식으로
-    .then((data) => {
-      cardView(data); // 불러온 데이터를 처리하기
-      historyView(data);
-    })
-    .catch((error) => console.error("오류 발생:", error));
+// export function fetchData() {
+//   fetch("../data/data.json") // json파일 가져오기
+//     .then((response) => response.json()) // json형식으로
+//     .then((data) => {
+//       cardView(data); // 불러온 데이터를 처리하기
+//       historyView(data);
+//     })
+//     .catch((error) => console.error("오류 발생:", error));
+// }
+export function getData() {
+  store.fetchData(function () {
+    cardView(store.state.columns);
+    historyView(store.state.historyList);
+  });
 }
 
-function cardView(data) {
-  data.colums.forEach((colum) => {
+function cardView(dataColumns) {
+  dataColumns.forEach((colum) => {
     if (colum.id === "toDo") {
       generateCardsFromList(colum);
     } else if (colum.id === "doing") {
@@ -41,10 +48,10 @@ function generateCardsFromList(colum) {
   countCard.textContent = count;
 }
 
-function historyView(data) {
+function historyView(dataHistoryList) {
   const recordHistory = document.getElementById("recordHistory");
   const fragment = document.createDocumentFragment();
-  data.historyList.forEach((record) => {
+  dataHistoryList.forEach((record) => {
     const recordElement = createRecordForm(record);
     fragment.appendChild(recordElement);
   });
