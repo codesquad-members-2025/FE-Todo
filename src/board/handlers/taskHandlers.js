@@ -43,7 +43,7 @@ function openDeleteTaskDialog(target) {
   const taskTitle = taskCard.querySelector('.task-title').innerText;
   const columnTitle = getColumnTitle(getColumnElement(taskCard).id);
 
-  setConfirmDialog('이 태스크를 삭제할까요?', async () => {
+  setConfirmDialog('선택한 카드를 삭제할까요?', async () => {
     const timeStamp = getISOStringNow();
     makeTaskRemover(taskCard.id)();
 
