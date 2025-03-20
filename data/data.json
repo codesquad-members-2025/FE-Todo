@@ -52,7 +52,7 @@
       "title": "블로그에 포스팅할 것",
       "fromColumn": "하고있는 일",
       "toColumn": "해야할 일 ",
-      "timeStamp": "3분 전"
+      "timeStamp": "2025-03-20 17:30:50"
     },
     {
       "photo": "./images/sam.png",
@@ -61,7 +61,7 @@
       "title": "GitHub 공부하기",
       "fromColumn": "null",
       "toColumn": "null",
-      "timeStamp": "10분 전"
+      "timeStamp": "2025-03-20 14:22:02"
     },
     {
       "photo": "./images/sam.png",
@@ -70,7 +70,7 @@
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "하고 있는 일",
-      "timeStamp": "18분 전"
+      "timeStamp": "2025-03-20 14:20:50"
     },
     {
       "photo": "./images/sam.png",
@@ -79,7 +79,7 @@
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
-      "timeStamp": "1시간 전"
+      "timeStamp": "2025-03-20 14:19:50"
     },
     {
       "photo": "./images/sam.png",
@@ -88,7 +88,7 @@
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
-      "timeStamp": "1시간 전"
+      "timeStamp": "2025-03-20 14:10:50"
     },
     {
       "photo": "./images/sam.png",
@@ -97,7 +97,7 @@
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "null",
-      "timeStamp": "1시간 전"
+      "timeStamp": "2025-03-20 14:03:50"
     },
     {
       "photo": "./images/sam.png",
@@ -106,7 +106,7 @@
       "title": "HTML/CSS 공부하기",
       "fromColumn": "해야할 일",
       "toColumn": "완료한 일",
-      "timeStamp": "1시간 전"
+      "timeStamp": "2025-03-19 14:00:50"
     }
   ]
 }

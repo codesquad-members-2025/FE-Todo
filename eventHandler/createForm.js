@@ -25,6 +25,7 @@ export function createRecordForm(record) {
     record.fromColumn,
     record.toColumn
   );
+  const time = calculateTime(record.timeStamp);
   const recordElement = document.createElement("div");
   recordElement.classList.add("record");
   recordElement.innerHTML = `<img src="${record.photo}" class="userImage" />
@@ -33,10 +34,31 @@ export function createRecordForm(record) {
       <div class="textBody">
         ${textBody}
       </div>
-      <div class="timeStamp">${record.timeStamp}</div>
+      <div class="timeStamp">${time}</div>
     </div>
   </div>`;
   return recordElement;
+}
+
+function calculateTime(date) {
+  const inputTime = new Date(date).getTime();
+  const now = new Date().getTime();
+  const diffInSeconds = Math.floor((now - inputTime) / 1000); // 초 단위 차이 계산
+  const diffInMinutes = Math.floor(diffInSeconds / 60); // 분 단위 차이
+  const diffInHours = Math.floor(diffInMinutes / 60); // 시간 단위 차이
+  const diffInDays = Math.floor(diffInHours / 24); // 일 단위 차이
+
+  if (diffInSeconds < 60) {
+    return `${diffInSeconds}초 전`;
+  } else if (diffInMinutes < 60) {
+    return `${diffInMinutes}분 전`;
+  } else if (diffInHours < 24) {
+    return `${diffInHours}시간 전`;
+  } else if (diffInDays < 30) {
+    return `${diffInDays}일 전`;
+  } else {
+    return date.toLocaleDateString(); // 한 달 이상 된 경우에는 입력된 날짜
+  }
 }
 
 function addTextOnAction(action, title, fromColumn, toColumn) {
