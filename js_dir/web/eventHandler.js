@@ -9,7 +9,7 @@ export const initialize = function () {
   const sections = document.querySelectorAll(".columnlist__col");
   sections.forEach((section) => {
     registerAddTaskEvent(section);
-    funcName(section);
+    updateCardPosition(section);
   });
 };
 
@@ -87,13 +87,15 @@ export function historyBar() {
 //함수 이름 수정해야함
 export function cardDragAndDrop() {
   const kanban = document.querySelector(".page-main__columnlist");
+
   kanban.addEventListener(
     "dragstart",
     (event) => {
-      const card = event.target.closest("todo-card");
-      if (!card) return;
-      card.classList.add("dragging");
-      card.addEventListener("dragend", handleDragEnd);
+      const draggingCard = event.target.closest(".todo-card");
+      if (!draggingCard) return;
+      draggingCard.classList.add("dragging");
+
+      draggingCard.addEventListener("dragend", handleDragEnd);
     },
     true
   );
@@ -114,29 +116,43 @@ function registerAddTaskEvent(section) {
 function handleDragEnd(event) {
   const card = event.target;
   card.removeEventListener("dragend", handleDragEnd);
-  card.classList.remove(".dragging");
+  card.classList.remove("dragging");
 }
 
-function funcName(section) {
+function updateCardPosition(section) {
   section.addEventListener("dragover", (event) => {
     event.preventDefault();
-    const cards = [...section.querySelectorAll(".todo-card")].filter(
-      (card) => !card.classList.contains("dragging")
-    );
-    getDragDownCard(cards, event.clientY);
+    const taskList = section.querySelector(".task-list");
+    // const cards = [...section.querySelectorAll(".todo-card")].filter(
+    //   (card) => !card.classList.contains("dragging")
+    // );
+
+    const cards = [...taskList.querySelectorAll(".todo-card:not(.dragging)")];
+    const underCard = getClosestCard(cards, event.clientY);
+    const draggingCard = document.querySelector(".dragging");
+
+    if (underCard === undefined) {
+      taskList.appendChild(draggingCard);
+    } else {
+      taskList.insertBefore(draggingCard, underCard);
+    }
   });
 }
 
-function getDragDownCard(cards, y) {
-  cards.reduce(
+function getClosestCard(cards, y) {
+  return cards.reduce(
     (closest, card) => {
-      const offset = y - (card.top + card.height / 2);
-      if (offset < 0 && closest.offset > offset) {
+      const cardDomRect = card.getBoundingClientRect();
+      const offset = y - (cardDomRect.top + cardDomRect.height / 2);
+      if (offset < 0 && Math.abs(offset) < Math.abs(closest.offset)) {
+        console.log(`Y좌표:${offset}`);
         return { offset, card };
       } else {
+        console.log(`Y좌표:${offset}`);
+
         return closest;
       }
     },
-    { offset: Infinity }
+    { offset: Number.NEGATIVE_INFINITY }
   ).card;
 }

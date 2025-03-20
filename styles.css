@@ -72,6 +72,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 85vh;
 }
 .columnlist__header {
   display: flex;
@@ -317,7 +318,7 @@ dialog {
 }
 
 .todo-card .dragging {
-  opacity: 0.3;
+  opacity: 0.8;
 }
 .todo-card__textarea {
   display: flex;
