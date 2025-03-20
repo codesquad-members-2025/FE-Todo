@@ -40,8 +40,6 @@ class TaskEditor {
   }
 
   async saveEdit() {
-    const timeStamp = getISOStringNow();
-
     const editedTitle = this.editForm.querySelector('input').value;
     const editedContent = this.editForm.querySelector('textarea').value;
 
@@ -65,7 +63,7 @@ class TaskEditor {
     addActivity({
       action: 'update',
       task: originalTitle,
-      timeStamp,
+      timeStamp: getISOStringNow(),
     });
 
     const activityData = await loadActivityData();

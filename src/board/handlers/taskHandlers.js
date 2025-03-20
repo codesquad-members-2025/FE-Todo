@@ -8,6 +8,7 @@ import {
   generateUUID,
   getISOStringNow,
   detectDeviceType,
+  getTimeAgo,
 } from '../../shared/utils/common.js';
 import TaskEditor from '../renderers/taskEditor.js';
 
@@ -44,13 +45,12 @@ function openDeleteTaskDialog(target) {
   const columnTitle = getColumnTitle(getColumnElement(taskCard).id);
 
   setConfirmDialog('선택한 카드를 삭제할까요?', async () => {
-    const timeStamp = getISOStringNow();
     makeTaskRemover(taskCard.id)();
 
     addActivity({
       action: 'remove',
       task: taskTitle,
-      timeStamp,
+      timeStamp: getISOStringNow(),
       details: { column: columnTitle },
     });
 
