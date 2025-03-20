@@ -1,9 +1,11 @@
 import { fetchData } from '../shared/utils/fetch.js';
+import observer from '../shared/utils/observer.js';
 
 const ACTIVITY_DATA_URL = './data/activityData.json';
 
-class ActivityStore {
+class ActivityStore extends observer {
   constructor() {
+    super();
     this.activityData = [];
   }
 
@@ -30,6 +32,7 @@ class ActivityStore {
     };
 
     this.activityData.unshift(activity);
+    this.notify(this.activityData); // 구독한 랜더함수 실행
   }
 }
 

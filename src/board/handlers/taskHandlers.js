@@ -2,7 +2,6 @@
 import columnStore from '../store.js';
 import activityStore from '../../activity/store.js';
 import { renderTask } from '../renderers/task.js';
-import { renderActivityRecords } from '../../activity/renderer.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
 import {
   generateUUID,
@@ -34,9 +33,6 @@ function createNewTask(target) {
     timeStamp: createdAt,
     details: { column: columnTitle },
   });
-
-  const activityData = activityStore.getActivityData();
-  renderActivityRecords(activityData);
 }
 
 function openDeleteTaskDialog(target) {
@@ -53,9 +49,6 @@ function openDeleteTaskDialog(target) {
       timeStamp: getISOStringNow(),
       details: { column: columnTitle },
     });
-
-    const activityData = activityStore.getActivityData();
-    renderActivityRecords(activityData);
   });
 }
 

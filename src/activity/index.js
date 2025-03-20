@@ -8,6 +8,8 @@ async function initializeActivity() {
 
   renderActivityRecords(activityData);
   initActivityHandlers();
+
+  activityStore.subscribe(renderActivityRecords);
 }
 
 export { initializeActivity };

@@ -1,7 +1,6 @@
 import activityStore from '../../activity/store.js';
 import { getISOStringNow } from '../../shared/utils/common.js';
 import columnStore from '../store.js';
-import { renderActivityRecords } from '../../activity/renderer.js';
 import { createEditForm } from './template.js';
 
 class TaskEditor {
@@ -65,9 +64,6 @@ class TaskEditor {
       task: originalTitle,
       timeStamp: getISOStringNow(),
     });
-
-    const activityData = activityStore.getActivityData();
-    renderActivityRecords(activityData);
   }
 
   showEditForm() {
