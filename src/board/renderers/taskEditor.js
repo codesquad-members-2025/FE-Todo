@@ -1,6 +1,6 @@
-import { addActivity, getActivityData } from '../../activity/store.js';
+import activityStore from '../../activity/store.js';
 import { getISOStringNow } from '../../shared/utils/common.js';
-import { updateTask } from '../store.js';
+import columnStore from '../store.js';
 import { renderActivityRecords } from '../../activity/renderer.js';
 import { createEditForm } from './template.js';
 
@@ -52,7 +52,7 @@ class TaskEditor {
     this.originalTaskCard.querySelector('.task-content').textContent =
       editedContent;
 
-    updateTask({
+    columnStore.updateTask({
       id: this.originalTaskCard.id,
       title: editedTitle,
       content: editedContent,
@@ -60,13 +60,13 @@ class TaskEditor {
 
     this.restoreOriginalTask();
 
-    addActivity({
+    activityStore.addActivity({
       action: 'update',
       task: originalTitle,
       timeStamp: getISOStringNow(),
     });
 
-    const activityData = getActivityData();
+    const activityData = activityStore.getActivityData();
     renderActivityRecords(activityData);
   }
 

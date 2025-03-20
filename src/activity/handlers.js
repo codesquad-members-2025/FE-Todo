@@ -1,7 +1,7 @@
 import { setElementVisibility } from './renderer.js';
 import { setConfirmDialog } from '../shared/components/dialog/index.js';
 import { removeActivityRecords, toggleDefaultUi } from './renderer.js';
-import { clearActivityData } from '../activity/store.js';
+import activityStore from '../activity/store.js';
 
 // 이벤트 리스너 등록
 function initActivityHandlers() {
@@ -22,7 +22,7 @@ function initActivityHandlers() {
 function openActivityDeleteDialog() {
   setConfirmDialog('모든 사용자 활동 기록을 삭제할까요?', () => {
     removeActivityRecords();
-    clearActivityData();
+    activityStore.clearActivityData();
     toggleDefaultUi(true);
   });
 }

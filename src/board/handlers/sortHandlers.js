@@ -1,5 +1,5 @@
 // src/board/handlers/sortHandlers.js
-import { getSortedTasksByDate } from '../store.js';
+import columnStore from '../store.js';
 import { renderTasksInColumn, clearTasks } from '../renderers/task.js';
 
 // 정렬 버튼 클릭 이벤트
@@ -35,7 +35,7 @@ function updateSortButtonUI({ button, label, newSortType, buttonText }) {
 
 // 정렬 후 UI 반영
 function applySortedTasks(sortType) {
-  const sortedData = getSortedTasksByDate(sortType);
+  const sortedData = columnStore.getSortedTasksByDate(sortType);
   clearTasks();
   renderTasksInColumn(sortedData);
 }

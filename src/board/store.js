@@ -2,67 +2,73 @@ import { fetchData } from '../shared/utils/fetch.js';
 
 const COLUMN_DATA_URL = './data/columnData.json';
 
-let columnData = null;
+class ColumnStore {
+  constructor() {
+    this.columnData = null;
+  }
 
-async function fetchAndStoreColumnData() {
-  columnData = await fetchData(COLUMN_DATA_URL);
-}
+  async fetchAndStoreColumnData() {
+    this.columnData = await fetchData(COLUMN_DATA_URL);
+  }
 
-function getColumnsData() {
-  return columnData;
-}
+  getColumnsData() {
+    return this.columnData;
+  }
 
-function addTask(columnId, taskData) {
-  const targetColumn = columnData.find((column) => column.id === columnId);
-  targetColumn.tasks.push(taskData);
-}
+  addTask(columnId, taskData) {
+    const targetColumn = this.columnData.find(
+      (column) => column.id === columnId
+    );
+    targetColumn.tasks.push(taskData);
+  }
 
-function updateTask(updatedTask) {
-  const targetColumn = columnData.find((column) =>
-    column.tasks.some((task) => task.id === updatedTask.id)
-  );
+  updateTask(updatedTask) {
+    const targetColumn = this.columnData.find((column) =>
+      column.tasks.some((task) => task.id === updatedTask.id)
+    );
 
-  const taskIndex = targetColumn.tasks.findIndex(
-    (task) => task.id === updatedTask.id
-  );
+    const taskIndex = targetColumn.tasks.findIndex(
+      (task) => task.id === updatedTask.id
+    );
 
-  if (taskIndex !== -1) {
-    targetColumn.tasks[taskIndex] = {
-      ...targetColumn.tasks[taskIndex],
-      title: updatedTask.title,
-      content: updatedTask.content,
-    };
+    if (taskIndex !== -1) {
+      targetColumn.tasks[taskIndex] = {
+        ...targetColumn.tasks[taskIndex],
+        title: updatedTask.title,
+        content: updatedTask.content,
+      };
+    }
+  }
+
+  removeTask(columnId, taskId) {
+    const targetColumn = this.columnData.find(
+      (column) => column.id === columnId
+    );
+    targetColumn.tasks = targetColumn.tasks.filter(
+      (task) => task.id !== taskId
+    );
+  }
+
+  getColumnTitle(columnId) {
+    const targetColumn = this.columnData.find(
+      (column) => column.id === columnId
+    );
+    return targetColumn.title;
+  }
+
+  // 정렬 함수 (order: 'created' | 'latest')
+  getSortedTasksByDate(order = 'created') {
+    return this.columnData.map((column) => ({
+      ...column,
+      tasks: [...column.tasks].sort((a, b) => {
+        return order === 'created'
+          ? new Date(a.createdAt) - new Date(b.createdAt) // 생성순
+          : new Date(b.createdAt) - new Date(a.createdAt); // 최신순
+      }),
+    }));
   }
 }
 
-function removeTask(columnId, taskId) {
-  const targetColumn = columnData.find((column) => column.id === columnId);
-  targetColumn.tasks = targetColumn.tasks.filter((task) => task.id !== taskId);
-}
+const columnStore = new ColumnStore();
 
-function getColumnTitle(columnId) {
-  const targetColumn = columnData.find((column) => column.id === columnId);
-  return targetColumn.title;
-}
-
-// 정렬 함수 (order: 'created' | 'latest')
-function getSortedTasksByDate(order = 'created') {
-  return columnData.map((column) => ({
-    ...column,
-    tasks: [...column.tasks].sort((a, b) => {
-      return order === 'created'
-        ? new Date(a.createdAt) - new Date(b.createdAt) // 생성순
-        : new Date(b.createdAt) - new Date(a.createdAt); // 최신순
-    }),
-  }));
-}
-
-export {
-  fetchAndStoreColumnData,
-  getColumnsData,
-  addTask,
-  removeTask,
-  getSortedTasksByDate,
-  updateTask,
-  getColumnTitle,
-};
+export default columnStore;

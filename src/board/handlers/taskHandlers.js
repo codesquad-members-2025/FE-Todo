@@ -1,6 +1,6 @@
 // src/board/handlers/taskHandlers.js
-import { addTask, removeTask, getColumnTitle } from '../store.js';
-import { addActivity, getActivityData } from '../../activity/store.js';
+import columnStore from '../store.js';
+import activityStore from '../../activity/store.js';
 import { renderTask } from '../renderers/task.js';
 import { renderActivityRecords } from '../../activity/renderer.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
@@ -22,39 +22,39 @@ function createNewTask(target) {
 
   const { title, createdAt } = inputData;
   const columnId = column.id;
-  const columnTitle = getColumnTitle(columnId);
+  const columnTitle = columnStore.getColumnTitle(columnId);
 
   closeTaskForm(taskForm);
   saveAndRenderTask(columnId, inputData);
   resetValues(taskForm);
 
-  addActivity({
+  activityStore.addActivity({
     action: 'add',
     task: title,
     timeStamp: createdAt,
     details: { column: columnTitle },
   });
 
-  const activityData = getActivityData();
+  const activityData = activityStore.getActivityData();
   renderActivityRecords(activityData);
 }
 
 function openDeleteTaskDialog(target) {
   const taskCard = target.closest('.task-item');
   const taskTitle = taskCard.querySelector('.task-title').innerText;
-  const columnTitle = getColumnTitle(getColumnElement(taskCard).id);
+  const columnTitle = columnStore.getColumnTitle(getColumnElement(taskCard).id);
 
   setConfirmDialog('선택한 카드를 삭제할까요?', () => {
     makeTaskRemover(taskCard.id)();
 
-    addActivity({
+    activityStore.addActivity({
       action: 'remove',
       task: taskTitle,
       timeStamp: getISOStringNow(),
       details: { column: columnTitle },
     });
 
-    const activityData = getActivityData();
+    const activityData = activityStore.getActivityData();
     renderActivityRecords(activityData);
   });
 }
@@ -66,7 +66,7 @@ function makeTaskRemover(taskId) {
     const column = getColumnElement(targetTask);
     const columnId = column.id;
 
-    removeTask(columnId, taskId);
+    columnStore.removeTask(columnId, taskId);
     targetTask.remove();
   };
 }
@@ -109,7 +109,7 @@ function collectInputData(taskForm) {
 
 // 카드 데이터 저장 & UI 업데이트
 function saveAndRenderTask(columnId, inputData) {
-  addTask(columnId, inputData);
+  columnStore.addTask(columnId, inputData);
   renderTask(columnId, inputData);
 }
 
