@@ -9,7 +9,7 @@ export const initialize = function () {
   const sections = document.querySelectorAll(".columnlist__col");
   sections.forEach((section) => {
     registerAddTaskEvent(section);
-    funcName(section);
+    taskModal.updateCardPosition(section);
   });
 };
 
@@ -84,16 +84,13 @@ export function historyBar() {
   ); //지우는 상황 전달
 }
 
-//함수 이름 수정해야함
 export function cardDragAndDrop() {
   const kanban = document.querySelector(".page-main__columnlist");
+
   kanban.addEventListener(
     "dragstart",
     (event) => {
-      const card = event.target.closest("todo-card");
-      if (!card) return;
-      card.classList.add("dragging");
-      card.addEventListener("dragend", handleDragEnd);
+      taskModal.dragStart(event);
     },
     true
   );
@@ -109,34 +106,4 @@ function registerAddTaskEvent(section) {
   addBtn.addEventListener("click", () => {
     inputModal.toggleModal(taskModal);
   });
-}
-
-function handleDragEnd(event) {
-  const card = event.target;
-  card.removeEventListener("dragend", handleDragEnd);
-  card.classList.remove(".dragging");
-}
-
-function funcName(section) {
-  section.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    const cards = [...section.querySelectorAll(".todo-card")].filter(
-      (card) => !card.classList.contains("dragging")
-    );
-    getDragDownCard(cards, event.clientY);
-  });
-}
-
-function getDragDownCard(cards, y) {
-  cards.reduce(
-    (closest, card) => {
-      const offset = y - (card.top + card.height / 2);
-      if (offset < 0 && closest.offset > offset) {
-        return { offset, card };
-      } else {
-        return closest;
-      }
-    },
-    { offset: Infinity }
-  ).card;
 }

@@ -82,4 +82,52 @@ export const taskModal = {
     this.inputModal = button.closest(".task-modal");
     taskCard.replaceWithInputModal(this.inputModal, this.cardClone);
   },
+  updateCardPosition(section) {
+    section.addEventListener("dragover", (event) => {
+      event.preventDefault();
+      const taskList = section.querySelector(".task-list");
+      const cards = [...section.querySelectorAll(".todo-card")].filter(
+        (card) => !card.classList.contains("dragging")
+      );
+
+      const underCard = this.getClosestCard(cards, event.clientY);
+      const draggingCard = document.querySelector(".dragging");
+
+      if (underCard === undefined) {
+        taskList.appendChild(draggingCard);
+      } else {
+        taskList.insertBefore(draggingCard, underCard);
+      }
+    });
+  },
+  getClosestCard(cards, y) {
+    return cards.reduce(
+      (closest, card) => {
+        const cardDomRect = card.getBoundingClientRect();
+        const offset = y - (cardDomRect.top + cardDomRect.height / 2);
+        if (offset < 0 && Math.abs(offset) < Math.abs(closest.offset)) {
+          return { offset, card };
+        } else {
+          return closest;
+        }
+      },
+      { offset: Number.NEGATIVE_INFINITY }
+    ).card;
+  },
+  dragStart(event) {
+    const draggingCard = event.target.closest(".todo-card");
+    if (!draggingCard) return;
+    draggingCard.classList.add("dragging");
+    this.currentSection = draggingCard.closest(".columnlist__col").dataset.type;
+    draggingCard.addEventListener("dragend", this.handleDragEnd.bind(this));
+  },
+  handleDragEnd(event) {
+    const timeStamp = Date.now().toString();
+    const card = event.target;
+    this.setTargetCard(card);
+    const taskDataArr = [this.titleValue, this.currentSection, timeStamp];
+    historyBarController.addHisotryLog(taskDataArr, "이동", this.targetSection);
+    card.removeEventListener("dragend", this.handleDragEnd);
+    card.classList.remove("dragging");
+  },
 };
