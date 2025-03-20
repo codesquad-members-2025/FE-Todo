@@ -11,6 +11,7 @@ import {
   getTimeAgo,
 } from '../../shared/utils/common.js';
 import TaskEditor from '../renderers/taskEditor.js';
+import { updateTaskCount } from '../renderers/column.js';
 
 // 새 카드 생성
 function createNewTask(target) {
@@ -34,12 +35,15 @@ function createNewTask(target) {
     timeStamp: createdAt,
     details: { column: columnTitle },
   });
+
+  updateTaskCount(column, 1);
 }
 
 function openDeleteTaskDialog(target) {
   const taskCard = target.closest('.task-item');
   const taskTitle = taskCard.querySelector('.task-title').innerText;
-  const columnTitle = columnStore.getColumnTitle(getColumnElement(taskCard).id);
+  const column = getColumnElement(taskCard);
+  const columnTitle = columnStore.getColumnTitle(column.id);
 
   setConfirmDialog(MODAL_MESSAGES.DELETE_TASK, () => {
     makeTaskRemover(taskCard.id)();
@@ -50,6 +54,8 @@ function openDeleteTaskDialog(target) {
       timeStamp: getISOStringNow(),
       details: { column: columnTitle },
     });
+
+    updateTaskCount(column, -1);
   });
 }
 

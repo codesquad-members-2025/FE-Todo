@@ -23,4 +23,10 @@ function renderBoard(columnsData) {
   columnContainer.appendChild(fragment);
 }
 
-export { renderBoard };
+function updateTaskCount(column, amount) {
+  const taskCount = column.querySelector('.task-counter span');
+  const newCount = parseInt(taskCount.innerText, 10) + amount;
+  taskCount.innerText = Math.max(newCount, 0); // 0 이하로 내려가지 않도록 제한
+}
+
+export { renderBoard, updateTaskCount };
