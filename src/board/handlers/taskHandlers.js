@@ -40,8 +40,22 @@ async function createNewTask(target) {
 
 function openDeleteTaskDialog(target) {
   const taskCard = target.closest('.task-item');
-  setConfirmDialog('이 태스크를 삭제할까요?', () => {
-    makeTaskRemover(taskCard.id);
+  const taskTitle = taskCard.querySelector('.task-title').innerText;
+  const columnTitle = getColumnTitle(getColumn(taskCard).id);
+
+  setConfirmDialog('이 태스크를 삭제할까요?', async () => {
+    const timeStamp = getISOStringNow();
+    makeTaskRemover(taskCard.id)();
+
+    addActivity({
+      action: 'remove',
+      task: taskTitle,
+      timeStamp,
+      details: { column: columnTitle },
+    });
+
+    const activityData = await loadActivityData();
+    renderActivityRecords(activityData);
   });
 }
 
