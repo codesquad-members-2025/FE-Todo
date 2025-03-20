@@ -317,7 +317,7 @@ dialog {
   gap: 16px;
 }
 
-.todo-card .dragging {
+.dragging {
   opacity: 0.8;
 }
 .todo-card__textarea {

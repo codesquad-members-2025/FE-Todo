@@ -123,11 +123,10 @@ function updateCardPosition(section) {
   section.addEventListener("dragover", (event) => {
     event.preventDefault();
     const taskList = section.querySelector(".task-list");
-    // const cards = [...section.querySelectorAll(".todo-card")].filter(
-    //   (card) => !card.classList.contains("dragging")
-    // );
+    const cards = [...section.querySelectorAll(".todo-card")].filter(
+      (card) => !card.classList.contains("dragging")
+    );
 
-    const cards = [...taskList.querySelectorAll(".todo-card:not(.dragging)")];
     const underCard = getClosestCard(cards, event.clientY);
     const draggingCard = document.querySelector(".dragging");
 
