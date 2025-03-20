@@ -1,11 +1,11 @@
-export function createShowCardForm(title, content) {
+export function createShowCardForm(title, content, author = "author by web") {
   const cardElement = document.createElement("div");
   cardElement.classList.add("show-card");
   const realContent = content.replace(/\n/g, "<br/>").replace(/\s/g, "&nbsp;");
   cardElement.innerHTML = `<div class="show-card__total">
       <h3 class="show-card__title">${title}</h3>
       <span class="show-card__content">${realContent}</span>
-      <span class="show-card__author">author by web</span>
+      <span class="show-card__author">${author}</span>
     </div>
     <div class="show-card__icons">
       <button class="show-card__cancel-icon delete">
