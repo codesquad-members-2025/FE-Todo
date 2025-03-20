@@ -163,6 +163,21 @@ function getCardBoundaries(cards) {
 // --- 완료 작업 ---
 // 복사본 좌표 계산 및 업데이트
 
+function getDropPosition({ clientX, clientY }) {    // 드롭될 위치를 찾는 함수
+    const columnBoundaries = dragLayoutState.columnBoundaries;
+    const targetColumnIndex = columnBoundaries.findIndex(boundary => clientX < boundary);
+    
+    const cardBoundaries = dragLayoutState.cardBoundaryMatrix[targetColumnIndex];
+    const targetCardIndex = cardBoundaries.findIndex(boundary => clientY < boundary);
+
+    // 경계를 넘어가면 마지막 위치 반환
+    // findIndex는 값을 찾지 못하면 -1을 반환
+    return [
+        targetColumnIndex >= 0 ? targetColumnIndex : columnBoundaries.length,
+        targetCardIndex >= 0 ? targetCardIndex : cardBoundaries.length
+    ];
+}
+
 // mouseup
 // --- 필요 작업 ---
 // 가상 돔을 렌더링
