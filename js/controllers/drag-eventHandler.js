@@ -43,26 +43,26 @@ const dragManager = {    // 또는 cardDragger, dragController
 }
 
 const dragLayoutState = {
-    virtualDOM: null,
+    kanbanDOM: null,
     columnElements: null,
     cardMatrix: null,
     columnBoundaries: null,
-    cardBoundaries: null,
+    cardBoundaryMatrix: null,
 
     initialize() {
-        this.virtualDOM = createVirtualDOMFromStore();
-        this.columnElements = getColumnElements(this.virtualDOM);
-        this.cardMatrix = getColumnCardMatrix(this.virtualDOM);
+        this.kanbanDOM = getKanbanElement();
+        this.columnElements = getColumnElements(this.kanbanDOM);
+        this.cardMatrix = getColumnCardMatrix(this.kanbanDOM);
         this.columnBoundaries = getColumnBoundaries(this.columnElements);
-        this.cardBoundaries = getCardBoundaryMatrix(this.cardMatrix);
+        this.cardBoundaryMatrix = getCardBoundaryMatrix(this.cardMatrix);
     },
 
     reset() {
-        this.virtualDOM = null;
+        this.kanbanDOM = null;
         this.columnElements = null;
         this.cardMatrix = null;
         this.columnBoundaries = null;
-        this.cardBoundaries = null;
+        this.cardBoundaryMatrix = null;
     }
 }
 
@@ -82,7 +82,7 @@ function handleMousemove(html) {
     html.addEventListener('mousemove', (e) => {
         if (!dragManager.isDragging) return;
         dragManager.updateDragPosition(e.clientX, e.clientY);
-    })
+    });
 }
 
 function handleMouseup(html) {
@@ -100,17 +100,16 @@ function createCloneCard(card) {
     return cloneCard;
 }
 
-function createVirtualDOMFromStore() {
-    const kanbanData = KanbanStore.getData();
-    return createKanbanVirtualDOM(kanbanData);
+function getKanbanElement() {
+    return document.querySelector('.kanban');
 }
 
-function getColumnElements(virtualDOM) {
-    return [...virtualDOM.querySelectorAll('.column')];
+function getColumnElements(kanbanDOM) {
+    return [...kanbanDOM.querySelectorAll('.column')];
 }
 
-function getColumnCardMatrix(virtualDOM) {
-    const columns = [...virtualDOM.querySelectorAll('.column')];
+function getColumnCardMatrix(kanbanDOM) {
+    const columns = [...kanbanDOM.querySelectorAll('.column')];
     return columns.reduce((cardMatrix, column, idx) => {  // 2차원 카드 배열
         cardMatrix[idx] = [...column.querySelectorAll('.card')];
         return cardMatrix;
