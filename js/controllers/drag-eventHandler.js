@@ -3,7 +3,7 @@ import { createKanbanVirtualDOM } from '../components/kanban-renderer.js';
 
 export default function initDragEvent() {
     const kanban = document.querySelector('.kanban');
-    const body = document.querySelector('html');
+    const body = document.querySelector('body');
 
     handleMousedown(kanban);
     handleMousemove(body);
@@ -20,29 +20,44 @@ const dragManager = {    // 또는 cardDragger, dragController
     isDragging: false,
     dragOffsetX: null,     // 드래그 시작 시의 X 오프셋
     dragOffsetY: null,     // 드래그 시작 시의 Y 오프셋
-    ghostCardPosition: null, // 잔상 현재 위치
 
-    initializeDrag(e, rect, ghostCard) {
+    startPosition: [-1, -1], // 잔상 시작 위치 (x, y)
+    currentPosition: [-1, -1], // 현재 위치
+    recentPosition: [-1, -1], // 이전 위치
+
+    initialize(e, rect, ghostCard) {
         this.ghostCard = ghostCard;
         this.draggedCard = document.querySelector('.card-clone');
         this.isDragging = true;
         this.dragOffsetX = e.clientX - rect.left;
         this.dragOffsetY = e.clientY - rect.top;
-        this.ghostCardPosition = getCurPosition(e); // 잔상 초기 위치 설정
-        this.updateDragPosition(e.clientX, e.clientY);
+        this.startPosition = getCurPosition(e); // 잔상 초기 위치 설정
+        this.updateDraggedCardPosition(e.clientX, e.clientY);
     },
 
-    updateDragPosition(clientX, clientY) {
+    updateDraggedCardPosition(clientX, clientY) {
         this.draggedCard.style.left = `${clientX - this.dragOffsetX}px`;
         this.draggedCard.style.top = `${clientY - this.dragOffsetY}px`;
     },
 
-    resetDragState() {
+    updateCurrentPosition(clientX, clientY) {
+        this.currentPosition = [clientX, clientY];
+    },
+
+    updateRecentPosition(clientX, clientY) {
+        this.recentPosition = [clientX, clientY];
+    },
+
+    reset() {
+        this.ghostCard = null;
         this.draggedCard.remove();
         this.draggedCard = null;
         this.isDragging = false;
         this.dragOffsetX = null;
         this.dragOffsetY = null;
+        this.startPosition = [-1, -1];
+        this.currentPosition = [-1, -1];
+        this.recentPosition = [-1, -1];
     }
 }
 
@@ -52,7 +67,7 @@ const dragLayoutState = {
     cardMatrix: null,
     columnBoundaries: null,
     cardBoundaryMatrix: null,
-    
+
     updatedColumnElements: null,
     updatedCardMatrix: null,
 
@@ -63,7 +78,7 @@ const dragLayoutState = {
         this.columnBoundaries = getColumnBoundaries(this.columnElements);
         this.cardBoundaryMatrix = getCardBoundaryMatrix(this.cardMatrix);
     },
-    
+
     update() {
         this.updatedKanbanDOM = getKanbanElement();
         this.columnElements = getColumnElements(this.updatedKanbanDOM);
@@ -79,9 +94,22 @@ const dragLayoutState = {
     }
 }
 
-const 카드위치 = {
-    드래그시작: null,
-    드래그중: null
+const cardLocationState = {
+    cardLocationMatrix: null,
+    cardLocationGap: null,
+
+    initialize() {
+        this.cardLocationMatrix = getCardLocationMatrix(dragLayoutState.cardMatrix);
+    },
+
+    updateGap(position, draggedPosition) {
+        this.cardLocationGap = getCardLocationGap(position, draggedPosition);
+    },
+
+    reset() {
+        this.cardLocationMatrix = null;
+        this.cardLocationGap = null;
+    }
 }
 
 function handleMousedown(kanban) {
@@ -92,24 +120,28 @@ function handleMousedown(kanban) {
 
         createCloneCard(ghostCard);
         dragLayoutState.initialize();
-        dragManager.initializeDrag(e, ghostCard.getBoundingClientRect(), ghostCard);
-        카드위치.드래그시작 = 카드위치구하기(dragLayoutState.cardMatrix);
+        dragManager.initialize(e, ghostCard.getBoundingClientRect(), ghostCard);
+        cardLocationState.initialize();
+        dragManager.updateRecentPosition(...getCurPosition(e));
     });
 }
 
 function handleMousemove(html) {
     html.addEventListener('mousemove', (e) => {
         if (!dragManager.isDragging) return;
-        dragManager.updateDragPosition(e.clientX, e.clientY);
-
-        updateGhostCard(e);
+        dragManager.updateDraggedCardPosition(e.clientX, e.clientY);
+        dragManager.updateCurrentPosition(...getCurPosition(e));
+        updateCardState(e);
     });
 }
 
 function handleMouseup(html) {
     html.addEventListener('mouseup', () => {
         if (!dragManager.isDragging) return;
-        dragManager.resetDragState();
+        dragManager.reset();
+        cardLocationState.reset();
+        resetCardSwap();
+        dragLayoutState.reset();
     });
 }
 
@@ -160,6 +192,118 @@ function getCardBoundaries(cards) {
     }, []);
 }
 
+
+//--------------------------------------------
+//------------카드로케이션로직-----------------
+//--------------------------------------------
+
+
+function getCardLocationMatrix(cardMatrix) {
+    return cardMatrix.reduce((locationMatrix, cards) => {
+        locationMatrix.push(getCardLocation(cards));
+        return locationMatrix;
+    }, []);
+}
+
+function getCardLocation(cards) {
+    return cards.reduce((locations, card) => {
+        const rect = card.getBoundingClientRect();
+        locations.push(rect.top);
+        return locations;
+    }, []);
+}
+
+// 각 카드의 transform 픽셀 거리를 구함
+// 나름대로 함수 분리해서 가독성 높였음
+function getCardLocationGap(startPosition, currentPosition) {
+    const [startX, startY] = startPosition;
+    const [curX, curY] = currentPosition;
+    const ghostCardHeight = dragManager.ghostCard.getBoundingClientRect().height;
+    const columns = dragLayoutState.columnElements;
+    const cardmatrix = dragLayoutState.cardMatrix;
+    const cardLocationGap = [];
+
+    for (let x = 0; x < columns.length; x++) {
+        for (let y = 0; y < cardmatrix[x].length; y++) {
+
+            if (!cardLocationGap[x]) cardLocationGap[x] = [];
+
+            if (startX === curX) {
+                if (x !== curX) cardLocationGap[x][y] = 0;
+                else cardLocationGap[x][y] = calculateVerticalOffsetInSameColumn(x, y, startY, curY, ghostCardHeight);
+            }
+
+            else if (startX !== curX) {
+                // 추후 작성
+            }
+        }
+    }
+
+    return cardLocationGap;
+}
+
+function calculateVerticalOffsetInSameColumn(x, y, startY, curY, ghostCardHeight) {
+    // 현재 카드가 startY보다 낮을 때
+    const distance = ghostCardHeight + CARD_GAP;
+    if (y < startY) {
+        if (y < curY) return 0; // 그대로
+        else if (y === curY) return distance; // 내려감
+        else if (y > curY) return distance; // 내려감
+    }
+    // 현재 카드가 startY일 때
+    else if (y === startY) {
+        if (y < curY) return getSumCardHeight(x, y, curY) + CARD_GAP * (curY - y); // 차이만큼 내려감
+        else if (y === curY) return 0; // 그대로
+        else if (y > curY) return -(getSumCardHeight(x, y, curY) + CARD_GAP * (curY - y)) // 차이만큼 올라감
+    }
+    // 현재 카드가 startY보다 높을 때
+    else if (y > startY) {
+        if (y < curY) return -distance; // 올라감
+        else if (y === curY) return -distance; // 올라감
+        else if (y > curY) return 0; // 그대로
+    }
+}
+
+function getSumCardHeight(x, y, curY) {
+    const [startY, endY] = [Math.min(y, curY), Math.max(y, curY)];
+    const cardMatrix = dragLayoutState.cardMatrix;
+    let totalHeight = 0;
+    
+    for (let i = startY + 1; i <= endY; i++) {
+        totalHeight += cardMatrix[x][i].getBoundingClientRect().height;
+    }
+    return totalHeight;
+}
+
+function animateCardSwap() {
+    const columns = dragLayoutState.columnElements;
+    const cardMatrix = dragLayoutState.cardMatrix;
+    const gapMatrix = cardLocationState.cardLocationGap;
+
+    for (let x = 0; x < columns.length; x++) {
+        for (let y = 0; y < cardMatrix[x].length; y++) {
+            const card = cardMatrix[x][y];
+            const verticalGap = gapMatrix[x][y];
+
+            card.style.transition = 'transform 0.3s ease-in-out';
+            card.style.transform = `translateY(${verticalGap}px`;
+        }
+    }
+}
+
+function resetCardSwap() {
+    const columns = dragLayoutState.columnElements;
+    const cardMatrix = dragLayoutState.cardMatrix;
+
+    for (let x = 0; x < columns.length; x++) {
+        for (let y = 0; y < cardMatrix[x].length; y++) {
+            const card = cardMatrix[x][y];
+            card.style.transform = `0px`;
+        }
+    }
+}
+
+
 // 모듈스코프 전역변수
 // dragManager
 
@@ -180,14 +324,17 @@ function getCardBoundaries(cards) {
 
 // --- 필요 작업 ---
 // 갱신 과정
-  // 잔상 포지션과 현재 커서 포지션 비교 완
-  // 같으면 아래 로직 실행 X 완
+// 잔상 포지션과 현재 커서 포지션 비교 완
+// 같으면 아래 로직 실행 X 완
 // 포지션 다를 때,
-  // 잔상 이동
-  // 잔상 포지션 갱신
-  // 카드 위치 다시 구하기 @@@@ 구현필요
-  // 카드의 위치 차이 계산 
-  // 계산 값 css로 적용 transform (0.3s)
+// 잔상이 있는 영역 구하기
+// 현재컬럼, 기존컬럼
+// 현재컬럼 => 몇번째 위치인지 구하고 그 아래 카드는 잔상 height만큼 transform
+// 기존컬럼 => 몇번째 위치였는지 구하고 그 아래 카드 hegiht만큼 transform
+// 따라서 현재 위치는 카드의 h
+// 카드 위치 다시 구하기 @@@@ 구현필요
+// 카드의 위치 차이 계산 
+// 계산 값 css로 적용 transform (0.3s)
 // --- 완료 작업 ---
 // 복사본 좌표 계산 및 업데이트
 // 현재 영역 인덱스 반환
@@ -202,58 +349,32 @@ function getCurPosition({ clientX, clientY }) {    // 현재 위치를 찾는 �
     // 경계를 넘어가면 마지막 위치 반환
     // findIndex는 값을 찾지 못하면 -1을 반환
     return [
-        targetColumnIndex >= 0 ? targetColumnIndex : columnBoundaries.length,
-        targetCardIndex >= 0 ? targetCardIndex : cardBoundaries.length
+        targetColumnIndex >= 0 ? targetColumnIndex
+            : columnBoundaries.length === 0 ? 0
+                : columnBoundaries.length - 1,
+        targetCardIndex >= 0 ? targetCardIndex
+            : cardBoundaries.length === 0 ? 0
+                : cardBoundaries.length - 1
     ];
 }
 
-function isSamePosition(newColumnIndex, newCardIndex) {
-    const [currentColumnIndex, currentCardIndex] = dragManager.ghostCardPosition;
-    return newColumnIndex === currentColumnIndex && newCardIndex === currentCardIndex;
+function isSamePosition(x1, y1, x2, y2) {
+    return x1 === x2 && y1 === y2;
 }
 
-function updateGhostCard(e) {
-    const ghostCard = dragManager.ghostCard;
-    const curPosition = getCurPosition(e);
-    const [curColumnIndex, curCardIndex] = curPosition; 
-    console.log(curColumnIndex, curCardIndex)
+function updateCardState(e) {
+    const startPosition = dragManager.startPosition;
+    const currentPosition = dragManager.currentPosition;
+    const recentPosition = dragManager.recentPosition;
     // 이전 위치와 동일하면 업데이트 불필요
-    if (isSamePosition(curColumnIndex, curCardIndex)) return;
-    // 잔상 이동 및 제거, 잔상 포지션 갱신
-    updateGhostCardPosition(ghostCard, curColumnIndex, curCardIndex);
-    dragLayoutState.update();
-    // 카드 위치 구하기
-    // 카드 차이 구하기
-    // transform 적용
-}
-
-function updateGhostCardPosition(ghostCard, newColumnIndex, newCardIndex) {
-    removeGhostCard(ghostCard);
-    moveGhostCard(ghostCard, newColumnIndex, newCardIndex);
-    updateGhostCardState(newColumnIndex, newCardIndex);
-    dragLayoutState.update();
-    // 카드 위치 구하기
-    // 카드 차이 구하기
-    // transform 적용
-}
-
-function removeGhostCard(ghostCard) {
-    ghostCard.remove();
-}
-
-function moveGhostCard(ghostCard, newColumnIndex, newCardIndex) {
-    const targetColumn = dragLayoutState.columnElements[newColumnIndex];
-    const targetCard = dragLayoutState.cardMatrix[newColumnIndex][newCardIndex];
-    
-    if (!targetCard) {
-        targetColumn.appendChild(ghostCard);
-    } else {
-        targetColumn.insertBefore(ghostCard, targetCard);
-    }
-}
-
-function updateGhostCardState(newColumnIndex, newCardIndex) {
-    dragManager.ghostCardPosition = [newColumnIndex, newCardIndex];
+    if (isSamePosition(...currentPosition, ...recentPosition)) return;
+    console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ')
+    console.log(`startPosition: ${startPosition}`)
+    console.log(`draggedPostion: ${currentPosition}`)
+    dragManager.updateRecentPosition(...getCurPosition(e));
+    cardLocationState.updateGap(startPosition, currentPosition);
+    console.log(cardLocationState.cardLocationGap);
+    animateCardSwap();
 }
 
 // mouseup
