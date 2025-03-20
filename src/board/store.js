@@ -4,10 +4,11 @@ const COLUMN_DATA_URL = './data/columnData.json';
 
 let columnData = null;
 
-async function loadColumnsData() {
-  if (columnData === null) {
-    columnData = await fetchData(COLUMN_DATA_URL);
-  }
+async function fetchAndStoreColumnData() {
+  columnData = await fetchData(COLUMN_DATA_URL);
+}
+
+function getColumnsData() {
   return columnData;
 }
 
@@ -57,7 +58,8 @@ function getSortedTasksByDate(order = 'created') {
 }
 
 export {
-  loadColumnsData,
+  fetchAndStoreColumnData,
+  getColumnsData,
   addTask,
   removeTask,
   getSortedTasksByDate,

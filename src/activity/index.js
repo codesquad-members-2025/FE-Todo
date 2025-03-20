@@ -1,9 +1,11 @@
 import { renderActivityRecords } from './renderer.js';
 import { initActivityHandlers } from './handlers.js';
-import { loadActivityData } from './store.js';
+import { fetchAndStoreActivityData, getActivityData } from './store.js';
 
 async function initializeActivity() {
-  const activityData = await loadActivityData();
+  await fetchAndStoreActivityData();
+  const activityData = getActivityData();
+
   renderActivityRecords(activityData);
   initActivityHandlers();
 }

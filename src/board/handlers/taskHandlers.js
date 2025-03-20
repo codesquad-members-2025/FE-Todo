@@ -1,6 +1,6 @@
 // src/board/handlers/taskHandlers.js
 import { addTask, removeTask, getColumnTitle } from '../store.js';
-import { addActivity, loadActivityData } from '../../activity/store.js';
+import { addActivity, getActivityData } from '../../activity/store.js';
 import { renderTask } from '../renderers/task.js';
 import { renderActivityRecords } from '../../activity/renderer.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
@@ -13,7 +13,7 @@ import {
 import TaskEditor from '../renderers/taskEditor.js';
 
 // 새 카드 생성
-async function createNewTask(target) {
+function createNewTask(target) {
   const column = getColumnElement(target);
   const taskForm = column && getTaskForm(column);
   const inputData = taskForm && collectInputData(taskForm);
@@ -35,7 +35,7 @@ async function createNewTask(target) {
     details: { column: columnTitle },
   });
 
-  const activityData = await loadActivityData();
+  const activityData = getActivityData();
   renderActivityRecords(activityData);
 }
 
@@ -44,7 +44,7 @@ function openDeleteTaskDialog(target) {
   const taskTitle = taskCard.querySelector('.task-title').innerText;
   const columnTitle = getColumnTitle(getColumnElement(taskCard).id);
 
-  setConfirmDialog('선택한 카드를 삭제할까요?', async () => {
+  setConfirmDialog('선택한 카드를 삭제할까요?', () => {
     makeTaskRemover(taskCard.id)();
 
     addActivity({
@@ -54,7 +54,7 @@ function openDeleteTaskDialog(target) {
       details: { column: columnTitle },
     });
 
-    const activityData = await loadActivityData();
+    const activityData = getActivityData();
     renderActivityRecords(activityData);
   });
 }

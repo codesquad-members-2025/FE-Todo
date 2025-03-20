@@ -4,10 +4,11 @@ const ACTIVITY_DATA_URL = './data/activityData.json';
 
 let activityData = null;
 
-async function loadActivityData() {
-  if (activityData === null) {
-    activityData = await fetchData(ACTIVITY_DATA_URL);
-  }
+async function fetchAndStoreActivityData() {
+  activityData = await fetchData(ACTIVITY_DATA_URL);
+}
+
+function getActivityData() {
   return activityData;
 }
 
@@ -28,4 +29,9 @@ function addActivity({ action, task, timeStamp, details = {} }) {
   activityData.unshift(activity);
 }
 
-export { loadActivityData, clearActivityData, addActivity };
+export {
+  getActivityData,
+  clearActivityData,
+  fetchAndStoreActivityData,
+  addActivity,
+};

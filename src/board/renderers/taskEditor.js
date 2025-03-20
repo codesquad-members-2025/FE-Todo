@@ -1,4 +1,4 @@
-import { addActivity, loadActivityData } from '../../activity/store.js';
+import { addActivity, getActivityData } from '../../activity/store.js';
 import { getISOStringNow } from '../../shared/utils/common.js';
 import { updateTask } from '../store.js';
 import { renderActivityRecords } from '../../activity/renderer.js';
@@ -39,7 +39,7 @@ class TaskEditor {
     this.editForm.replaceWith(this.originalTaskCard);
   }
 
-  async saveEdit() {
+  saveEdit() {
     const editedTitle = this.editForm.querySelector('input').value;
     const editedContent = this.editForm.querySelector('textarea').value;
 
@@ -66,7 +66,7 @@ class TaskEditor {
       timeStamp: getISOStringNow(),
     });
 
-    const activityData = await loadActivityData();
+    const activityData = getActivityData();
     renderActivityRecords(activityData);
   }
 
