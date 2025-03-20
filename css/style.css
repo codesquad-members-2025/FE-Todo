@@ -181,7 +181,7 @@ h1 {
   gap: var(--number-100);
 }
 
-.add-card__cancle-btn {
+.add-card__cancel-btn {
   width: 140px;
   height: 32px;
   border-radius: var(--number-100);
@@ -249,7 +249,7 @@ h1 {
   flex-direction: column;
 }
 
-.show-card__cancle-icon {
+.show-card__cancel-icon {
   width: 24px;
   height: 24px;
   display: flex;
@@ -467,7 +467,7 @@ h1 {
   text-align: center;
 }
 
-.confirmContent .cancleButton {
+.confirmContent .cancelButton {
   width: 172px;
   height: 32px;
   background-color: var(--surface-alt);

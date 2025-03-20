@@ -29,11 +29,11 @@ function rocordListDeleteAlert() {
 
 function processRecordList() {
   const modal = document.querySelector(".deleteAlert");
-  const cancelButton = modal.querySelector(".cancleButton");
+  const cancelButton = modal.querySelector(".cancelButton");
   const deleteButton = modal.querySelector(".decideDeleteButton");
 
   cancelButton.addEventListener("click", () => {
-    cancleDelete();
+    cancelDelete();
   });
   deleteButton.addEventListener("click", () => {
     decideDelete();
@@ -48,7 +48,7 @@ export function createDeleteConfirmModal(title) {
     <div class="confirmContent">
       <p>${title} 삭제할까요?</p>
       <div class="buttons">
-        <button class="cancleButton">취소</button>
+        <button class="cancelButton">취소</button>
         <button class="decideDeleteButton">삭제</button>
       </div>
     </div>
@@ -57,13 +57,13 @@ export function createDeleteConfirmModal(title) {
 }
 
 // 삭제 알림창에서 취소 버튼 클릭 시 알림창 제거
-export function cancleDelete() {
+export function cancelDelete() {
   document.querySelector(".deleteAlert").remove();
 }
 
 // 삭제 알림창에서 삭제 버튼 클릭 시 recordHistory 제거 후 해당 위치에 빈 사용자 기록으로 변경
 function decideDelete() {
-  cancleDelete();
+  cancelDelete();
 
   const recordList = document.querySelector(".history__recordList");
   recordList.innerHTML = `<div class="record-empty">사용자 활동 기록이 없습니다.</div>`;

@@ -1,8 +1,10 @@
+import { store } from "../store/store.js";
 import { createAddCardForm, createShowCardForm } from "./createForm.js";
+import { cancelDelete, createDeleteConfirmModal } from "./historyList.js";
 
 const columnListAll = document.querySelector(".columnList");
 
-export function addCardHandler() {
+function addCardHandler() {
   columnListAll.addEventListener("click", function (event) {
     const plusButton = event.target.closest(".column-header__plusButton");
     if (!plusButton) return;
@@ -39,13 +41,16 @@ function isFormEmpty(card) {
 function newAddCard(card) {
   card.addEventListener("click", function ({ target }) {
     const { classList } = target;
-    if (classList.contains("add-card__cancle-btn")) return card.remove();
+    if (classList.contains("add-card__cancel-btn")) return card.remove();
     if (classList.contains("add-card__submit-btn")) {
       const title = card.querySelector(".add-card__input__title").value;
       const content = card.querySelector(".add-card__input__content").value;
 
       if (textLengthWithoutGap(title, content))
         return alert("제목, 내용 모두 입력해주세요");
+
+      const columnId = target.closest(".column-cardList").dataset.columnId; // data-column-id 속성 값을 가져옴
+      store.addCard(columnId, title, content); // 카드가 추가될 때 store 접근하여 저장
 
       const createCardForm = createShowCardForm(title, content);
       const findAddCardElement = target.closest(".add-card");
@@ -94,7 +99,7 @@ function updateCard(card) {
   card.addEventListener("click", function ({ target }) {
     const { classList } = target;
     const previousCard = target.closest(".add-card").nextElementSibling;
-    if (classList.contains("add-card__cancle-btn")) {
+    if (classList.contains("add-card__cancel-btn")) {
       card.remove();
       previousCard.classList.remove("hidden");
     }
@@ -114,4 +119,50 @@ function updateCard(card) {
       previousCard.remove();
     }
   });
+}
+
+function deleteCardHandler() {
+  document.addEventListener("click", (event) => {
+    const button = event.target.closest("button");
+    if (!button || !button.classList.contains("delete")) return;
+
+    const isShowCard = button.closest(".show-card");
+    if (isShowCard) return processCard(isShowCard);
+
+    button.closest("section").remove();
+  });
+}
+
+function cardDeleteAlert() {
+  const title = "선택한 카드를";
+  const modal = document.querySelector(".DeleteConfirmationModal");
+  const confirmLayer = createDeleteConfirmModal(title);
+  modal.appendChild(confirmLayer);
+  document.body.appendChild(modal);
+}
+
+function processCard(card) {
+  cardDeleteAlert();
+  document.addEventListener(
+    "click",
+    ({ target }) => {
+      const { className } = target;
+      if (className === "cancelButton") return cancelDelete();
+      if (className === "decideDeleteButton") {
+        cancelDelete();
+
+        const columnHeader =
+          card.closest(".column-cardList").previousElementSibling;
+        const countCard = columnHeader.querySelector(".count_card");
+        countCard.textContent = Number(countCard.textContent) - 1;
+        card.remove();
+      }
+    },
+    { once: true }
+  );
+}
+
+export function initializeColumn() {
+  addCardHandler();
+  deleteCardHandler();
 }

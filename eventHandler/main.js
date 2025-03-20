@@ -1,10 +1,8 @@
-import { fetchData } from "./view.js";
+import { init } from "./view.js";
 import { historyEvent } from "./historyList.js";
-import { addCardHandler, updateCardHandler } from "./column.js";
-import { deleteCardHandler } from "./deleteForm.js";
+import { initializeColumn, updateCardHandler } from "./column.js";
 
 historyEvent();
-fetchData();
-addCardHandler();
-deleteCardHandler();
+init();
+initializeColumn();
 updateCardHandler();
