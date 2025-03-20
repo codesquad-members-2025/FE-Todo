@@ -74,6 +74,7 @@ function handleMousedown(kanban) {
 
         createCloneCard(card);
         dragManager.initializeDrag(e, card.getBoundingClientRect());
+        dragLayoutState.initialize();
     });
 }
 
@@ -105,34 +106,37 @@ function createVirtualDOMFromStore() {
 }
 
 function getColumnElements(virtualDOM) {
-    return virtualDOM.querySelectorAll('.column');
+    return [...virtualDOM.querySelectorAll('.column')];
 }
 
 function getColumnCardMatrix(virtualDOM) {
-    const columns = virtualDOM.querySelectorAll('.column');
-    return columns.reduce((acc, column, idx) => {
-        acc[idx] = column.querySelectorAll('.card');
-        return acc;
+    const columns = [...virtualDOM.querySelectorAll('.column')];
+    return columns.reduce((cardMatrix, column, idx) => {  // 2차원 카드 배열
+        cardMatrix[idx] = [...column.querySelectorAll('.card')];
+        return cardMatrix;
     }, []);
 }
 
 function getColumnBoundaries(columns) {
-    return columns.reduce((acc, column) => {
+    return columns.reduce((boundaries, column) => {  // 경계선 좌표 배열
         const rect = column.getBoundingClientRect();
-        acc.push(rect.left + rect.width + COLUMN_GAP / 2);
-        return acc;
+        boundaries.push(rect.left + rect.width + COLUMN_GAP / 2);
+        return boundaries;
     }, []); 
 }
 
 function getCardBoundaryMatrix(cardMatrix) {
-    return cardMatrix.reduce((acc, cards) => acc.push(getCardBoundaries(cards)), []);
+    return cardMatrix.reduce((boundaryMatrix, cards) => {  // 2차원 경계선 배열
+        boundaryMatrix.push(getCardBoundaries(cards));
+        return boundaryMatrix;
+    }, []);
 }
 
 function getCardBoundaries(cards) {
-    return cards.reduce((acc, card) => {
+    return cards.reduce((boundaries, card) => {  // 경계선 좌표 배열
         const rect = card.getBoundingClientRect();
-        acc.push(rect.top + rect.height + CARD_GAP / 2);
-        return acc;
+        boundaries.push(rect.top + rect.height + CARD_GAP / 2);
+        return boundaries;
     }, []);
 }
 
