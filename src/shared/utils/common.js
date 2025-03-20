@@ -29,7 +29,9 @@ function getTimeAgo(timestamp) {
   const diffInWeeks = Math.floor(diffInDays / 7);
   const diffInMonths = Math.floor(diffInDays / 30);
 
-  if (diffInMinutes < 60) {
+  if (diffInMinutes < 1) {
+    return `방금`;
+  } else if (diffInMinutes < 60) {
     return `${diffInMinutes}분`;
   } else if (diffInHours < 24) {
     return `${diffInHours}시간`;
