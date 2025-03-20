@@ -1,8 +1,8 @@
-import { getData } from "./view.js";
+import { init } from "./view.js";
 import { historyEvent } from "./historyList.js";
 import { initializeColumn, updateCardHandler } from "./column.js";
 
 historyEvent();
-getData();
+init();
 initializeColumn();
 updateCardHandler();

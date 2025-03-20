@@ -1,3 +1,6 @@
+import { changeColumnName } from "../eventHandler/createForm.js";
+import { addHistoryRecord } from "../eventHandler/view.js";
+
 export const store = {
   state: { columns: [], historyList: [] },
 
@@ -13,12 +16,14 @@ export const store = {
   },
 
   addCard(columnId, title, content, author = "author by web") {
-    const column = this.state.columns.find((objCol) => objCol.id === columnId);
     const newCard = { title, content, author };
-    column.cardList.unshift(newCard);
-    column.count++;
-    this.addHistory("ADD_CARD", title, columnId);
-    console.log(this.state.columns, this.state.historyList);
+    this.state.columns.forEach((objCol) => {
+      if (objCol.id !== columnId) return;
+      objCol.cardList.unshift(newCard);
+    });
+    let ColumnNameInKorean = changeColumnName(columnId);
+    this.addHistory("ADD_CARD", title, ColumnNameInKorean);
+    addHistoryRecord(this.state.historyList[0]);
   },
 
   addHistory(action, title, fromColumn, toColumn = null) {
@@ -29,7 +34,7 @@ export const store = {
       title: `${title}`,
       fromColumn: `${fromColumn}`,
       toColumn: `${toColumn}`,
-      timeStemp: new Date().toLocaleString(),
+      timeStamp: new Date(),
     };
     this.state.historyList.unshift(historyRecord);
   },

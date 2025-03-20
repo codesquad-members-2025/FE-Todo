@@ -57,7 +57,7 @@ function calculateTime(date) {
   } else if (diffInDays < 30) {
     return `${diffInDays}일 전`;
   } else {
-    return date.toLocaleDateString(); // 한 달 이상 된 경우에는 입력된 날짜
+    return date;
   }
 }
 
@@ -65,10 +65,10 @@ function addTextOnAction(action, title, fromColumn, toColumn) {
   let text = "";
   switch (action) {
     case "ADD_CARD":
-      text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />등록 <span> 하였습니다. </span>`;
+      text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span>등록 <span> 하였습니다. </span>`;
       return text;
     case "REMOVE_CARD":
-      text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br />삭제 <span> 하였습니다. </span>`;
+      text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span>삭제 <span> 하였습니다. </span>`;
       return text;
     case "UPDATE_CARD":
       text = `${title} <span> 을(를)</span> 변경 <span> 하였습니다. </span>`;
@@ -76,6 +76,18 @@ function addTextOnAction(action, title, fromColumn, toColumn) {
     case "MOVE_CARD":
       text = `${title} <span> 을(를)</span> ${fromColumn} <span> 에서 </span><br /> ${toColumn}  <span> 으로 </span> 이동 <span> 하였습니다. </span>`;
       return text;
+  }
+}
+
+export function changeColumnName(columnName) {
+  let changeColumnName = "";
+  switch (columnName) {
+    case "toDo":
+      return (changeColumnName = "해야할 일");
+    case "doing":
+      return (changeColumnName = "하고있는 일");
+    case "done":
+      return (changeColumnName = "완료한 일");
   }
 }
 

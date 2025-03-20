@@ -1,7 +1,7 @@
 import { store } from "../store/store.js";
 import { createRecordForm, createShowCardForm } from "./createForm.js";
 
-export function getData() {
+export function init() {
   store.fetchData(function () {
     cardView(store.state.columns);
     historyView(store.state.historyList);
@@ -28,7 +28,7 @@ function generateCardsFromList(column) {
   column.count = column.cardList.length;
 }
 
-function historyView(dataHistoryList) {
+export function historyView(dataHistoryList) {
   const recordHistory = document.getElementById("recordHistory");
   const fragment = document.createDocumentFragment();
   dataHistoryList.forEach((record) => {
@@ -36,4 +36,10 @@ function historyView(dataHistoryList) {
     fragment.appendChild(recordElement);
   });
   recordHistory.appendChild(fragment);
+}
+
+export function addHistoryRecord(record) {
+  const recordHistory = document.getElementById("recordHistory");
+  const recordElement = createRecordForm(record);
+  recordHistory.prepend(recordElement);
 }
