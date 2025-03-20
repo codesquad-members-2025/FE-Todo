@@ -1,6 +1,5 @@
 import { fetchData } from '../shared/utils/fetch.js';
-
-const COLUMN_DATA_URL = './data/columnData.json';
+import { DATA_URLS } from '../shared/constants/constants.js';
 
 class ColumnStore {
   constructor() {
@@ -8,7 +7,7 @@ class ColumnStore {
   }
 
   async fetchAndStoreColumnData() {
-    this.columnData = await fetchData(COLUMN_DATA_URL);
+    this.columnData = await fetchData(DATA_URLS.COLUMN);
   }
 
   getColumnsData() {

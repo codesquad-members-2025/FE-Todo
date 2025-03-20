@@ -1,7 +1,6 @@
 import { fetchData } from '../shared/utils/fetch.js';
 import observer from '../shared/utils/observer.js';
-
-const ACTIVITY_DATA_URL = './data/activityData.json';
+import { DATA_URLS } from '../shared/constants/constants.js';
 
 class ActivityStore extends observer {
   constructor() {
@@ -10,7 +9,7 @@ class ActivityStore extends observer {
   }
 
   async fetchAndStoreActivityData() {
-    this.activityData = await fetchData(ACTIVITY_DATA_URL);
+    this.activityData = await fetchData(DATA_URLS.ACTIVITY);
   }
 
   getActivityData() {

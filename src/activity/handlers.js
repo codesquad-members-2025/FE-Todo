@@ -1,4 +1,5 @@
 import { setElementVisibility } from './renderer.js';
+import { MODAL_MESSAGES } from '../shared/constants/constants.js';
 import { setConfirmDialog } from '../shared/components/dialog/index.js';
 import { removeActivityRecords, toggleDefaultUi } from './renderer.js';
 import activityStore from '../activity/store.js';
@@ -20,7 +21,7 @@ function initActivityHandlers() {
 
 // 활동기록 삭제 모달 오픈
 function openActivityDeleteDialog() {
-  setConfirmDialog('모든 사용자 활동 기록을 삭제할까요?', () => {
+  setConfirmDialog(MODAL_MESSAGES.DELETE_ALL_ACTIVITY, () => {
     removeActivityRecords();
     activityStore.clearActivityData();
     toggleDefaultUi(true);

@@ -1,6 +1,7 @@
 // src/board/handlers/taskHandlers.js
 import columnStore from '../store.js';
 import activityStore from '../../activity/store.js';
+import { MODAL_MESSAGES } from '../../shared/constants/constants.js';
 import { renderTask } from '../renderers/task.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
 import {
@@ -40,7 +41,7 @@ function openDeleteTaskDialog(target) {
   const taskTitle = taskCard.querySelector('.task-title').innerText;
   const columnTitle = columnStore.getColumnTitle(getColumnElement(taskCard).id);
 
-  setConfirmDialog('선택한 카드를 삭제할까요?', () => {
+  setConfirmDialog(MODAL_MESSAGES.DELETE_TASK, () => {
     makeTaskRemover(taskCard.id)();
 
     activityStore.addActivity({
