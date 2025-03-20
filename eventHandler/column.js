@@ -49,7 +49,7 @@ function newAddCard(card) {
       if (textLengthWithoutGap(title, content))
         return alert("제목, 내용 모두 입력해주세요");
 
-      const columnId = target.closest(".column-cardList").dataset.columnId;
+      const columnId = target.closest(".column-cardList").dataset.columnId; // data-column-id 속성 값을 가져옴
       store.addCard(columnId, title, content); // 카드가 추가될 때 store 접근하여 저장
 
       const createCardForm = createShowCardForm(title, content);

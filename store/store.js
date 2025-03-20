@@ -17,6 +17,20 @@ export const store = {
     const newCard = { title, content, author };
     column.cardList.unshift(newCard);
     column.count++;
-    console.log(column.cardList, column.count);
+    this.addHistory("ADD_CARD", title, columnId);
+    console.log(this.state.columns, this.state.historyList);
+  },
+
+  addHistory(action, title, fromColumn, toColumn = null) {
+    const historyRecord = {
+      photo: "./images/sam.png",
+      userName: "@멋진삼",
+      action: `${action}`,
+      title: `${title}`,
+      fromColumn: `${fromColumn}`,
+      toColumn: `${toColumn}`,
+      timeStemp: new Date().toLocaleString(),
+    };
+    this.state.historyList.unshift(historyRecord);
   },
 };
