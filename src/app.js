@@ -132,7 +132,7 @@ document.body.addEventListener("click", (event) => {
       // 카드 생성
       const columnElement = actionElement.closest("article");
       const columnIdClass = columnElement.className.split(" ").slice(-1)[0];
-      const columnId = parseInt(columnIdClass.split("=")[1], 10); // 숫자형 id로 변환
+      const columnId = parseInt(columnIdClass.split("=")[1]); // 숫자형 id로 변환
 
       const cardId = Store.generateCardId(columnId);
       const titleInput = columnElement.querySelector(".card-input-title");
@@ -162,6 +162,18 @@ document.body.addEventListener("click", (event) => {
       if (createCardElement) {
         createCardElement.remove();
       }
+    },
+    // 카드를 삭제하기 위해 X 버튼을 눌렀을 때
+    "task-card__right-delete-icon": () => {
+      // 칼럼 id와 카드 id를 찾아서 Store에 전달
+      // 칼럼 id 찾기
+      const columnElement = actionElement.closest("article");
+      const columnId = parseInt(columnElement.className.split("=")[1]);
+      // 카드 id 찾기
+      const deleteCardElement = actionElement.closest(".task-card");
+      const deleteCardId = parseInt(deleteCardElement.className.split("=")[1]);
+      // Store에 전달
+      Dispatcher.dispatch(Actions.deleteCard(columnId, deleteCardId));
     },
     "card-input-title": () => {},
     "card-input-description": () => {},
