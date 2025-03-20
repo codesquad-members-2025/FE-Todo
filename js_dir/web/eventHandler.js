@@ -82,6 +82,17 @@ export function historyBar() {
     historyBarController.showAlert.bind(historyBarController)
   ); //지우는 상황 전달
 }
+
+//함수 이름 수정해야함
+export function cardDragAndDrop() {
+  const kanban = document.querySelector(".page-main__columnlist");
+  kanban.addEventListener("dragstart", (event) => {
+    const card = event.target.closest("todo-card");
+    if (!card) return;
+    card.classList.add("dragging");
+    card.addEventListener("dragend", handleDragEnd);
+  });
+}
 // -----------------------------
 function findContainClass(button, target) {
   return button.classList.contains(target);
@@ -93,4 +104,10 @@ function registerAddTaskEvent(section) {
   addBtn.addEventListener("click", () => {
     inputModal.toggleModal(taskModal);
   });
+}
+
+function handleDragEnd(event) {
+  const card = event.target;
+  card.removeEventListener("dragend", handleDragEnd);
+  card.classList.remove(".dragging");
 }

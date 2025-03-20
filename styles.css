@@ -315,6 +315,10 @@ dialog {
   padding: 16px;
   gap: 16px;
 }
+
+.todo-card .dragging {
+  opacity: 0.3;
+}
 .todo-card__textarea {
   display: flex;
   flex-direction: column;
