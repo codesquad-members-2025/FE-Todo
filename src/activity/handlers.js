@@ -1,6 +1,7 @@
-import { setElementVisivility } from './renderer.js';
+import { setElementVisibility } from './renderer.js';
 import { setConfirmDialog } from '../shared/components/dialog/index.js';
-import { removeActivityRecords } from './renderer.js';
+import { removeActivityRecords, toggleDefaultUi } from './renderer.js';
+import { clearActivityData } from '../activity/store.js';
 
 // 이벤트 리스너 등록
 function initActivityHandlers() {
@@ -19,17 +20,18 @@ function initActivityHandlers() {
 
 // 활동기록 삭제 모달 오픈
 function openActivityDeleteDialog() {
-  setConfirmDialog(
-    '모든 사용자 활동 기록을 삭제할까요?',
-    removeActivityRecords
-  );
+  setConfirmDialog('모든 사용자 활동 기록을 삭제할까요?', () => {
+    removeActivityRecords();
+    clearActivityData();
+    toggleDefaultUi(true);
+  });
 }
 
 // 활동 패널 토글
 function toggleActivityPanel() {
   const activityPanel = document.getElementById('activity-panel');
   const isPanelVisible = activityPanel.style.display !== 'flex';
-  setElementVisivility(activityPanel, isPanelVisible);
+  setElementVisibility(activityPanel, isPanelVisible);
 }
 
 function parseContent(task, action, details = {}) {

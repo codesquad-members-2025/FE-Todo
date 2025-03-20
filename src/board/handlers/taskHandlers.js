@@ -1,6 +1,8 @@
 // src/board/handlers/taskHandlers.js
-import { addTask, removeTask } from '../store.js';
+import { addTask, removeTask, getColumnTitle } from '../store.js';
+import { addActivity, loadActivityData } from '../../activity/store.js';
 import { renderTask } from '../renderers/task.js';
+import { renderActivityRecords } from '../../activity/renderer.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
 import {
   generateUUID,
@@ -10,21 +12,37 @@ import {
 import TaskEditor from '../renderers/taskEditor.js';
 
 // 새 카드 생성
-function createNewTask(target) {
+async function createNewTask(target) {
   const column = getColumn(target);
   const taskForm = column && getTaskForm(column);
   const inputData = taskForm && collectInputData(taskForm);
 
   if (!inputData) return;
 
+  const { title, createdAt } = inputData;
+  const columnId = column.id;
+  const columnTitle = getColumnTitle(columnId);
+
   closeTaskForm(taskForm);
-  saveAndRenderTask(column.id, inputData);
+  saveAndRenderTask(columnId, inputData);
   resetValues(taskForm);
+
+  addActivity({
+    action: 'add',
+    task: title,
+    timeStamp: createdAt,
+    details: { column: columnTitle },
+  });
+
+  const activityData = await loadActivityData();
+  renderActivityRecords(activityData);
 }
 
 function openDeleteTaskDialog(target) {
   const taskCard = target.closest('.task-item');
-  setConfirmDialog('이 태스크를 삭제할까요?', makeTaskRemover(taskCard.id));
+  setConfirmDialog('이 태스크를 삭제할까요?', () => {
+    makeTaskRemover(taskCard.id);
+  });
 }
 
 // 카드 제거 함수 반환 (고차함수)

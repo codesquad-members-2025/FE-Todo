@@ -39,6 +39,11 @@ function removeTask(columnId, taskId) {
   targetColumn.tasks = targetColumn.tasks.filter((task) => task.id !== taskId);
 }
 
+function getColumnTitle(columnId) {
+  const targetColumn = columnData.find((column) => column.id === columnId);
+  return targetColumn.title;
+}
+
 // 정렬 함수 (order: 'created' | 'latest')
 function getSortedTasksByDate(order = 'created') {
   return columnData.map((column) => ({
@@ -57,4 +62,5 @@ export {
   removeTask,
   getSortedTasksByDate,
   updateTask,
+  getColumnTitle,
 };

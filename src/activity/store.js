@@ -15,4 +15,17 @@ function clearActivityData() {
   activityData = [];
 }
 
-export { loadActivityData, clearActivityData };
+function addActivity({ action, task, timeStamp, details = {} }) {
+  const activity = {
+    username: '멋진곰',
+    task,
+    timeStamp,
+    profileImage: './assets/images/default_profile.jpg',
+    action,
+    details,
+  };
+
+  activityData.unshift(activity);
+}
+
+export { loadActivityData, clearActivityData, addActivity };

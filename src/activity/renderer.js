@@ -14,10 +14,11 @@ const activityFooter = activityPanel.querySelector('footer');
 // 기록 렌더링
 function renderActivityRecords(activityListData) {
   if (activityListData.length === 0) {
-    setElementVisivility(activityDefault, true);
-
+    toggleDefaultUi(true);
     return;
   }
+
+  removeActivityRecords();
 
   const fragment = activityListData.reduce(
     (frag, { task, username, profileImage, timeStamp, action, details }) => {
@@ -34,18 +35,26 @@ function renderActivityRecords(activityListData) {
   );
 
   activityContainer.appendChild(fragment);
-  setElementVisivility(activityFooter, true);
+  toggleDefaultUi(false);
 }
 
-function setElementVisivility(targetElement, isVisible) {
+function setElementVisibility(targetElement, isVisible) {
   targetElement.style.display = isVisible ? 'flex' : 'none';
 }
 
 // 기록 삭제
 function removeActivityRecords() {
-  activityContainer.innerHTML = '';
-  setElementVisivility(activityDefault, true);
-  setElementVisivility(activityFooter, false);
+  activityContainer.innerHTML = ''; // 기존 기록 삭제
 }
 
-export { renderActivityRecords, setElementVisivility, removeActivityRecords };
+function toggleDefaultUi(isShow) {
+  setElementVisibility(activityDefault, isShow); // 기본 화면 보이기
+  setElementVisibility(activityFooter, !isShow); // 푸터 숨기기
+}
+
+export {
+  renderActivityRecords,
+  setElementVisibility,
+  removeActivityRecords,
+  toggleDefaultUi,
+};
