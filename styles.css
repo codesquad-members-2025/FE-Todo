@@ -318,7 +318,8 @@ dialog {
 }
 
 .dragging {
-  opacity: 0.8;
+  opacity: 0.8 !important;
+  transform: scale(1.05);
 }
 .todo-card__textarea {
   display: flex;

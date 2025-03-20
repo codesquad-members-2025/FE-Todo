@@ -9,7 +9,7 @@ export const initialize = function () {
   const sections = document.querySelectorAll(".columnlist__col");
   sections.forEach((section) => {
     registerAddTaskEvent(section);
-    updateCardPosition(section);
+    taskModal.updateCardPosition(section);
   });
 };
 
@@ -84,18 +84,13 @@ export function historyBar() {
   ); //지우는 상황 전달
 }
 
-//함수 이름 수정해야함
 export function cardDragAndDrop() {
   const kanban = document.querySelector(".page-main__columnlist");
 
   kanban.addEventListener(
     "dragstart",
     (event) => {
-      const draggingCard = event.target.closest(".todo-card");
-      if (!draggingCard) return;
-      draggingCard.classList.add("dragging");
-
-      draggingCard.addEventListener("dragend", handleDragEnd);
+      taskModal.dragStart(event);
     },
     true
   );
@@ -111,47 +106,4 @@ function registerAddTaskEvent(section) {
   addBtn.addEventListener("click", () => {
     inputModal.toggleModal(taskModal);
   });
-}
-
-function handleDragEnd(event) {
-  const card = event.target;
-  card.removeEventListener("dragend", handleDragEnd);
-  card.classList.remove("dragging");
-}
-
-function updateCardPosition(section) {
-  section.addEventListener("dragover", (event) => {
-    event.preventDefault();
-    const taskList = section.querySelector(".task-list");
-    const cards = [...section.querySelectorAll(".todo-card")].filter(
-      (card) => !card.classList.contains("dragging")
-    );
-
-    const underCard = getClosestCard(cards, event.clientY);
-    const draggingCard = document.querySelector(".dragging");
-
-    if (underCard === undefined) {
-      taskList.appendChild(draggingCard);
-    } else {
-      taskList.insertBefore(draggingCard, underCard);
-    }
-  });
-}
-
-function getClosestCard(cards, y) {
-  return cards.reduce(
-    (closest, card) => {
-      const cardDomRect = card.getBoundingClientRect();
-      const offset = y - (cardDomRect.top + cardDomRect.height / 2);
-      if (offset < 0 && Math.abs(offset) < Math.abs(closest.offset)) {
-        console.log(`Y좌표:${offset}`);
-        return { offset, card };
-      } else {
-        console.log(`Y좌표:${offset}`);
-
-        return closest;
-      }
-    },
-    { offset: Number.NEGATIVE_INFINITY }
-  ).card;
 }
