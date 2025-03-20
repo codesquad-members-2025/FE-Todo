@@ -10,6 +10,7 @@ class ActivityStore extends observer {
 
   async fetchAndStoreActivityData() {
     this.activityData = await fetchData(DATA_URLS.ACTIVITY);
+    this.notify(this.activityData);
   }
 
   getActivityData() {
@@ -18,6 +19,7 @@ class ActivityStore extends observer {
 
   clearActivityData() {
     this.activityData = [];
+    this.notify(this.activityData); // 구독한 랜더함수 실행
   }
 
   addActivity({ action, task, timeStamp, details = {} }) {

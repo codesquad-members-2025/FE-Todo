@@ -52,9 +52,21 @@ function toggleDefaultUi(isShow) {
   setElementVisibility(activityFooter, !isShow); // 푸터 숨기기
 }
 
+function updateActivityCounter(activityData) {
+  const counterLabel = document.getElementById('activity-counter-label');
+
+  if (activityData.length === 0) {
+    counterLabel.style.display = 'none';
+  } else {
+    counterLabel.style.display = 'flex';
+    counterLabel.innerText = activityData.length;
+  }
+}
+
 export {
   renderActivityRecords,
   setElementVisibility,
   removeActivityRecords,
   toggleDefaultUi,
+  updateActivityCounter,
 };
