@@ -46,11 +46,11 @@ function parseContent(task, action, details = {}) {
   const actionText = `<span class="tx-b14 text-bold">${actionMap[action]}</span>하였습니다.`;
 
   const contentMap = {
-    add: `<span class="tx-b14 text-bold">${details?.column || ''}</span>에서`,
-    remove: '',
+    add: `<span class="tx-b14 text-bold">${details?.column}</span>에서`,
+    remove: `<span class="tx-b14 text-bold">${details?.column}</span>에서`,
     update: '',
-    move: `<span class="tx-b14 text-bold">${details?.from || ''}</span>에서 
-           <span class="tx-b14 text-bold">${details?.to || ''}</span>으로`,
+    move: `<span class="tx-b14 text-bold">${details?.from}</span>에서 
+           <span class="tx-b14 text-bold">${details?.to}</span>으로`,
   };
 
   return `${taskText}${contentMap[action]} ${actionText}`;
