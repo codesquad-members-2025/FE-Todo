@@ -1,4 +1,4 @@
-.card, .card-form, .card-clone {
+.card, .card-form, .floating-card {
     width: 320px;
     background-color: var(--surface-default);
     border-radius: 8px;
@@ -44,7 +44,7 @@
     opacity: 0.3;
 }
 
-.card-clone {
+.floating-card {
     position: absolute;
     box-shadow: 0px 0px 4px 0px #6E809114;
     box-shadow: 0px 16px 16px 0px #6E80913D;

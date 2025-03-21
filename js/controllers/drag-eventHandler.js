@@ -25,30 +25,30 @@ const CARD_GAP = 10;   // px
  * - 마우스 오프셋 값
  * - 드래그 시작/현재/이전 위치 좌표
  */
-const dragManager = {    // 또는 cardDragger, dragController
-    ghostCard: null,
-    draggedCard: null,   // 드래그 중인 카드 요소
+const dragManager = {
+    draggedCard: null,
+    floatingCard: null,
     isDragging: false,
-    dragOffsetX: null,     // 드래그 시작 시의 X 오프셋
-    dragOffsetY: null,     // 드래그 시작 시의 Y 오프셋
+    dragOffsetX: null,
+    dragOffsetY: null,
 
-    startPosition: [-1, -1], // 잔상 시작 위치 (x, y)
-    currentPosition: [-1, -1], // 현재 위치
-    recentPosition: [-1, -1], // 이전 위치
+    startPosition: [-1, -1],
+    currentPosition: [-1, -1],
+    recentPosition: [-1, -1],
 
-    initialize(e, rect, ghostCard) {
-        this.ghostCard = ghostCard;
-        this.draggedCard = document.querySelector('.card-clone');
+    initialize(e, rect, draggedCard) {
+        this.draggedCard = draggedCard;
+        this.floatingCard = document.querySelector('.floating-card');
         this.isDragging = true;
         this.dragOffsetX = e.clientX - rect.left;
         this.dragOffsetY = e.clientY - rect.top;
         this.startPosition = getCurPosition(e); // 잔상 초기 위치 설정
-        this.updateDraggedCardPosition(e.clientX, e.clientY);
+        this.updateFloatingCardLocation(e.clientX, e.clientY);
     },
 
-    updateDraggedCardPosition(clientX, clientY) {
-        this.draggedCard.style.left = `${clientX - this.dragOffsetX}px`;
-        this.draggedCard.style.top = `${clientY - this.dragOffsetY}px`;
+    updateFloatingCardLocation(clientX, clientY) {
+        this.floatingCard.style.left = `${clientX - this.dragOffsetX}px`;
+        this.floatingCard.style.top = `${clientY - this.dragOffsetY}px`;
     },
 
     updateCurrentPosition(clientX, clientY) {
@@ -60,9 +60,9 @@ const dragManager = {    // 또는 cardDragger, dragController
     },
 
     reset() {
-        this.ghostCard = null;
-        this.draggedCard.remove();
         this.draggedCard = null;
+        this.floatingCard.remove();
+        this.floatingCard = null;
         this.isDragging = false;
         this.dragOffsetX = null;
         this.dragOffsetY = null;
@@ -101,12 +101,6 @@ const dragLayoutState = {
         this.cardBoundaryMatrix[startX].pop();
     },
 
-    update() {
-        this.updatedKanbanDOM = getKanbanElement();
-        this.columnElements = getColumnElements(this.updatedKanbanDOM);
-        this.cardMatrix = getCardMatrix(this.updatedKanbanDOM);
-    },
-
     reset() {
         this.kanbanDOM = null;
         this.columnElements = null;
@@ -124,31 +118,40 @@ const dragLayoutState = {
  * - 위치 정보 업데이트 및 초기화
  */
 const cardLocationState = {
-    cardPositionMatrix: null,
-    cardVerticalMatrix: null,
-    ghostCardStartTop: null,
-    ghostCardCurTop: null,
-    ghostCardOffset: null,
+    cardRectTopMatrix: null,
+    cardTransformYMatrix: null,
+
+    draggedCardStartTop: null,
+    draggedCardCurTop: null,
+
+    draggedCardTransformValues: null,
 
 
     initialize() {
-        this.cardPositionMatrix = getCardPositionMatrix(dragLayoutState.cardMatrix);
+        this.cardRectTopMatrix = getCardPositionMatrix(dragLayoutState.cardMatrix);
     },
 
-    setGhostCardStartTop(ghostCard) {
-        this.ghostCardStartTop = ghostCard.getBoundingClientRect().top;
+    updateDraggedCardTransformValues(startPosition, currentPosition) {
+        this.draggedCardTransformValues = calcDraggedCardTransformValue(...startPosition, ...currentPosition);
     },
 
-    // setGhostCardCurTop(startY, curX, curY) {
-    // },
+    setDraggedCardStartTop(startPosition) {
+        const [x, y] = startPosition;
+        this.draggedCardStartTop = this.cardRectTopMatrix[x][y];
+    },
 
-    updateCardOffset(startPosition, currentPosition) {
-        [this.cardVerticalMatrix, this.ghostCardOffset] = getCardOffset(startPosition, currentPosition);
+    setDraggedCardCurrentTop(currentPosition) {
+        const [x, y] = currentPosition;
+        this.draggedCardCurTop = this.cardRectTopMatrix[x][y];
+    },
+
+    updateCardTransformYMatrix(startPosition, currentPosition) {
+        this.cardTransformYMatrix = getCardOffset(startPosition, currentPosition);
     },
 
     reset() {
-        this.cardPositionMatrix = null;
-        this.cardVerticalMatrix = null;
+        this.cardRectTopMatrix = null;
+        this.cardTransformYMatrix = null;
     }
 }
 
@@ -160,24 +163,39 @@ const cardLocationState = {
 function handleMousedown(kanban) {
     kanban.addEventListener('dragstart', (e) => {
         e.preventDefault();
-        const ghostCard = e.target.closest('.card');
-        if (!ghostCard) return;
+        const draggedCard = e.target.closest('.card');
+        if (!draggedCard) return;
 
-        createCloneCard(ghostCard);
+        appendFloatingCardElement(draggedCard);
+
         dragLayoutState.initialize();
-        dragManager.initialize(e, ghostCard.getBoundingClientRect(), ghostCard);
         dragLayoutState.adjustStartColumnLayout(getCurPosition(e)[0]);
-        cardLocationState.initialize();
+
+        dragManager.initialize(e, draggedCard.getBoundingClientRect(), draggedCard);
         dragManager.updateRecentPosition(...getCurPosition(e));
-        cardLocationState.setGhostCardStartTop(ghostCard);
+
+        cardLocationState.initialize();
     });
 }
 function handleMousemove(html) {
     html.addEventListener('mousemove', (e) => {
         if (!dragManager.isDragging) return;
-        dragManager.updateDraggedCardPosition(e.clientX, e.clientY);
+        dragManager.updateFloatingCardLocation(e.clientX, e.clientY);
         dragManager.updateCurrentPosition(...getCurPosition(e));
-        updateCardState(e);
+
+        const startPosition = dragManager.startPosition;
+        const currentPosition = dragManager.currentPosition;
+        const recentPosition = dragManager.recentPosition;
+
+        if (isSamePosition(...currentPosition, ...recentPosition)) return;
+
+        dragManager.updateRecentPosition(...getCurPosition(e));
+
+        cardLocationState.updateCardTransformYMatrix(startPosition, currentPosition);
+        cardLocationState.updateDraggedCardTransformValues(startPosition, currentPosition);
+
+        animatedCards();
+        animateDraggedCard();
     });
 }
 function handleMouseup(html) {
@@ -198,30 +216,17 @@ function handleMouseup(html) {
 function isSamePosition(x1, y1, x2, y2) {
     return x1 === x2 && y1 === y2;
 }
-function updateCardState(e) {
-    const startPosition = dragManager.startPosition;
-    const currentPosition = dragManager.currentPosition;
-    const recentPosition = dragManager.recentPosition;
-    // 이전 위치와 동일하면 업데이트 불필요
-    if (isSamePosition(...currentPosition, ...recentPosition)) return;
-    dragManager.updateRecentPosition(...getCurPosition(e));
-    cardLocationState.updateCardOffset(startPosition, currentPosition);
-    cardLocationState.setGhostCardCurTop(startPosition[0], currentPosition[0], currentPosition[1])
-    animatedCards();
-    animateGhostCard();
-}
 
 /**
  * DOM Element Handlers
  * ------------------
  * DOM 요소 생성 및 조작 관련 함수들
  */
-function createCloneCard(card) {
-    const cloneCard = card.cloneNode(true);
-    cloneCard.classList.remove('card');
-    cloneCard.classList.add('card-clone');
-    document.querySelector('body').appendChild(cloneCard);
-    return cloneCard;
+function appendFloatingCardElement(card) {
+    const floatingCard = card.cloneNode(true);
+    floatingCard.classList.remove('card');
+    floatingCard.classList.add('floating-card');
+    document.querySelector('body').appendChild(floatingCard);
 }
 function getKanbanElement() {
     return document.querySelector('.kanban');
@@ -284,11 +289,10 @@ function getCardLocation(cards) {
 function getCardOffset(startPosition, currentPosition) {
     const [startX, startY] = startPosition;
     const [curX, curY] = currentPosition;
-    const ghostCardHeight = dragManager.ghostCard.getBoundingClientRect().height;
+    const draggedCardHeight = dragManager.draggedCard.getBoundingClientRect().height;
     const columns = dragLayoutState.columnElements;
     const cardMatrix = dragLayoutState.cardMatrix;
     const verticalOffsetMatrix = [];
-    const horizontalOffset = calculateGhostCardOffset(startX, startY, curX, curY);
 
     for (let x = 0; x < columns.length; x++) {
         for (let y = 0; y < cardMatrix[x].length; y++) {
@@ -296,43 +300,38 @@ function getCardOffset(startPosition, currentPosition) {
 
             if (startX === curX) {
                 if (x !== curX) verticalOffsetMatrix[x][y] = 0;
-                else verticalOffsetMatrix[x][y] = calculateSameColumnOffset(x, y, startY, curY, ghostCardHeight);
+                else verticalOffsetMatrix[x][y] = calcSameColumnOffset(y, startY, curY, draggedCardHeight);
             }
 
             else if (startX !== curX) {
                 if (x === startX) {
-                    // 컬럼 이동 시, 시작 컬럼의 이동거리 계산
-                    verticalOffsetMatrix[x][y] = calculateStartColumnOffset(y, startY, ghostCardHeight);
+                    verticalOffsetMatrix[x][y] = calcStartColumnOffset(y, startY, draggedCardHeight);
                 }
                 else if (x === curX) {
-                    // 컬럼 이동 시, 타겟 컬럼의 이동거리 계산
-                    verticalOffsetMatrix[x][y] = calculateTargetColumnOffset(y, curY, ghostCardHeight);
+                    verticalOffsetMatrix[x][y] = calcCurrentColumnOffset(y, curY, draggedCardHeight);
                 }
                 else {
-                    // 시작, 타겟 컬럼이 아니면 이동거리 0
                     verticalOffsetMatrix[x][y] = 0;
                 }
             }
         }
     }
 
-    return [verticalOffsetMatrix, horizontalOffset];
+    return verticalOffsetMatrix;
 }
-// function calculateGhostCardOffset(cardMatrix, curX, curY) {
-//     const { left, top } = cardMatrix[curX][curY].getBoundingClientRect();
-//     return [left, top];
-// }
-function calculateGhostCardOffset(startX, startY, curX, curY) {
+function calcDraggedCardTransformValue(startX, startY, curX, curY) {
     const columnElements = dragLayoutState.columnElements;
     const { left: startLeft } = columnElements[startX].getBoundingClientRect();
     const { left: curLeft } = columnElements[curX].getBoundingClientRect();
-    const offsetX = curLeft - startLeft;
+    const transformX = curLeft - startLeft;
     
-    const startTop = cardLocationState.ghostCardStartTop;
-    const curTop = cardLocationState.ghostCardCurTop;
-    const offsetY = curTop - startTop;
+    const cardRectTopMatrix = cardLocationState.cardRectTopMatrix;
+    const startTop = cardRectTopMatrix[startX][startY];
+    const curTop = cardRectTopMatrix[curX][curY];
 
-    return [offsetX, offsetY];
+    const transformY = curTop - startTop;
+
+    return [transformX, transformY];
 }
 
 /**
@@ -340,52 +339,24 @@ function calculateGhostCardOffset(startX, startY, curX, curY) {
  * ----------------
  * 카드 이동 거리 계산 함수들
  */
-function calculateSameColumnOffset(x, y, startY, curY, ghostCardHeight) {
-    const distance = ghostCardHeight + CARD_GAP;
-    // 현재 카드가 startY보다 낮을 때
-    if (y < startY) {
-        if (y < curY) return 0;
-        else if (y >= curY) return distance;
-    }
-    // 현재 카드가 startY일 때
-    else if (y === startY) {
-        if (y < curY) return getSumCardHeight(x, y, curY) + CARD_GAP * (curY - y); // 차이만큼 내려감
-        else if (y === curY) return 0; // 그대로
-        else if (y > curY) return -(getSumCardHeight(x, y, curY) + CARD_GAP * (y - curY)) // 차이만큼 올라감
-    }
-    // 현재 카드가 startY보다 높을 때
-    else if (y > startY) {
-        if (y <= curY) return -distance;
-        else if (y > curY) return 0;
-    }
+function calcSameColumnOffset(y, startY, curY, draggedCardHeight) {
+    const distance = draggedCardHeight + CARD_GAP;
+
+    if (y < startY && y >= curY) return distance;
+    else if (y > startY && y <= curY) return -distance;
+    else return 0
 }
-function calculateStartColumnOffset(y, startY, ghostCardHeight) {
-    const distance = ghostCardHeight + CARD_GAP;
+function calcStartColumnOffset(y, startY, draggedCardHeight) {
+    const distance = draggedCardHeight + CARD_GAP;
+
     if (y < startY) return 0;
     else if (y >= startY) return -distance;
 }
-function calculateTargetColumnOffset(y, curY, ghostCardHeight) {
-    const distance = ghostCardHeight + CARD_GAP;
+function calcCurrentColumnOffset(y, curY, draggedCardHeight) {
+    const distance = draggedCardHeight + CARD_GAP;
+
     if (y < curY) return 0;
     else if (y >= curY) return distance;
-}
-function getSumCardHeight(x, startY, curY) {
-    let startIdx, endIdx;
-    if (startY > curY) {
-        startIdx = curY
-        endIdx = startY
-    } else if (startY < curY) {
-        startIdx = startY + 1;
-        endIdx = curY + 1;
-    }
-
-    const cardMatrix = dragLayoutState.cardMatrix;   
-    let totalHeight = 0;
-
-    for (let i = startIdx; i < endIdx; i++) {
-        totalHeight += cardMatrix[x][i].getBoundingClientRect().height;
-    }
-    return totalHeight;
 }
 
 /**
@@ -396,24 +367,24 @@ function getSumCardHeight(x, startY, curY) {
 function animatedCards() {
     const columns = dragLayoutState.columnElements;
     const cardMatrix = dragLayoutState.cardMatrix;
-    const verticalOffsetMatrix = cardLocationState.cardVerticalMatrix;
+    const verticalOffsetMatrix = cardLocationState.cardTransformYMatrix;
 
     for (let x = 0; x < columns.length; x++) {
         for (let y = 0; y < cardMatrix[x].length; y++) {
             const card = cardMatrix[x][y];
             const verticalOffset = verticalOffsetMatrix[x][y];
 
-            card.style.transition = 'transform 0.3s ease-in-out';
+            card.style.transition = 'transform 0.25s ease-in-out';
             card.style.transform = `translateY(${verticalOffset}px`;
         }
     }
 }
-function animateGhostCard() {
-    const ghostCard = dragManager.ghostCard;
-    const ghostCardOffset = cardLocationState.ghostCardOffset;
+function animateDraggedCard() {
+    const draggedCard = dragManager.draggedCard;
+    const [transformX, transformY] = cardLocationState.draggedCardTransformValues;
 
-    ghostCard.style.transition = 'transform 0.3s ease-in-out';
-    ghostCard.style.transform = `translate(${ghostCardOffset[0]}px, ${ghostCardOffset[1]}px)`
+    draggedCard.style.transition = 'transform 0.2s ease-in-out';
+    draggedCard.style.transform = `translate(${transformX}px, ${transformY}px)`
 }
 
 /**
