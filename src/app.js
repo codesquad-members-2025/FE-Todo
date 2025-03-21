@@ -1,6 +1,6 @@
 import { columnsComponent } from "./components/columns_component";
 import { CreateCardComponent } from "./components/create_card_component";
-import { fetchMockData } from "./data";
+import { ModifyCardComponent } from "./components/modify_card_component";
 
 import "pretendard/dist/web/static/pretendard.css"; // 폰트 CSS 불러오기
 import "./css/global.css";
@@ -175,8 +175,66 @@ document.body.addEventListener("click", (event) => {
       // Store에 전달
       Dispatcher.dispatch(Actions.deleteCard(columnId, deleteCardId));
     },
-    "card-input-title": () => {},
-    "card-input-description": () => {},
+    // 카드를 수정하기 위해 수정 버튼을 눌렀을 때
+    "task-card__right-modify-icon": () => {
+      // 칼럼 id와 카드 id를 찾아서 Store에 전달
+      // 칼럼 요소 찾기
+      const columnElement = actionElement.closest("article");
+      // 카드 요소와 id 찾기
+      const modifyCardElement = actionElement.closest(".task-card");
+      const modifyCardId = parseInt(modifyCardElement.className.split("=")[1]);
+
+      const titleInput = modifyCardElement.querySelector(".task-card__title");
+      const descriptionInput = modifyCardElement.querySelector(
+        ".task-card__description"
+      );
+
+      console.log(titleInput.innerText, descriptionInput.innerText);
+
+      const oldData = {
+        id: modifyCardId,
+        title: titleInput.innerText || "Modified Task",
+        description: descriptionInput.innerText || "Modified description",
+      };
+
+      modifyCardElement.outerHTML = ModifyCardComponent(oldData); // 카드 수정 컴포넌트로 교체
+    },
+    "task-modify-card__btn-cancel": () => {
+      // 수정 컴포넌트 취소 시 제거
+      const modifyCardElement = actionElement.closest(".task-modify-card");
+      if (modifyCardElement) {
+        modifyCardElement.remove();
+      }
+    },
+    // 수정 컴포넌트에서 '등록' 버튼 눌렀을 때
+    "task-modify-card__btn-create": () => {
+      // 카드 수정
+      const columnElement = actionElement.closest("article");
+      const columnId = parseInt(columnElement.className.split("=")[1]);
+      // 카드 id 찾기
+      const modifyCardElement = actionElement.closest(".task-card");
+      const modifyCardId = parseInt(modifyCardElement.className.split("=")[1]);
+
+      const titleInput = columnElement.querySelector(".card-input-title");
+      const descriptionInput = columnElement.querySelector(
+        ".card-input-description"
+      );
+
+      const updatedData = {
+        title: titleInput.value || "Modified Task",
+        description: descriptionInput.value || "Modified description",
+      };
+
+      // Store에 전달
+      Dispatcher.dispatch(
+        Actions.updateCard(columnId, modifyCardId, updatedData)
+      );
+
+      // 생성 컴포넌트 제거
+      if (modifyCardElement) {
+        modifyCardElement.remove();
+      }
+    },
     header__history: openHistoryModal,
     "history-modal__header-close": closeHistoryModal,
     "history-modal__footer-btn": showModal,
