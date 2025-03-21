@@ -1,5 +1,4 @@
 import KanbanStore from '../store/kanban-store.js';
-import { createKanbanVirtualDOM } from '../components/kanban-renderer.js';
 
 export default function initDragEvent() {
     const kanban = document.querySelector('.kanban');
@@ -14,6 +13,18 @@ export default function initDragEvent() {
 const COLUMN_GAP = 24;  // px
 const CARD_GAP = 10;   // px
 
+/**
+ * Drag State Managers
+ * ==================
+ */
+
+/**
+ * 드래그 중인 카드의 상태 관리
+ * --------------------------
+ * - 드래그 중인 카드(복제본)의 참조 및 상태
+ * - 마우스 오프셋 값
+ * - 드래그 시작/현재/이전 위치 좌표
+ */
 const dragManager = {    // 또는 cardDragger, dragController
     ghostCard: null,
     draggedCard: null,   // 드래그 중인 카드 요소
@@ -61,6 +72,13 @@ const dragManager = {    // 또는 cardDragger, dragController
     }
 }
 
+/**
+ * 칸반 보드 레이아웃 상태 관리
+ * -------------------------
+ * - DOM 요소 참조 (칸반, 컬럼, 카드)
+ * - 경계선 좌표 정보
+ * - 레이아웃 업데이트 및 초기화
+ */
 const dragLayoutState = {
     kanbanDOM: null,
     columnElements: null,
@@ -98,24 +116,41 @@ const dragLayoutState = {
     }
 }
 
+/**
+ * 카드 위치 정보 상태 관리
+ * ---------------------
+ * - 카드의 초기 위치 정보
+ * - 수평/수직 이동 거리 매트릭스
+ * - 위치 정보 업데이트 및 초기화
+ */
 const cardLocationState = {
-    cardLocationMatrix: null,
-    cardLocationGap: null,
+    cardPositionMatrix: null,
+    cardHorizontalMatrix: null,
+    cardVerticalMatrix: null,
 
     initialize() {
-        this.cardLocationMatrix = getCardLocationMatrix(dragLayoutState.cardMatrix);
+        this.cardPositionMatrix = getCardPositionMatrix(dragLayoutState.cardMatrix);
     },
 
-    updateGap(position, draggedPosition) {
-        this.cardLocationGap = getCardLocationGap(position, draggedPosition);
+    updateCardHorizontalMatrix() {
+        this.cardHorizontalMatrix = getCardHorizontalMatrix(startPosition, currentPosition);
+    },
+
+    updateCardVerticalMatrix(startPosition, currentPosition) {
+        this.cardVerticalMatrix = getCardVerticalMatrix(startPosition, currentPosition);
     },
 
     reset() {
-        this.cardLocationMatrix = null;
-        this.cardLocationGap = null;
+        this.cardPositionMatrix = null;
+        this.cardVerticalMatrix = null;
     }
 }
 
+/**
+ * Event Handlers
+ * -------------
+ * 마우스 이벤트 핸들링 함수들
+ */
 function handleMousedown(kanban) {
     kanban.addEventListener('dragstart', (e) => {
         e.preventDefault();
@@ -130,7 +165,6 @@ function handleMousedown(kanban) {
         dragManager.updateRecentPosition(...getCurPosition(e));
     });
 }
-
 function handleMousemove(html) {
     html.addEventListener('mousemove', (e) => {
         if (!dragManager.isDragging) return;
@@ -139,17 +173,40 @@ function handleMousemove(html) {
         updateCardState(e);
     });
 }
-
 function handleMouseup(html) {
     html.addEventListener('mouseup', () => {
         if (!dragManager.isDragging) return;
+        KanbanStore.moveCard(dragManager.startPosition, dragManager.currentPosition);
         dragManager.reset();
         cardLocationState.reset();
-        resetCardSwap();
         dragLayoutState.reset();
     });
 }
 
+/**
+ * Mousemove Helpers
+ * ---------------
+ * 마우스 이동 중 위치 추적 및 상태 업데이트
+ */
+function isSamePosition(x1, y1, x2, y2) {
+    return x1 === x2 && y1 === y2;
+}
+function updateCardState(e) {
+    const startPosition = dragManager.startPosition;
+    const currentPosition = dragManager.currentPosition;
+    const recentPosition = dragManager.recentPosition;
+    // 이전 위치와 동일하면 업데이트 불필요
+    if (isSamePosition(...currentPosition, ...recentPosition)) return;
+    dragManager.updateRecentPosition(...getCurPosition(e));
+    cardLocationState.updateCardVerticalMatrix(startPosition, currentPosition);
+    animateCardSwap();
+}
+
+/**
+ * DOM Element Handlers
+ * ------------------
+ * DOM 요소 생성 및 조작 관련 함수들
+ */
 function createCloneCard(card) {
     const cloneCard = card.cloneNode(true);
     cloneCard.classList.remove('card');
@@ -157,15 +214,12 @@ function createCloneCard(card) {
     document.querySelector('body').appendChild(cloneCard);
     return cloneCard;
 }
-
 function getKanbanElement() {
     return document.querySelector('.kanban');
 }
-
 function getColumnElements(kanbanDOM) {
     return [...kanbanDOM.querySelectorAll('.column')];
 }
-
 function getCardMatrix(kanbanDOM) {
     const columns = [...kanbanDOM.querySelectorAll('.column')];
     return columns.reduce((cardMatrix, column, idx) => {  // 2차원 카드 배열
@@ -174,6 +228,11 @@ function getCardMatrix(kanbanDOM) {
     }, []);
 }
 
+/**
+ * Boundary Calculation
+ * ------------------
+ * 요소들의 경계선 좌표 계산 함수들
+ */
 function getColumnBoundaries(columns) {
     return columns.reduce((boundaries, column) => {  // 경계선 좌표 배열
         const rect = column.getBoundingClientRect();
@@ -181,14 +240,12 @@ function getColumnBoundaries(columns) {
         return boundaries;
     }, []);
 }
-
 function getCardBoundaryMatrix(cardMatrix) {
     return cardMatrix.reduce((boundaryMatrix, cards) => {  // 2차원 경계선 배열
         boundaryMatrix.push(getCardBoundaries(cards));
         return boundaryMatrix;
     }, []);
 }
-
 function getCardBoundaries(cards) {
     return cards.reduce((boundaries, card) => {  // 경계선 좌표 배열
         const rect = card.getBoundingClientRect();
@@ -197,19 +254,17 @@ function getCardBoundaries(cards) {
     }, []);
 }
 
-
-//--------------------------------------------
-//------------카드로케이션로직-----------------
-//--------------------------------------------
-
-
-function getCardLocationMatrix(cardMatrix) {
+/**
+ * Card Position Calculation
+ * ----------------------
+ * 카드 위치 계산 관련 함수들
+ */
+function getCardPositionMatrix(cardMatrix) {
     return cardMatrix.reduce((locationMatrix, cards) => {
         locationMatrix.push(getCardLocation(cards));
         return locationMatrix;
     }, []);
 }
-
 function getCardLocation(cards) {
     return cards.reduce((locations, card) => {
         const rect = card.getBoundingClientRect();
@@ -217,16 +272,14 @@ function getCardLocation(cards) {
         return locations;
     }, []);
 }
-
-// 각 카드의 transform 픽셀 거리를 구함
-// 나름대로 함수 분리해서 가독성 높였음
-function getCardLocationGap(startPosition, currentPosition) {
+function getCardVerticalMatrix(startPosition, currentPosition) {
     const [startX, startY] = startPosition;
     const [curX, curY] = currentPosition;
     const ghostCardHeight = dragManager.ghostCard.getBoundingClientRect().height;
     const columns = dragLayoutState.columnElements;
     const cardmatrix = dragLayoutState.cardMatrix;
     const verticalOffsetMatrix = [];
+    const horizontalOffsetMatrix = 0;
 
     for (let x = 0; x < columns.length; x++) {
         for (let y = 0; y < cardmatrix[x].length; y++) {
@@ -239,12 +292,12 @@ function getCardLocationGap(startPosition, currentPosition) {
 
             else if (startX !== curX) {
                 if (x === startX) {
-                    // 컬럼 이동 시 시작 컬럼 계산
+                    // 컬럼 이동 시, 시작 컬럼의 이동거리 계산
                     verticalOffsetMatrix[x][y] = calculateStartColumnOffset(y, startY, ghostCardHeight);
                 }
                 else if (x === curX) {
-                    // 컬럼 이동 시 타겟 컬럼 계산
-                    verticalOffsetMatrix[x][y] = calculateOtherColumnOffset(y, curY, ghostCardHeight);
+                    // 컬럼 이동 시, 타겟 컬럼의 이동거리 계산
+                    verticalOffsetMatrix[x][y] = calculateTargetColumnOffset(y, curY, ghostCardHeight);
                 }
                 else {
                     // 시작, 타겟 컬럼이 아니면 이동거리 0
@@ -257,6 +310,11 @@ function getCardLocationGap(startPosition, currentPosition) {
     return verticalOffsetMatrix;
 }
 
+/**
+ * Offset Calculation
+ * ----------------
+ * 카드 이동 거리 계산 함수들
+ */
 function calculateSameColumnOffset(x, y, startY, curY, ghostCardHeight) {
     const distance = ghostCardHeight + CARD_GAP;
     // 현재 카드가 startY보다 낮을 때
@@ -276,19 +334,16 @@ function calculateSameColumnOffset(x, y, startY, curY, ghostCardHeight) {
         else if (y > curY) return 0;
     }
 }
-
 function calculateStartColumnOffset(y, startY, ghostCardHeight) {
     const distance = ghostCardHeight + CARD_GAP;
     if (y < startY) return 0;
     else if (y >= startY) return -distance;
 }
-
-function calculateOtherColumnOffset(y, curY, ghostCardHeight) {
+function calculateTargetColumnOffset(y, curY, ghostCardHeight) {
     const distance = ghostCardHeight + CARD_GAP;
     if (y < curY) return 0;
     else if (y >= curY) return distance;
 }
-
 function getSumCardHeight(x, y, curY) {
     let startY, endY;
     if (y > curY) {
@@ -308,10 +363,15 @@ function getSumCardHeight(x, y, curY) {
     return totalHeight;
 }
 
+/**
+ * Animation Handler
+ * ---------------
+ * 카드 애니메이션 관련 함수
+ */
 function animateCardSwap() {
     const columns = dragLayoutState.columnElements;
     const cardMatrix = dragLayoutState.cardMatrix;
-    const gapMatrix = cardLocationState.cardLocationGap;
+    const gapMatrix = cardLocationState.cardVerticalMatrix;
 
     for (let x = 0; x < columns.length; x++) {
         for (let y = 0; y < cardMatrix[x].length; y++) {
@@ -324,54 +384,11 @@ function animateCardSwap() {
     }
 }
 
-function resetCardSwap() {
-    const columns = dragLayoutState.columnElements;
-    const cardMatrix = dragLayoutState.cardMatrix;
-
-    for (let x = 0; x < columns.length; x++) {
-        for (let y = 0; y < cardMatrix[x].length; y++) {
-            const card = cardMatrix[x][y];
-            card.style.transform = `0px`;
-        }
-    }
-}
-
-
-// 모듈스코프 전역변수
-// dragManager
-
-// dragLayoutManager
-
-// mousedown
-// --- 필요 작업 ---
-// --- 완료 작업 ---
-// 카드 위치 구하기  @@@@ 구현필요
-// x1,x2,y1,y2 등 컬럼, 카드로 영역 나누기
-// 원본에 잔상효과 추가
-// 복사본 생성
-// 복사본 좌표 계산 및 업데이트
-// 잔상 포지션 저장 ex) [1,0] 등
-
-// mousemove
-// 
-
-// --- 필요 작업 ---
-// 갱신 과정
-// 잔상 포지션과 현재 커서 포지션 비교 완
-// 같으면 아래 로직 실행 X 완
-// 포지션 다를 때,
-// 잔상이 있는 영역 구하기
-// 현재컬럼, 기존컬럼
-// 현재컬럼 => 몇번째 위치인지 구하고 그 아래 카드는 잔상 height만큼 transform
-// 기존컬럼 => 몇번째 위치였는지 구하고 그 아래 카드 hegiht만큼 transform
-// 따라서 현재 위치는 카드의 h
-// 카드 위치 다시 구하기 @@@@ 구현필요
-// 카드의 위치 차이 계산 
-// 계산 값 css로 적용 transform (0.3s)
-// --- 완료 작업 ---
-// 복사본 좌표 계산 및 업데이트
-// 현재 영역 인덱스 반환
-
+/**
+ * Utility Function
+ * ---------------
+ * 유틸리티 함수
+ */
 function getCurPosition({ clientX, clientY }) {    // 현재 위치를 찾는 함수
     const columnBoundaries = dragLayoutState.columnBoundaries;
     const targetColumnIndex = columnBoundaries.findIndex(boundary => clientX < boundary);
@@ -386,32 +403,3 @@ function getCurPosition({ clientX, clientY }) {    // 현재 위치를 찾는 �
         targetCardIndex >= 0 ? targetCardIndex : cardBoundaries.length
     ]
 }
-
-function isSamePosition(x1, y1, x2, y2) {
-    return x1 === x2 && y1 === y2;
-}
-
-function updateCardState(e) {
-    const startPosition = dragManager.startPosition;
-    const currentPosition = dragManager.currentPosition;
-    const recentPosition = dragManager.recentPosition;
-    // 이전 위치와 동일하면 업데이트 불필요
-    if (isSamePosition(...currentPosition, ...recentPosition)) return;
-    dragManager.updateRecentPosition(...getCurPosition(e));
-    cardLocationState.updateGap(startPosition, currentPosition);
-    animateCardSwap();
-}
-
-// mouseup
-// --- 필요 작업 ---
-// 가상 돔을 렌더링
-// draggingData 초기화화
-// --- 완료 작업 ---
-// 복사본 제거
-// 원본에 잔상효과 제거
-
-// 변수 저장 관점에서
-// mousedown 시 객체 생성
-// 객체가 담을 정보
-// { 컬럼배열, 컬럼별카드이차원배열, 영역좌표이차원배열, 카드위치이차원배열, 가상돔카드위치이차원배열2 }
-// 해당 객체는 전역변수에 존재, mouseup 발생 시 reset
