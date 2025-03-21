@@ -136,7 +136,6 @@ class StoreClass {
         return;
     }
     this.emitChange();
-    console.log(this.state.history);
   }
 }
 
