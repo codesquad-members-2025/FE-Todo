@@ -16,9 +16,9 @@ export const taskModal = {
     this.cardModal = button.closest(".todo-card");
     this.titleValue = this.cardModal.querySelector(".task-title").textContent;
     this.targetId = this.cardModal.id;
-    if (button.classList.contains("edit-task-btn"))
-      this.taskContent =
-        this.cardModal.querySelector(".task-content").textContent;
+    // if (button.classList.contains("edit-task-btn"))
+    this.taskContent =
+      this.cardModal.querySelector(".task-content").textContent;
     this.targetSection =
       this.cardModal.closest(".columnlist__col").dataset.type;
   },
@@ -90,13 +90,13 @@ export const taskModal = {
         (card) => !card.classList.contains("dragging")
       );
 
-      const underCard = this.getClosestCard(cards, event.clientY);
+      this.underCard = this.getClosestCard(cards, event.clientY);
       const draggingCard = document.querySelector(".dragging");
 
-      if (underCard === undefined) {
+      if (this.underCard === undefined) {
         taskList.appendChild(draggingCard);
       } else {
-        taskList.insertBefore(draggingCard, underCard);
+        taskList.insertBefore(draggingCard, this.underCard);
       }
     });
   },
@@ -125,6 +125,16 @@ export const taskModal = {
     const timeStamp = Date.now().toString();
     const card = event.target;
     this.setTargetCard(card);
+    store.removeTask(this.currentSection, this.targetId);
+    const id = this.underCard ? this.underCard.id - 1 : Infinity;
+    const taskObj = {
+      id: id.toString(),
+      title: this.titleValue,
+      content: this.taskContent,
+    }; //id는 들어갈 카드의 다음 id 를 추적하여 생성한다.
+
+    store.addTask(this.targetSection, taskObj);
+
     const taskDataArr = [this.titleValue, this.currentSection, timeStamp];
     historyBarController.addHisotryLog(taskDataArr, "이동", this.targetSection);
     card.removeEventListener("dragend", this.handleDragEnd);

@@ -40,6 +40,29 @@ export const historyModalUi = {
     id,
     action,
   }) {
+    switch (currentColumn) {
+      case "todo":
+        currentColumn = "해야할 일";
+        break;
+      case "doing":
+        currentColumn = "하고 있는 일";
+        break;
+      case "done":
+        currentColumn = "완료한 일";
+        break;
+    }
+    switch (targetColumn) {
+      case "todo":
+        targetColumn = "해야할 일";
+        break;
+      case "doing":
+        targetColumn = "하고 있는 일";
+        break;
+      case "done":
+        targetColumn = "완료한 일";
+        break;
+    }
+
     let logColumnType = "";
     const newLog = makeLogNode();
     const time = Math.floor((Date.now().toString() - id) / (1000 * 60));
