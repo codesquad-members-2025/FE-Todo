@@ -79,6 +79,10 @@ const dragLayoutState = {
         this.cardBoundaryMatrix = getCardBoundaryMatrix(this.cardMatrix);
     },
 
+    adjustStartColumnLayout(startX) {
+        this.cardBoundaryMatrix[startX].pop();
+    },
+
     update() {
         this.updatedKanbanDOM = getKanbanElement();
         this.columnElements = getColumnElements(this.updatedKanbanDOM);
@@ -121,6 +125,7 @@ function handleMousedown(kanban) {
         createCloneCard(ghostCard);
         dragLayoutState.initialize();
         dragManager.initialize(e, ghostCard.getBoundingClientRect(), ghostCard);
+        dragLayoutState.adjustStartColumnLayout(getCurPosition(e)[0]);
         cardLocationState.initialize();
         dragManager.updateRecentPosition(...getCurPosition(e));
     });
@@ -221,55 +226,83 @@ function getCardLocationGap(startPosition, currentPosition) {
     const ghostCardHeight = dragManager.ghostCard.getBoundingClientRect().height;
     const columns = dragLayoutState.columnElements;
     const cardmatrix = dragLayoutState.cardMatrix;
-    const cardLocationGap = [];
+    const verticalOffsetMatrix = [];
 
     for (let x = 0; x < columns.length; x++) {
         for (let y = 0; y < cardmatrix[x].length; y++) {
-
-            if (!cardLocationGap[x]) cardLocationGap[x] = [];
+            if (!verticalOffsetMatrix[x]) verticalOffsetMatrix[x] = [];
 
             if (startX === curX) {
-                if (x !== curX) cardLocationGap[x][y] = 0;
-                else cardLocationGap[x][y] = calculateVerticalOffsetInSameColumn(x, y, startY, curY, ghostCardHeight);
+                if (x !== curX) verticalOffsetMatrix[x][y] = 0;
+                else verticalOffsetMatrix[x][y] = calculateSameColumnOffset(x, y, startY, curY, ghostCardHeight);
             }
 
             else if (startX !== curX) {
-                // 추후 작성
+                if (x === startX) {
+                    // 컬럼 이동 시 시작 컬럼 계산
+                    verticalOffsetMatrix[x][y] = calculateStartColumnOffset(y, startY, ghostCardHeight);
+                }
+                else if (x === curX) {
+                    // 컬럼 이동 시 타겟 컬럼 계산
+                    verticalOffsetMatrix[x][y] = calculateOtherColumnOffset(y, curY, ghostCardHeight);
+                }
+                else {
+                    // 시작, 타겟 컬럼이 아니면 이동거리 0
+                    verticalOffsetMatrix[x][y] = 0;
+                }
             }
         }
     }
 
-    return cardLocationGap;
+    return verticalOffsetMatrix;
 }
 
-function calculateVerticalOffsetInSameColumn(x, y, startY, curY, ghostCardHeight) {
-    // 현재 카드가 startY보다 낮을 때
+function calculateSameColumnOffset(x, y, startY, curY, ghostCardHeight) {
     const distance = ghostCardHeight + CARD_GAP;
+    // 현재 카드가 startY보다 낮을 때
     if (y < startY) {
-        if (y < curY) return 0; // 그대로
-        else if (y === curY) return distance; // 내려감
-        else if (y > curY) return distance; // 내려감
+        if (y < curY) return 0;
+        else if (y >= curY) return distance;
     }
     // 현재 카드가 startY일 때
     else if (y === startY) {
         if (y < curY) return getSumCardHeight(x, y, curY) + CARD_GAP * (curY - y); // 차이만큼 내려감
         else if (y === curY) return 0; // 그대로
-        else if (y > curY) return -(getSumCardHeight(x, y, curY) + CARD_GAP * (curY - y)) // 차이만큼 올라감
+        else if (y > curY) return -(getSumCardHeight(x, y, curY) + CARD_GAP * (y - curY)) // 차이만큼 올라감
     }
     // 현재 카드가 startY보다 높을 때
     else if (y > startY) {
-        if (y < curY) return -distance; // 올라감
-        else if (y === curY) return -distance; // 올라감
-        else if (y > curY) return 0; // 그대로
+        if (y <= curY) return -distance;
+        else if (y > curY) return 0;
     }
 }
 
+function calculateStartColumnOffset(y, startY, ghostCardHeight) {
+    const distance = ghostCardHeight + CARD_GAP;
+    if (y < startY) return 0;
+    else if (y >= startY) return -distance;
+}
+
+function calculateOtherColumnOffset(y, curY, ghostCardHeight) {
+    const distance = ghostCardHeight + CARD_GAP;
+    if (y < curY) return 0;
+    else if (y >= curY) return distance;
+}
+
 function getSumCardHeight(x, y, curY) {
-    const [startY, endY] = [Math.min(y, curY), Math.max(y, curY)];
-    const cardMatrix = dragLayoutState.cardMatrix;
+    let startY, endY;
+    if (y > curY) {
+        startY = curY
+        endY = y
+    } else if (y < curY) {
+        startY = y + 1;
+        endY = curY + 1;
+    }
+
+    const cardMatrix = dragLayoutState.cardMatrix;   
     let totalHeight = 0;
-    
-    for (let i = startY + 1; i <= endY; i++) {
+
+    for (let i = startY; i < endY; i++) {
         totalHeight += cardMatrix[x][i].getBoundingClientRect().height;
     }
     return totalHeight;
@@ -349,13 +382,9 @@ function getCurPosition({ clientX, clientY }) {    // 현재 위치를 찾는 �
     // 경계를 넘어가면 마지막 위치 반환
     // findIndex는 값을 찾지 못하면 -1을 반환
     return [
-        targetColumnIndex >= 0 ? targetColumnIndex
-            : columnBoundaries.length === 0 ? 0
-                : columnBoundaries.length - 1,
-        targetCardIndex >= 0 ? targetCardIndex
-            : cardBoundaries.length === 0 ? 0
-                : cardBoundaries.length - 1
-    ];
+        targetColumnIndex >= 0 ? targetColumnIndex : columnBoundaries.length,
+        targetCardIndex >= 0 ? targetCardIndex : cardBoundaries.length
+    ]
 }
 
 function isSamePosition(x1, y1, x2, y2) {
@@ -368,12 +397,8 @@ function updateCardState(e) {
     const recentPosition = dragManager.recentPosition;
     // 이전 위치와 동일하면 업데이트 불필요
     if (isSamePosition(...currentPosition, ...recentPosition)) return;
-    console.log('ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ')
-    console.log(`startPosition: ${startPosition}`)
-    console.log(`draggedPostion: ${currentPosition}`)
     dragManager.updateRecentPosition(...getCurPosition(e));
     cardLocationState.updateGap(startPosition, currentPosition);
-    console.log(cardLocationState.cardLocationGap);
     animateCardSwap();
 }
 
