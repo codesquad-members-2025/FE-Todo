@@ -29,6 +29,18 @@ h3 {
     0px 16px 16px rgba(110, 128, 145, 0.24);
 }
 
+.header-first {
+  display: flex;
+  gap: 16px;
+}
+
+.sort-cards-btn {
+  border: 1px solid #bec1d5;
+  color: #4e4b66;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
 button {
   all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
   cursor: pointer;
@@ -72,6 +84,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  min-height: 85vh;
 }
 .columnlist__header {
   display: flex;
@@ -90,7 +103,7 @@ button {
 }
 
 .columnlist__count {
-  border: 1px solid #eff0f6;
+  border: 1px solid #bec1d5;
   color: #a0a3bd;
   border-radius: 8px;
   padding: 5px 8px;
@@ -168,12 +181,13 @@ button {
 .activity-list__list:last-child {
   border-bottom: none;
 }
-.activity-list img {
+.activity-list__list img {
   flex-grow: 0;
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  object-fit: cover; /* 비율 유지하면서 크기 조정 */
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .popover-footer {
@@ -314,6 +328,11 @@ dialog {
   box-shadow: 0 1px 4px #6e80913d; /* 🔹 부드러운 그림자 효과 */
   padding: 16px;
   gap: 16px;
+}
+
+.dragging {
+  opacity: 0.8 !important;
+  transform: scale(1.05);
 }
 .todo-card__textarea {
   display: flex;
