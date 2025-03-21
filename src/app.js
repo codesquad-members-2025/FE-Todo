@@ -1,4 +1,3 @@
-import { columnsComponent } from "./components/columns_component";
 import { CreateCardComponent } from "./components/create_card_component";
 import { ModifyCardComponent } from "./components/modify_card_component";
 
@@ -11,46 +10,21 @@ import "./css/style.css";
 import { Actions } from "./store/actions.js";
 import { Dispatcher } from "./store/dispatcher.js";
 import { Store } from "./store/store.js";
+import { renderColumns } from "./store/view.js";
+
+import { dataInitialize } from "./data.js";
 
 // 데이터 불러오기
-fetch("/data/mock.json")
-  .then((response) => response.json())
-  .then((data) => {
-    // mock.json의 칼럼, 카드 데이터 확인 후 Store에 저장
-    // 예시로 columns에 빈 카드 배열을 초기화하는 과정
-    const { columns } = data;
-    columns.forEach((column) => {
-      // 카드 배열이 없다고 가정하면 초기화
-      if (!column.cards) {
-        column.cards = [];
-      }
-    });
-    Store.state.columns = columns;
-    // 초기 데이터 기준으로 id 카운터 설정
-    Store.initializeIdCounters();
-    // 첫 렌더링
-    renderColumns();
-  });
-
-// 2) View 업데이트 함수
-const renderColumns = () => {
-  const columnContainer = document.querySelector(".column-container");
-  // Store에 있는 columns 데이터를 가져와서
-  // columnsComponent 컴포넌트 함수(HTML 문자열 생성)를 호출
-  columnContainer.innerHTML = columnsComponent(Store.getState().columns);
-};
-
-// 3) 상태 변경 감지 (구독)
+dataInitialize();
+// 상태 변경 감지 (구독)
 Store.subscribe(renderColumns);
 
 //
 
 // 히스토리 모달 등장하거나 사라지는 구현
-// const historyOpenBtn = document.querySelector(".header__history-icon");
 const historyModal = document.querySelector(".history-modal-container");
-// const historyCloseBtn = document.querySelector(".history-modal__header-close");
 
-// 히스토리 모달 열고 닫기
+// 히스토리 모달 열기
 const openHistoryModal = () => {
   historyModal.style.cssText = `
     display: grid;
@@ -58,6 +32,7 @@ const openHistoryModal = () => {
   `;
 };
 
+// 히스토리 모달 닫기
 const closeHistoryModal = () => {
   historyModal.style.cssText += "animation: slideOut 0.5s forwards;";
 };
@@ -65,31 +40,18 @@ const closeHistoryModal = () => {
 //
 
 // 히스토리 삭제 모달 이벤트
-// const historyDeleteBtn = document.querySelector(".history-modal__footer-btn");
 const historyDeleteModal = document.querySelector(".history-delete-modal");
-// const historyDeleteCancelBtn = document.querySelector("#cancel-delete-btn");
 const historyDeleteApproveBtn = document.querySelector(".confirm-delete-btn");
 
-// 모달 열고 닫기
+// 삭제 모달 열기
 const showModal = () => {
   historyDeleteModal.showModal();
 };
 
+// 삭제 모달 닫기
 const deleteModal = () => {
   historyDeleteModal.close();
 };
-
-//
-
-// 카드 생성
-const createCardBtn = document.querySelector(".create-card-btn");
-const deleteColumnBtn = document.querySelector("#delete-column-btn");
-
-const cardInputTitle = document.querySelector(".card-input-title");
-const cardInputDescription = document.querySelector(".card-input-description");
-
-const deleteCardBtn = document.querySelector(".task-create-card__btn-cancel");
-const addCardBtn = document.querySelector(".task-create-card__btn-create");
 
 //
 
@@ -139,7 +101,6 @@ document.body.addEventListener("click", (event) => {
       const descriptionInput = columnElement.querySelector(
         ".card-input-description"
       );
-      // console.log(titleInput.value, descriptionInput.value);
       // 카드 데이터 생성
       const cardData = {
         id: cardId,
@@ -188,8 +149,6 @@ document.body.addEventListener("click", (event) => {
       const descriptionInput = modifyCardElement.querySelector(
         ".task-card__description"
       );
-
-      console.log(titleInput.innerText, descriptionInput.innerText);
 
       const oldData = {
         id: modifyCardId,
