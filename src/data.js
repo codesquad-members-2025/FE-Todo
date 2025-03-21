@@ -1,4 +1,4 @@
-import { renderColumns } from "./store/view.js";
+import { renderColumns, renderHistory } from "./store/view.js";
 import { Store } from "./store/store.js";
 
 export const dataInitialize = async () => {
@@ -14,6 +14,9 @@ export const dataInitialize = async () => {
     Store.state.columns = columns;
     Store.initializeIdCounters();
     renderColumns();
+
+    Store.state.history = [];
+    renderHistory();
   } catch (error) {
     console.error("데이터 로드 에러:", error);
   }

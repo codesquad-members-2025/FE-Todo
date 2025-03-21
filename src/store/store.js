@@ -107,7 +107,6 @@ class StoreClass {
       }
       return column;
     });
-    this.addHistory(`Card updated.`);
   }
 
   // 히스토리 추가: emitChange() 제거 - handleAction에서 한 번만 호출
@@ -137,6 +136,7 @@ class StoreClass {
         return;
     }
     this.emitChange();
+    console.log(this.state.history);
   }
 }
 

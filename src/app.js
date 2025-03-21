@@ -10,7 +10,7 @@ import "./css/style.css";
 import { Actions } from "./store/actions.js";
 import { Dispatcher } from "./store/dispatcher.js";
 import { Store } from "./store/store.js";
-import { renderColumns } from "./store/view.js";
+import { renderColumns, renderHistory } from "./store/view.js";
 
 import { dataInitialize } from "./data.js";
 
@@ -18,6 +18,7 @@ import { dataInitialize } from "./data.js";
 dataInitialize();
 // 상태 변경 감지 (구독)
 Store.subscribe(renderColumns);
+Store.subscribe(renderHistory);
 
 //
 
