@@ -1,6 +1,6 @@
 // Task Card Component
-export const cardComponent = ({ title, description, author }) => `
-  <div class="task-card flex flex-justify-space-between">
+export const cardComponent = ({ id, title, description, author }) => `
+  <div class="task-card flex flex-justify-space-between card-id=${id}">
     <div class="task-card__left">
       <h1 class="task-card__title">${title}</h1>
       <h2 class="task-card__description">${description}</h2>
