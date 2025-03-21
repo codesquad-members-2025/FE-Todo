@@ -169,12 +169,13 @@ button {
 .activity-list__list:last-child {
   border-bottom: none;
 }
-.activity-list img {
+.activity-list__list img {
   flex-grow: 0;
   flex-shrink: 0;
   width: 40px;
   height: 40px;
-  object-fit: cover; /* 비율 유지하면서 크기 조정 */
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .popover-footer {
