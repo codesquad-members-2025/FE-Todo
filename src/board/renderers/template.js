@@ -4,10 +4,10 @@ import { stringToNode } from '../../shared/utils/dom.js';
 function createColumn(id, title, taskCount) {
   return stringToNode(`
   <section class="kanban-column flex-col" id="${id}">
-    <div class="kanban-column-header">
+    <div class="kanban-column-header flex-content-between">
       <div class="kanban-column-title flex-item-center">
         <h2 class="text-bold tx-b16">${title}</h2>
-        <div class="task-counter flex-item-center">
+        <div class="task-counter flex-item-center flex-content-center">
           <span class="text-weak tx-m12">${taskCount}</span>
         </div>
       </div>
@@ -47,6 +47,7 @@ const taskForm = `
   </article>
 `;
 
+//TODO edit/create form을 하나의 form 레이아웃으로 재사용
 function createEditForm(title, content) {
   return stringToNode(`
   <article class="task-form task-common flex-col">

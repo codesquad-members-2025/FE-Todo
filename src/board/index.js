@@ -1,10 +1,11 @@
 import { renderBoard } from './renderers/column.js';
 import { initKanbanEvents, initSortButton } from './handlers/eventHandlers.js';
-import { loadColumnsData } from './store.js';
+import columnStore from './store.js';
 
 // 보드 초기화
 async function initializeBoard() {
-  const columnsData = await loadColumnsData();
+  await columnStore.fetchAndStoreColumnData();
+  const columnsData = columnStore.getColumnsData();
 
   renderBoard(columnsData);
   initKanbanEvents();
