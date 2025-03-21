@@ -1,17 +1,21 @@
-import { renderKanban } from '../components/kanban-renderer.js';
+import { updateKanbanBoard } from '../components/kanban-renderer.js';
 
 const Store = (function () {
-    let kanbanNodes = null;
+    let store = null;
 
-    if (kanbanNodes === null) initStore();
+    if (store === null) initStore();
 
     const setData = ({ columns }) => {
-        kanbanNodes = columns;
+        store = columns;
         renderData();
     }
 
+    const getData = () => {
+        return store;
+    }
+
     const renderData = () => {
-        renderKanban(kanbanNodes);
+        updateKanbanBoard(getData());
     }
 
     const addCard = (columnId, cardData) => {
@@ -27,7 +31,17 @@ const Store = (function () {
     }
 
     const removeColumn = (columnId) => {
-        kanbanNodes = kanbanNodes.filter(column => column.id != columnId)
+        store = store.filter(column => column.id != columnId)
+        renderData();
+    }
+
+    const moveCard = (startPosition, currentPosition) => {
+        const [startX, startY] = startPosition;
+        const [currentX, currentY] = currentPosition;
+        
+        const targetCard = store[startX].cards.splice(startY, 1)[0];
+        store[currentX].cards.splice(currentY, 0, targetCard);
+
         renderData();
     }
 
@@ -42,10 +56,10 @@ const Store = (function () {
 
     const _findColumn = ({ columnId = null, cardId = null}) => {
         // 컬럼 아이디가 있을 경우
-        if (columnId) return kanbanNodes.find(column => column.id == columnId);
+        if (columnId) return store.find(column => column.id == columnId);
         // 카드 아이디만 있을 경우
         else if (cardId) {
-            return kanbanNodes.find(column => {
+            return store.find(column => {
                 return column.cards.find(card => card.id == cardId);
             });
         }
@@ -66,7 +80,7 @@ const Store = (function () {
     }
 
     const _getColumnTitle = (columnId) => {
-        return kanbanNodes.find(column => column.id == columnId).title;
+        return store.find(column => column.id == columnId).title;
     }
 
     return {
@@ -75,7 +89,9 @@ const Store = (function () {
         addCard,
         removeCard,
         removeColumn,
-        getTextInfo
+        getTextInfo,
+        getData,
+        moveCard
     }
 })();
 

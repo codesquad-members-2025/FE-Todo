@@ -1,42 +1,79 @@
 {
-    "columns": [
-      {
-        "id": 1,
-        "title": "해야할 일",
-        "count": 2,
-        "cards": [
-          {
-            "id": 101,
-            "title": "GitHub 공부하기",
-            "description": "add, commit, push",
-            "author": "web"
-          },
-          {
-            "id": 102,
-            "title": "블로그에 포스팅할 것",
-            "description": "* GitHub 공부내용\n* 모던 자바스크립트 1장 공부내용",
-            "author": "web"
-          }
-        ]
-      },
-      {
-        "id": 2,
-        "title": "하고 있는 일",
-        "count": 1,
-        "cards": [
-          {
-            "id": 201,
-            "title": "HTML/CSS 공부하기",
-            "description": "input 태그 실습",
-            "author": "web"
-          }
-        ]
-      },
-      {
-        "id": 3,
-        "title": "완료한 일",
-        "count": 0,
-        "cards": []
-      }
-    ]
-  }
+  "columns": [
+    {
+      "id": 1,
+      "title": "해야할 일",
+      "count": 2,
+      "cards": [
+        {
+          "id": 101,
+          "title": "리액트 Hooks 학습",
+          "description": "useState, useEffect, useContext 예제 만들기",
+          "author": "frontend"
+        },
+        {
+          "id": 102,
+          "title": "TypeScript 타입 시스템",
+          "description": "제네릭, 유틸리티 타입, 타입 가드 정리하기",
+          "author": "frontend"
+        },
+        {
+          "id": 103,
+          "title": "Jest로 단위 테스트 작성",
+          "description": "- 컴포넌트 테스트\n- 유틸 함수 테스트\n- 커버리지 80% 달성",
+          "author": "test"
+        },
+        {
+          "id": 104,
+          "title": "성능 최적화",
+          "description": "- 메모이제이션\n- 레이아웃 스래싱 해결\n- 번들 사이즈 분석",
+          "author": "performance"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "하고 있는 일",
+      "count": 1,
+      "cards": [
+        {
+          "id": 201,
+          "title": "드래그 앤 드롭 구현",
+          "description": "- 애니메이션 효과\n- 상태 관리\n- 경계값 처리",
+          "author": "feature"
+        },
+        {
+          "id": 202,
+          "title": "API 연동 작업",
+          "description": "- 에러 핸들링\n- 로딩 상태 처리\n- 캐시 전략 수립",
+          "author": "backend"
+        },
+        {
+          "id": 203,
+          "title": "접근성 개선",
+          "description": "- ARIA 레이블 추가\n- 키보드 인터랙션\n- 스크린리더 테스트",
+          "author": "a11y"
+        },
+        {
+          "id": 204,
+          "title": "상태 관리 리팩토링",
+          "description": "- 전역 상태 정리\n- 불필요한 리렌더링 제거\n- 상태 정규화",
+          "author": "refactor"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "완료한 일",
+      "count": 0,
+      "cards": [
+        {
+          "id": 301,
+          "title": "CI/CD 파이프라인 구축",
+          "description": "- GitHub Actions 설정\n- 자동 배포 환경 구성\n- 테스트 자동화",
+          "author": "devops"
+        }
+      ]
+    }
+  ]
+}
