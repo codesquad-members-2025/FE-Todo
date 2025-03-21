@@ -4,6 +4,7 @@ import { taskCard } from "../component/CardUi.js";
 import { inputModal } from "../component/inputModalUi.js";
 import { inputModalController } from "./inputmodalController.js";
 import { historyBarController } from "./control-Historybar.js";
+import { calumnCount } from "./calumnCount.js";
 
 export const taskModal = {
   cardModal: null,
@@ -31,6 +32,7 @@ export const taskModal = {
     const timeStamp = Date.now().toString();
     store.removeTask(this.targetSection, this.targetId);
     const taskDataArr = [this.titleValue, this.targetSection, timeStamp];
+    calumnCount.updateCardNumbers(this.targetSection);
     historyBarController.addHisotryLog(taskDataArr, "삭제");
     taskCard.delete(this.targetId);
     DeleteAlert.closeDeleteModal();
@@ -45,6 +47,7 @@ export const taskModal = {
         taskCard.create(id, title, content);
       });
       taskCard.draw(dataType);
+      calumnCount.updateCardNumbers(dataType);
     });
   },
   parseCardModal: function () {
@@ -126,6 +129,7 @@ export const taskModal = {
     const card = event.target;
     this.setTargetCard(card);
     store.removeTask(this.currentSection, this.targetId);
+    calumnCount.updateCardNumbers(this.currentSection);
     const id = this.underCard ? this.underCard.id - 1 : Infinity;
     const taskObj = {
       id: id.toString(),
@@ -134,6 +138,7 @@ export const taskModal = {
     }; //id는 들어갈 카드의 다음 id 를 추적하여 생성한다.
 
     store.addTask(this.targetSection, taskObj);
+    calumnCount.updateCardNumbers(this.targetSection);
 
     const taskDataArr = [this.titleValue, this.currentSection, timeStamp];
     historyBarController.addHisotryLog(taskDataArr, "이동", this.targetSection);

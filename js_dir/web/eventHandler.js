@@ -4,7 +4,7 @@ import { inputModal } from "../component/inputModalUi.js";
 import { historyBarController } from "../controller/control-Historybar.js";
 import { inputModalController } from "../controller/inputmodalController.js";
 import { taskModal } from "../controller/taskModalController.js";
-//얘도 아래의 kanban에 이벤트 위임으로 넣어보자(리팩토링 사항) -> 동적으로 바뀌는 사항이 아니라 바꿀 필요있을까?
+
 export const initialize = function () {
   const sections = document.querySelectorAll(".columnlist__col");
   sections.forEach((section) => {
