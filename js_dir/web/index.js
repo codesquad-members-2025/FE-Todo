@@ -16,6 +16,7 @@ initialize();
 kanbanDetector();
 historyBar();
 cardDragAndDrop();
+
 // document.addEventListener("DOMContentLoaded", () => {
 //   taskModal.renderTaskCards();
 // });

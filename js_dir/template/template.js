@@ -70,3 +70,10 @@ export const editModal = function (title, content) {
 </div>`;
   return editModal;
 };
+
+export const makeSortBtn = function (btnSort) {
+  const sortBtn = `
+  <img src="/icons/sort.svg" />${btnSort}
+  `;
+  return sortBtn;
+};

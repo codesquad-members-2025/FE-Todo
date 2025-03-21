@@ -29,6 +29,18 @@ h3 {
     0px 16px 16px rgba(110, 128, 145, 0.24);
 }
 
+.header-first {
+  display: flex;
+  gap: 16px;
+}
+
+.sort-cards-btn {
+  border: 1px solid #bec1d5;
+  color: #4e4b66;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
 button {
   all: unset; /* 기본 스타일(테두리, 배경, 패딩, 마진 등) 모두 초기화 */
   cursor: pointer;
@@ -91,7 +103,7 @@ button {
 }
 
 .columnlist__count {
-  border: 1px solid #eff0f6;
+  border: 1px solid #bec1d5;
   color: #a0a3bd;
   border-radius: 8px;
   padding: 5px 8px;

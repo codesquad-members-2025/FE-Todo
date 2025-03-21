@@ -5,6 +5,7 @@ import { inputModal } from "../component/inputModalUi.js";
 import { inputModalController } from "./inputmodalController.js";
 import { historyBarController } from "./control-Historybar.js";
 import { calumnCount } from "./calumnCount.js";
+import { makeSortBtn } from "../template/template.js";
 
 export const taskModal = {
   cardModal: null,
@@ -144,5 +145,32 @@ export const taskModal = {
     historyBarController.addHisotryLog(taskDataArr, "이동", this.targetSection);
     card.removeEventListener("dragend", this.handleDragEnd);
     card.classList.remove("dragging");
+  },
+
+  sortCard(sortBtn) {
+    //입수한 버튼 의 id 추적,, 분기별로 로직 구현
+    let sortBtnNode = null;
+    let sortBtnForm = null;
+    const btnId = sortBtn.id;
+    switch (btnId) {
+      case "oldest":
+        sortBtnNode = this.createSortButton("newest");
+        sortBtnForm = makeSortBtn("최신순");
+        break;
+      case "newest":
+        sortBtnNode = this.createSortButton("oldest");
+        sortBtnForm = makeSortBtn("생성순");
+        break;
+    }
+    sortBtnNode.innerHTML = sortBtnForm;
+    sortBtn.replaceWith(sortBtnNode);
+  },
+
+  createSortButton(id) {
+    const button = document.createElement("button");
+    button.id = id; // ✅ id 속성 추가
+    button.classList.add("sort-cards-btn");
+
+    return button;
   },
 };
