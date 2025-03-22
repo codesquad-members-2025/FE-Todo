@@ -51,12 +51,12 @@ const dragManager = {
         this.floatingCard.style.top = `${clientY - this.dragOffsetY}px`;
     },
 
-    updateCurrentPosition(clientX, clientY) {
-        this.currentPosition = [clientX, clientY];
+    updateCurrentPosition(currentPosition) {
+        this.currentPosition = currentPosition;
     },
-
-    updateRecentPosition(clientX, clientY) {
-        this.recentPosition = [clientX, clientY];
+    
+    updateRecentPosition(recentPosition) {
+        this.recentPosition = recentPosition;
     },
 
     reset() {
@@ -85,9 +85,6 @@ const dragLayoutState = {
     cardMatrix: null,
     columnBoundaries: null,
     cardBoundaryMatrix: null,
-
-    updatedColumnElements: null,
-    updatedCardMatrix: null,
 
     initialize() {
         this.kanbanDOM = getKanbanElement();
@@ -128,25 +125,15 @@ const cardLocationState = {
 
 
     initialize() {
-        this.cardRectTopMatrix = getCardPositionMatrix(dragLayoutState.cardMatrix);
+        this.cardRectTopMatrix = getCardRectTopMatrix(dragLayoutState.cardMatrix);
     },
 
     updateDraggedCardTransformValues(startPosition, currentPosition) {
         this.draggedCardTransformValues = calcDraggedCardTransformValue(...startPosition, ...currentPosition);
     },
 
-    setDraggedCardStartTop(startPosition) {
-        const [x, y] = startPosition;
-        this.draggedCardStartTop = this.cardRectTopMatrix[x][y];
-    },
-
-    setDraggedCardCurrentTop(currentPosition) {
-        const [x, y] = currentPosition;
-        this.draggedCardCurTop = this.cardRectTopMatrix[x][y];
-    },
-
     updateCardTransformYMatrix(startPosition, currentPosition) {
-        this.cardTransformYMatrix = getCardOffset(startPosition, currentPosition);
+        this.cardTransformYMatrix = getCardTransformYMatrix(startPosition, currentPosition);
     },
 
     reset() {
@@ -172,7 +159,7 @@ function handleMousedown(kanban) {
         dragLayoutState.adjustStartColumnLayout(getCurPosition(e)[0]);
 
         dragManager.initialize(e, draggedCard.getBoundingClientRect(), draggedCard);
-        dragManager.updateRecentPosition(...getCurPosition(e));
+        dragManager.updateRecentPosition(getCurPosition(e));
 
         cardLocationState.initialize();
     });
@@ -181,7 +168,7 @@ function handleMousemove(html) {
     html.addEventListener('mousemove', (e) => {
         if (!dragManager.isDragging) return;
         dragManager.updateFloatingCardLocation(e.clientX, e.clientY);
-        dragManager.updateCurrentPosition(...getCurPosition(e));
+        dragManager.updateCurrentPosition(getCurPosition(e));
 
         const startPosition = dragManager.startPosition;
         const currentPosition = dragManager.currentPosition;
@@ -189,7 +176,9 @@ function handleMousemove(html) {
 
         if (isSamePosition(...currentPosition, ...recentPosition)) return;
 
-        dragManager.updateRecentPosition(...getCurPosition(e));
+        dragManager.updateRecentPosition(getCurPosition(e));
+        
+        console.log(dragManager.currentPosition)
 
         cardLocationState.updateCardTransformYMatrix(startPosition, currentPosition);
         cardLocationState.updateDraggedCardTransformValues(startPosition, currentPosition);
@@ -273,7 +262,7 @@ function getCardBoundaries(cards) {
  * ----------------------
  * 카드 위치 계산 관련 함수들
  */
-function getCardPositionMatrix(cardMatrix) {
+function getCardRectTopMatrix(cardMatrix) {
     return cardMatrix.reduce((locationMatrix, cards) => {
         locationMatrix.push(getCardLocation(cards));
         return locationMatrix;
@@ -286,7 +275,7 @@ function getCardLocation(cards) {
         return locations;
     }, []);
 }
-function getCardOffset(startPosition, currentPosition) {
+function getCardTransformYMatrix(startPosition, currentPosition) {
     const [startX, startY] = startPosition;
     const [curX, curY] = currentPosition;
     const draggedCardHeight = dragManager.draggedCard.getBoundingClientRect().height;
@@ -297,66 +286,83 @@ function getCardOffset(startPosition, currentPosition) {
     for (let x = 0; x < columns.length; x++) {
         for (let y = 0; y < cardMatrix[x].length; y++) {
             if (!verticalOffsetMatrix[x]) verticalOffsetMatrix[x] = [];
-
-            if (startX === curX) {
-                if (x !== curX) verticalOffsetMatrix[x][y] = 0;
-                else verticalOffsetMatrix[x][y] = calcSameColumnOffset(y, startY, curY, draggedCardHeight);
-            }
-
-            else if (startX !== curX) {
-                if (x === startX) {
-                    verticalOffsetMatrix[x][y] = calcStartColumnOffset(y, startY, draggedCardHeight);
-                }
-                else if (x === curX) {
-                    verticalOffsetMatrix[x][y] = calcCurrentColumnOffset(y, curY, draggedCardHeight);
-                }
-                else {
-                    verticalOffsetMatrix[x][y] = 0;
-                }
-            }
+            verticalOffsetMatrix[x][y] = calcCardTransformY(x, y, startX, startY, curX, curY, draggedCardHeight);
         }
     }
 
     return verticalOffsetMatrix;
 }
-function calcDraggedCardTransformValue(startX, startY, curX, curY) {
-    const columnElements = dragLayoutState.columnElements;
-    const { left: startLeft } = columnElements[startX].getBoundingClientRect();
-    const { left: curLeft } = columnElements[curX].getBoundingClientRect();
-    const transformX = curLeft - startLeft;
-    
-    const cardRectTopMatrix = cardLocationState.cardRectTopMatrix;
-    const startTop = cardRectTopMatrix[startX][startY];
-    const curTop = cardRectTopMatrix[curX][curY];
-
-    const transformY = curTop - startTop;
-
-    return [transformX, transformY];
-}
-
 /**
  * Offset Calculation
  * ----------------
- * 카드 이동 거리 계산 함수들
+ * 카드 이동 거리 계산 함수
  */
-function calcSameColumnOffset(y, startY, curY, draggedCardHeight) {
-    const distance = draggedCardHeight + CARD_GAP;
+function calcDraggedCardTransformValue(startX, startY, curX, curY) {
+    const columnElements = dragLayoutState.columnElements;
+    const cardMatrix = dragLayoutState.cardMatrix;
+    const cardRectTopMatrix = cardLocationState.cardRectTopMatrix;
+    const curColumnLength = cardMatrix[curX].length;
 
-    if (y < startY && y >= curY) return distance;
-    else if (y > startY && y <= curY) return -distance;
-    else return 0
+    let isEndOfColumn = false;
+    if (curY === curColumnLength) {
+        curY--;
+        isEndOfColumn = true;
+    }
+
+    // transformX 구하기
+    const { left: startLeft } = columnElements[startX].getBoundingClientRect();
+    const { left: curLeft } = columnElements[curX].getBoundingClientRect();
+
+    const transformX = curLeft - startLeft;
+
+    // transformY 구하기
+    const startTop = cardRectTopMatrix[startX][startY];
+
+    // currentX가 카드가 없는 컬럼일 때
+    if (curColumnLength === 0) {
+        const rect = columnElements[curX].querySelector('.column-header').getBoundingClientRect();
+        const curTop = rect.top + rect.height + CARD_GAP;
+        const transformY = curTop - startTop;
+        return [transformX, transformY];
+    }
+    
+    // currentX가 카드가 있는 컬럼일 때
+    const curTop = cardRectTopMatrix[curX][curY];
+    // draggedCrad, currentTargetCard의 높이 차이 구하기
+    let startCardHeight = cardMatrix[startX][startY].getBoundingClientRect().height;
+    let curCardHeight = cardMatrix[curX][curY].getBoundingClientRect().height;
+    const cardHeightGap = curCardHeight - startCardHeight;
+    // 마지막 카드 뒤에 쌓일 때
+    const lastCardHeight = cardMatrix[curX][curY].getBoundingClientRect().height;
+
+    const transformY = curTop - startTop + 
+        (startX === curX && startY < curY ? cardHeightGap : 0) +
+        (isEndOfColumn ? lastCardHeight + CARD_GAP : 0);
+    return [transformX, transformY];
 }
-function calcStartColumnOffset(y, startY, draggedCardHeight) {
+function calcCardTransformY(x, y, startX, startY, curX, curY, draggedCardHeight) {
     const distance = draggedCardHeight + CARD_GAP;
 
-    if (y < startY) return 0;
-    else if (y >= startY) return -distance;
-}
-function calcCurrentColumnOffset(y, curY, draggedCardHeight) {
-    const distance = draggedCardHeight + CARD_GAP;
-
-    if (y < curY) return 0;
-    else if (y >= curY) return distance;
+    if (startX === curX) {
+        if (x !== curX) return 0;
+        else {
+            if (y < startY && y >= curY) return distance;
+            else if (y > startY && y <= curY) return -distance;
+            else return 0;
+        }
+    } else {
+        if (x === startX) {
+            if (y < startY) return 0;
+            else if (y >= startY) return -distance;
+        }
+        else if (x === curX) {
+            if (y < curY) return 0;
+            else if (y >= curY) return distance;
+        }
+        else {
+            return 0;
+        }
+    }
 }
 
 /**

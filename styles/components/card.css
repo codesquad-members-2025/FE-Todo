@@ -41,7 +41,7 @@
 }
 
 .card:active {
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .floating-card {
