@@ -1,4 +1,5 @@
 import KanbanStore from '../store/kanban-store.js';
+import createLogEntry from '../components/history-logger.js';
 
 export default function initDragEvent() {
     const kanban = document.querySelector('.kanban');
@@ -46,7 +47,7 @@ const DragStateManager = {
     updateCurrentPosition(currentPosition) {
         this.currentPosition = currentPosition;
     },
-    
+
     updateRecentPosition(recentPosition) {
         this.recentPosition = recentPosition;
     },
@@ -174,8 +175,21 @@ function handleMousemove(html) {
     });
 }
 function handleMouseup(html) {
-    html.addEventListener('mouseup', () => {
+    html.addEventListener('mouseup', ({ target }) => {
         if (!DragStateManager.isDragging) return;
+        DragStateManager.draggedCard.dataset.id
+
+        const colums = KanbanLayoutManager.columnElements;
+        const startColumnIdx = DragStateManager.startPosition[0];
+        const curColumnIdx = DragStateManager.currentPosition[0];
+        const logInfo = {
+            actionType: 'cardMove',
+            cardId: DragStateManager.draggedCard.dataset.id,
+            columnId: colums[startColumnIdx].dataset.id,
+            afterColumnId: colums[curColumnIdx].dataset.id
+        }
+        createLogEntry(logInfo);
+    
         KanbanStore.moveCard(DragStateManager.startPosition, DragStateManager.currentPosition);
         DragStateManager.reset();
         CardPositionManager.reset();
@@ -311,7 +325,7 @@ function calcDraggedCardTransformValue(startX, startY, curX, curY) {
         const transformY = curTop - startTop;
         return [transformX, transformY];
     }
-    
+
     // currentX가 카드가 있는 컬럼일 때
     const curTop = cardRectTopMatrix[curX][curY];
     // draggedCrad, currentTargetCard의 높이 차이 구하기
@@ -321,7 +335,7 @@ function calcDraggedCardTransformValue(startX, startY, curX, curY) {
     // 마지막 카드 뒤에 쌓일 때
     const lastCardHeight = cardMatrix[curX][curY].getBoundingClientRect().height;
 
-    const transformY = curTop - startTop + 
+    const transformY = curTop - startTop +
         (startX === curX && startY < curY ? cardHeightGap : 0) +
         (isEndOfColumn ? lastCardHeight + CARD_GAP : 0);
     return [transformX, transformY];
