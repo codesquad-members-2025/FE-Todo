@@ -14,18 +14,10 @@ const COLUMN_GAP = 24;  // px
 const CARD_GAP = 10;   // px
 
 /**
- * Drag State Managers
- * ==================
+ * DragStateManager
+ * - 드래그 상태 및 관련 요소 관리
  */
-
-/**
- * 드래그 중인 카드의 상태 관리
- * --------------------------
- * - 드래그 중인 카드(복제본)의 참조 및 상태
- * - 마우스 오프셋 값
- * - 드래그 시작/현재/이전 위치 좌표
- */
-const dragManager = {
+const DragStateManager = {
     draggedCard: null,
     floatingCard: null,
     isDragging: false,
@@ -73,13 +65,11 @@ const dragManager = {
 }
 
 /**
- * 칸반 보드 레이아웃 상태 관리
- * -------------------------
- * - DOM 요소 참조 (칸반, 컬럼, 카드)
- * - 경계선 좌표 정보
- * - 레이아웃 업데이트 및 초기화
+ * KanbanLayoutManager
+ * - 칸반 보드의 구조적 상태 관리
+ * - DOM 요소 참조 및 경계값 계산
  */
-const dragLayoutState = {
+const KanbanLayoutManager = {
     kanbanDOM: null,
     columnElements: null,
     cardMatrix: null,
@@ -108,13 +98,11 @@ const dragLayoutState = {
 }
 
 /**
- * 카드 위치 정보 상태 관리
- * ---------------------
- * - 카드의 초기 위치 정보
- * - 수평/수직 이동 거리 매트릭스
- * - 위치 정보 업데이트 및 초기화
+ * CardPositionManager
+ * - 카드들의 위치 계산 및 변환값 관리
+ * - 드래그 중 카드들의 위치 업데이트
  */
-const cardLocationState = {
+const CardPositionManager = {
     cardRectTopMatrix: null,
     cardTransformYMatrix: null,
 
@@ -125,7 +113,7 @@ const cardLocationState = {
 
 
     initialize() {
-        this.cardRectTopMatrix = getCardRectTopMatrix(dragLayoutState.cardMatrix);
+        this.cardRectTopMatrix = getCardRectTopMatrix(KanbanLayoutManager.cardMatrix);
     },
 
     updateDraggedCardTransformValues(startPosition, currentPosition) {
@@ -155,33 +143,31 @@ function handleMousedown(kanban) {
 
         appendFloatingCardElement(draggedCard);
 
-        dragLayoutState.initialize();
-        dragLayoutState.adjustStartColumnLayout(getCurPosition(e)[0]);
+        KanbanLayoutManager.initialize();
+        KanbanLayoutManager.adjustStartColumnLayout(getCurPosition(e)[0]);
 
-        dragManager.initialize(e, draggedCard.getBoundingClientRect(), draggedCard);
-        dragManager.updateRecentPosition(getCurPosition(e));
+        DragStateManager.initialize(e, draggedCard.getBoundingClientRect(), draggedCard);
+        DragStateManager.updateRecentPosition(getCurPosition(e));
 
-        cardLocationState.initialize();
+        CardPositionManager.initialize();
     });
 }
 function handleMousemove(html) {
     html.addEventListener('mousemove', (e) => {
-        if (!dragManager.isDragging) return;
-        dragManager.updateFloatingCardLocation(e.clientX, e.clientY);
-        dragManager.updateCurrentPosition(getCurPosition(e));
+        if (!DragStateManager.isDragging) return;
+        DragStateManager.updateFloatingCardLocation(e.clientX, e.clientY);
+        DragStateManager.updateCurrentPosition(getCurPosition(e));
 
-        const startPosition = dragManager.startPosition;
-        const currentPosition = dragManager.currentPosition;
-        const recentPosition = dragManager.recentPosition;
+        const startPosition = DragStateManager.startPosition;
+        const currentPosition = DragStateManager.currentPosition;
+        const recentPosition = DragStateManager.recentPosition;
 
         if (isSamePosition(...currentPosition, ...recentPosition)) return;
 
-        dragManager.updateRecentPosition(getCurPosition(e));
-        
-        console.log(dragManager.currentPosition)
+        DragStateManager.updateRecentPosition(getCurPosition(e));
 
-        cardLocationState.updateCardTransformYMatrix(startPosition, currentPosition);
-        cardLocationState.updateDraggedCardTransformValues(startPosition, currentPosition);
+        CardPositionManager.updateCardTransformYMatrix(startPosition, currentPosition);
+        CardPositionManager.updateDraggedCardTransformValues(startPosition, currentPosition);
 
         animatedCards();
         animateDraggedCard();
@@ -189,11 +175,11 @@ function handleMousemove(html) {
 }
 function handleMouseup(html) {
     html.addEventListener('mouseup', () => {
-        if (!dragManager.isDragging) return;
-        KanbanStore.moveCard(dragManager.startPosition, dragManager.currentPosition);
-        dragManager.reset();
-        cardLocationState.reset();
-        dragLayoutState.reset();
+        if (!DragStateManager.isDragging) return;
+        KanbanStore.moveCard(DragStateManager.startPosition, DragStateManager.currentPosition);
+        DragStateManager.reset();
+        CardPositionManager.reset();
+        KanbanLayoutManager.reset();
     });
 }
 
@@ -278,9 +264,9 @@ function getCardLocation(cards) {
 function getCardTransformYMatrix(startPosition, currentPosition) {
     const [startX, startY] = startPosition;
     const [curX, curY] = currentPosition;
-    const draggedCardHeight = dragManager.draggedCard.getBoundingClientRect().height;
-    const columns = dragLayoutState.columnElements;
-    const cardMatrix = dragLayoutState.cardMatrix;
+    const draggedCardHeight = DragStateManager.draggedCard.getBoundingClientRect().height;
+    const columns = KanbanLayoutManager.columnElements;
+    const cardMatrix = KanbanLayoutManager.cardMatrix;
     const verticalOffsetMatrix = [];
 
     for (let x = 0; x < columns.length; x++) {
@@ -298,9 +284,9 @@ function getCardTransformYMatrix(startPosition, currentPosition) {
  * 카드 이동 거리 계산 함수
  */
 function calcDraggedCardTransformValue(startX, startY, curX, curY) {
-    const columnElements = dragLayoutState.columnElements;
-    const cardMatrix = dragLayoutState.cardMatrix;
-    const cardRectTopMatrix = cardLocationState.cardRectTopMatrix;
+    const columnElements = KanbanLayoutManager.columnElements;
+    const cardMatrix = KanbanLayoutManager.cardMatrix;
+    const cardRectTopMatrix = CardPositionManager.cardRectTopMatrix;
     const curColumnLength = cardMatrix[curX].length;
 
     let isEndOfColumn = false;
@@ -371,9 +357,9 @@ function calcCardTransformY(x, y, startX, startY, curX, curY, draggedCardHeight)
  * 카드 애니메이션 관련 함수들
  */
 function animatedCards() {
-    const columns = dragLayoutState.columnElements;
-    const cardMatrix = dragLayoutState.cardMatrix;
-    const verticalOffsetMatrix = cardLocationState.cardTransformYMatrix;
+    const columns = KanbanLayoutManager.columnElements;
+    const cardMatrix = KanbanLayoutManager.cardMatrix;
+    const verticalOffsetMatrix = CardPositionManager.cardTransformYMatrix;
 
     for (let x = 0; x < columns.length; x++) {
         for (let y = 0; y < cardMatrix[x].length; y++) {
@@ -386,8 +372,8 @@ function animatedCards() {
     }
 }
 function animateDraggedCard() {
-    const draggedCard = dragManager.draggedCard;
-    const [transformX, transformY] = cardLocationState.draggedCardTransformValues;
+    const draggedCard = DragStateManager.draggedCard;
+    const [transformX, transformY] = CardPositionManager.draggedCardTransformValues;
 
     draggedCard.style.transition = 'transform 0.2s ease-in-out';
     draggedCard.style.transform = `translate(${transformX}px, ${transformY}px)`
@@ -399,10 +385,10 @@ function animateDraggedCard() {
  * 유틸리티 함수
  */
 function getCurPosition({ clientX, clientY }) {    // 현재 위치를 찾는 함수
-    const columnBoundaries = dragLayoutState.columnBoundaries;
+    const columnBoundaries = KanbanLayoutManager.columnBoundaries;
     const targetColumnIndex = columnBoundaries.findIndex(boundary => clientX < boundary);
 
-    const cardBoundaries = dragLayoutState.cardBoundaryMatrix[targetColumnIndex];
+    const cardBoundaries = KanbanLayoutManager.cardBoundaryMatrix[targetColumnIndex];
     const targetCardIndex = cardBoundaries.findIndex(boundary => clientY < boundary);
 
     // 경계를 넘어가면 마지막 위치 반환
