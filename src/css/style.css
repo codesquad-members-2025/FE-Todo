@@ -345,3 +345,20 @@ body {
 .task-create-card__btn-cancel {
   background-color: var(--surface-alt);
 }
+
+.task-card__right-delete-icon {
+  cursor: pointer;
+}
+
+.task-card__right-modify-icon {
+  cursor: pointer;
+}
+
+.task-modify-card__btn-create {
+  background-color: var(--surface-brand);
+  color: white;
+}
+
+.task-modify-card__btn-cancel {
+  background-color: var(--surface-alt);
+}
