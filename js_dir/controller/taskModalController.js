@@ -123,7 +123,8 @@ export const taskModal = {
     if (!draggingCard) return;
     draggingCard.classList.add("dragging");
     this.currentSection = draggingCard.closest(".columnlist__col").dataset.type;
-    draggingCard.addEventListener("dragend", this.handleDragEnd.bind(this));
+    this.boundhandleDragEnd = this.handleDragEnd.bind(this);
+    draggingCard.addEventListener("dragend", this.boundhandleDragEnd);
   },
   handleDragEnd(event) {
     const timeStamp = Date.now().toString();
@@ -143,7 +144,7 @@ export const taskModal = {
 
     const taskDataArr = [this.titleValue, this.currentSection, timeStamp];
     historyBarController.addHisotryLog(taskDataArr, "이동", this.targetSection);
-    card.removeEventListener("dragend", this.handleDragEnd);
+    card.removeEventListener("dragend", this.boundhandleDragEnd);
     card.classList.remove("dragging");
   },
 
