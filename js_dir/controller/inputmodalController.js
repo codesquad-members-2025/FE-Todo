@@ -1,6 +1,7 @@
 import { taskCard } from "../component/CardUi.js";
 import { store } from "../store/store.js";
 import { inputModal } from "../component/inputModalUi.js";
+import { calumnCount } from "./calumnCount.js";
 
 //input 태그에 입력값이 없으면 버튼 비활성화 로직 구현 필요
 export const inputModalController = {
@@ -31,6 +32,7 @@ export const inputModalController = {
   processAddTask: function (button) {
     const [inputData, taskObj] = this.processInput(button);
     store.addTask(inputData.columnType, taskObj);
+    calumnCount.updateCardNumbers(inputData.columnType);
     const { id, title, content } = taskObj;
     //카드 생성부분 로직도 한번 묶어보자
     taskCard.create(id, title, content);

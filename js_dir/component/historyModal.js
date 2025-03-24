@@ -40,6 +40,29 @@ export const historyModalUi = {
     id,
     action,
   }) {
+    switch (currentColumn) {
+      case "todo":
+        currentColumn = "해야할 일";
+        break;
+      case "doing":
+        currentColumn = "하고 있는 일";
+        break;
+      case "done":
+        currentColumn = "완료한 일";
+        break;
+    }
+    switch (targetColumn) {
+      case "todo":
+        targetColumn = "해야할 일";
+        break;
+      case "doing":
+        targetColumn = "하고 있는 일";
+        break;
+      case "done":
+        targetColumn = "완료한 일";
+        break;
+    }
+
     let logColumnType = "";
     const newLog = makeLogNode();
     const time = Math.floor((Date.now().toString() - id) / (1000 * 60));
@@ -52,9 +75,8 @@ export const historyModalUi = {
         : "";
     }
     const content = `${logTitle}을(를)${logColumnType} <strong>${action}</strong>하였습니다.`;
-    newLog.innerHTML = makeLog(content, time);
-    this.logNodes.push(newLog);
-    // return [content, id];
+    this.logNodes.push(newLog); //먼저 데이터를 보낸뒤에
+    newLog.innerHTML = makeLog(content, time); //화면에 표시하는 것이 흐름상 올바름
   },
   drawRegisterLog: function () {
     this.emptyMessage.style.display = "none";

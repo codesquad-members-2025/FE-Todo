@@ -41,7 +41,7 @@ export const makeDeleteAlert = function (type, alertMessage, cancel) {
 export const makeLog = function (content, time) {
   const log = `
               <li class="activity-list__list">
-                <img src="icons/Image.png" alt="귀여운 개구리" />
+                <img src="icons/logImage.jpeg" alt="귀여운 개구리" />
                 <div class="activity-list__log">
                   <header class="history-log__header">@멋진영민!</header>
                   <div class="log__activityArea">${content}</div>
@@ -69,4 +69,11 @@ export const editModal = function (title, content) {
   </footer>
 </div>`;
   return editModal;
+};
+
+export const makeSortBtn = function (btnSort) {
+  const sortBtn = `
+  <img src="/icons/sort.svg" />${btnSort}
+  `;
+  return sortBtn;
 };

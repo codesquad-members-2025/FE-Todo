@@ -18,9 +18,10 @@ export const inputModal = {
     this.resetFields(modal);
     this.closeModal(modal);
   },
-  createInputModal: function (title, content) {
+  createInputModal: function (title, content, columnType) {
     const inputModal = document.createElement("div");
     inputModal.classList.add("task-modal-overlay");
+    inputModal.dataset.type = columnType;
     inputModal.innerHTML = editModal(title, content);
     inputModal.style.display = "block";
     return inputModal;

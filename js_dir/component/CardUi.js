@@ -7,6 +7,7 @@ export const taskCard = {
     const newcard = document.createElement("div");
     newcard.id = cardId;
     newcard.classList.add("todo-card");
+    newcard.draggable = true;
     newcard.innerHTML = makeTaskCard(titleValue, contentValue);
     this.cardNodes.push(newcard);
   },

@@ -25,6 +25,8 @@ export const historyBarController = {
   },
   addHisotryLog: function (taskDataArr, action, targetColumn = "null") {
     const [title, currentColumn, id] = taskDataArr;
+    const lodDataArr = [title, currentColumn, targetColumn, id, action];
+    store.addLog(lodDataArr);
     if (action === "이동") {
       historyModalUi.makeRegisterLog({
         title: title,
@@ -43,22 +45,20 @@ export const historyBarController = {
     }
 
     historyModalUi.drawRegisterLog();
-    const lodDataArr = [title, currentColumn, targetColumn, id, action];
-    store.addLog(lodDataArr);
   },
   renderLogData: function () {
     const storedLogData = store.getLogData();
     storedLogData.forEach((logDataArr) => {
+      const [title, currentColumn, targetColumn, id, action] = logDataArr; //먼저 구조분해 할당
+
       historyModalUi.makeRegisterLog({
-        title: logDataArr[0],
-        currentColumn: logDataArr[1],
-        targetColumn: logDataArr[2],
-        id: logDataArr[3],
-        action: logDataArr[4],
+        title,
+        currentColumn,
+        targetColumn,
+        id,
+        action,
       });
       historyModalUi.drawRegisterLog();
     });
   },
 };
-
-//밀리세컨즈

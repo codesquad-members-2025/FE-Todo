@@ -4,11 +4,12 @@ import { inputModal } from "../component/inputModalUi.js";
 import { historyBarController } from "../controller/control-Historybar.js";
 import { inputModalController } from "../controller/inputmodalController.js";
 import { taskModal } from "../controller/taskModalController.js";
-//얘도 아래의 kanban에 이벤트 위임으로 넣어보자(리팩토링 사항) -> 동적으로 바뀌는 사항이 아니라 바꿀 필요있을까?
+
 export const initialize = function () {
   const sections = document.querySelectorAll(".columnlist__col");
   sections.forEach((section) => {
     registerAddTaskEvent(section);
+    taskModal.updateCardPosition(section);
   });
 };
 
@@ -42,9 +43,6 @@ export function kanbanDetector() {
       button.closest(".taskModal")
     ) {
       taskModal.deleteTaskModal(); //this.targetSection, this.targetId 만 전달__title value필요
-      //히스토리 컨트롤러 호출-> 삭제 로그 띄어라!
-      const taskDataArr = taskModal.parseCardModal();
-      historyBarController.addHisotryLog(taskDataArr, "삭제");
     } else if (
       button.id === "confirm-delete-button" &&
       button.closest(".historyModal")
@@ -65,6 +63,7 @@ export function kanbanDetector() {
     }
   });
 }
+
 export function historyBar() {
   const historyBtn = document.getElementById("header__history-btn");
   const historyBar = historyModalUi.historySidebar;
@@ -84,6 +83,19 @@ export function historyBar() {
     historyBarController.showAlert.bind(historyBarController)
   ); //지우는 상황 전달
 }
+
+export function cardDragAndDrop() {
+  const kanban = document.querySelector(".page-main__columnlist");
+
+  kanban.addEventListener(
+    "dragstart",
+    (event) => {
+      taskModal.dragStart(event);
+    },
+    true
+  );
+}
+
 // -----------------------------
 function findContainClass(button, target) {
   return button.classList.contains(target);
