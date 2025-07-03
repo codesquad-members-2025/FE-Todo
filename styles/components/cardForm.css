@@ -1,0 +1,64 @@
+.card__input-area {
+    border-radius: 8px;
+    gap: 8px;
+}
+
+.card__title-input,
+.card__title-input::placeholder {
+    color: var(--text-strong);
+}
+
+.card__body-input,
+.card__body-input::placeholder {
+    color: var(--text-default);
+}
+
+.card__title-input, 
+.card__body-input {
+    border: none;
+    outline: none;
+    padding: 0;
+    resize: none;
+}
+
+.card__body-input,
+.card__body-input::placeholder {
+    /* 텍스트 크기와 비슷한 높이 
+    추후에 js로 조정해야함 */
+    height: 1.2em;
+    overflow: hidden; /* 스크롤바 제거 */
+}
+
+.card__button-area {
+    display: flex;
+    gap: 8px;
+    justify-content: space-between;
+}
+
+.card__cancel-btn,
+.card__submit-btn {
+    width: 100%;
+    height: 32px;
+    border-radius: 8px;
+    padding: 0px 8px;
+}
+
+.card__cancel-btn {
+    background-color: var(--surface-alt);
+    color: var(--text-default);
+}
+
+.card__submit-btn {
+    background-color: var(--surface-brand);
+    opacity: 0.3;
+    color: var(--text-white-default);
+}
+
+/* 타이틀, 바디에 값 입력 시 버튼 활성화로 변경해야함. 현재는 호버 */
+.card__submit-btn:hover {
+    opacity: 1;
+}
+
+.card__submit-btn:active {
+    opacity: 0.7;
+}

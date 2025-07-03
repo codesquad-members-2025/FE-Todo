@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "iconName": "flog.png",
+            "userName": "멋진삼",
+            "text": "<strong>블로그에 포스팅할 것</strong>을(를) <strong>하고있는 일</strong>에서 <strong>해야할 일</strong>로 이동하였습니다.",
+            "datetime": "1시간 전"
+        },
+        {
+            "iconName": "flog.png",
+            "userName": "멋진삼",
+            "text": "GitHub 공부하기(을) 변경하였습니다.",
+            "datetime": "10분 전"
+        },
+        {
+            "iconName": "flog.png",
+            "userName": "멋진삼", 
+            "text": "HTML/CSS 공부하기(을) 해야할 일에서 하고있는 일으로 이동하였습니다.",
+            "datetime": "18분 전"
+        },
+        {
+            "iconName": "flog.png",
+            "userName": "멋진삼",
+            "text": "HTML/CSS 공부하기(을) 해야할 일에서 등록했습니다.",
+            "datetime": "1시간 전"
+        },
+        {
+            "iconName": "flog.png",
+            "userName": "멋진삼",
+            "text": "블로그에 포스팅할 것(을) 하고있는 일에서 등록했습니다.",
+            "datetime": "1시간 전"
+        }
+    ]
+}

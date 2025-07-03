@@ -1,0 +1,51 @@
+.card, .card-form, .floating-card {
+    width: 320px;
+    background-color: var(--surface-default);
+    border-radius: 8px;
+    padding: 16px;
+    gap: 16px;
+    box-shadow: 0px 1px 4px 0px rgba(110, 128, 145, 0.24);
+}
+
+.card__content {
+    gap: 16px;
+}
+
+/* 마진이 0으로 공통인데 추후에 초기화 해야할 지 고민 중 */
+.card__text {
+    margin: 0;
+    gap: 8px;
+}
+
+.card__title {
+    margin: 0;
+    color: var(--text-strong);
+}
+
+.card__description {
+    margin: 0;
+    color: var(--text-default);
+}
+
+.card__caption {
+    margin: 0;
+    color: var(--text-weak);
+}
+
+.card__close-btn:hover svg path {
+    fill: var(--text-danger);
+}
+
+.card__edit-btn:hover svg path {
+    fill: var(--text-strong);
+}
+
+.card:active {
+    opacity: 0.5;
+}
+
+.floating-card {
+    position: absolute;
+    box-shadow: 0px 0px 4px 0px #6E809114;
+    box-shadow: 0px 16px 16px 0px #6E80913D;
+}
