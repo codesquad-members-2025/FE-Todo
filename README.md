@@ -1,4 +1,12 @@
 # FE-Todo
+## 💡 프로젝트 목표
+
+- git branch 이해
+- 함수 기반 모듈, 프로그래밍
+- 개발 환경 구성
+- 복잡한 UX 구현
+- 브라우저에서 웹사이트의 동작방식 이해
+- task/sprint 나누고 계획하는 연습
 
 ## ⚒️ 주요 문제 해결 및 기술적 도전
 
@@ -9,16 +17,27 @@
 - [UUID 버전 선택](https://github.com/wan0514/FE-Todo/wiki/%5B%EA%B3%A0%EB%AF%BC%EA%B3%BC-%ED%95%B4%EA%B2%B0%5D-%ED%98%84%EC%9E%AC-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EC%97%90%EC%84%A0-%EC%96%B4%EB%96%A4-version%EC%9D%98-UUID%EB%A5%BC-%EC%84%A0%ED%83%9D%ED%95%A0-%EA%B2%83%EC%9D%B8%EA%B0%80%3F)
 
 
-## 학습 목표
+## 📚 주요 학습 정리 
 
-- git branch 이해
-- 함수 기반 모듈, 프로그래밍
-- 개발 환경 구성
-- 복잡한 UX 구현
-- 브라우저에서 웹사이트의 동작방식 이해
-- task/sprint 나누고 계획하는 연습
+- 📖 [HTMLCollection vs NodeList](https://github.com/wan0514/FE-Todo/wiki/%5B%ED%95%99%EC%8A%B5%5D-HTML-collection%EA%B3%BC-node-list-%EC%B0%A8%EC%9D%B4)  
+  → DOM 반환 객체 차이, live vs static collection 이해  
 
-## trello
+- 📖 [SVG 파일 색상 변경](https://github.com/wan0514/FE-Todo/wiki/%5B%ED%95%99%EC%8A%B5%5D-svg-%ED%8C%8C%EC%9D%BC-%EC%83%89%EC%83%81-%EB%B3%80%EA%B2%BD)  
+  → `<use>` 태그 한계, `fill` 속성 직접 제어  
+
+- 📖 [toString.call 이란?](https://github.com/wan0514/FE-Todo/wiki/%5B%ED%95%99%EC%8A%B5%5D-toString.call-%EC%9D%B4%EB%9E%80%3F)  
+  → `typeof`, `instanceof` 보완하는 타입 판별 방법  
+
+- 📖 [모듈 시스템](https://github.com/wan0514/FE-Todo/wiki/%5B%ED%95%99%EC%8A%B5%5D-%EB%AA%A8%EB%93%88-%EC%8B%9C%EC%8A%A4%ED%85%9C)  
+  → ES Module vs CommonJS, import/export 원리  
+
+- 📖 [옵셔널 체이닝](https://github.com/wan0514/FE-Todo/wiki/%5B%ED%95%99%EC%8A%B5%5D-%EC%98%B5%EC%85%94%EB%84%90-%EC%B2%B4%EC%9D%B4%EB%8B%9D(Optional-Chaining))  
+  → `?.` 문법으로 안전한 프로퍼티 접근  
+
+- 📖 [Error Handling은 어디서 해야 하나?](https://github.com/wan0514/FE-Todo/wiki/%5B%ED%95%99%EC%8A%B5%5D%E2%80%90-error-handling%EC%9D%80-%EB%AA%A8%EB%93%A0-%EA%B3%B3%EC%97%90%EC%84%9C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98%3F-%EC%96%B4%EB%94%94%EC%84%9C-%ED%95%B4%EC%95%BC%ED%95%98%EB%82%98%3F)  
+  → 전역 vs 모듈 단위 에러 처리 구분, 전파 전략  
+
+## 📆 trello
 
 유저 시나리오를 기반으로 task를 분리하여, sprint 단위로 나누어 진행합니다.
 
@@ -26,11 +45,10 @@
 - 2주 : 카드 수정하기, 카드 이동하기, 칼럼 관리하기, 전체 활동 기록 확인하기, 전체 활동 기록 삭제하기
 - +a : 실행취소, 다시 실행
 
-[👉 trello 링크](https://trello.com/invite/b/67c68babd9a1af4b5516d24b/ATTI7ba27d245056ee657df8fe675231c998CE45F5BE/todo-project)
+👉 [trello 링크](https://trello.com/invite/b/67c68babd9a1af4b5516d24b/ATTI7ba27d245056ee657df8fe675231c998CE45F5BE/todo-project)
 
-# 설계
 
-## 폴더 구조
+## 📁 폴더 구조
 주차별로 폴더 구조에 대한 회고를 거치며 개선했습니다.
 - **1주차**: CSS/JS 분리, `assets` 도입  
 - **2주차**: `components`, `utils`, `store`로 세분화  
