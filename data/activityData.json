@@ -2,52 +2,58 @@
   {
     "username": "멋진곰",
     "task": "블로그 포스팅",
-    "timestamp": "3분",
+    "timeStamp": "2025-03-06T10:00:00Z",
     "profileImage": "./assets/images/default_profile.jpg",
-    "actionText": "어디서 어디로 이동했어요."
+    "action": "move",
+    "details": {
+      "from": "해야 할 일",
+      "to": "하고 있는 일"
+    }
   },
   {
     "username": "멋진곰",
     "task": "GitHub 공부하기",
-    "timestamp": "10분",
+    "timeStamp": "2025-03-06T09:50:00Z",
     "profileImage": "./assets/images/default_profile.jpg",
-    "actionText": "어디서 어디로 이동했어요."
+    "action": "move",
+    "details": {
+      "from": "해야 할 일",
+      "to": "완료된 일"
+    }
   },
   {
     "username": "멋진곰",
     "task": "HTML/CSS 공부하기",
-    "timestamp": "3분",
+    "timeStamp": "2025-03-06T09:57:00Z",
     "profileImage": "./assets/images/default_profile.jpg",
-    "actionText": "어디서 어디로 이동했어요."
+    "action": "move",
+    "details": {
+      "from": "해야 할 일",
+      "to": "하고 있는 일"
+    }
   },
   {
     "username": "멋진곰",
     "task": "HTML/CSS 공부하기",
-    "registeredColumn": "해야 할 일",
-    "timestamp": "10분",
+    "timeStamp": "2025-03-06T09:45:00Z",
     "profileImage": "./assets/images/default_profile.jpg",
-    "actionText": "어디서 어디로 이동했어요."
+    "action": "remove"
   },
   {
     "username": "멋진곰",
     "task": "블로그 포스팅",
-    "registeredColumn": "하고 있는 일",
-    "timestamp": "3분",
+    "timeStamp": "2025-03-06T09:40:00Z",
     "profileImage": "./assets/images/default_profile.jpg",
-    "actionText": "어디서 어디로 이동했어요."
+    "action": "add",
+    "details": {
+      "column": "해야 할 일"
+    }
   },
   {
     "username": "멋진곰",
     "task": "GitHub 공부하기",
-    "timestamp": "10분",
+    "timeStamp": "2025-03-06T09:30:00Z",
     "profileImage": "./assets/images/default_profile.jpg",
-    "actionText": "어디서 어디로 이동했어요."
-  },
-  {
-    "username": "멋진곰",
-    "task": "HTML/CSS 공부하기",
-    "timestamp": "3분",
-    "profileImage": "./assets/images/default_profile.jpg",
-    "actionText": "어디서 어디로 이동했어요."
+    "action": "update"
   }
 ]

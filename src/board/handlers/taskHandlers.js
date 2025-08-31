@@ -1,50 +1,79 @@
 // src/board/handlers/taskHandlers.js
-import { addTask, removeTask, updateTask } from '../store.js';
+import columnStore from '../store.js';
+import activityStore from '../../activity/store.js';
+import { MODAL_MESSAGES } from '../../shared/constants/constants.js';
 import { renderTask } from '../renderers/task.js';
 import { setConfirmDialog } from '../../shared/components/dialog/index.js';
 import {
   generateUUID,
   getISOStringNow,
   detectDeviceType,
+  getTimeAgo,
 } from '../../shared/utils/common.js';
 import TaskEditor from '../renderers/taskEditor.js';
+import { updateTaskCount } from '../renderers/column.js';
 
 // 새 카드 생성
 function createNewTask(target) {
-  const column = getColumn(target);
-  if (!column) return;
+  const column = getColumnElement(target);
+  const taskForm = column && getTaskForm(column);
+  const inputData = taskForm && collectInputData(taskForm);
 
-  const taskForm = getTaskForm(column);
-  if (!taskForm) return;
-
-  const inputData = collectInputData(taskForm);
   if (!inputData) return;
 
+  const { title, createdAt } = inputData;
+  const columnId = column.id;
+  const columnTitle = columnStore.getColumnTitle(columnId);
+
   closeTaskForm(taskForm);
-  saveAndRenderTask(column.id, inputData);
+  saveAndRenderTask(columnId, inputData);
   resetValues(taskForm);
+
+  activityStore.addActivity({
+    action: 'add',
+    task: title,
+    timeStamp: createdAt,
+    details: { column: columnTitle },
+  });
+
+  updateTaskCount(column, 1);
 }
 
 function openDeleteTaskDialog(target) {
   const taskCard = target.closest('.task-item');
-  setConfirmDialog('이 태스크를 삭제할까요?', makeTaskRemover(taskCard.id));
+  const taskTitle = taskCard.querySelector('.task-title').innerText;
+  const column = getColumnElement(taskCard);
+  const columnTitle = columnStore.getColumnTitle(column.id);
+
+  setConfirmDialog(MODAL_MESSAGES.DELETE_TASK, () => {
+    makeTaskRemover(taskCard.id)();
+
+    activityStore.addActivity({
+      action: 'remove',
+      task: taskTitle,
+      timeStamp: getISOStringNow(),
+      details: { column: columnTitle },
+    });
+
+    updateTaskCount(column, -1);
+  });
 }
 
 // 카드 제거 함수 반환 (고차함수)
 function makeTaskRemover(taskId) {
   return () => {
     const targetTask = document.getElementById(taskId);
-    const column = targetTask.closest('.kanban-column');
+    const column = getColumnElement(targetTask);
     const columnId = column.id;
 
-    removeTask(columnId, taskId);
+    columnStore.removeTask(columnId, taskId);
     targetTask.remove();
   };
 }
 
 // 카드 폼 토글
 function toggleTaskForm(target) {
-  const column = getColumn(target);
+  const column = getColumnElement(target);
   const taskForm = getTaskForm(column);
   if (!taskForm) return;
 
@@ -53,7 +82,7 @@ function toggleTaskForm(target) {
 }
 
 // 칼럼 요소 가져오기
-function getColumn(target) {
+function getColumnElement(target) {
   return target.closest('.kanban-column');
 }
 
@@ -64,11 +93,8 @@ function getTaskForm(column) {
 
 // 입력 데이터 수집 및 검증
 function collectInputData(taskForm) {
-  const input = taskForm.querySelector('input');
-  const textarea = taskForm.querySelector('textarea');
-
-  const title = input?.value;
-  const content = textarea?.value;
+  const { value: title } = taskForm.querySelector('input') || {};
+  const { value: content } = taskForm.querySelector('textarea') || {};
 
   if (!title || !content) return null;
 
@@ -83,7 +109,7 @@ function collectInputData(taskForm) {
 
 // 카드 데이터 저장 & UI 업데이트
 function saveAndRenderTask(columnId, inputData) {
-  addTask(columnId, inputData);
+  columnStore.addTask(columnId, inputData);
   renderTask(columnId, inputData);
 }
 

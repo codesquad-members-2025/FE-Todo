@@ -1,23 +1,42 @@
 import { fetchData } from '../shared/utils/fetch.js';
+import observer from '../shared/utils/observer.js';
+import { DATA_URLS } from '../shared/constants/constants.js';
 
-const ACTIVITY_DATA_URL = './data/activityData.json';
-
-let activityData = null;
-
-async function loadActivityData() {
-  if (activityData === null) {
-    activityData = await fetchData(ACTIVITY_DATA_URL);
+class ActivityStore extends observer {
+  constructor() {
+    super();
+    this.activityData = [];
   }
-  return activityData;
+
+  async fetchAndStoreActivityData() {
+    this.activityData = await fetchData(DATA_URLS.ACTIVITY);
+    this.notify(this.activityData);
+  }
+
+  getActivityData() {
+    return this.activityData;
+  }
+
+  clearActivityData() {
+    this.activityData = [];
+    this.notify(this.activityData); // 구독한 랜더함수 실행
+  }
+
+  addActivity({ action, task, timeStamp, details = {} }) {
+    const activity = {
+      username: '멋진곰',
+      task,
+      timeStamp,
+      profileImage: './assets/images/default_profile.jpg',
+      action,
+      details,
+    };
+
+    this.activityData.unshift(activity);
+    this.notify(this.activityData); // 구독한 랜더함수 실행
+  }
 }
 
-function clearActivityData() {
-  activityData = [];
-}
+const activityStore = new ActivityStore();
 
-export { loadActivityData, clearActivityData };
-
-// 활동 기록 데이터 가져오기
-export function getActivityData() {
-  return activityData;
-}
+export default activityStore;

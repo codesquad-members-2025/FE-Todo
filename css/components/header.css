@@ -1,21 +1,14 @@
 @import url('../base/variables.css');
 
 .app-header {
-  justify-content: space-between;
   height: 64px;
 }
 
 .app-header__left {
-  display: flex;
-  align-items: center;
   gap: 8px;
 }
 
 #task-sort-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
   width: 75px;
   height: 24px;
 

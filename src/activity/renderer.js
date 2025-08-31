@@ -1,4 +1,6 @@
 import { getFragment } from '../shared/utils/dom.js';
+import { getTimeAgo } from '../shared/utils/common.js';
+import { parseContent } from './handlers.js';
 import { createActivityRecord } from './template.js';
 
 // 캐싱된 DOM 요소
@@ -12,14 +14,19 @@ const activityFooter = activityPanel.querySelector('footer');
 // 기록 렌더링
 function renderActivityRecords(activityListData) {
   if (activityListData.length === 0) {
-    setActivityDefaultUI(true);
+    toggleDefaultUi(true);
     return;
   }
 
+  removeActivityRecords();
+
   const fragment = activityListData.reduce(
-    (frag, { username, profileImage, actionText, timestamp }) => {
+    (frag, { task, username, profileImage, timeStamp, action, details }) => {
+      const parsedContent = parseContent(task, action, details);
+      const timeAgo = getTimeAgo(timeStamp);
+
       frag.appendChild(
-        createActivityRecord(username, profileImage, actionText, timestamp)
+        createActivityRecord(username, profileImage, parsedContent, timeAgo)
       );
 
       return frag;
@@ -27,35 +34,39 @@ function renderActivityRecords(activityListData) {
     getFragment()
   );
 
-  // pushChild(activityContainer, activityRecordsHtml);
   activityContainer.appendChild(fragment);
-  setActivityDeleteButton(true);
+  toggleDefaultUi(false);
 }
 
-// UI 상태 관리 함수들
-function setActivityVisibility(isVisible) {
-  activityPanel.style.display = isVisible ? 'flex' : 'none';
-}
-
-function setActivityDefaultUI(isVisible) {
-  activityDefault.style.display = isVisible ? 'flex' : 'none';
-}
-
-function setActivityDeleteButton(isVisible) {
-  activityFooter.style.display = isVisible ? 'flex' : 'none';
+function setElementVisibility(targetElement, isVisible) {
+  targetElement.style.display = isVisible ? 'flex' : 'none';
 }
 
 // 기록 삭제
 function removeActivityRecords() {
-  activityContainer.innerHTML = '';
-  setActivityDefaultUI(true);
-  setActivityDeleteButton(false);
+  activityContainer.innerHTML = ''; // 기존 기록 삭제
+}
+
+function toggleDefaultUi(isShow) {
+  setElementVisibility(activityDefault, isShow); // 기본 화면 보이기
+  setElementVisibility(activityFooter, !isShow); // 푸터 숨기기
+}
+
+function updateActivityCounter(activityData) {
+  const counterLabel = document.getElementById('activity-counter-label');
+
+  if (activityData.length === 0) {
+    counterLabel.style.display = 'none';
+  } else {
+    counterLabel.style.display = 'flex';
+    counterLabel.innerText = activityData.length;
+  }
 }
 
 export {
   renderActivityRecords,
-  setActivityVisibility,
-  setActivityDefaultUI,
-  setActivityDeleteButton,
+  setElementVisibility,
   removeActivityRecords,
+  toggleDefaultUi,
+  updateActivityCounter,
 };

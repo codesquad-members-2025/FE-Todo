@@ -13,11 +13,12 @@
   </head>
   <body>
     <div class="app-layout flex-col">
-      <header class="app-header flex-item-center">
-        <div class="app-header__left">
+      <header class="app-header flex-item-center flex-content-between">
+        <div class="app-header__left flex-item-center">
           <h1 class="text-strong tx-b24">TASKIFY</h1>
           <button
             id="task-sort-btn"
+            class="flex-item-center flex-content-center"
             aria-label="Sort tasks"
             data-type="created"
           >
@@ -35,14 +36,15 @@
             role="img"
             aria-label="View task history"
           ></div>
+          <div id="activity-counter-label">0</div>
         </button>
       </header>
       <aside id="activity-panel" class="flex-col">
-        <header>
+        <header class="flex-item-center flex-content-between">
           <span class="text-strong tx-b16">사용자 활동 기록</span>
           <button
             id="activity-panel-close-btn"
-            class="activity-panel-close-btn"
+            class="activity-panel-close-btn flex-item-center"
           >
             <div
               class="closed-icon svg-16 svg-color-default"
@@ -55,14 +57,17 @@
         <section id="activity-panel-content" class="flex-col">
           <span
             id="activity-empty-state"
-            class="text-weak tx-m14"
+            class="flex-content-center text-weak tx-m14"
             style="display: none"
             >사용자 활동 기록이 없습니다.</span
           >
           <div id="activity-list-container"></div>
         </section>
         <footer id="activity-panel-footer">
-          <button id="activity-clear-btn" class="tx-b14 text-danger">
+          <button
+            id="activity-clear-btn"
+            class="flex-content-center tx-b14 text-danger"
+          >
             기록 전체 삭제
           </button>
         </footer>
@@ -73,7 +78,7 @@
     </div>
     <dialog id="confirm-dialog">
       <p id="confirm-dialog__message" class="text-default tx-m16"></p>
-      <div class="confirm-dialog__buttons">
+      <div class="confirm-dialog__buttons flex-content-between">
         <button id="confirm-dialog__cancel-btn" class="text-default tx-b14">
           <span>취소</span>
         </button>

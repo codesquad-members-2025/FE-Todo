@@ -1,4 +1,6 @@
-import { updateTask } from '../store.js';
+import activityStore from '../../activity/store.js';
+import { getISOStringNow } from '../../shared/utils/common.js';
+import columnStore from '../store.js';
 import { createEditForm } from './template.js';
 
 class TaskEditor {
@@ -40,18 +42,28 @@ class TaskEditor {
     const editedTitle = this.editForm.querySelector('input').value;
     const editedContent = this.editForm.querySelector('textarea').value;
 
+    // 수정 전의 타이틀을 저장
+    const originalTitle =
+      this.originalTaskCard.querySelector('.task-title').textContent;
+
     this.originalTaskCard.querySelector('.task-title').textContent =
       editedTitle;
     this.originalTaskCard.querySelector('.task-content').textContent =
       editedContent;
 
-    updateTask({
+    columnStore.updateTask({
       id: this.originalTaskCard.id,
       title: editedTitle,
       content: editedContent,
     });
 
     this.restoreOriginalTask();
+
+    activityStore.addActivity({
+      action: 'update',
+      task: originalTitle,
+      timeStamp: getISOStringNow(),
+    });
   }
 
   showEditForm() {
